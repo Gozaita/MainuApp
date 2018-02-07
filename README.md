@@ -28,6 +28,7 @@ El cliente Android es el encargado de gestionar la interacción con la API de Ma
 - **Bocadillos y raciones**: la aplicación contará con un listado de bocadillos y raciones disponibles que se podrá consultar *off-line*.
 - **Comentarios y valoraciones**: permite a los usuarios comentar y valorar los productos, así como ver comentarios y valoraciones del resto de la comunidad.
 - **Fotografías**: permite a los usuarios subir y ver fotografías del resto de la comunidad sobre los diferentes productos.
+- **Filtrado de bocadillos en función de los ingredientes**: permite a los usuarios realizar una búsqueda personalizada de los productos en función de los ingredientes deseados.
 
 > **Nota**: 
 >
