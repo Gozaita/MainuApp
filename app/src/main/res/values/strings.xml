@@ -1,4 +1,26 @@
 <resources>
     <string name="app_name">MainU</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_bocadillos">Bocadillos</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string-array name="listaBocadillos">
+        <item>Ave Cesar</item>
+        <item>Jamaica</item>
+        <item>Lomo Queso</item>
+    </string-array>
+
+    <string-array name="preciosBocadillos">
+        <item>3.00€</item>
+        <item>2.25</item>
+        <item>3.00€</item>
+    </string-array>
+
+    <string-array name="descripcionBocadillos">
+        <item>Pollo empanado, lechuga, tomate y salsa cesar</item>
+        <item>Lomo, bacon y huevo</item>
+        <item>Lomo y queso</item>
+    </string-array>
+
 </resources>
