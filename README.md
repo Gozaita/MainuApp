@@ -19,7 +19,7 @@ El proyecto de MainU
 **MainU** es un proyecto que pretende dar servicio al alumnado y profesorado de la Escuela de Ingeniería de Bilbao así como al resto de público objetivo de la cafetería del centro. El proyecto engloba diferentes partes:
 - Base de datos de MainU
 - [MainU API](https://github.com/Gozaita/MainuAPI)
-- MainU App
+- [MainU App](https://github.com/Gozaita/MainuApp)
 
 Cliente Android
 -------------
