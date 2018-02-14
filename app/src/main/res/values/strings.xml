@@ -5,6 +5,26 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="primer_Plato">Primer Plato</string>
+    <string name="segundo_Plato">Segundo Plato</string>
+    <string name="postre">Postre</string>
+
+    <string-array name="listaPrimeros">
+        <item>Lentejas</item>
+        <item>Arroz a la cubana</item>
+        <item>Cocido montañés</item>
+    </string-array>
+
+    <string-array name="listaSegundos">
+        <item>Filete con patatas</item>
+        <item>Muslo al limón</item>
+        <item>Revuelto de gulas</item>
+    </string-array>
+
+    <string-array name="listaPostres">
+        <item>Helados</item>
+    </string-array>
+
     <string-array name="listaBocadillos">
         <item>Ave Cesar</item>
         <item>Jamaica</item>
