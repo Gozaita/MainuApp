@@ -50,7 +50,7 @@ public class AdaptadorDeObjetos extends BaseAdapter {
         return i;
     }
 
-    /*@Override
+    @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         View v = mInflator.inflate(R.layout.listview_bocadillos,null);
@@ -65,18 +65,6 @@ public class AdaptadorDeObjetos extends BaseAdapter {
         nombreTextView.setText(nom);
         descripcionTextView.setText(des);
         precioTextView.setText(pre);
-
-        return v;
-    }*/
-
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-
-        View v = mInflator.inflate(R.layout.listview_platos,null);
-        TextView nombreTextView = (TextView) v.findViewById(R.id.nombreTextView);
-
-        String nom = nombre[i];
-        nombreTextView.setText(nom);
 
         return v;
     }

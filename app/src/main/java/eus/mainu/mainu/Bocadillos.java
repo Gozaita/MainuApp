@@ -1,5 +1,6 @@
 package eus.mainu.mainu;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,17 +8,16 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class Bocadillos extends AppCompatActivity {
 
-    private TextView mTextMessage;
+    //private TextView mTextMessage;
     private ListView listaBocadillos;
     String[] bocadillos;
     String[] descripcion;
     String[] precios;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    /*private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -35,17 +35,37 @@ public class Bocadillos extends AppCompatActivity {
             }
             return false;
         }
-    };
+    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bocadillos);
 
-        mTextMessage = findViewById(R.id.message);
         BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+                switch (item.getItemId()) {
+
+                    case R.id.navigation_home:
+                        Intent intent1 = new Intent(Bocadillos.this, MainActivity.class);
+                        startActivity(intent1);
+                        break;
+
+                    case R.id.navigation_dashboard:
+                        Intent intent2 = new Intent(Bocadillos.this, Bocadillos.class);
+                        startActivity(intent2);
+                        break;
+
+                    case R.id.navigation_notifications:
+                        //Vacio de momento
+                        break;
+                }
+                return false;
+            }
+        });
         bocadillos  = new String[]{"Aperribai", "Ave Cesar", "Lomo-queso"};
         descripcion = new String[]{"Pollo, lechuga, mayonesa, tomate", "mierda con tomate", "Ingredientes secretos"};
         precios     = new String[]{"3.35€", "3.40€", "3.15"};

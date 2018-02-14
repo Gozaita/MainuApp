@@ -5,9 +5,14 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="primer_Plato">Primer Plato</string>
-    <string name="segundo_Plato">Segundo Plato</string>
+    <string name="primer_Plato">1º Plato:</string>
+    <string name="segundo_Plato">2º Plato:</string>
     <string name="postre">Postre</string>
+    <string name="otros">Otros</string>
+    <string name="bocadillos">Bocadillos</string>
+    <string name="menuDelDia">Menu del dia</string>
+
+
 
     <string-array name="listaPrimeros">
         <item>Lentejas</item>
