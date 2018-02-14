@@ -16,13 +16,20 @@ import android.widget.TextView;
 public class AdaptadorDeObjetos extends BaseAdapter {
 
     LayoutInflater mInflator; //la m de mInflator es porque es miembro de la clase
-    String[] bocadillos;
+    String[] nombre;
     String[] descripcion;
     String[] precios;
 
-    //Contructo de la clase
-    public AdaptadorDeObjetos(Context c, String[] b, String[] d, String[] p){
-        bocadillos = b;
+
+    //Contructor de la clase
+    public AdaptadorDeObjetos(Context c, String[] n){
+        mInflator = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        nombre = n;
+    }
+
+    //Contructor de la clase
+    public AdaptadorDeObjetos(Context c, String[] n, String[] d, String[] p){
+        nombre = n;
         descripcion = d;
         precios = p;
         mInflator = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -30,12 +37,12 @@ public class AdaptadorDeObjetos extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return bocadillos.length;
+        return nombre.length;
     }
 
     @Override
     public Object getItem(int i) {
-        return bocadillos[i];
+        return nombre[i];
     }
 
     @Override
@@ -43,7 +50,7 @@ public class AdaptadorDeObjetos extends BaseAdapter {
         return i;
     }
 
-    @Override
+    /*@Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         View v = mInflator.inflate(R.layout.listview_bocadillos,null);
@@ -51,7 +58,7 @@ public class AdaptadorDeObjetos extends BaseAdapter {
         TextView descripcionTextView = (TextView) v.findViewById(R.id.descripcionTextView);
         TextView precioTextView = (TextView) v.findViewById(R.id.precioTextView);
 
-        String nom = bocadillos[i];
+        String nom = nombre[i];
         String des = descripcion[i];
         String pre = precios[i];
 
@@ -60,5 +67,18 @@ public class AdaptadorDeObjetos extends BaseAdapter {
         precioTextView.setText(pre);
 
         return v;
+    }*/
+
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
+
+        View v = mInflator.inflate(R.layout.listview_platos,null);
+        TextView nombreTextView = (TextView) v.findViewById(R.id.nombreTextView);
+
+        String nom = nombre[i];
+        nombreTextView.setText(nom);
+
+        return v;
     }
+
 }
