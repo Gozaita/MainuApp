@@ -46,12 +46,13 @@ public class Bocadillos extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        //Recogemos las referencias del listView
+        bocadillos  = new String[]{"Aperribai", "Ave Cesar", "Lomo-queso"};
+        descripcion = new String[]{"Pollo, lechuga, mayonesa, tomate", "mierda con tomate", "Ingredientes secretos"};
+        precios     = new String[]{"3.35€", "3.40€", "3.15"};
+
         Resources res = getResources();
         listaBocadillos = findViewById(R.id.listaBocadillos);
-        bocadillos = res.getStringArray(R.array.listaBocadillos);
-        descripcion = res.getStringArray(R.array.descripcionBocadillos);
-        precios = res.getStringArray(R.array.preciosBocadillos);
+
 
         //Adaptamos el formato del listView en funcion del layout que hemos creado
         AdaptadorDeObjetos adaptadorDeObjetos = new AdaptadorDeObjetos(this, bocadillos, descripcion, precios);
