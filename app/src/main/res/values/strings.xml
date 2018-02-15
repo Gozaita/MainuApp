@@ -13,7 +13,6 @@
     <string name="menuDelDia">Menu del dia</string>
 
 
-
     <string-array name="listaPrimeros">
         <item>Lentejas</item>
         <item>Arroz a la cubana</item>
@@ -47,5 +46,6 @@
         <item>Lomo, bacon y huevo</item>
         <item>Lomo y queso</item>
     </string-array>
+    <string name="title_activity_recycler_view">RecyclerView</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package eus.mainu.mainu;
+package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import eus.mainu.mainu.R;
 
 /**
  * Created by narciso on 9/02/18.

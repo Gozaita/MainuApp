@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_notifications:
-                        //Vacio de momento
+                        Intent intent3 = new Intent(MainActivity.this, RecyclerView.class);
+                        startActivity(intent3);
                         break;
                 }
                 return false;

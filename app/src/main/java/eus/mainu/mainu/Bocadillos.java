@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import eus.mainu.mainu.Utilidades.AdaptadorDeObjetos;
+
 public class Bocadillos extends AppCompatActivity {
 
     //private TextView mTextMessage;
