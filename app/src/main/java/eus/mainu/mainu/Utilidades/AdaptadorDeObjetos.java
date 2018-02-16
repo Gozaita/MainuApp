@@ -55,7 +55,7 @@ public class AdaptadorDeObjetos extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        View v = mInflator.inflate(R.layout.listview_bocadillos,null);
+        View v = mInflator.inflate(R.layout.listView_bocadillos,null);
         TextView nombreTextView = (TextView) v.findViewById(R.id.nombreTextView);
         TextView descripcionTextView = (TextView) v.findViewById(R.id.descripcionTextView);
         TextView precioTextView = (TextView) v.findViewById(R.id.precioTextView);

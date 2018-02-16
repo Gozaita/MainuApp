@@ -6,19 +6,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import eus.mainu.mainu.R;
 
 /**
  * Created by narciso on 15/02/18.
+ * Clase para la adaptar el contenido al recycling view
  */
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
@@ -39,7 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     //Metodo que se utiliza para "Inflar" el contexto
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclingView_listitem, parent,false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -49,11 +47,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d(TAG,"onBindViewHolder: called."); //Para debuguear
+    /*
+    Código para hacer la petición de las imagenes, no funciona y depende de librerías externas
 
-        Glide.with(mContext) //Coge el contexto
-                .asBitmap() //Dice que es un bitmap
-                .load(mImagenes.get(position))
-                .into(holder.imagen);
+        // Glide.with(mContext) //Coge el contexto
+           //     .asBitmap() //Dice que es un bitmap
+             //   .load(mImagenes.get(position))
+              //  .into(holder.imagen);
 
         holder.nombre.setText(mNombres.get(position));
 
@@ -64,7 +64,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 Toast.makeText(mContext,mImagenes.get(position), Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
+
 
     }
 
@@ -76,7 +77,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
 
-        CircleImageView imagen;
+        ImageView imagen;
         TextView nombre;
         RelativeLayout parentLayout;
 

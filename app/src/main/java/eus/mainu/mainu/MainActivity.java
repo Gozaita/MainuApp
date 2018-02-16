@@ -75,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
         lvPostres = findViewById(R.id.listaPostres);
 
         //Adaptamos la informacion que va dentro de ellos
-        ArrayAdapter<String> arrayAdapterPrimeros = new ArrayAdapter<>(this, R.layout.listview_platos, R.id.nombreTextView, new String[]{"Lentejas","Cocido","Ensalada de pollo"});
-        ArrayAdapter<String> arrayAdapterSegundos = new ArrayAdapter<>(this, R.layout.listview_platos, R.id.nombreTextView, new String[]{"Albondigas","Tortilla Francesa","Arraingorri"});
-        ArrayAdapter<String> arrayAdapterPostres = new ArrayAdapter<>(this, R.layout.listview_platos, R.id.nombreTextView, new String[]{"Helado"});
+        ArrayAdapter<String> arrayAdapterPrimeros = new ArrayAdapter<>(this, R.layout.listView_platos, R.id.nombreTextView, new String[]{"Lentejas","Cocido","Ensalada de pollo"});
+        ArrayAdapter<String> arrayAdapterSegundos = new ArrayAdapter<>(this, R.layout.listView_platos, R.id.nombreTextView, new String[]{"Albondigas","Tortilla Francesa","Arraingorri"});
+        ArrayAdapter<String> arrayAdapterPostres = new ArrayAdapter<>(this, R.layout.listView_platos, R.id.nombreTextView, new String[]{"Helado"});
 
         //Metemos dentro la informacion
         lvPrimeros.setAdapter(arrayAdapterPrimeros);
