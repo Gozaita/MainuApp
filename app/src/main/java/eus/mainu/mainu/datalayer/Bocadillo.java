@@ -14,18 +14,17 @@ public class Bocadillo {
     private String descripcion;
     private float precio;
     private ArrayList<Ingrediente> ingredientes;
-    private ArrayList<String> urlValoracion;
-    private ArrayList<String> urlFoto;
+    private ArrayList<ValoracionBocadillo> valoraciones;
+    private ArrayList<FotoBocadillo> fotos;
 
-
-    public Bocadillo(int id, String nombre, String descripcion, float precio, ArrayList<Ingrediente> ingredientes, ArrayList<String> urlValoracion, ArrayList<String> urlFoto) {
+    public Bocadillo(int id, String nombre, String descripcion, float precio, ArrayList<Ingrediente> ingredientes, ArrayList<ValoracionBocadillo> valoraciones, ArrayList<FotoBocadillo> fotos) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.ingredientes = ingredientes;
-        this.urlValoracion = urlValoracion;
-        this.urlFoto = urlFoto;
+        this.valoraciones = valoraciones;
+        this.fotos = fotos;
     }
 
     public int getId() {
@@ -68,19 +67,19 @@ public class Bocadillo {
         this.ingredientes = ingredientes;
     }
 
-    public ArrayList<String> getUrlValoracion() {
-        return urlValoracion;
+    public ArrayList<ValoracionBocadillo> getValoraciones() {
+        return valoraciones;
     }
 
-    public void setUrlValoracion(ArrayList<String> urlValoracion) {
-        this.urlValoracion = urlValoracion;
+    public void setValoraciones(ArrayList<ValoracionBocadillo> valoraciones) {
+        this.valoraciones = valoraciones;
     }
 
-    public ArrayList<String> getUrlFoto() {
-        return urlFoto;
+    public ArrayList<FotoBocadillo> getFotos() {
+        return fotos;
     }
 
-    public void setUrlFoto(ArrayList<String> urlFoto) {
-        this.urlFoto = urlFoto;
+    public void setFotos(ArrayList<FotoBocadillo> fotos) {
+        this.fotos = fotos;
     }
 }
