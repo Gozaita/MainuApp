@@ -15,14 +15,10 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".Bocadillos"
+            android:name=".BocadillosActivity"
             android:label="MainU"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -35,9 +31,17 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".RecyclerView"
+            android:name=".RecyclerViewActivity"
             android:label="@string/title_activity_recycler_view"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".OtrosActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

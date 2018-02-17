@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="eus.mainu.mainu.Bocadillos">
+    tools:context="eus.mainu.mainu.BocadillosActivity">
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

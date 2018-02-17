@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import eus.mainu.mainu.Utilidades.AdaptadorDeObjetos;
 
-public class Bocadillos extends AppCompatActivity {
+public class BocadillosActivity extends AppCompatActivity {
 
     //private TextView mTextMessage;
     private ListView listaBocadillos;
@@ -32,17 +32,18 @@ public class Bocadillos extends AppCompatActivity {
                 switch (item.getItemId()) {
 
                     case R.id.navigation_home:
-                        Intent intent1 = new Intent(Bocadillos.this, MainActivity.class);
+                        Intent intent1 = new Intent(BocadillosActivity.this, MainActivity.class);
                         startActivity(intent1);
                         break;
 
                     case R.id.navigation_dashboard:
-                        Intent intent2 = new Intent(Bocadillos.this, Bocadillos.class);
+                        Intent intent2 = new Intent(BocadillosActivity.this, BocadillosActivity.class);
                         startActivity(intent2);
                         break;
 
                     case R.id.navigation_notifications:
-                        //Vacio de momento
+                        Intent intent3 = new Intent(BocadillosActivity.this, RecyclerViewActivity.class);
+                        startActivity(intent3);
                         break;
                 }
                 return false;

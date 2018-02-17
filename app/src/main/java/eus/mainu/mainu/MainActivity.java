@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_dashboard:
-                        Intent intent2 = new Intent(MainActivity.this, Bocadillos.class);
+                        Intent intent2 = new Intent(MainActivity.this, BocadillosActivity.class);
                         startActivity(intent2);
                         break;
 
                     case R.id.navigation_notifications:
-                        Intent intent3 = new Intent(MainActivity.this, RecyclerView.class);
+                        Intent intent3 = new Intent(MainActivity.this, RecyclerViewActivity.class);
                         startActivity(intent3);
                         break;
                 }

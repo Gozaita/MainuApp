@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import eus.mainu.mainu.Utilidades.RecyclerViewAdapter;
 
-public class RecyclerView extends AppCompatActivity {
+public class RecyclerViewActivity extends AppCompatActivity {
 
     private static final String TAG = "RecyclerView";
 
