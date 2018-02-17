@@ -37,7 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     //Metodo que se utiliza para "Inflar" el contexto
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclingView_listitem, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclingview_listitem, parent,false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }

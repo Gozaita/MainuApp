@@ -11,31 +11,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
     private TextView mTextMessage;
     private ListView lvPrimeros;
     private ListView lvSegundos;
     private ListView lvPostres;
-
-    /*private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    //mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    //mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    //mTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +53,20 @@ public class MainActivity extends AppCompatActivity {
         lvSegundos = findViewById(R.id.listaSegundos);
         lvPostres = findViewById(R.id.listaPostres);
 
+        //Quita el borde gris de cada listview item
+        lvPrimeros.setDivider(null);
+        lvSegundos.setDivider(null);
+        lvPostres.setDivider(null);
+
         //Adaptamos la informacion que va dentro de ellos
-        ArrayAdapter<String> arrayAdapterPrimeros = new ArrayAdapter<>(this, R.layout.listView_platos, R.id.nombreTextView, new String[]{"Lentejas","Cocido","Ensalada de pollo"});
-        ArrayAdapter<String> arrayAdapterSegundos = new ArrayAdapter<>(this, R.layout.listView_platos, R.id.nombreTextView, new String[]{"Albondigas","Tortilla Francesa","Arraingorri"});
-        ArrayAdapter<String> arrayAdapterPostres = new ArrayAdapter<>(this, R.layout.listView_platos, R.id.nombreTextView, new String[]{"Helado"});
+        ArrayAdapter<String> ad = new ArrayAdapter<String>(this, R.layout.textcenter, R.id.textItem, new String[]{"Lentejas","Cocido","Ensalada de pollo"} );
+        lvPrimeros.setAdapter(ad);
+        //ArrayAdapter<String> arrayAdapterPrimeros = new ArrayAdapter<>(this, R.layout.listview_platos, R.id.nombreTextView, new String[]{"Lentejas","Cocido","Ensalada de pollo"});
+        ArrayAdapter<String> arrayAdapterSegundos = new ArrayAdapter<>(this, R.layout.listview_platos, R.id.nombreTextView, new String[]{"Albondigas","Tortilla Francesa","Arraingorri"});
+        ArrayAdapter<String> arrayAdapterPostres = new ArrayAdapter<>(this, R.layout.listview_platos, R.id.nombreTextView, new String[]{"Helado"});
 
         //Metemos dentro la informacion
-        lvPrimeros.setAdapter(arrayAdapterPrimeros);
+        //lvPrimeros.setAdapter(arrayAdapterPrimeros);
         lvSegundos.setAdapter(arrayAdapterSegundos);
         lvPostres.setAdapter(arrayAdapterPostres);
 

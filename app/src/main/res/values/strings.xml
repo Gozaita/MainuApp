@@ -11,41 +11,7 @@
     <string name="otros">Otros</string>
     <string name="bocadillos">Bocadillos</string>
     <string name="menuDelDia">Menu del dia</string>
-
-
-    <string-array name="listaPrimeros">
-        <item>Lentejas</item>
-        <item>Arroz a la cubana</item>
-        <item>Cocido montañés</item>
-    </string-array>
-
-    <string-array name="listaSegundos">
-        <item>Filete con patatas</item>
-        <item>Muslo al limón</item>
-        <item>Revuelto de gulas</item>
-    </string-array>
-
-    <string-array name="listaPostres">
-        <item>Helados</item>
-    </string-array>
-
-    <string-array name="listaBocadillos">
-        <item>Ave Cesar</item>
-        <item>Jamaica</item>
-        <item>Lomo Queso</item>
-    </string-array>
-
-    <string-array name="preciosBocadillos">
-        <item>3.00€</item>
-        <item>2.25</item>
-        <item>3.00€</item>
-    </string-array>
-
-    <string-array name="descripcionBocadillos">
-        <item>Pollo empanado, lechuga, tomate y salsa cesar</item>
-        <item>Lomo, bacon y huevo</item>
-        <item>Lomo y queso</item>
-    </string-array>
+    
     <string name="title_activity_recycler_view">RecyclerView</string>
 
 </resources>
