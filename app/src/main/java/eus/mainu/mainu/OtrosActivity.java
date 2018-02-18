@@ -4,10 +4,17 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import eus.mainu.mainu.Utilidades.AdaptadorDeSeccionesPagerView;
 
 public class OtrosActivity extends AppCompatActivity {
+
+    private TextView mTextMessage;
+    private ListView lvPrimeros;
+    private ListView lvSegundos;
+    private ListView lvPostres;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +22,7 @@ public class OtrosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_otros);
 
         setupViewPager();
+
     }
 
     /**
@@ -33,9 +41,9 @@ public class OtrosActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_dashboard_black_24dp);
+        tabLayout.getTabAt(0).setIcon(R.mipmap.icon);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_menu);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_home_black_24dp);
+        tabLayout.getTabAt(2).setIcon(R.mipmap.icon);
     }
 
 }

@@ -1,0 +1,71 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/primerPlato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:text="@string/primer_Plato"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"/>
+
+        <ListView
+            android:id="@+id/listaPrimeros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_below="@+id/primerPlato"/>
+
+        <TextView
+            android:id="@+id/segundoPlato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:text="@string/segundo_Plato"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_below="@id/listaPrimeros"
+            android:layout_centerHorizontal="true" />
+
+        <ListView
+            android:id="@+id/listaSegundos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_below="@+id/segundoPlato"
+            android:layout_centerHorizontal="true"/>
+
+
+        <TextView
+            android:id="@+id/postre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:text="@string/postre"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_below="@id/listaSegundos"
+            android:layout_centerHorizontal="true" />
+
+        <ListView
+            android:id="@+id/listaPostres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100sp"
+            android:layout_marginRight="100sp"
+            android:gravity="right"
+            android:layout_below="@id/postre"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+
+</merge>

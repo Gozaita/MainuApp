@@ -17,6 +17,13 @@ public class Bocadillo {
     private ArrayList<ValoracionBocadillo> valoraciones;
     private ArrayList<FotoBocadillo> fotos;
 
+    public Bocadillo(int id, String nombre, String descripcion, float precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+    }
+
     public Bocadillo(int id, String nombre, String descripcion, float precio, ArrayList<Ingrediente> ingredientes, ArrayList<ValoracionBocadillo> valoraciones, ArrayList<FotoBocadillo> fotos) {
         this.id = id;
         this.nombre = nombre;

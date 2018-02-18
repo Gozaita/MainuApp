@@ -9,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import eus.mainu.mainu.Utilidades.AdaptadorDeObjetos;
-
 public class BocadillosActivity extends AppCompatActivity {
 
     //private TextView mTextMessage;
@@ -58,8 +56,8 @@ public class BocadillosActivity extends AppCompatActivity {
 
 
         //Adaptamos el formato del listView en funcion del layout que hemos creado
-        AdaptadorDeObjetos adaptadorDeObjetos = new AdaptadorDeObjetos(this, bocadillos, descripcion, precios);
-        listaBocadillos.setAdapter(adaptadorDeObjetos);
+        //AdaptadorDeObjetos adaptadorDeObjetos = new AdaptadorDeObjetos(this, bocadillos, descripcion, precios);
+        //listaBocadillos.setAdapter(adaptadorDeObjetos);
 
     }
 

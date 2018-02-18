@@ -6,13 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import eus.mainu.mainu.R;
+import eus.mainu.mainu.datalayer.Bocadillo;
 
 /**
  * Created by narciso on 15/02/18.
@@ -23,21 +23,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     //Para debbuguear
     private static final String TAG = "RecyclerViewAdapter";
-    private ArrayList<String> mNombres = new ArrayList<>();
-    private ArrayList<String> mImagenes = new ArrayList<>();
+    ArrayList<Bocadillo> arrayBocadillos = new ArrayList<Bocadillo>();
     private Context mContext;
 
-    public RecyclerViewAdapter(ArrayList<String> mNombres, ArrayList<String> mImagenes, Context mContext) {
-        this.mNombres = mNombres;
-        this.mImagenes = mImagenes;
-        this.mContext = mContext;
+
+    public RecyclerViewAdapter(ArrayList<Bocadillo> arrayBocadillos, Context context) {
+        this.arrayBocadillos = arrayBocadillos;
+        mContext = context;
     }
 
 
     //Metodo que se utiliza para "Inflar" el contexto
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclingview_listitem, parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.recyclingview_listitem, parent,false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -47,6 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d(TAG,"onBindViewHolder: called."); //Para debuguear
+
     /*
     Código para hacer la petición de las imagenes, no funciona y depende de librerías externas
 
@@ -66,27 +66,34 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         });*/
 
+    //holder.nombre.setText(arrayBocadillos.get(position).getNombre());
+    //holder.descripcion.setText(arrayBocadillos.get(position).getDescripcion());
+    //holder.precio.setText(Float.toString(arrayBocadillos.get(position).getPrecio()));
+
+
 
     }
 
     //Le dice al adaptador cuantos objetos tenemos en la lista, si devolvemos 0, no muestra ninguno
     @Override
     public int getItemCount() {
-        return mImagenes.size();
+        return arrayBocadillos.size();
     }
 
     public class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
 
-        ImageView imagen;
         TextView nombre;
+        TextView descripcion;
+        TextView precio;
+
         RelativeLayout parentLayout;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imagen = itemView.findViewById(R.id.imagen);
-            nombre = itemView.findViewById(R.id.nombre);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
+            nombre = itemView.findViewById(R.id.nombreTextView);
+            descripcion = itemView.findViewById(R.id.descripcionTextView);
+            precio = itemView.findViewById(R.id.precioTextView);
         }
     }
 

@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import eus.mainu.mainu.R;
+import eus.mainu.mainu.datalayer.Bocadillo;
 
 /**
  * Created by narciso on 9/02/18.
@@ -18,33 +21,23 @@ import eus.mainu.mainu.R;
 public class AdaptadorDeObjetos extends BaseAdapter {
 
     LayoutInflater mInflator; //la m de mInflator es porque es miembro de la clase
-    String[] nombre;
-    String[] descripcion;
-    String[] precios;
+    ArrayList<Bocadillo> arrayBocadillos;
 
 
     //Contructor de la clase
-    public AdaptadorDeObjetos(Context c, String[] n){
-        mInflator = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        nombre = n;
-    }
-
-    //Contructor de la clase
-    public AdaptadorDeObjetos(Context c, String[] n, String[] d, String[] p){
-        nombre = n;
-        descripcion = d;
-        precios = p;
+    public AdaptadorDeObjetos(Context c, ArrayList<Bocadillo> arrayBocadillos){
+        this.arrayBocadillos = arrayBocadillos;
         mInflator = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return nombre.length;
+        return arrayBocadillos.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return nombre[i];
+        return arrayBocadillos.get(i);
     }
 
     @Override
@@ -60,9 +53,11 @@ public class AdaptadorDeObjetos extends BaseAdapter {
         TextView descripcionTextView = (TextView) v.findViewById(R.id.descripcionTextView);
         TextView precioTextView = (TextView) v.findViewById(R.id.precioTextView);
 
-        String nom = nombre[i];
-        String des = descripcion[i];
-        String pre = precios[i];
+        Bocadillo bocadillo = arrayBocadillos.get(i);
+
+        String nom = bocadillo.getNombre();
+        String des = bocadillo.getDescripcion();
+        String pre = Float.toString(bocadillo.getPrecio());
 
         nombreTextView.setText(nom);
         descripcionTextView.setText(des);

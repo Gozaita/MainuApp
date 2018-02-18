@@ -2,12 +2,9 @@ package eus.mainu.mainu;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 
 import java.util.ArrayList;
-
-import eus.mainu.mainu.Utilidades.RecyclerViewAdapter;
 
 public class RecyclerViewActivity extends AppCompatActivity {
 
@@ -47,10 +44,10 @@ public class RecyclerViewActivity extends AppCompatActivity {
     private void initRecyclerView() {
         Log.d(TAG,"initImageBitmaps: recyclerView");
 
-        android.support.v7.widget.RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(mImagenesUrls, mNombres, this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //android.support.v7.widget.RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        //RecyclerViewAdapter adapter = new RecyclerViewAdapter(mImagenesUrls, mNombres, this);
+        //recyclerView.setAdapter(adapter);
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
     }
