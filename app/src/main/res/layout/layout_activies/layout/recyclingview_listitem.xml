@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Plantilla para el listView de los Bocadillos, se representaran en funcion de este layout-->
+<!-- Plantilla para el recycling view de los Bocadillos, se representara en funcion de este layout-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,7 +15,7 @@
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/ic_menu"
+        android:src="@mipmap/icon_round"
         android:layout_gravity="center_vertical"/>
 
     <LinearLayout
