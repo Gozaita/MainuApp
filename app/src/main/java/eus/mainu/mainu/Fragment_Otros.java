@@ -7,14 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by narciso on 17/02/18.
- * Clase infladora del fragmento de bocadillos
- */
+public class Fragment_Otros extends Fragment{
 
-public class OtrosFragment extends Fragment{
-
-    private static final String TAG = "OtrosFragment";
+    private static final String TAG = "Fragment_Otros";
 
     @Nullable
     @Override

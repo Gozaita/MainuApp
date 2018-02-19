@@ -6,11 +6,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import eus.mainu.mainu.Utilidades.AdaptadorDeSeccionesPagerView;
 
-public class OtrosActivity extends AppCompatActivity {
-
+public class Activity_Otros extends AppCompatActivity {
     private TextView mTextMessage;
     private ListView lvPrimeros;
     private ListView lvSegundos;
@@ -22,18 +20,14 @@ public class OtrosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_otros);
 
         setupViewPager();
-
     }
 
-    /**
-     * Responsable de añadir 3 fragmentos: Bocadillos, Menu, Otros
-     *
-     */
+    //Responsable de añadir 3 fragmentos: Bocadillos, Menu, Otros
     private void setupViewPager(){
         AdaptadorDeSeccionesPagerView adapter = new AdaptadorDeSeccionesPagerView(getSupportFragmentManager());
-        adapter.addFragment(new BocadillosFragment()); //index 0
-        adapter.addFragment(new MenuFragment()); //index 1
-        adapter.addFragment(new OtrosFragment()); //index 2
+        adapter.addFragment(new Fragment_Bocadillos()); //index 0
+        adapter.addFragment(new Fragment_Menu()); //index 1
+        adapter.addFragment(new Fragment_Otros()); //index 2
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.contenedor);
         viewPager.setAdapter(adapter);

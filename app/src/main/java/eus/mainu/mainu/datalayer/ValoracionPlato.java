@@ -1,11 +1,6 @@
 package eus.mainu.mainu.datalayer;
 
-/**
- * Created by Manole on 17/02/2018.
- */
-
 public class ValoracionPlato {
-
     private int id;
     private int puntuacion;
     private String texto;

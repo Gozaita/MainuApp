@@ -12,19 +12,6 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main">
-
-        </activity>
-        <activity
-            android:name=".BocadillosActivity"
-            android:label="MainU"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="eus.mainu.mainu.MainActivity" />
-        </activity>
 
         <meta-data
             android:name="preloaded_fonts"
@@ -35,7 +22,7 @@
             android:label="@string/title_activity_recycler_view"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".OtrosActivity">
+        <activity android:name=".Activity_Otros">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

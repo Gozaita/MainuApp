@@ -8,21 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
 import java.util.ArrayList;
-
 import eus.mainu.mainu.Utilidades.RecyclerViewAdapter;
 import eus.mainu.mainu.datalayer.Bocadillo;
 
-/**
- * Created by narciso on 17/02/18.
- * Clase infladora del fragmento de bocadillos
- */
+public class Fragment_Bocadillos extends Fragment{
 
-public class BocadillosFragment extends Fragment{
-
-    private static final String TAG = "BocadillosFragment";
-    //private TextView mTextMessage;
+    private static final String TAG = "Fragment_Bocadillos";
     private ListView listaBocadillos;
 
     @Nullable
@@ -40,7 +32,7 @@ public class BocadillosFragment extends Fragment{
 
         ArrayList<Bocadillo> arrayBocadillos = new ArrayList<Bocadillo>();
 
-        Bocadillo aveCesar = new Bocadillo(1,"Ave Cesar","Bocadillo Romano",3f);
+        Bocadillo aveCesar  = new Bocadillo(1,"Ave Cesar","Bocadillo Romano",3f);
         Bocadillo aperribai = new Bocadillo(2,"Aperribai","Bocadillo Vasco",3.25f);
         Bocadillo lomoQueso = new Bocadillo(3,"Lomo Solo","Bocadillo Terrible", 2.25f);
 
