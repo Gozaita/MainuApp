@@ -2,29 +2,24 @@ package eus.mainu.mainu.datalayer;
 
 import java.util.ArrayList;
 
-/**
- * Created by Manole on 16/02/2018.
- * Clase de Bocadillo
- */
-
 public class Bocadillo {
 
     private int id;
     private String nombre;
     private String descripcion;
-    private float precio;
+    private double precio;
     private ArrayList<Ingrediente> ingredientes;
     private ArrayList<ValoracionBocadillo> valoraciones;
     private ArrayList<FotoBocadillo> fotos;
 
-    public Bocadillo(int id, String nombre, String descripcion, float precio) {
+    public Bocadillo(int id, String nombre, String descripcion, double precio) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
     }
 
-    public Bocadillo(int id, String nombre, String descripcion, float precio, ArrayList<Ingrediente> ingredientes, ArrayList<ValoracionBocadillo> valoraciones, ArrayList<FotoBocadillo> fotos) {
+    public Bocadillo(int id, String nombre, String descripcion, double precio, ArrayList<Ingrediente> ingredientes, ArrayList<ValoracionBocadillo> valoraciones, ArrayList<FotoBocadillo> fotos) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -58,7 +53,7 @@ public class Bocadillo {
         this.descripcion = descripcion;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 

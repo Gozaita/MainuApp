@@ -68,7 +68,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     holder.nombre.setText(arrayBocadillos.get(position).getNombre());
     holder.descripcion.setText(arrayBocadillos.get(position).getDescripcion());
-    holder.precio.setText(Float.toString(arrayBocadillos.get(position).getPrecio()));
+    holder.precio.setText(Double.toString(arrayBocadillos.get(position).getPrecio()));
 
 
 
