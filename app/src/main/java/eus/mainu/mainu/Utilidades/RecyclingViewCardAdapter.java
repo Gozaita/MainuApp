@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,9 +26,9 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
     private Context mContext;
 
 
-    public RecyclingViewCardAdapter(Context mContext) {
-        //this.nombres = nombres;
-        //this.precios = precios;
+    public RecyclingViewCardAdapter(Context mContext,ArrayList<String> nombres,ArrayList<String> precios) {
+        this.nombres = nombres;
+        this.precios = precios;
         this.mContext = mContext;
     }
 
@@ -41,24 +42,24 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.nombre.setText("NombrePrueba");
-        holder.precio.setText("6.50");
+        holder.nombre.setText(nombres.get(position));
+        holder.precio.setText(precios.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return nombres.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        //ImageView imagen;
+        ImageView imagen;
         TextView nombre;
         TextView precio;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            //this.imagen = imagen;
+            this.imagen = itemView.findViewById(R.id.imagen_card);
             this.nombre = itemView.findViewById(R.id.nombre_card);
             this.precio = itemView.findViewById(R.id.precio_card);
         }

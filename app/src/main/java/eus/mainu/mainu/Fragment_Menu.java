@@ -3,18 +3,13 @@ package eus.mainu.mainu;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import eus.mainu.mainu.Utilidades.HttpGetRequest;
 
 public class Fragment_Menu extends Fragment{
     private ListView lvPrimeros;
@@ -46,11 +41,18 @@ public class Fragment_Menu extends Fragment{
         ArrayList<String> menuPri = new ArrayList<String>();
         ArrayList<String> menuSeg = new ArrayList<String>();
         ArrayList<String> menuPos = new ArrayList<String>();
+
+        menuPri.add("Lentejas");
+        menuPri.add("Arroz a la cubana");
+        menuPri.add("Ensalada mixta");
+
+
         menuSeg.add("Albondigas");
         menuSeg.add("Tortilla Francesa");
         menuSeg.add("Arraingorri");
         menuPos.add("Helado");
 
+        /*
         //Instantiate new instance
         String result;
         HttpGetRequest getRequest = new HttpGetRequest();
@@ -64,6 +66,7 @@ public class Fragment_Menu extends Fragment{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        */
 
 
         //Adaptamos la informacion que va dentro de ellos

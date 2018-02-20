@@ -8,7 +8,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import eus.mainu.mainu.Utilidades.AdaptadorDeSeccionesPagerView;
 
-public class Activity_Otros extends AppCompatActivity {
+public class Activity_Main extends AppCompatActivity {
     private TextView mTextMessage;
     private ListView lvPrimeros;
     private ListView lvSegundos;

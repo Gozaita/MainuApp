@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 import eus.mainu.mainu.Utilidades.RecyclingViewCardAdapter;
 
 public class Fragment_Otros extends Fragment{
@@ -22,16 +24,35 @@ public class Fragment_Otros extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_otros, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_otros);
+        setOtros(view);
 
-        RecyclingViewCardAdapter recyclingViewCardAdapter = new RecyclingViewCardAdapter(getActivity());
+        return view;
+    }
+
+    private void setOtros(View view){
+
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_otros);
+        ArrayList<String> nombres = new ArrayList<>();
+        ArrayList<String> precios = new ArrayList<>();
+
+        nombres.add("Cocacola");
+        nombres.add("Fanta");
+        nombres.add("alioli");
+        nombres.add("Tosta Plus");
+        nombres.add("Cafe con leche");
+
+        precios.add("2.00");
+        precios.add("2.00");
+        precios.add("3.00");
+        precios.add("3.00");
+        precios.add("1.10");
+
+
+        RecyclingViewCardAdapter recyclingViewCardAdapter = new RecyclingViewCardAdapter(getActivity(),nombres,precios);
         StaggeredGridLayoutManager recyclingViewCardAdapterManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(recyclingViewCardAdapterManager);
         recyclerView.setAdapter(recyclingViewCardAdapter);
 
-
-
-        return view;
     }
 
 }

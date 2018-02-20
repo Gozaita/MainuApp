@@ -20,7 +20,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/mainu_logo"
+                android:src="@mipmap/ic_launcher_foreground"
                 android:id="@+id/imagen_card"
                 android:scaleType="center"/>
 
@@ -36,10 +36,10 @@
                 android:id="@+id/precio_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/nombre"
-                android:layout_alignBottom="@+id/nombre"
+                android:layout_alignBaseline="@+id/nombre_card"
+                android:layout_alignBottom="@+id/nombre_card"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="17dp"
                 android:text="Precio" />
 
         </RelativeLayout>
