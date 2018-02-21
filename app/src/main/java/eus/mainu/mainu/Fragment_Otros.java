@@ -29,6 +29,7 @@ public class Fragment_Otros extends Fragment{
         return view;
     }
 
+
     private void setOtros(View view){
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_otros);
