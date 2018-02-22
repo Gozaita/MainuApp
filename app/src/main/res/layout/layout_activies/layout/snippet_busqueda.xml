@@ -3,43 +3,48 @@
     >
 
 
-   <RelativeLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorPrimary">
 
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/busquedaToolBar">
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/busquedaToolBar">
 
-       <ImageButton
-           android:id="@+id/configuracionButton"
-           android:layout_width="30dp"
-           android:layout_height="30dp"
-           android:layout_alignParentBottom="true"
-           android:layout_alignParentStart="true"
-           app:srcCompat="@mipmap/icon" />
+        </android.support.v7.widget.Toolbar>
+
+        <ImageButton
+            android:id="@+id/camaraButton"
+            android:layout_width="15dp"
+            android:layout_height="30dp"
+            android:layout_alignTop="@+id/Activity"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/Activity"
+            android:background="@color/colorPrimary"
+            app:srcCompat="@drawable/ic_3_puntitos" />
+
         <SearchView
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
+            android:id="@+id/Activity"
+            android:layout_width="330dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/imageButton" />
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
-       <ImageButton
-           android:id="@+id/camaraButton"
-           android:layout_width="30dp"
-           android:layout_height="30dp"
-           android:layout_alignParentEnd="true"
-           android:layout_alignTop="@+id/imageButton"
-           android:layout_marginStart="20dp"
-           app:srcCompat="@android:drawable/ic_menu_camera" />
+        <ImageButton
+            android:id="@+id/configuracionButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignTop="@+id/camaraButton"
+            android:layout_toStartOf="@+id/Activity"
+            android:background="@color/colorPrimary"
+            app:srcCompat="@drawable/ic_menu_navigation" />
 
 
-
-    </android.support.v7.widget.Toolbar>
-
-   </RelativeLayout>
+    </RelativeLayout>
 
 
 </merge>

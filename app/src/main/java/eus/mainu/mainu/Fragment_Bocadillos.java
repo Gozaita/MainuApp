@@ -32,6 +32,17 @@ public class Fragment_Bocadillos extends Fragment{
     }
 
     private void setBocadillos(View view){
+
+        ArrayList<Bocadillo> arrayBocadillos = getBocadillos();
+
+        android.support.v7.widget.RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(arrayBocadillos, getActivity());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    private ArrayList<Bocadillo> getBocadillos(){
+
         ArrayList<Bocadillo> arrayBocadillos = new ArrayList<Bocadillo>();
 
         String result;
@@ -49,10 +60,7 @@ public class Fragment_Bocadillos extends Fragment{
             e.printStackTrace();
         }
 
-        android.support.v7.widget.RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(arrayBocadillos, getActivity());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        return arrayBocadillos;
     }
 
 }

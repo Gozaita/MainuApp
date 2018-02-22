@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import eus.mainu.mainu.Utilidades.AdaptadorDeSeccionesPagerView;
 
 public class Activity_Main extends AppCompatActivity {
@@ -24,6 +25,8 @@ public class Activity_Main extends AppCompatActivity {
 
     //Responsable de añadir 3 fragmentos: Bocadillos, Menu, Otros
     private void setupViewPager(){
+
+
         AdaptadorDeSeccionesPagerView adapter = new AdaptadorDeSeccionesPagerView(getSupportFragmentManager());
         adapter.addFragment(new Fragment_Bocadillos()); //index 0
         adapter.addFragment(new Fragment_Menu()); //index 1
@@ -35,9 +38,10 @@ public class Activity_Main extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setIcon(R.mipmap.icon);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_sandwich);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_menu);
-        tabLayout.getTabAt(2).setIcon(R.mipmap.icon);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_french_fries);
     }
+
 
 }

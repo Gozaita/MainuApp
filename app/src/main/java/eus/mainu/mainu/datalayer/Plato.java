@@ -14,16 +14,22 @@ public class Plato {
     private int tipo;
     private boolean actual;
     private String descripcion;
-    private ArrayList<ValoracionPlato> valoraciones;
+    private float valoracion;
     private ArrayList<FotoPlato> fotos;
 
-    public Plato(int id, String nombre, int tipo, boolean actual, String descripcion, ArrayList<ValoracionPlato> valoraciones, ArrayList<FotoPlato> fotos) {
+    public Plato(int id, String nombre, float valoracion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.valoracion = valoracion;
+    }
+
+    public Plato(int id, String nombre, int tipo, boolean actual, String descripcion, float valoracion, ArrayList<FotoPlato> fotos) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.actual = actual;
         this.descripcion = descripcion;
-        this.valoraciones = valoraciones;
+        this.valoracion = valoracion;
         this.fotos = fotos;
     }
 
@@ -67,12 +73,12 @@ public class Plato {
         this.descripcion = descripcion;
     }
 
-    public ArrayList<ValoracionPlato> getValoraciones() {
-        return valoraciones;
+    public float getValoracion() {
+        return valoracion;
     }
 
-    public void setValoraciones(ArrayList<ValoracionPlato> valoraciones) {
-        this.valoraciones = valoraciones;
+    public void setValoracion(float valoracion) {
+        this.valoracion = valoracion;
     }
 
     public ArrayList<FotoPlato> getFotos() {

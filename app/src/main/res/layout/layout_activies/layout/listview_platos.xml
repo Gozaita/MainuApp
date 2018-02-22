@@ -4,18 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/nombreTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="@font/gothamroundedbook"
+        android:text="Nombre"
+        android:textAlignment="textStart"
+        android:textSize="20sp" />
+
+    <RatingBar
+        android:id="@+id/ratingBarEstrellitas"
+        style="@style/Base.Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true">
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"/>
 
-        <TextView
-            android:id="@+id/nombreTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nombre"
-            android:gravity="center"
-            android:textSize="20sp" />
 
-    </LinearLayout>
+
 </RelativeLayout>

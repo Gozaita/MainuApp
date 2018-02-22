@@ -9,6 +9,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -18,11 +19,16 @@ public class Fragment_Otros extends Fragment{
 
     private static final String TAG = "Fragment_Otros";
     private static final int NUM_COLUMNS = 2;
+    private TextView titulo;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_otros, container, false);
+
+        //Ponemos el titulo en la toolbat
+        titulo = view.findViewById(R.id.Activity);
+        titulo.setText(getResources().getString(R.string.complementos));
 
         setOtros(view);
 
