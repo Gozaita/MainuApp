@@ -20,14 +20,13 @@
             android:layout_width="15dp"
             android:layout_height="30dp"
             android:layout_alignTop="@+id/Activity"
-            android:layout_marginStart="12dp"
             android:layout_toEndOf="@+id/Activity"
             android:background="@color/colorPrimary"
             app:srcCompat="@drawable/ic_3_puntitos" />
 
         <SearchView
             android:id="@+id/Activity"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"

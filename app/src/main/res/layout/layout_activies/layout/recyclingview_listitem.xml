@@ -47,7 +47,7 @@
         android:id="@+id/precioTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="10dp"
         android:fontFamily="@font/gothamroundedbook"
         android:gravity="right"
         android:text="X.XX€"
