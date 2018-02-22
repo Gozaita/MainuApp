@@ -18,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/relLayout1">
+        <include layout="@layout/snippet_toolbar"/>
+
 
     </RelativeLayout>
 
@@ -25,16 +27,23 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/relLayout2">
+        android:id="@+id/relLayout2"
+        android:layout_below="@id/relLayout1">
 
         <include layout="@layout/layout_centro_viewpager"/>
-
-        <!-- bottom navigation -->
-        <include layout="@layout/layout_abajo_navegacion"/>
 
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/reLayout3">
+
+    <!-- bottom navigation -->
+    <include layout="@layout/layout_abajo_navegacion"/>
+
+    </RelativeLayout>
 
 
 

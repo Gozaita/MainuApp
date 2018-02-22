@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,6 +22,7 @@ import eus.mainu.mainu.datalayer.Bocadillo;
 public class Fragment_Bocadillos extends Fragment{
 
     private static final String TAG = "Fragment_Bocadillos";
+    private TextView titulo;
 
 
     //Metodo que se ejecuta al visualizar el fragmento, se representa en funcion del layout fragment_bocadillos
@@ -30,7 +32,11 @@ public class Fragment_Bocadillos extends Fragment{
         View view = inflater.inflate(R.layout.fragment_bocadillos, container, false);
 
 
-        setBocadillos(view);
+        //Ponemos el titulo en la toolbat
+        //titulo = view.findViewById(R.id.Activity);
+        //titulo.setText(getResources().getString(R.string.bocadillos));
+
+        //setBocadillos(view);
 
         return view;
     }

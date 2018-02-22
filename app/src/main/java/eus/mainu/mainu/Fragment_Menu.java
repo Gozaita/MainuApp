@@ -36,8 +36,8 @@ public class Fragment_Menu extends Fragment{
         */
 
         //Ponemos el titulo en la toolbat
-        titulo = view.findViewById(R.id.Activity);
-        titulo.setText(getResources().getString(R.string.menuDelDia));
+        //titulo = view.findViewById(R.id.Activity);
+        //titulo.setText(getResources().getString(R.string.menuDelDia));
 
         //Ponemos el contenido del listView
         setMenu(view);
