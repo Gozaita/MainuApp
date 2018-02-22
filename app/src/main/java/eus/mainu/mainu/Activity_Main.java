@@ -26,6 +26,7 @@ public class Activity_Main extends AppCompatActivity {
     //Responsable de añadir 3 fragmentos: Bocadillos, Menu, Otros
     private void setupViewPager(){
 
+        //Creamos los fragmentos
 
         AdaptadorDeSeccionesPagerView adapter = new AdaptadorDeSeccionesPagerView(getSupportFragmentManager());
         adapter.addFragment(new Fragment_Menu()); //index 0
@@ -35,8 +36,11 @@ public class Activity_Main extends AppCompatActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.contenedor);
         viewPager.setAdapter(adapter);
 
+        //Creamos las tabulaciones
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        //Añadimos 3 iconos
 
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_sandwich);

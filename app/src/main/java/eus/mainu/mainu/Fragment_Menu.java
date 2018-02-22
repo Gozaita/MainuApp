@@ -39,6 +39,7 @@ public class Fragment_Menu extends Fragment{
         titulo = view.findViewById(R.id.Activity);
         titulo.setText(getResources().getString(R.string.menuDelDia));
 
+        //Ponemos el contenido del listView
         setMenu(view);
 
         return view;
@@ -57,6 +58,7 @@ public class Fragment_Menu extends Fragment{
         lvSegundos.setDivider(null);
         lvPostres.setDivider(null);
 
+        //Creamos los platos
         Plato primero1 = new Plato(1,"Lentejas",3.2f);
         Plato primero2 = new Plato(2,"Arroz a la cubana",5.5f);
         Plato primero3 = new Plato(3,"Ensalada Mixta",4.1f);
@@ -96,6 +98,7 @@ public class Fragment_Menu extends Fragment{
         }
         */
 
+        //Adaptamos
         ListViewAdapter adapter1 = new ListViewAdapter(getActivity(),primeros);
         ListViewAdapter adapter2 = new ListViewAdapter(getActivity(),segundos);
         ListViewAdapter adapter3 = new ListViewAdapter(getActivity(),postres);

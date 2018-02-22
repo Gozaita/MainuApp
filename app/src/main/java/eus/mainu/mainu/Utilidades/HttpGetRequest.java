@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+
+//Clase para hacer las peticiones GET
 public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
     @Override

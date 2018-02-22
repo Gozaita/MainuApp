@@ -32,6 +32,7 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
         this.mContext = mContext;
     }
 
+    //Metodo que se utiliza para "Inflar" el contexto
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.layout_grid_item,parent,false);
@@ -46,6 +47,7 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
         holder.precio.setText(precios.get(position));
     }
 
+    //Le dice al adaptador cuantos objetos tenemos en la lista, si devolvemos 0, no muestra ninguno
     @Override
     public int getItemCount() {
         return nombres.size();

@@ -42,29 +42,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
 
-    //metodo importante que cambia en funcion del layout, sera llamado cada vez que
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d(TAG,"onBindViewHolder: called."); //Para debuguear
-
-    /*
-    Código para hacer la petición de las imagenes, no funciona y depende de librerías externas
-
-        // Glide.with(mContext) //Coge el contexto
-           //     .asBitmap() //Dice que es un bitmap
-             //   .load(mImagenes.get(position))
-              //  .into(holder.imagen);
-
-        holder.nombre.setText(mNombres.get(position));
-
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View view) {
-                Log.d(TAG,"onClick: clicked on: "+ mImagenes.get(position));
-
-                Toast.makeText(mContext,mImagenes.get(position), Toast.LENGTH_SHORT).show();
-            }
-        });*/
 
     holder.nombre.setText(arrayBocadillos.get(position).getNombre());
     holder.descripcion.setText(arrayBocadillos.get(position).getDescripcion());

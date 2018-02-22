@@ -18,7 +18,7 @@ import eus.mainu.mainu.Utilidades.RecyclingViewCardAdapter;
 public class Fragment_Otros extends Fragment{
 
     private static final String TAG = "Fragment_Otros";
-    private static final int NUM_COLUMNS = 2;
+    private static final int NUM_COLUMNS = 2;   //Numero de columnas del cardview
     private TextView titulo;
 
     @Nullable
@@ -30,15 +30,20 @@ public class Fragment_Otros extends Fragment{
         titulo = view.findViewById(R.id.Activity);
         titulo.setText(getResources().getString(R.string.complementos));
 
+        //Ponemos el contenido del cardView
         setOtros(view);
 
         return view;
     }
 
 
+    //Metodo para rellenar el cardview
     private void setOtros(View view){
 
+        //Referenciamos el cardview
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_otros);
+
+        //Creamos el contenido del cardView
         ArrayList<String> nombres = new ArrayList<>();
         ArrayList<String> precios = new ArrayList<>();
 
@@ -54,7 +59,7 @@ public class Fragment_Otros extends Fragment{
         precios.add("3.00");
         precios.add("1.10");
 
-
+        //Adaptamos
         RecyclingViewCardAdapter recyclingViewCardAdapter = new RecyclingViewCardAdapter(getActivity(),nombres,precios);
         StaggeredGridLayoutManager recyclingViewCardAdapterManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(recyclingViewCardAdapterManager);

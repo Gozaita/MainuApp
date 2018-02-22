@@ -17,27 +17,39 @@ import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.RecyclerViewAdapter;
 import eus.mainu.mainu.datalayer.Bocadillo;
 
+//Clase del fragmento responsable de visualizar los bocadillos
 public class Fragment_Bocadillos extends Fragment{
 
     private static final String TAG = "Fragment_Bocadillos";
 
+
+    //Metodo que se ejecuta al visualizar el fragmento, se representa en funcion del layout fragment_bocadillos
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bocadillos, container, false);
+
 
         setBocadillos(view);
 
         return view;
     }
 
+    //Clase para crear y adaptar la informacion al recycling view
     private void setBocadillos(View view){
 
+        //Pedimos los bocadillos a la API
         ArrayList<Bocadillo> arrayBocadillos = getBocadillos();
 
+        //Referenciamos el recyclingView
         android.support.v7.widget.RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);
+
+        //Creamos el objeto de la clase adaptador
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(arrayBocadillos, getActivity());
+
+        //Adaptamos el recyclingview
         recyclerView.setAdapter(adapter);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
