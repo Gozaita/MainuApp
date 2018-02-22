@@ -36,7 +36,7 @@ public class Fragment_Bocadillos extends Fragment{
         //titulo = view.findViewById(R.id.Activity);
         //titulo.setText(getResources().getString(R.string.bocadillos));
 
-        //setBocadillos(view);
+        setBocadillos(view);
 
         return view;
     }

@@ -5,8 +5,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="primer_Plato">1º Plato:</string>
-    <string name="segundo_Plato">2º Plato:</string>
+    <string name="primer_Plato">Primeros</string>
+    <string name="segundo_Plato">Segundos</string>
     <string name="postre">Postre</string>
     <string name="complementos">Complementos</string>
     <string name="bocadillos">Bocadillos</string>

@@ -27,36 +27,6 @@ public class Fragment_Menu extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        /*No funciona, no hace nada
-
-        //Para cerrar el teclado cuando lleguemos a este fragmento
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
-        */
-
-        //Ponemos el titulo en la toolbat
-        //titulo = view.findViewById(R.id.Activity);
-        //titulo.setText(getResources().getString(R.string.menuDelDia));
-
-        //Ponemos el contenido del listView
-        setMenu(view);
-
-        return view;
-    }
-
-    private void setMenu(View view){
-
-
-        //Cogemos la referencia de los textviews
-        lvPrimeros = view.findViewById(R.id.listaPrimeros);
-        lvSegundos = view.findViewById(R.id.listaSegundos);
-        lvPostres  = view.findViewById(R.id.listaPostres);
-
-        //Quita el borde gris de cada listview item
-        lvPrimeros.setDivider(null);
-        lvSegundos.setDivider(null);
-        lvPostres.setDivider(null);
 
         //Creamos los platos
         Plato primero1 = new Plato(1,"Lentejas",3.2f);
@@ -75,39 +45,39 @@ public class Fragment_Menu extends Fragment{
         primeros.add(primero3);
 
         ArrayList<Plato> segundos = new ArrayList<>();
-        primeros.add(segundo1);
-        primeros.add(segundo2);
-        primeros.add(segundo3);
+        segundos.add(segundo1);
+        segundos.add(segundo2);
+        segundos.add(segundo3);
 
         ArrayList<Plato> postres = new ArrayList<>();
-        primeros.add(postre1);
+        postres.add(postre1);
 
-        /*
-        //Instantiate new instance
-        String result;
-        HttpGetRequest getRequest = new HttpGetRequest();
-        try {
-            result = getRequest.execute("https://api.mainu.eus/get_bocadillos").get();
-            JSONArray obj = new JSONArray(result);
-            for (int i = 0; i < obj.length(); i++){
-                JSONObject o = obj.getJSONObject(i);
-                menuPri.add( o.getString("nombre") );
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
+        //Referenciamos los listViews
+        lvPrimeros = view.findViewById(R.id.listaPrimeros);
+        lvSegundos = view.findViewById(R.id.listaSegundos);
+        lvPostres  = view.findViewById(R.id.listaPostres);
 
-        //Adaptamos
-        ListViewAdapter adapter1 = new ListViewAdapter(getActivity(),primeros);
-        ListViewAdapter adapter2 = new ListViewAdapter(getActivity(),segundos);
-        ListViewAdapter adapter3 = new ListViewAdapter(getActivity(),postres);
+        //Adaptamos los listviews
+        setListView(primeros,lvPrimeros);
+        setListView(segundos,lvSegundos);
+        setListView(postres,lvPostres);
 
+
+        return view;
+    }
+
+    private void setListView(ArrayList<Plato> listaPlatos, ListView listView)
+    {
+        //Quitamos las divisiones
+        listView.setDivider(null);
+
+        //Adaptamos la lista
+        ListViewAdapter adapter = new ListViewAdapter(getActivity(),listaPlatos);
 
         //Metemos dentro la informacion
-        lvPrimeros.setAdapter(adapter1);
-        lvSegundos.setAdapter(adapter2);
-        lvPostres.setAdapter(adapter3);
+        listView.setAdapter(adapter);
+
     }
+
 
 }

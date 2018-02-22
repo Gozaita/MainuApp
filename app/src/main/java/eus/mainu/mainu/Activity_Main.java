@@ -4,16 +4,11 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import eus.mainu.mainu.Utilidades.AdaptadorDeSeccionesPagerView;
 
 public class Activity_Main extends AppCompatActivity {
-    private TextView mTextMessage;
-    private ListView lvPrimeros;
-    private ListView lvSegundos;
-    private ListView lvPostres;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +36,13 @@ public class Activity_Main extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         //Añadimos 3 iconos
-
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_sandwich);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_french_fries);
+
     }
+
+
 
 
 }
