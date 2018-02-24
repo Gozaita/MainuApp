@@ -2,7 +2,7 @@
 <!-- Plantilla para el recycling view de los Bocadillos, se representara en funcion de este layout-->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -27,9 +27,8 @@
         android:id="@+id/nombreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/imageView"
-        android:layout_marginLeft="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/descripcionTextView"
         android:text="Nombre"
         android:textSize="20sp" />
 
@@ -37,11 +36,11 @@
         android:id="@+id/descripcionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView"
+        android:layout_below="@+id/nombreTextView"
+        android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/imageView"
-        android:layout_marginLeft="5dp"
         android:text="Descripcion"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 
 
     <TextView
@@ -52,7 +51,6 @@
         android:layout_alignTop="@+id/imageView"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="14dp"
-        android:gravity="right"
         android:text="X.XX€"
         android:textSize="20sp" />
 
