@@ -1,7 +1,5 @@
 package eus.mainu.mainu.datalayer;
 
-import java.util.ArrayList;
-
 /**
  * Created by Manole on 16/02/2018.
  * Clase del modelo de datos Plato
@@ -11,26 +9,14 @@ public class Plato {
 
     private int id;
     private String nombre;
-    private int tipo;
-    private boolean actual;
-    private String descripcion;
-    private float valoracion;
-    private ArrayList<FotoPlato> fotos;
+    private double valoracion;
+    private String imagen;
 
-    public Plato(int id, String nombre, float valoracion) {
+    public Plato(int id, String nombre, double valoracion, String imagen) {
         this.id = id;
         this.nombre = nombre;
         this.valoracion = valoracion;
-    }
-
-    public Plato(int id, String nombre, int tipo, boolean actual, String descripcion, float valoracion, ArrayList<FotoPlato> fotos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.tipo = tipo;
-        this.actual = actual;
-        this.descripcion = descripcion;
-        this.valoracion = valoracion;
-        this.fotos = fotos;
+        this.imagen = imagen;
     }
 
     public int getId() {
@@ -49,43 +35,19 @@ public class Plato {
         this.nombre = nombre;
     }
 
-    public int getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
-
-    public boolean isActual() {
-        return actual;
-    }
-
-    public void setActual(boolean actual) {
-        this.actual = actual;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public float getValoracion() {
+    public double getValoracion() {
         return valoracion;
     }
 
-    public void setValoracion(float valoracion) {
+    public void setValoracion(double valoracion) {
         this.valoracion = valoracion;
     }
 
-    public ArrayList<FotoPlato> getFotos() {
-        return fotos;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setFotos(ArrayList<FotoPlato> fotos) {
-        this.fotos = fotos;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

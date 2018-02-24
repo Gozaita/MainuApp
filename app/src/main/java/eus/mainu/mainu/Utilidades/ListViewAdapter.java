@@ -57,7 +57,7 @@ public class ListViewAdapter extends BaseAdapter {
 
         //Metemos dentro la informacion
         lvPrimeros.setText(platos.get(position).getNombre());
-        puntuacion.setRating(platos.get(position).getValoracion());
+        puntuacion.setRating((float)platos.get(position).getValoracion());
 
         return view;
     }

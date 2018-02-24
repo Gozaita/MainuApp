@@ -40,7 +40,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imagen_card"
                 android:layout_marginLeft="5dp"
-                android:fontFamily="@font/gothamroundedbook"
                 android:text="Nombre"
                 android:textColor="@color/cardview_light_background" />
 
