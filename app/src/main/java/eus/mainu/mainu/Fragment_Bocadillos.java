@@ -70,8 +70,16 @@ public class Fragment_Bocadillos extends Fragment{
             JSONArray obj = new JSONArray(result);
             for (int i = 0; i < obj.length(); i++){
                 JSONObject o = obj.getJSONObject(i);
+
+                //Cogemos la lista de los ingredientes
+                JSONArray ingredientes = o.getJSONArray("ingredientes");
+                StringBuilder descripcion = new StringBuilder();
+                for(int j = 0; j < ingredientes.length(); j++) {
+                    descripcion.append(ingredientes.getString(j)+" ");
+                }
+
                 arrayBocadillos.add(
-                        new Bocadillo( o.getInt("id"), o.getString("nombre"), "Falta descripcion en la API", o.getDouble("precio"))
+                        new Bocadillo( o.getInt("id"), o.getString("nombre"), descripcion.toString(), o.getDouble("precio"))
                 );
             }
         } catch (Exception e) {
