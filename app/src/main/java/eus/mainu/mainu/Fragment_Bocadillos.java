@@ -9,9 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
@@ -45,7 +42,9 @@ public class Fragment_Bocadillos extends Fragment{
     private void setBocadillos(View view){
 
         //Pedimos los bocadillos a la API
-        ArrayList<Bocadillo> arrayBocadillos = getBocadillos();
+        HttpGetRequest request = new HttpGetRequest();
+
+        ArrayList<Bocadillo> arrayBocadillos = request.getBocadillos();
 
         //Referenciamos el recyclingView
         android.support.v7.widget.RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);
@@ -59,34 +58,6 @@ public class Fragment_Bocadillos extends Fragment{
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
-    private ArrayList<Bocadillo> getBocadillos(){
 
-        ArrayList<Bocadillo> arrayBocadillos = new ArrayList<Bocadillo>();
-
-        String result;
-        HttpGetRequest getRequest = new HttpGetRequest();
-        try {
-            result = getRequest.execute("https://api.mainu.eus/get_bocadillos").get();
-            JSONArray obj = new JSONArray(result);
-            for (int i = 0; i < obj.length(); i++){
-                JSONObject o = obj.getJSONObject(i);
-
-                //Cogemos la lista de los ingredientes
-                JSONArray ingredientes = o.getJSONArray("ingredientes");
-                StringBuilder descripcion = new StringBuilder();
-                for(int j = 0; j < ingredientes.length(); j++) {
-                    descripcion.append(ingredientes.getString(j)+" ");
-                }
-
-                arrayBocadillos.add(
-                        new Bocadillo( o.getInt("id"), o.getString("nombre"), descripcion.toString(), o.getDouble("precio"))
-                );
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return arrayBocadillos;
-    }
 
 }

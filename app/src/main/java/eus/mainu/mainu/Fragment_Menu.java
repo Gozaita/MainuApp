@@ -60,7 +60,9 @@ public class Fragment_Menu extends Fragment {
         postres.add(postre1);
 
 */
-        Menu menu = getMenu();
+        HttpGetRequest request = new HttpGetRequest();
+
+        Menu menu = request.getMenu();
 
         //Referenciamos los listViews
         lvPrimeros = view.findViewById(R.id.listaPrimeros);
@@ -89,61 +91,6 @@ public class Fragment_Menu extends Fragment {
     }
 
 
-    private Menu getMenu() {
-
-        Menu menu = new Menu();
-
-        String result;
-        HttpGetRequest getRequest = new HttpGetRequest();
-
-        try {
-            result = getRequest.execute("https://api.mainu.eus/get_menu").get();
-
-            JSONObject obj = new JSONObject(result);
-
-            //Cogemos el plato del postre
-            JSONObject oPostre = obj.getJSONObject("postre");
-
-            //Lo metemos en la lista de los postres
-            menu.getPostres().add((new Plato(oPostre.getInt("id"), oPostre.getString("nombre"), 5f, oPostre.getString("imagen"))));
-
-            //Cogemos los primeros y los segundos
-            JSONArray oPrimeros = obj.getJSONArray("primeros");
-            JSONArray oSegundos = obj.getJSONArray("segundos");
-
-            //Rellenamos los platos de los primeros y los segundos
-            menu.setPrimeros(getPlatos(oPrimeros));
-            menu.setSegundos(getPlatos(oSegundos));
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return menu;
-
-    }
-
-    //Metodo para sacar el array de platos
-    private ArrayList<Plato> getPlatos(JSONArray obj){
-
-        ArrayList<Plato> plato = new ArrayList<>();
-
-        try {
-            for(int i = 0; i < obj.length(); i++){
-                JSONObject o = obj.getJSONObject(i);
-                plato.add(new Plato(o.getInt("id"), o.getString("nombre"), 5f, o.getString("imagen")));
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return plato;
-    }
 
 
 
