@@ -9,12 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.ListViewAdapter;
@@ -34,32 +29,11 @@ public class Fragment_Menu extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
-/*
-        //Creamos los platos
-        Plato primero1 = new Plato(1,"Lentejas",3.2f);
-        Plato primero2 = new Plato(2,"Arroz a la cubana",5.5f);
-        Plato primero3 = new Plato(3,"Ensalada Mixta",4.1f);
+        // ATENCION ERROR Attempt to invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on a null object reference
+        //Ponemos el titulo en la toolbat
+        //titulo = view.findViewById(R.id.textViewActividad);
+        //titulo.setText(getString(R.string.menuDelDia));
 
-        Plato segundo1 = new Plato(4,"Albondigas",4.5f);
-        Plato segundo2 = new Plato(5,"Tortilla Francesa",2);
-        Plato segundo3 = new Plato(6,"Arraingorri",3.5f);
-
-        Plato postre1 = new Plato(7,"Helado",3.9f);
-
-        ArrayList<Plato> primeros = new ArrayList<>();
-        primeros.add(primero1);
-        primeros.add(primero2);
-        primeros.add(primero3);
-
-        ArrayList<Plato> segundos = new ArrayList<>();
-        segundos.add(segundo1);
-        segundos.add(segundo2);
-        segundos.add(segundo3);
-
-        ArrayList<Plato> postres = new ArrayList<>();
-        postres.add(postre1);
-
-*/
         HttpGetRequest request = new HttpGetRequest();
 
         Menu menu = request.getMenu();
@@ -77,6 +51,7 @@ public class Fragment_Menu extends Fragment {
 
         return view;
     }
+
 
     private void setListView(ArrayList<Plato> listaPlatos, ListView listView) {
         //Quitamos las divisiones

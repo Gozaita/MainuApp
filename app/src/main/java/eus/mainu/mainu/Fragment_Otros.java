@@ -26,9 +26,10 @@ public class Fragment_Otros extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_otros, container, false);
 
+        // ATENCION ERROR Attempt to invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on a null object reference
         //Ponemos el titulo en la toolbat
-        //titulo = view.findViewById(R.id.Activity);
-        //titulo.setText(getResources().getString(R.string.complementos));
+        //titulo = view.findViewById(R.id.textViewActividad);
+        //titulo.setText(getString(R.string.complementos));
 
         //Ponemos el contenido del cardView
         setOtros(view);

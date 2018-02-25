@@ -25,7 +25,7 @@
             app:srcCompat="@drawable/ic_3_puntitos" />
 
         <TextView
-            android:id="@+id/Activity"
+            android:id="@+id/textViewActividad"
             android:layout_width="300dp"
             android:layout_height="30dp"
             android:layout_centerHorizontal="true"

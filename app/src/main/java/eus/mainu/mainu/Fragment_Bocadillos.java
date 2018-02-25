@@ -29,9 +29,10 @@ public class Fragment_Bocadillos extends Fragment{
         View view = inflater.inflate(R.layout.fragment_bocadillos, container, false);
 
 
+        // ATENCION ERROR Attempt to invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on a null object reference
         //Ponemos el titulo en la toolbat
-        //titulo = view.findViewById(R.id.Activity);
-        //titulo.setText(getResources().getString(R.string.bocadillos));
+        //titulo = view.findViewById(R.id.textViewActividad);
+        //titulo.setText(getString(R.string.bocadillos));
 
         setBocadillos(view);
 
