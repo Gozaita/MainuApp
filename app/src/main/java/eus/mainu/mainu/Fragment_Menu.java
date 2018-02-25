@@ -6,15 +6,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
-import eus.mainu.mainu.Utilidades.ListViewAdapter;
-import eus.mainu.mainu.datalayer.Menu;
-import eus.mainu.mainu.datalayer.Plato;
+import eus.mainu.mainu.Utilidades.Menu;
 
 public class Fragment_Menu extends Fragment {
 
@@ -43,25 +42,31 @@ public class Fragment_Menu extends Fragment {
         lvSegundos = view.findViewById(R.id.listaSegundos);
         lvPostres = view.findViewById(R.id.listaPostres);
 
+
+        //Creo arrays de nombres de los platos para poder usar el inflador por defecto de listviews
+        ArrayList<String> nombrePrimeros = menu.getNombrePrimeros();
+        ArrayList<String> nombreSegundos = menu.getNombreSegundos();
+        ArrayList<String> nombrePostres = menu.getNombrePostres();
+
         //Adaptamos los listviews
-        setListView(menu.getPrimeros(), lvPrimeros);
-        setListView(menu.getSegundos(), lvSegundos);
-        setListView(menu.getPostres(), lvPostres);
+        setListView(nombrePrimeros, lvPrimeros);
+        setListView(nombreSegundos, lvSegundos);
+        setListView(nombrePostres, lvPostres);
 
 
         return view;
     }
 
 
-    private void setListView(ArrayList<Plato> listaPlatos, ListView listView) {
+    private void setListView(ArrayList<String> listaPlatos, ListView listView) {
         //Quitamos las divisiones
         listView.setDivider(null);
 
-        //Adaptamos la lista
-        ListViewAdapter adapter = new ListViewAdapter(getActivity(), listaPlatos);
+        //Adaptamos la informacion que va dentro de ellos (los nombres)
+        ArrayAdapter<String> arrayAdapterPrimeros = new ArrayAdapter<String>(getActivity(), R.layout.listview_platos, R.id.nombreTextView, listaPlatos);
 
         //Metemos dentro la informacion
-        listView.setAdapter(adapter);
+        listView.setAdapter(arrayAdapterPrimeros);
 
     }
 

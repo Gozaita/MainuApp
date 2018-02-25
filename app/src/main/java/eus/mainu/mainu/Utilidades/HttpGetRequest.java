@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import eus.mainu.mainu.datalayer.Bocadillo;
-import eus.mainu.mainu.datalayer.Menu;
 import eus.mainu.mainu.datalayer.Plato;
 
 
