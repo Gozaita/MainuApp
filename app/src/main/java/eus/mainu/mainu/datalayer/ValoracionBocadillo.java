@@ -1,9 +1,5 @@
 package eus.mainu.mainu.datalayer;
 
-/**
- * Created by Manole on 17/02/2018.
- */
-
 public class ValoracionBocadillo {
 
     private int id;
@@ -25,7 +21,6 @@ public class ValoracionBocadillo {
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -33,7 +28,6 @@ public class ValoracionBocadillo {
     public int getPuntuacion() {
         return puntuacion;
     }
-
     public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
     }
@@ -41,7 +35,6 @@ public class ValoracionBocadillo {
     public String getTexto() {
         return texto;
     }
-
     public void setTexto(String texto) {
         this.texto = texto;
     }
@@ -49,7 +42,6 @@ public class ValoracionBocadillo {
     public boolean isVisible() {
         return visible;
     }
-
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
@@ -57,7 +49,6 @@ public class ValoracionBocadillo {
     public int getId_bocadillo() {
         return id_bocadillo;
     }
-
     public void setId_bocadillo(int id_bocadillo) {
         this.id_bocadillo = id_bocadillo;
     }
@@ -65,7 +56,6 @@ public class ValoracionBocadillo {
     public int getId_usuario() {
         return id_usuario;
     }
-
     public void setId_usuario(int id_usuario) {
         this.id_usuario = id_usuario;
     }

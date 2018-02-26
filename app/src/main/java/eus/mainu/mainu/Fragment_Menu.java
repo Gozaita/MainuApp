@@ -1,5 +1,9 @@
 package eus.mainu.mainu;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,19 +13,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.Menu;
 
 public class Fragment_Menu extends Fragment {
-
     private TextView titulo;
     private ListView lvPrimeros;
     private ListView lvSegundos;
     private ListView lvPostres;
-
 
     @Nullable
     @Override
@@ -33,26 +33,32 @@ public class Fragment_Menu extends Fragment {
         //titulo = view.findViewById(R.id.textViewActividad);
         //titulo.setText(getString(R.string.menuDelDia));
 
-        HttpGetRequest request = new HttpGetRequest();
-
-        Menu menu = request.getMenu();
-
         //Referenciamos los listViews
         lvPrimeros = view.findViewById(R.id.listaPrimeros);
         lvSegundos = view.findViewById(R.id.listaSegundos);
-        lvPostres = view.findViewById(R.id.listaPostres);
+        lvPostres  = view.findViewById(R.id.listaPostres);
 
+        ArrayList<String> nombrePrimeros = new ArrayList<String>();
+        ArrayList<String> nombreSegundos = new ArrayList<String>();
+        ArrayList<String> nombrePostres  = new ArrayList<String>();
 
-        //Creo arrays de nombres de los platos para poder usar el inflador por defecto de listviews
-        ArrayList<String> nombrePrimeros = menu.getNombrePrimeros();
-        ArrayList<String> nombreSegundos = menu.getNombreSegundos();
-        ArrayList<String> nombrePostres = menu.getNombrePostres();
+        HttpGetRequest request = new HttpGetRequest();
+
+        if(isConnected() ){
+            Menu menu = request.getMenu();
+
+            //Creo arrays de nombres de los platos para poder usar el inflador por defecto de listviews
+            nombrePrimeros = menu.getNombrePrimeros();
+            nombreSegundos = menu.getNombreSegundos();
+            nombrePostres  = menu.getNombrePostres();
+        } else {
+
+        }
 
         //Adaptamos los listviews
         setListView(nombrePrimeros, lvPrimeros);
         setListView(nombreSegundos, lvSegundos);
         setListView(nombrePostres, lvPostres);
-
 
         return view;
     }
@@ -70,8 +76,12 @@ public class Fragment_Menu extends Fragment {
 
     }
 
-
-
+    public boolean isConnected() {
+        ConnectivityManager cm =
+                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
 
 
 }

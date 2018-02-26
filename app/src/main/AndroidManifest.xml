@@ -4,6 +4,8 @@
 
     <!-- Para tener permiso para acceder a internet -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Para comprobar si hay internet-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
