@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import eus.mainu.mainu.R;
+import eus.mainu.mainu.datalayer.Complemento;
 
 /**
  * Created by Manole on 20/02/2018.
@@ -21,14 +22,12 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
 
     private static final String TAG = "RecyclingViewCardAdapte";
 
-    private ArrayList<String> nombres = new ArrayList<>();
-    private ArrayList<String> precios = new ArrayList<>();
+    private ArrayList<Complemento> arrayComplementos = new ArrayList<>();
     private Context mContext;
 
 
-    public RecyclingViewCardAdapter(Context mContext,ArrayList<String> nombres,ArrayList<String> precios) {
-        this.nombres = nombres;
-        this.precios = precios;
+    public RecyclingViewCardAdapter(Context mContext,ArrayList<Complemento> arrayComplementos) {
+        this.arrayComplementos = arrayComplementos;
         this.mContext = mContext;
     }
 
@@ -43,14 +42,14 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.nombre.setText(nombres.get(position));
-        holder.precio.setText(precios.get(position));
+        holder.nombre.setText(arrayComplementos.get(position).getNombre());
+        holder.precio.setText(Double.toString(arrayComplementos.get(position).getPrecio()));
     }
 
     //Le dice al adaptador cuantos objetos tenemos en la lista, si devolvemos 0, no muestra ninguno
     @Override
     public int getItemCount() {
-        return nombres.size();
+        return arrayComplementos.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import eus.mainu.mainu.datalayer.Bocadillo;
+import eus.mainu.mainu.datalayer.Complemento;
 import eus.mainu.mainu.datalayer.Plato;
 
 
@@ -104,17 +105,13 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
             JSONObject obj = new JSONObject(result);
 
-            //Cogemos el plato del postre
-            JSONObject oPostre = obj.getJSONObject("postre");
-
-            //Lo metemos en la lista de los postres
-            menu.getPostres().add((new Plato(oPostre.getInt("id"), oPostre.getString("nombre"), 5f, oPostre.getString("imagen"))));
-
-            //Cogemos los primeros y los segundos
+            //Cogemos los primeros, los segundos y los postres
+            JSONArray oPostres = obj.getJSONArray("postre");
             JSONArray oPrimeros = obj.getJSONArray("primeros");
             JSONArray oSegundos = obj.getJSONArray("segundos");
 
             //Rellenamos los platos de los primeros y los segundos
+            menu.setPostres(getPlatos(oPostres));
             menu.setPrimeros(getPlatos(oPrimeros));
             menu.setSegundos(getPlatos(oSegundos));
 
@@ -147,5 +144,30 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
         return plato;
     }
+
+    //Método para crear el array de Complementos
+    public ArrayList<Complemento> getOtros()
+    {
+        ArrayList<Complemento> arrayComplementos = new ArrayList<>();
+
+        String result;
+        try {
+            result = execute("https://api.mainu.eus/get_otros").get();
+            JSONArray obj = new JSONArray(result);
+            for (int i = 0; i < obj.length(); i++){
+                JSONObject o = obj.getJSONObject(i);
+
+                arrayComplementos.add(
+                        new Complemento( o.getInt("id"), o.getString("nombre"), o.getDouble("precio"))
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return arrayComplementos;
+    }
+
+
 
 }

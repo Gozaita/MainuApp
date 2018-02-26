@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.RecyclingViewCardAdapter;
+import eus.mainu.mainu.datalayer.Complemento;
 
 public class Fragment_Otros extends Fragment{
 
@@ -45,23 +47,14 @@ public class Fragment_Otros extends Fragment{
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_otros);
 
         //Creamos el contenido del cardView
-        ArrayList<String> nombres = new ArrayList<>();
-        ArrayList<String> precios = new ArrayList<>();
 
-        nombres.add("Cocacola");
-        nombres.add("Fanta");
-        nombres.add("alioli");
-        nombres.add("Tosta Plus");
-        nombres.add("Cafe con leche");
 
-        precios.add("2.00");
-        precios.add("2.00");
-        precios.add("3.00");
-        precios.add("3.00");
-        precios.add("1.10");
+        HttpGetRequest request = new HttpGetRequest();
+
+        ArrayList<Complemento> arrayComplementos = request.getOtros();
 
         //Adaptamos
-        RecyclingViewCardAdapter recyclingViewCardAdapter = new RecyclingViewCardAdapter(getActivity(),nombres,precios);
+        RecyclingViewCardAdapter recyclingViewCardAdapter = new RecyclingViewCardAdapter(getActivity(),arrayComplementos);
         StaggeredGridLayoutManager recyclingViewCardAdapterManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(recyclingViewCardAdapterManager);
         recyclerView.setAdapter(recyclingViewCardAdapter);

@@ -13,6 +13,12 @@
     <string name="menuDelDia">Menu del dia</string>
 
 
+    <string name="getBocadillos">Menu del dia</string>
+    <string name="getMenu">Menu del dia</string>
+    <string name="getComplementos">https://api.mainu.eus/get_otros</string>
+
+
+
 
 
 </resources>

@@ -11,9 +11,15 @@ public class Complemento {
 
     private int id;
     private String nombre;
-    private float precio;
+    private double precio;
     private ArrayList<ValoracionComplemento> valoraciones;
     private ArrayList<FotoComplemento> fotos;
+
+    public Complemento(int id, String nombre, double precio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+    }
 
     public Complemento(int id, String nombre, float precio, ArrayList<ValoracionComplemento> valoraciones, ArrayList<FotoComplemento> fotos) {
         this.id = id;
@@ -39,11 +45,11 @@ public class Complemento {
         this.nombre = nombre;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
