@@ -30,7 +30,7 @@
                 android:layout_height="25dp"
                 android:layout_alignBottom="@+id/nombre_card"
                 android:layout_alignParentStart="true"
-                android:background="@color/gris1"
+                android:background="@color/gris"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme" />
 

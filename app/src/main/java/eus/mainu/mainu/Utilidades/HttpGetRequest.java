@@ -1,5 +1,8 @@
 package eus.mainu.mainu.Utilidades;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
@@ -27,6 +30,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         String url = params[0];
         String result, inputLine;
 
+
         try {
             URL myUrl = new URL(url);
             HttpURLConnection connection = (HttpURLConnection)myUrl.openConnection();
@@ -53,6 +57,13 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         }
 
         return result;
+    }
+
+    public boolean isConnected(Context mContext) {
+        ConnectivityManager cm =
+                (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     @Override
