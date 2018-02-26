@@ -3,13 +3,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp">
+    >
 
     <TextView
         android:id="@+id/nombreTextView"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
         android:text="Nombre"
         android:textAlignment="textStart"
         android:textSize="20sp"
@@ -21,6 +22,7 @@
         style="@style/Base.Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/nombreTextView"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"/>
