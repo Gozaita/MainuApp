@@ -17,13 +17,13 @@
 
         <TextView
             android:id="@+id/textViewActividad"
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="30dp"
-            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="Activity"
+            android:layout_toEndOf="@+id/configuracionButton"
+            android:text="MainU for U"
+            android:textColor="@color/blanco"
             android:textAlignment="center"
-            android:textAllCaps="true"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -33,6 +33,7 @@
             android:layout_height="30dp"
             android:layout_alignParentStart="true"
             android:layout_alignTop="@+id/textViewActividad"
+            android:layout_marginStart="20dp"
             android:background="@color/colorPrimary"
             app:srcCompat="@drawable/ic_menu_navigation" />
 
