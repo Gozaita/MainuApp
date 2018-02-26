@@ -41,7 +41,9 @@
                 android:layout_below="@+id/imagen_card"
                 android:layout_marginLeft="5dp"
                 android:text="Nombre"
-                android:textColor="@color/cardview_light_background" />
+                android:textColor="@color/cardview_light_background"
+                android:fontFamily="@font/gothamblack"
+                />
 
             <TextView
                 android:id="@+id/precio_card"
@@ -51,9 +53,10 @@
                 android:layout_alignBottom="@+id/nombre_card"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="5dp"
-                android:fontFamily="@font/gothamroundedbook"
                 android:text="Precio"
-                android:textColor="@color/blanco" />
+                android:textColor="@color/blanco"
+                android:fontFamily="@font/gothamroundedbook"
+                />
 
         </RelativeLayout>
 

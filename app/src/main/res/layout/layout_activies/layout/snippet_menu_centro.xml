@@ -12,10 +12,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10sp"
-            android:fontFamily="@font/gothamroundedbold"
             android:text="@string/primer_Plato"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/gothamlight"
+            />
 
         <ListView
             android:id="@+id/listaPrimeros"
@@ -32,7 +32,8 @@
             android:layout_marginTop="10sp"
             android:text="@string/segundo_Plato"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/gothamlight"
+            />
 
         <ListView
             android:id="@+id/listaSegundos"
@@ -49,7 +50,8 @@
             android:layout_marginTop="10sp"
             android:text="@string/postre"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/gothamlight"
+            />
 
         <ListView
             android:id="@+id/listaPostres"

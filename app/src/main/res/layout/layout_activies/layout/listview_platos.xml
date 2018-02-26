@@ -11,7 +11,9 @@
         android:layout_marginLeft="10dp"
         android:text="Nombre"
         android:textAlignment="textStart"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:fontFamily="@font/gothambold"
+        />
 
     <RatingBar
         android:id="@+id/ratingBarEstrellitas"
