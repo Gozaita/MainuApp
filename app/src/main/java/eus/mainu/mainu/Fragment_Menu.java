@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -40,10 +41,16 @@ public class Fragment_Menu extends Fragment {
         ArrayList<String> nombreSegundos = new ArrayList<String>();
         ArrayList<String> nombrePostres  = new ArrayList<String>();
 
+        //Indicamos que esta cargando mediante una animacion
+        ProgressBar progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+
         HttpGetRequest request = new HttpGetRequest();
+
 
         if(request.isConnected(getContext()) ){
             Menu menu = request.getMenu();
+            progressBar.setVisibility(View.GONE); //Una vez ha cargado, lo quitamos
 
             //Creo arrays de nombres de los platos para poder usar el inflador por defecto de listviews
             nombrePrimeros = menu.getNombrePrimeros();

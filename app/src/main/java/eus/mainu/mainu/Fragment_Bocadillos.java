@@ -7,8 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import java.util.ArrayList;
+
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.RecyclerViewAdapter;
 import eus.mainu.mainu.datalayer.Bocadillo;
@@ -37,10 +40,16 @@ public class Fragment_Bocadillos extends Fragment{
     //Clase para crear y adaptar la informacion al recycling view
     private void setBocadillos(View view){
 
+        //Indicamos que esta cargando mediante una animacion
+        ProgressBar progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+
         //Pedimos los bocadillos a la API
         HttpGetRequest request = new HttpGetRequest();
 
         ArrayList<Bocadillo> arrayBocadillos = request.getBocadillos();
+
+        progressBar.setVisibility(View.GONE);   //Quitamos la animacion
 
         //Referenciamos el recyclingView
         android.support.v7.widget.RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);

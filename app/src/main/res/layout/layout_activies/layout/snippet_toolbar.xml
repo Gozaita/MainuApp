@@ -15,15 +15,6 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <ImageButton
-            android:id="@+id/camaraButton"
-            android:layout_width="15dp"
-            android:layout_height="30dp"
-            android:layout_alignTop="@+id/Activity"
-            android:layout_toEndOf="@+id/Activity"
-            android:background="@color/colorPrimary"
-            app:srcCompat="@drawable/ic_3_puntitos" />
-
         <TextView
             android:id="@+id/textViewActividad"
             android:layout_width="300dp"
@@ -40,8 +31,8 @@
             android:id="@+id/configuracionButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignTop="@+id/camaraButton"
-            android:layout_toStartOf="@+id/Activity"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/textViewActividad"
             android:background="@color/colorPrimary"
             app:srcCompat="@drawable/ic_menu_navigation" />
 

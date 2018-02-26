@@ -9,6 +9,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -46,12 +47,15 @@ public class Fragment_Otros extends Fragment{
         //Referenciamos el cardview
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_otros);
 
+        //Indicamos que esta cargando mediante una animacion
+        ProgressBar progressBar = view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+
         //Creamos el contenido del cardView
-
-
         HttpGetRequest request = new HttpGetRequest();
 
         ArrayList<Complemento> arrayComplementos = request.getOtros();
+        progressBar.setVisibility(View.GONE);   //Quitamos la animacion
 
         //Adaptamos
         RecyclingViewCardAdapter recyclingViewCardAdapter = new RecyclingViewCardAdapter(getActivity(),arrayComplementos);
