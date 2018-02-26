@@ -55,7 +55,7 @@ public class Fragment_Otros extends Fragment{
         HttpGetRequest request = new HttpGetRequest();
 
         ArrayList<Complemento> arrayComplementos = request.getOtros();
-        progressBar.setVisibility(View.GONE);   //Quitamos la animacion
+        if (arrayComplementos.size() != 0 )progressBar.setVisibility(View.GONE);   //Quitamos la animacion
 
         //Adaptamos
         RecyclingViewCardAdapter recyclingViewCardAdapter = new RecyclingViewCardAdapter(getActivity(),arrayComplementos);

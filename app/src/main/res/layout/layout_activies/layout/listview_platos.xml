@@ -12,7 +12,7 @@
         android:text="Nombre"
         android:textAlignment="textStart"
         android:textSize="20sp"
-        android:fontFamily="@font/gothambold"
+        android:fontFamily="@font/gothamlight"
         />
 
     <RatingBar

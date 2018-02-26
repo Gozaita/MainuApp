@@ -49,7 +49,7 @@ public class Fragment_Bocadillos extends Fragment{
 
         ArrayList<Bocadillo> arrayBocadillos = request.getBocadillos();
 
-        progressBar.setVisibility(View.GONE);   //Quitamos la animacion
+        if (arrayBocadillos.size() != 0 )progressBar.setVisibility(View.GONE);   //Quitamos la animacion
 
         //Referenciamos el recyclingView
         android.support.v7.widget.RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);
