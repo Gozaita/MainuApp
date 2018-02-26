@@ -43,7 +43,7 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         holder.nombre.setText(arrayComplementos.get(position).getNombre());
-        holder.precio.setText(Double.toString(arrayComplementos.get(position).getPrecio()));
+        holder.precio.setText(String.format("%.2f€",arrayComplementos.get(position).getPrecio()));
     }
 
     //Le dice al adaptador cuantos objetos tenemos en la lista, si devolvemos 0, no muestra ninguno

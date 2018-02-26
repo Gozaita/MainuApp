@@ -36,7 +36,7 @@
 
             <TextView
                 android:id="@+id/nombre_card"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imagen_card"
                 android:layout_marginLeft="5dp"
