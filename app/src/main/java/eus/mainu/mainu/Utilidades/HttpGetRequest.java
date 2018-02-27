@@ -87,13 +87,19 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
                 //Cogemos la lista de los ingredientes
                 JSONArray ingredientes = o.getJSONArray("ingredientes");
                 StringBuilder descripcion = new StringBuilder();
-                for(int j = 0; j < ingredientes.length(); j++) {
-                    descripcion.append(ingredientes.getString(j)+" ");
-                }
 
-                arrayBocadillos.add(
-                        new Bocadillo( o.getInt("id"), o.getString("nombre"), descripcion.toString(), o.getDouble("precio"))
-                );
+                if(ingredientes.length() == 1){
+                    descripcion.append(ingredientes.getString(0));
+                }
+                else {
+                    for (int j = 0; j < ingredientes.length() - 1; j++) {
+                        descripcion.append(ingredientes.getString(j) + ", ");
+                    }
+
+                    arrayBocadillos.add(
+                            new Bocadillo(o.getInt("id"), o.getString("nombre"), descripcion.toString(), o.getDouble("precio"))
+                    );
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
