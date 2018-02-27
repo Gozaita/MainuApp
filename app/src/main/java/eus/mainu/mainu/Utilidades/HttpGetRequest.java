@@ -182,6 +182,14 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
                         new Complemento( o.getInt("id"), o.getString("nombre"), o.getDouble("precio"))
                 );
             }
+
+            Collections.sort(arrayComplementos, new Comparator<Complemento>() {
+                @Override
+                public int compare(Complemento complemento1, Complemento complemento2){
+                    return  complemento1.getNombre().compareTo(complemento2.getNombre());
+                }
+            });
+
         } catch (Exception e) {
             e.printStackTrace();
         }
