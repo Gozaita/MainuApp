@@ -12,20 +12,9 @@
     android:id="@+id/parent_layout">
 
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="5dp"
-        android:src="@mipmap/icon_round"
-        android:id="@+id/imageView" />
-
-
     <TextView
         android:id="@+id/nombreTextView"
-        android:layout_width="200dp"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/descripcionTextView"
@@ -36,11 +25,10 @@
 
     <TextView
         android:id="@+id/descripcionTextView"
-        android:layout_width="190dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/nombreTextView"
         android:layout_marginTop="2dp"
-        android:layout_toEndOf="@+id/imageView"
         android:textAllCaps="true"
         android:text="Descripcion"
         android:textSize="12sp"
@@ -53,7 +41,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/imageView"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="14dp"
         android:text="X.XX€"

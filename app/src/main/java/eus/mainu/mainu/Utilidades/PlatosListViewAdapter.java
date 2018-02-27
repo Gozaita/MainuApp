@@ -1,16 +1,14 @@
 package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import eus.mainu.mainu.R;
 import eus.mainu.mainu.datalayer.Plato;
@@ -20,14 +18,58 @@ import eus.mainu.mainu.datalayer.Plato;
  * Clase para adaptar los platos al listview, en este momento no vale para nada, hace que la aplicacion cargue mas despacio
  */
 
-public class PlatosListViewAdapter extends ArrayAdapter<Plato> {
+public class PlatosListViewAdapter extends BaseAdapter {
 
     private static final String TAG = "Adaptador de Plato";
 
     private Context mContext;
-    private int mResource;
+    private ArrayList<Plato> platos;
 
+    public PlatosListViewAdapter(Context mContext, ArrayList<Plato> platos) {
+        this.mContext = mContext;
+        this.platos = platos;
+    }
 
+    @Override
+    public int getCount() {
+        return platos.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return platos.get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
+
+        if (view == null) {
+            view = LayoutInflater.from(mContext).
+                    inflate(R.layout.listview_platos, viewGroup, false);
+        }
+
+        // get current item to be displayed
+        Plato plato = (Plato) getItem(i);
+
+        // get the TextView for item name and item description
+        TextView textView = view.findViewById(R.id.nombreTextView);
+        RatingBar estrellitas = view.findViewById(R.id.ratingBarEstrellitas);
+
+        //sets the text for item name and item description from the current item object
+        textView.setText(plato.getNombre());
+        float valoracion = (float)plato.getValoracion();
+        estrellitas.setRating((float) plato.getValoracion());
+
+        // returns the view for the current row
+        return view;
+    }
+
+/*
     public PlatosListViewAdapter(@NonNull Context context, int resource, @NonNull List<Plato> objects) {
         super(context, resource, objects);
         mContext = context;
@@ -54,5 +96,5 @@ public class PlatosListViewAdapter extends ArrayAdapter<Plato> {
 
         return convertView;
 
-    }
+    } */
 }

@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -15,6 +14,8 @@ import java.util.ArrayList;
 
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.Menu;
+import eus.mainu.mainu.Utilidades.PlatosListViewAdapter;
+import eus.mainu.mainu.datalayer.Plato;
 
 public class Fragment_Menu extends Fragment {
     private TextView titulo;
@@ -37,47 +38,42 @@ public class Fragment_Menu extends Fragment {
         lvSegundos = view.findViewById(R.id.listaSegundos);
         lvPostres  = view.findViewById(R.id.listaPostres);
 
-        ArrayList<String> nombrePrimeros = new ArrayList<String>();
-        ArrayList<String> nombreSegundos = new ArrayList<String>();
-        ArrayList<String> nombrePostres  = new ArrayList<String>();
-
         //Indicamos que esta cargando mediante una animacion
         ProgressBar progressBar = view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
+        //Creamos un objeto para hacer las peticiones get y para hacer los hilos
         HttpGetRequest request = new HttpGetRequest();
-
 
         if(request.isConnected(getContext()) ){
             Menu menu = request.getMenu();
             progressBar.setVisibility(View.GONE); //Una vez ha cargado, lo quitamos
 
-            //Creo arrays de nombres de los platos para poder usar el inflador por defecto de listviews
-            nombrePrimeros = menu.getNombrePrimeros();
-            nombreSegundos = menu.getNombreSegundos();
-            nombrePostres  = menu.getNombrePostres();
+            setListView(menu.getPrimeros(),lvPrimeros);
+            setListView(menu.getPrimeros(),lvSegundos);
+            setListView(menu.getPrimeros(),lvPostres);
+
+
         } else {
 
         }
 
-        //Adaptamos los listviews
-        setListView(nombrePrimeros, lvPrimeros);
-        setListView(nombreSegundos, lvSegundos);
-        setListView(nombrePostres, lvPostres);
+
 
         return view;
     }
 
 
-    private void setListView(ArrayList<String> listaPlatos, ListView listView) {
+    private void setListView(ArrayList<Plato> platos, ListView listView) {
+
         //Quitamos las divisiones
         listView.setDivider(null);
 
         //Adaptamos la informacion que va dentro de ellos (los nombres)
-        ArrayAdapter<String> arrayAdapterPrimeros = new ArrayAdapter<String>(getActivity(), R.layout.listview_platos, R.id.nombreTextView, listaPlatos);
+        PlatosListViewAdapter adaptador = new PlatosListViewAdapter(getContext(),platos);
 
         //Metemos dentro la informacion
-        listView.setAdapter(arrayAdapterPrimeros);
+        listView.setAdapter(adaptador);
 
     }
 
