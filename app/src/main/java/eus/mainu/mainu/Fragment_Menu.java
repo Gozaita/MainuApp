@@ -50,8 +50,8 @@ public class Fragment_Menu extends Fragment {
             progressBar.setVisibility(View.GONE); //Una vez ha cargado, lo quitamos
 
             setListView(menu.getPrimeros(),lvPrimeros);
-            setListView(menu.getPrimeros(),lvSegundos);
-            setListView(menu.getPrimeros(),lvPostres);
+            setListView(menu.getSegundos(),lvSegundos);
+            setListView(menu.getPostres(),lvPostres);
 
 
         } else {
