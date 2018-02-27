@@ -27,7 +27,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbarFondo"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:layout_alignBottom="@+id/nombre_card"
                 android:layout_alignParentStart="true"
                 android:background="@color/gris"
@@ -36,7 +36,7 @@
 
             <TextView
                 android:id="@+id/nombre_card"
-                android:layout_width="125dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imagen_card"
                 android:layout_marginLeft="5dp"
