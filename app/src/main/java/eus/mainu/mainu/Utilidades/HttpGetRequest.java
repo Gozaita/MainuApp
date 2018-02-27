@@ -96,14 +96,13 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
                 arrayBocadillos.add(
                         new Bocadillo( o.getInt("id"), o.getString("nombre"), descripcion.toString(), o.getDouble("precio"))
                 );
-
-                // Sorting
+/*                //Ordenar por nombre
                 Collections.sort(arrayBocadillos, new Comparator<Bocadillo>() {
                     @Override
                     public int compare(Bocadillo bocadillo1, Bocadillo bocadillo2){
                         return  bocadillo1.getNombre().compareTo(bocadillo2.getNombre());
                     }
-                });
+                });*/
             }
         } catch (Exception e) {
             e.printStackTrace();
