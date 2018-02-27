@@ -57,7 +57,7 @@ public class Fragment_Otros extends Fragment{
         ArrayList<Complemento> arrayComplementos = request.getOtros();
         if (arrayComplementos.size() != 0 )progressBar.setVisibility(View.GONE);   //Quitamos la animacion
 
-        //Adaptamos
+        //Adaptamos, llamamos al adaptador del contenido para ese recycling view
         RecyclingViewCardAdapter recyclingViewCardAdapter = new RecyclingViewCardAdapter(getActivity(),arrayComplementos);
         StaggeredGridLayoutManager recyclingViewCardAdapterManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(recyclingViewCardAdapterManager);
