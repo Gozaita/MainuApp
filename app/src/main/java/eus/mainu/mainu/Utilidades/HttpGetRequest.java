@@ -15,6 +15,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.concurrent.ExecutionException;
 
 import eus.mainu.mainu.datalayer.Bocadillo;
@@ -29,7 +31,6 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String url = params[0];
         String result, inputLine;
-
 
         try {
             URL myUrl = new URL(url);
@@ -60,10 +61,10 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
     }
 
     public boolean isConnected(Context mContext) {
-        ConnectivityManager cm =
-                (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
+            ConnectivityManager cm =
+                    (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo netInfo = cm.getActiveNetworkInfo();
+            return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     @Override
@@ -87,19 +88,22 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
                 //Cogemos la lista de los ingredientes
                 JSONArray ingredientes = o.getJSONArray("ingredientes");
                 StringBuilder descripcion = new StringBuilder();
-
-                if(ingredientes.length() == 1){
-                    descripcion.append(ingredientes.getString(0));
+                for(int j = 0; j < ingredientes.length(); j++) {
+                    descripcion.append(ingredientes.getString(j)+", ");
                 }
-                else {
-                    for (int j = 0; j < ingredientes.length() - 1; j++) {
-                        descripcion.append(ingredientes.getString(j) + ", ");
+                descripcion.deleteCharAt(descripcion.length()-2);
+
+                arrayBocadillos.add(
+                        new Bocadillo( o.getInt("id"), o.getString("nombre"), descripcion.toString(), o.getDouble("precio"))
+                );
+
+                // Sorting
+                Collections.sort(arrayBocadillos, new Comparator<Bocadillo>() {
+                    @Override
+                    public int compare(Bocadillo bocadillo1, Bocadillo bocadillo2){
+                        return  bocadillo1.getNombre().compareTo(bocadillo2.getNombre());
                     }
-
-                    arrayBocadillos.add(
-                            new Bocadillo(o.getInt("id"), o.getString("nombre"), descripcion.toString(), o.getDouble("precio"))
-                    );
-                }
+                });
             }
         } catch (Exception e) {
             e.printStackTrace();
