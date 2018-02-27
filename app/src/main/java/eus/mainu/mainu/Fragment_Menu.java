@@ -53,14 +53,11 @@ public class Fragment_Menu extends Fragment {
         HttpGetRequest request = new HttpGetRequest();
 
         //Comprobamos si hay conexion para hacer las peticiones de los arrays
-        if(request.isConnected(getContext()) ){
+        if(request.isConnected(mContext) ){
 
             setListView(request);
 
-        } else {
-
         }
-
 
         //Ponemos escuchando el SwipeToRefresh
         swipeRefreshLayout = view.findViewById(R.id.swipeMenu);
@@ -75,10 +72,6 @@ public class Fragment_Menu extends Fragment {
                 //Chequeamos si tenemos el menu actualizado
                 //request.checkMenuActualizados();
 
-                //Solamente hacemos el get e inflamos la lista si la tenemos vacia o desactualizada
-                boolean conexion = request.isConnected(mContext);
-                boolean esnull = (menu.getNombrePrimeros() == null);
-
 
                 if(request.isConnected(mContext) && menu.getNombrePrimeros().isEmpty()){
                     setListView(request);
@@ -90,7 +83,7 @@ public class Fragment_Menu extends Fragment {
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
                     }
-                }, 2000);   //Tiempo durante el cual se muestra el icono de refresh
+                }, 2000);   //Tiempo en ms durante el cual se muestra el icono de refresh
             }
         });
 

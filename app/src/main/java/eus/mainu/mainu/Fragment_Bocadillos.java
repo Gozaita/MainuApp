@@ -1,14 +1,15 @@
 package eus.mainu.mainu;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -18,8 +19,15 @@ import eus.mainu.mainu.datalayer.Bocadillo;
 
 //Clase del fragmento responsable de visualizar los bocadillos
 public class Fragment_Bocadillos extends Fragment{
-    private static final String TAG = "Fragment_Bocadillos";
-    private TextView titulo;
+
+    //private TextView titulo;
+    private Context mContext;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ArrayList<Bocadillo> arrayBocadillos =new ArrayList<Bocadillo>();
+    private boolean actualizado = false;
+    private android.support.v7.widget.RecyclerView recyclerView;
+
+
 
     //Metodo que se ejecuta al visualizar el fragmento, se representa en funcion del layout fragment_bocadillos
     @Nullable
@@ -32,27 +40,63 @@ public class Fragment_Bocadillos extends Fragment{
         //titulo = view.findViewById(R.id.textViewActividad);
         //titulo.setText(getString(R.string.bocadillos));
 
-        setBocadillos(view);
+        //Cogemos el contexto
+        mContext = view.getContext();
+
+        //Cogemos el recycling view
+        recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);
+
+
+        //Creamos un objeto para hacer las peticiones get y para hacer los hilos
+        HttpGetRequest request = new HttpGetRequest();
+
+
+        //Comprobamos si hay conexion para hacer las peticiones de los arrays
+        if(request.isConnected(mContext) ){
+
+            setBocadillos(request);
+
+        }
+
+        //Ponemos escuchando el SwipeToRefresh
+        swipeRefreshLayout = view.findViewById(R.id.swipeBocadillos);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            //Accion que se ejecuta cuando se activa
+            @Override
+            public void onRefresh() {
+
+                //Creamos otro request porque solo se puede llamar al asynctask una vez
+                HttpGetRequest request = new HttpGetRequest();
+
+                //Chequeamos si tenemos el menu actualizado
+                //request.checkMenuActualizados();
+
+
+                if(request.isConnected(mContext) && arrayBocadillos.isEmpty()){
+                    setBocadillos(request);
+                }
+
+                //Esto es para ejecutar un hilo que se encarga de hacer la accion, creo
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 2000);   //Tiempo en ms durante el cual se muestra el icono de refresh
+            }
+        });
+
 
         return view;
     }
 
-    //Clase para crear y adaptar la informacion al recycling view
-    private void setBocadillos(View view){
 
-        //Indicamos que esta cargando mediante una animacion
-        ProgressBar progressBar = view.findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
+    //Clase para crear y adaptar la informacion al recycling view
+    private void setBocadillos(HttpGetRequest request){
+
 
         //Pedimos los bocadillos a la API
-        HttpGetRequest request = new HttpGetRequest();
-
-        ArrayList<Bocadillo> arrayBocadillos = request.getBocadillos();
-
-        if (arrayBocadillos.size() != 0 )progressBar.setVisibility(View.GONE);   //Quitamos la animacion
-
-        //Referenciamos el recyclingView
-        android.support.v7.widget.RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);
+        arrayBocadillos = request.getBocadillos();
 
         //Creamos el objeto de la clase adaptador
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(arrayBocadillos, getActivity());
