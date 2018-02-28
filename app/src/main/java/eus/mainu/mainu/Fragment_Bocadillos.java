@@ -95,8 +95,23 @@ public class Fragment_Bocadillos extends Fragment{
     //Clase para crear y adaptar la informacion al recycling view
     private void setBocadillos(HttpGetRequest request){
 
+        /*
+        AdministradorDeCache cache = new AdministradorDeCache();
+        //Leemos los bocadillos de cache
+        if(arrayBocadillos.size() == 0) {
+            arrayBocadillos = (ArrayList<Bocadillo>) cache.leeObjetoCache(mContext, "apk");
+        }
 
-        //Pedimos los bocadillos a la API
+        //Si está vacío, no habia datos en cache
+        if (arrayBocadillos.size() == 0) {
+            //Pedimos los bocadillos a la API
+            arrayBocadillos = request.getBocadillos();
+            //Si tenemos bocadillos los guardamos
+            if(arrayBocadillos.size() != 0) {
+                cache.guardarArrayBocadillos(mContext,"Bocadillos",arrayBocadillos);
+            }
+        }
+        */
         arrayBocadillos = request.getBocadillos();
 
         //Creamos el objeto de la clase adaptador
