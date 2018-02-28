@@ -60,6 +60,7 @@ public class Fragment_Bocadillos extends Fragment{
 
         //Ponemos escuchando el SwipeToRefresh
         swipeRefreshLayout = view.findViewById(R.id.swipeBocadillos);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             //Accion que se ejecuta cuando se activa
             @Override

@@ -91,18 +91,22 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
                 for(int j = 0; j < ingredientes.length(); j++) {
                     descripcion.append(ingredientes.getString(j)+", ");
                 }
-                descripcion.deleteCharAt(descripcion.length()-2);
+
+                //Quitamos la coma del ultimo elemento
+                if(descripcion.length() != 0) {
+                    descripcion.deleteCharAt(descripcion.length() - 2);
+                }
 
                 arrayBocadillos.add(
                         new Bocadillo( o.getInt("id"), o.getString("nombre"), descripcion.toString(), o.getDouble("precio"))
                 );
-/*                //Ordenar por nombre
+                //Ordenar por nombre
                 Collections.sort(arrayBocadillos, new Comparator<Bocadillo>() {
                     @Override
                     public int compare(Bocadillo bocadillo1, Bocadillo bocadillo2){
                         return  bocadillo1.getNombre().compareTo(bocadillo2.getNombre());
                     }
-                });*/
+                });
             }
         } catch (Exception e) {
             e.printStackTrace();
