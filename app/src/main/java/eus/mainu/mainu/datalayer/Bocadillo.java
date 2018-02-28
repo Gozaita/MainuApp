@@ -1,8 +1,9 @@
 package eus.mainu.mainu.datalayer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Bocadillo {
+public class Bocadillo implements Serializable {
 
     private int id;
     private String nombre;

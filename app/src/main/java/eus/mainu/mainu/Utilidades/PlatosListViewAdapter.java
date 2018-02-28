@@ -1,7 +1,6 @@
 package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,8 +62,6 @@ public class PlatosListViewAdapter extends BaseAdapter {
 
         //sets the text for item name and item description from the current item object
         textView.setText(plato.getNombre());
-        float valoracion = (float)plato.getValoracion();
-        Log.d("Mensaje",Float.toString(valoracion)); //Para que en el log salga el valor de valoracion
         estrellitas.setRating((float) plato.getValoracion());
 
         // returns the view for the current row
