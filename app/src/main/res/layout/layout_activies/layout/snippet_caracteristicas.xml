@@ -27,7 +27,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
             android:layout_below="@+id/textViewNombre"
-            android:text="4.5"
+            android:text="3.5"
             android:textColor="@color/blanco"
             android:textSize="14sp"
             android:fontFamily="@font/gothammedium"/>

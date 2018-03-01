@@ -1,6 +1,9 @@
 package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +62,8 @@ public class PlatosListViewAdapter extends BaseAdapter {
         // get the TextView for item name and item description
         TextView textView = view.findViewById(R.id.nombreTextView);
         RatingBar estrellitas = view.findViewById(R.id.ratingBarEstrellitas);
+        LayerDrawable stars = (LayerDrawable) estrellitas.getProgressDrawable();
+        stars.getDrawable(2).setColorFilter(Color.parseColor("#0E70B7"), PorterDuff.Mode.SRC_ATOP);
 
         //sets the text for item name and item description from the current item object
         textView.setText(plato.getNombre());
