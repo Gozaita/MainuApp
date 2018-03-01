@@ -158,7 +158,14 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         try {
             for(int i = 0; i < obj.length(); i++){
                 JSONObject o = obj.getJSONObject(i);
-                plato.add(new Plato(o.getInt("id"), o.getString("nombre"), 5f, o.getString("imagen")));
+
+                double puntuacion = 0;
+
+                if(!o.isNull("puntuacion")) {
+                    puntuacion = o.getDouble("puntuacion");
+                }
+
+                plato.add(new Plato(o.getInt("id"), o.getString("nombre"), puntuacion, o.getString("imagen")));
             }
 
         } catch (JSONException e) {

@@ -28,7 +28,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity_Elemento"
-            android:parentActivityName=".Activity_Main"/>
+            android:parentActivityName=".Activity_Main"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
