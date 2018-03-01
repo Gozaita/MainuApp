@@ -21,11 +21,11 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/configuracionButton"
+            android:layout_marginStart="20dp"
             android:text="MainU for U"
             android:textColor="@color/blanco"
-            android:textAlignment="center"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/gothamblack" />
 
         <ImageButton
             android:id="@+id/configuracionButton"

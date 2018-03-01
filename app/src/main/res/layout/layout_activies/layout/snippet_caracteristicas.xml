@@ -1,0 +1,48 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:layout_marginTop="225dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/textViewNombre"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:text="Nombre"
+            android:textColor="@color/blanco"
+            android:textSize="18sp"
+            android:fontFamily="@font/gothammedium"/>
+
+        <TextView
+            android:id="@+id/textViewPuntuacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_below="@+id/textViewNombre"
+            android:text="4.5"
+            android:textColor="@color/blanco"
+            android:textSize="14sp"
+            android:fontFamily="@font/gothammedium"/>
+
+        <RatingBar
+            android:id="@+id/estrellitasElemento"
+            style="@style/Base.Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/textViewPuntuacion"
+            android:layout_below="@+id/textViewNombre"/>
+
+    </RelativeLayout>
+
+
+</merge>

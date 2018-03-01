@@ -10,6 +10,9 @@
     <color name="grisT">#BBbfbfbf</color>
     <color name="blanco">#fff</color>
     <color name="gris2">#e6616161</color>
+    <color name="transparente">#00000000 </color>
+    <color name="negro">#191919 </color>
+
 
 
 </resources>

@@ -1,6 +1,5 @@
 package eus.mainu.mainu.datalayer;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +7,7 @@ import java.util.ArrayList;
  * Clase de Ingrediente
  */
 
-public class Ingrediente implements Serializable{
+public class Ingrediente{
 
     private int id;
     private String nombre;

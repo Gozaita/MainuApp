@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="eus.mainu.mainu.Activity_Elemento">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/botonElemento"
+                android:layout_width="match_parent"
+                android:layout_height="225dp"
+                android:adjustViewBounds="true"
+                android:background="@color/negro"
+                app:srcCompat="@drawable/otros_1" />
+
+            <!--Quitamos el boton de atras
+            <ImageButton
+                android:id="@+id/atrasButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:background="@color/transparente"
+                app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+                -->
+
+            <include layout="@layout/snippet_caracteristicas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/caracteristicas" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

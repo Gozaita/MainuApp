@@ -4,7 +4,7 @@
 
     <!-- Para tener permiso para acceder a internet -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Para comprobar si hay internet-->
+    <!-- Para comprobar si hay internet -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -14,18 +14,21 @@
         android:roundIcon="@drawable/mainu_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Activity_Main"
+        <activity
+            android:name=".Activity_Main"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity_Elemento"
+            android:parentActivityName=".Activity_Main"/>
     </application>
 
 </manifest>

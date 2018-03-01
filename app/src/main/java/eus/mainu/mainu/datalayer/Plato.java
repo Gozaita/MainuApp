@@ -1,11 +1,13 @@
 package eus.mainu.mainu.datalayer;
 
+import java.io.Serializable;
+
 /**
  * Created by Manole on 16/02/2018.
  * Clase del modelo de datos Plato
  */
 
-public class Plato {
+public class Plato implements Serializable{
 
     private int id;
     private String nombre;

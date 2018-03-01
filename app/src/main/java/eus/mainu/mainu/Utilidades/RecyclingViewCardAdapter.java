@@ -1,15 +1,19 @@
 package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import eus.mainu.mainu.Activity_Elemento;
 import eus.mainu.mainu.R;
 import eus.mainu.mainu.datalayer.Complemento;
 
@@ -40,10 +44,26 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder,final int position) {
 
         holder.nombre.setText(arrayComplementos.get(position).getNombre());
         holder.precio.setText(String.format("%.2f€",arrayComplementos.get(position).getPrecio()));
+
+        //Accion que se ejecuta al pulsar en un objeto de la lista
+        holder.complemento_layout.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: "+ arrayComplementos.get(position).getNombre());
+
+                //Decimos que queremos navegar a la clase Elemento
+                Intent intent = new Intent(mContext, Activity_Elemento.class);
+                //Le pasamos la informacion que necesita la clase
+                intent.putExtra("Complemento",arrayComplementos.get(position));
+                //Iniciamos la actividad
+                mContext.startActivity(intent);
+
+            }
+        }));
     }
 
     //Le dice al adaptador cuantos objetos tenemos en la lista, si devolvemos 0, no muestra ninguno
@@ -57,12 +77,14 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
         ImageView imagen;
         TextView nombre;
         TextView precio;
+        RelativeLayout complemento_layout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.imagen = itemView.findViewById(R.id.imagen_card);
             this.nombre = itemView.findViewById(R.id.nombre_card);
             this.precio = itemView.findViewById(R.id.precio_card);
+            this.complemento_layout = itemView.findViewById(R.id.complemento_layout);
         }
 
     }

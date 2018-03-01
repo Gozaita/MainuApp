@@ -1,6 +1,7 @@
 package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import eus.mainu.mainu.Activity_Elemento;
 import eus.mainu.mainu.R;
 import eus.mainu.mainu.datalayer.Bocadillo;
 
@@ -50,7 +52,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     holder.descripcion.setText(arrayBocadillos.get(position).getDescripcion());
     holder.precio.setText(String.format("%.2f€",arrayBocadillos.get(position).getPrecio()));
 
+    //Accion que se ejecuta al pulsar en un objeto de la lista
+    holder.bocadillo_layout.setOnClickListener((new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.d(TAG, "onClick: "+ arrayBocadillos.get(position).getNombre());
 
+            //Decimos que queremos navegar a la clase Elemento
+            Intent intent = new Intent(mContext, Activity_Elemento.class);
+            //Le pasamos la informacion que necesita la clase
+            intent.putExtra("Bocadillo",arrayBocadillos.get(position));
+            //Iniciamos la actividad
+            mContext.startActivity(intent);
+
+        }
+    }));
     }
 
     //Le dice al adaptador cuantos objetos tenemos en la lista, si devolvemos 0, no muestra ninguno
@@ -64,8 +80,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView nombre;
         TextView descripcion;
         TextView precio;
+        RelativeLayout bocadillo_layout;
 
-        RelativeLayout parentLayout;
 
 
         public ViewHolder(View itemView) {
@@ -73,6 +89,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             nombre = itemView.findViewById(R.id.nombreTextView);
             descripcion = itemView.findViewById(R.id.descripcionTextView);
             precio = itemView.findViewById(R.id.precioTextView);
+            bocadillo_layout = itemView.findViewById(R.id.bocadillo_layout);
         }
     }
 
