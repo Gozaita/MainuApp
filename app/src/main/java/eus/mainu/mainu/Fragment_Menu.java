@@ -9,7 +9,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -26,6 +29,7 @@ public class Fragment_Menu extends Fragment {
     private ListView lvPrimeros;
     private ListView lvSegundos;
     private ListView lvPostres;
+    private ImageView imagen;
     private Menu menu = new Menu();
     private boolean actualizado = false;
 
@@ -47,6 +51,7 @@ public class Fragment_Menu extends Fragment {
         lvPrimeros = view.findViewById(R.id.listaPrimeros);
         lvSegundos = view.findViewById(R.id.listaSegundos);
         lvPostres  = view.findViewById(R.id.listaPostres);
+        imagen = view.findViewById(R.id.imagenMenu);
 
 
         //Creamos un objeto para hacer las peticiones get y para hacer los hilos
@@ -100,6 +105,8 @@ public class Fragment_Menu extends Fragment {
         inflaListView(menu.getPrimeros(),lvPrimeros);
         inflaListView(menu.getSegundos(),lvSegundos);
         inflaListView(menu.getPostres(),lvPostres);
+        Picasso.with(mContext).load(menu.getPrimeros().get(0).getImagen()).resize(420, 200).centerCrop().into(imagen);
+
 
     }
 
