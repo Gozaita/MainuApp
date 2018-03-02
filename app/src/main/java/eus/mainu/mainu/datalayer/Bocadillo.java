@@ -7,24 +7,25 @@ public class Bocadillo implements Serializable {
 
     private int id;
     private String nombre;
-    private String descripcion;
     private double precio;
+    private double puntuacion;
     private ArrayList<Ingrediente> ingredientes;
-    private ArrayList<ValoracionBocadillo> valoraciones;
-    private ArrayList<FotoBocadillo> fotos;
+    private ArrayList<Valoracion> valoraciones;
+    private ArrayList<Imagen> fotos;
 
-    public Bocadillo(int id, String nombre, String descripcion, double precio) {
+    public Bocadillo(int id, String nombre, double precio, double puntuacion, ArrayList<Ingrediente> ingredientes) {
         this.id = id;
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.precio = precio;
+        this.puntuacion = puntuacion;
+        this.ingredientes = ingredientes;
     }
 
-    public Bocadillo(int id, String nombre, String descripcion, double precio, ArrayList<Ingrediente> ingredientes, ArrayList<ValoracionBocadillo> valoraciones, ArrayList<FotoBocadillo> fotos) {
+    public Bocadillo(int id, String nombre, double precio, double puntuacion, ArrayList<Ingrediente> ingredientes, ArrayList<Valoracion> valoraciones, ArrayList<Imagen> fotos) {
         this.id = id;
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.precio = precio;
+        this.puntuacion = puntuacion;
         this.ingredientes = ingredientes;
         this.valoraciones = valoraciones;
         this.fotos = fotos;
@@ -46,20 +47,20 @@ public class Bocadillo implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(float precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public double getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(double puntuacion) {
+        this.puntuacion = puntuacion;
     }
 
     public ArrayList<Ingrediente> getIngredientes() {
@@ -70,19 +71,20 @@ public class Bocadillo implements Serializable {
         this.ingredientes = ingredientes;
     }
 
-    public ArrayList<ValoracionBocadillo> getValoraciones() {
+    public ArrayList<Valoracion> getValoraciones() {
         return valoraciones;
     }
 
-    public void setValoraciones(ArrayList<ValoracionBocadillo> valoraciones) {
+    public void setValoraciones(ArrayList<Valoracion> valoraciones) {
         this.valoraciones = valoraciones;
     }
 
-    public ArrayList<FotoBocadillo> getFotos() {
+    public ArrayList<Imagen> getFotos() {
         return fotos;
     }
 
-    public void setFotos(ArrayList<FotoBocadillo> fotos) {
+    public void setFotos(ArrayList<Imagen> fotos) {
         this.fotos = fotos;
     }
 }
+

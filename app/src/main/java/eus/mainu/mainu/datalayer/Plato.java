@@ -1,24 +1,36 @@
 package eus.mainu.mainu.datalayer;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by Manole on 16/02/2018.
  * Clase del modelo de datos Plato
  */
 
-public class Plato implements Serializable{
+public class Plato implements Serializable {
 
     private int id;
     private String nombre;
-    private double valoracion;
-    private String imagen;
+    private String descripcion;
+    private double puntuacion;
+    private ArrayList<Valoracion> valoraciones;
+    private ArrayList<Imagen> fotos;
 
-    public Plato(int id, String nombre, double valoracion, String imagen) {
+    public Plato(int id, String nombre, String descripcion, double puntuacion) {
         this.id = id;
         this.nombre = nombre;
-        this.valoracion = valoracion;
-        this.imagen = imagen;
+        this.descripcion = descripcion;
+        this.puntuacion = puntuacion;
+    }
+
+    public Plato(int id, String nombre, String descripcion, double puntuacion, ArrayList<Valoracion> valoraciones, ArrayList<Imagen> fotos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.puntuacion = puntuacion;
+        this.valoraciones = valoraciones;
+        this.fotos = fotos;
     }
 
     public int getId() {
@@ -37,19 +49,35 @@ public class Plato implements Serializable{
         this.nombre = nombre;
     }
 
-    public double getValoracion() {
-        return valoracion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setValoracion(double valoracion) {
-        this.valoracion = valoracion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public String getImagen() {
-        return imagen;
+    public double getPuntuacion() {
+        return puntuacion;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+    public void setPuntuacion(double puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    public ArrayList<Valoracion> getValoraciones() {
+        return valoraciones;
+    }
+
+    public void setValoraciones(ArrayList<Valoracion> valoraciones) {
+        this.valoraciones = valoraciones;
+    }
+
+    public ArrayList<Imagen> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(ArrayList<Imagen> fotos) {
+        this.fotos = fotos;
     }
 }

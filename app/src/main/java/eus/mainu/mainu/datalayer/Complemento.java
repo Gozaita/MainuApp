@@ -8,24 +8,27 @@ import java.util.ArrayList;
  * Clase del modelo de datos Complemento
  */
 
-public class Complemento implements Serializable{
+public class Complemento implements Serializable {
 
     private int id;
     private String nombre;
     private double precio;
-    private ArrayList<ValoracionComplemento> valoraciones;
-    private ArrayList<FotoComplemento> fotos;
+    private double puntuacion;
+    private ArrayList<Valoracion> valoraciones;
+    private ArrayList<Imagen> fotos;
 
-    public Complemento(int id, String nombre, double precio) {
+    public Complemento(int id, String nombre, double precio, double puntuacion) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
+        this.puntuacion = puntuacion;
     }
 
-    public Complemento(int id, String nombre, float precio, ArrayList<ValoracionComplemento> valoraciones, ArrayList<FotoComplemento> fotos) {
+    public Complemento(int id, String nombre, double precio, double puntuacion, ArrayList<Valoracion> valoraciones, ArrayList<Imagen> fotos) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
+        this.puntuacion = puntuacion;
         this.valoraciones = valoraciones;
         this.fotos = fotos;
     }
@@ -54,19 +57,28 @@ public class Complemento implements Serializable{
         this.precio = precio;
     }
 
-    public ArrayList<ValoracionComplemento> getValoraciones() {
+    public double getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(double puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    public ArrayList<Valoracion> getValoraciones() {
         return valoraciones;
     }
 
-    public void setValoraciones(ArrayList<ValoracionComplemento> valoraciones) {
+    public void setValoraciones(ArrayList<Valoracion> valoraciones) {
         this.valoraciones = valoraciones;
     }
 
-    public ArrayList<FotoComplemento> getFotos() {
+    public ArrayList<Imagen> getFotos() {
         return fotos;
     }
 
-    public void setFotos(ArrayList<FotoComplemento> fotos) {
+    public void setFotos(ArrayList<Imagen> fotos) {
         this.fotos = fotos;
     }
 }
+
