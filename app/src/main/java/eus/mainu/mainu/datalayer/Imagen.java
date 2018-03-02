@@ -1,5 +1,6 @@
 package eus.mainu.mainu.datalayer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * Clase que contiene la ruta de las imagenes
  */
 
-public class Imagen {
+public class Imagen implements Serializable{
 
     private int id;
     private String ruta;

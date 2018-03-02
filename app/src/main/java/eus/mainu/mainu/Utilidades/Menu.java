@@ -2,6 +2,7 @@ package eus.mainu.mainu.Utilidades;
 
 import java.util.ArrayList;
 
+import eus.mainu.mainu.datalayer.Imagen;
 import eus.mainu.mainu.datalayer.Plato;
 
 /**
@@ -39,40 +40,62 @@ public class Menu {
         this.postres = postres;
     }
 
-    public ArrayList<String> getNombrePrimeros()
+    public ArrayList<String> getNombres()
     {
         ArrayList<String> nombres = new ArrayList<String>();
+        int i;
 
-        for(int i = 0; i < primeros.size(); i++)
+        for(i = 0; i < primeros.size(); i++)
         {
             nombres.add(primeros.get(i).getNombre());
         }
 
-        return nombres;
-    }
-
-    public ArrayList<String> getNombreSegundos()
-    {
-        ArrayList<String> nombres = new ArrayList<String>();
-
-        for(int i = 0; i < segundos.size(); i++)
+        for(i = 0; i < segundos.size(); i++)
         {
             nombres.add(segundos.get(i).getNombre());
         }
 
-        return nombres;
-    }
-
-    public ArrayList<String> getNombrePostres()
-    {
-        ArrayList<String> nombres = new ArrayList<String>();
-
-        for(int i = 0; i < postres.size(); i++)
+        for(i = 0; i < postres.size(); i++)
         {
             nombres.add(postres.get(i).getNombre());
         }
 
         return nombres;
+    }
+
+    public ArrayList<Imagen> getImagenes(){
+
+        ArrayList<Imagen> imagenes = new ArrayList<Imagen>();
+
+        int i,j;
+
+        //Cogemos las imagenes oficiales de los platos
+        for(i = 0; i < primeros.size(); i++) {
+            for(j = 0; j < primeros.get(i).getFotos().size(); j++){
+                if(primeros.get(i).getFotos().get(j).isOficial()){
+                    imagenes.add(primeros.get(i).getFotos().get(j));
+                }
+            }
+        }
+
+        for(i = 0; i < segundos.size(); i++) {
+            for(j = 0; j < segundos.get(i).getFotos().size(); j++){
+                if(segundos.get(i).getFotos().get(j).isOficial()){
+                    imagenes.add(segundos.get(i).getFotos().get(j));
+                }
+            }
+        }
+
+        for(i = 0; i < postres.size(); i++) {
+            for(j = 0; j < postres.get(i).getFotos().size(); j++){
+                if(postres.get(i).getFotos().get(j).isOficial()){
+                    imagenes.add(postres.get(i).getFotos().get(j));
+                }
+            }
+        }
+
+
+        return imagenes;
     }
 
 }

@@ -67,7 +67,7 @@ public class PlatosListViewAdapter extends BaseAdapter {
 
         //sets the text for item name and item description from the current item object
         textView.setText(plato.getNombre());
-        estrellitas.setRating((float) plato.getValoracion());
+        estrellitas.setRating((float) plato.getPuntuacion());
 
         // returns the view for the current row
         return view;

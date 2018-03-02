@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,6 +21,8 @@ import java.util.concurrent.ExecutionException;
 
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
+import eus.mainu.mainu.datalayer.Imagen;
+import eus.mainu.mainu.datalayer.Ingrediente;
 import eus.mainu.mainu.datalayer.Plato;
 
 
@@ -86,20 +89,27 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
                 //Cogemos la lista de los ingredientes
                 JSONArray ingredientes = o.getJSONArray("ingredientes");
-                StringBuilder descripcion = new StringBuilder();
+
+                //Mapeamos la lista de JSON en ingredientes
+                ArrayList<Ingrediente> arrayingredientes = new ArrayList<Ingrediente>();
                 for(int j = 0; j < ingredientes.length(); j++) {
-                    descripcion.append(ingredientes.getString(j)+", ");
+
+                    Ingrediente ingrediente = new Ingrediente(j,(String )ingredientes.get(j));
+                    arrayingredientes.add(ingrediente);
                 }
 
-                //Quitamos la coma del ultimo elemento
-                if(descripcion.length() != 0) {
-                    descripcion.deleteCharAt(descripcion.length() - 2);
+                double puntuacion = 0;
+
+                if(!o.isNull("puntuacion")) {
+                    puntuacion = o.getDouble("puntuacion");
                 }
 
+                //Creamos el bocadillo
                 arrayBocadillos.add(
-                        new Bocadillo( o.getInt("id"), o.getString("nombre"), descripcion.toString(), o.getDouble("precio"))
+                        new Bocadillo( o.getInt("id"), o.getString("nombre"), o.getDouble("precio"),puntuacion, arrayingredientes)
                 );
-                //Ordenar por nombre
+
+                //Ordenamos por nombre
                 Collections.sort(arrayBocadillos, new Comparator<Bocadillo>() {
                     @Override
                     public int compare(Bocadillo bocadillo1, Bocadillo bocadillo2){
@@ -165,7 +175,11 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
                     puntuacion = o.getDouble("puntuacion");
                 }
 
-                plato.add(new Plato(o.getInt("id"), o.getString("nombre"), puntuacion, o.getString("imagen")));
+                ArrayList<Imagen> imagenes = new ArrayList<>();
+                Imagen imagen = new Imagen(0,o.getString("imagen"),true,true);
+                imagenes.add(imagen);
+
+                    plato.add(new Plato(o.getInt("id"), o.getString("nombre"), "",puntuacion, imagenes));
             }
 
         } catch (JSONException e) {
@@ -187,8 +201,14 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
             for (int i = 0; i < obj.length(); i++){
                 JSONObject o = obj.getJSONObject(i);
 
-                arrayComplementos.add(
-                        new Complemento( o.getInt("id"), o.getString("nombre"), o.getDouble("precio"))
+                double puntuacion = 0;
+
+                if(!o.isNull("puntuacion")) {
+                    puntuacion = o.getDouble("puntuacion");
+                }
+
+                    arrayComplementos.add(
+                        new Complemento( o.getInt("id"), o.getString("nombre"), o.getDouble("precio"),puntuacion)
                 );
             }
 

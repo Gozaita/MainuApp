@@ -79,7 +79,7 @@ public class Fragment_Menu extends Fragment {
                 //request.checkMenuActualizados();
 
 
-                if(request.isConnected(mContext) && menu.getNombrePrimeros().isEmpty()){
+                if(request.isConnected(mContext) && menu.getNombres().isEmpty()){
                     setListView(request);
                 }
 
@@ -105,7 +105,7 @@ public class Fragment_Menu extends Fragment {
         inflaListView(menu.getPrimeros(),lvPrimeros);
         inflaListView(menu.getSegundos(),lvSegundos);
         inflaListView(menu.getPostres(),lvPostres);
-        Picasso.with(mContext).load(menu.getPrimeros().get(0).getImagen()).resize(405, 200).centerCrop().into(imagen);
+        Picasso.with(mContext).load(menu.getImagenes().get(0).getRuta()).resize(405, 200).centerCrop().into(imagen);
 
 
     }

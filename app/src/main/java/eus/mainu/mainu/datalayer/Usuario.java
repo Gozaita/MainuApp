@@ -1,5 +1,6 @@
 package eus.mainu.mainu.datalayer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * Clase del modelo de datos Usuario
  */
 
-public class Usuario {
+public class Usuario implements Serializable{
 
     private int id;
     private String nombre;

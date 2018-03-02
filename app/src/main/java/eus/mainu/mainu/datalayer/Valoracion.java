@@ -1,5 +1,6 @@
 package eus.mainu.mainu.datalayer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,7 +8,7 @@ import java.util.ArrayList;
  * Clase que contiene la valoracion de los usuarios
  */
 
-public class Valoracion {
+public class Valoracion implements Serializable{
 
     private int id;
     private String nombre;

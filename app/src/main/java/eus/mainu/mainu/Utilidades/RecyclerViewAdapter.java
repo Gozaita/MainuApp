@@ -49,7 +49,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d(TAG,"onBindViewHolder: called."); //Para debuguear
 
     holder.nombre.setText(arrayBocadillos.get(position).getNombre());
-    holder.descripcion.setText(arrayBocadillos.get(position).getDescripcion());
+    //holder.descripcion.setText(arrayBocadillos.get(position).getDescripcion());
     holder.precio.setText(String.format("%.2f€",arrayBocadillos.get(position).getPrecio()));
 
     //Accion que se ejecuta al pulsar en un objeto de la lista
@@ -78,7 +78,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
 
         TextView nombre;
-        TextView descripcion;
+        //TextView descripcion; YA NO HAY DESCRIPCION
         TextView precio;
         RelativeLayout bocadillo_layout;
 
@@ -87,7 +87,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ViewHolder(View itemView) {
             super(itemView);
             nombre = itemView.findViewById(R.id.nombreTextView);
-            descripcion = itemView.findViewById(R.id.descripcionTextView);
+            //descripcion = itemView.findViewById(R.id.descripcionTextView);
             precio = itemView.findViewById(R.id.precioTextView);
             bocadillo_layout = itemView.findViewById(R.id.bocadillo_layout);
         }

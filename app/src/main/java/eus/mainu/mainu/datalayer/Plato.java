@@ -17,11 +17,12 @@ public class Plato implements Serializable {
     private ArrayList<Valoracion> valoraciones;
     private ArrayList<Imagen> fotos;
 
-    public Plato(int id, String nombre, String descripcion, double puntuacion) {
+    public Plato(int id, String nombre, String descripcion, double puntuacion, ArrayList<Imagen> fotos) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.puntuacion = puntuacion;
+        this.fotos = fotos;
     }
 
     public Plato(int id, String nombre, String descripcion, double puntuacion, ArrayList<Valoracion> valoraciones, ArrayList<Imagen> fotos) {
