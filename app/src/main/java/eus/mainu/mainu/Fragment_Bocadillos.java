@@ -20,6 +20,9 @@ import eus.mainu.mainu.datalayer.Bocadillo;
 //Clase del fragmento responsable de visualizar los bocadillos
 public class Fragment_Bocadillos extends Fragment{
 
+
+    private static final String TAG = "Bocadillos";
+
     //private TextView titulo;
     private Context mContext;
     private SwipeRefreshLayout swipeRefreshLayout;

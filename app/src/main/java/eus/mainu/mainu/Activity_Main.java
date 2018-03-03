@@ -7,35 +7,43 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import eus.mainu.mainu.Utilidades.AdaptadorDeSeccionesPagerView;
+import eus.mainu.mainu.Utilidades.IActivityMain;
 
-public class Activity_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Activity_Main extends AppCompatActivity {
 
+    private static final String TAG = "Activity MAIN";
+
+    private TextView titulo;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        titulo = findViewById(R.id.textViewActividad);
+        viewPager = findViewById(R.id.contenedor);
+        tabLayout = findViewById(R.id.tabs);
+
         setupViewPager();
+        setUpTitulo();
     }
 
     //Responsable de añadir 3 fragmentos: Bocadillos, Menu, Otros
     private void setupViewPager(){
 
         //Creamos los fragmentos
-
         AdaptadorDeSeccionesPagerView adapter = new AdaptadorDeSeccionesPagerView(getSupportFragmentManager());
         adapter.addFragment(new Fragment_Menu()); //index 0
         adapter.addFragment(new Fragment_Bocadillos()); //index 1
         adapter.addFragment(new Fragment_Otros()); //index 2
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.contenedor);
-        viewPager.setAdapter(adapter);
-
         //Creamos las tabulaciones
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
         //Añadimos 3 iconos
@@ -45,9 +53,30 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
     }
 
+    //Metodo que sirve para cambiar el titulo de la toolbar en funcion del fragmento
+    private void setUpTitulo(){
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if(position==0) {
+                    titulo.setText("Menu del dia");
+                }
+                if(position==1) {
+                    titulo.setText("Bocadillos");
+                }
+                if(position==2) {
+                    titulo.setText("Otros");
+                }
+            }
+            @Override
+            public void onPageSelected(int position) {
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
+
 }

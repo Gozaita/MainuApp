@@ -1,5 +1,6 @@
 package eus.mainu.mainu.Utilidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import eus.mainu.mainu.datalayer.Imagen;
@@ -10,7 +11,7 @@ import eus.mainu.mainu.datalayer.Plato;
  * Clase para crear el menu del dia y adaptar el contenido
  */
 
-public class Menu {
+public class Menu implements Serializable{
 
     ArrayList<Plato> primeros = new ArrayList<>();
     ArrayList<Plato> segundos = new ArrayList<>();

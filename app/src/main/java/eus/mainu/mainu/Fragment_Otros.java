@@ -20,6 +20,7 @@ import eus.mainu.mainu.datalayer.Complemento;
 
 public class Fragment_Otros extends Fragment{
 
+    private static final String TAG = "Otros";
     private static final int NUM_COLUMNS = 2;   //Numero de columnas del cardview
 
     //private TextView titulo;

@@ -17,11 +17,16 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
+import eus.mainu.mainu.Utilidades.IActivityMain;
 import eus.mainu.mainu.Utilidades.Menu;
 import eus.mainu.mainu.Utilidades.PlatosListViewAdapter;
 import eus.mainu.mainu.datalayer.Plato;
 
 public class Fragment_Menu extends Fragment {
+
+    private static final String TAG = "Menu";
+
+    private IActivityMain mIActivityMain;
 
     //private TextView titulo;
     private Context mContext;
@@ -32,6 +37,27 @@ public class Fragment_Menu extends Fragment {
     private ImageView imagen;
     private Menu menu = new Menu();
     private boolean actualizado = false;
+
+    //Metodo que se llama antes de onCreate
+    //Siempre se instancian las interfaces aqui
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        //mIActivityMain = (IActivityMain) getActivity();
+    }
+
+    //Metodo que se llama antes de onCreateView, se suelen coger las variables aqui
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //mIActivityMain.setTitulo(TAG);//Pasamos el titulo que queremos que tenga la toolbar
+
+        Bundle bundle = this.getArguments();
+        if(bundle != null) {
+            menu = (Menu) bundle.getSerializable("Menu");
+        }
+    }
 
     @Nullable
     @Override
@@ -123,6 +149,8 @@ public class Fragment_Menu extends Fragment {
         listView.setAdapter(adaptador);
 
     }
+
+
 
 
 }
