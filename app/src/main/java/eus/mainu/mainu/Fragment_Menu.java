@@ -105,8 +105,9 @@ public class Fragment_Menu extends Fragment {
         inflaListView(menu.getPrimeros(),lvPrimeros);
         inflaListView(menu.getSegundos(),lvSegundos);
         inflaListView(menu.getPostres(),lvPostres);
-        Picasso.with(mContext).load(menu.getImagenes().get(0).getRuta()).resize(405, 200).centerCrop().into(imagen);
-
+        if(!menu.getImagenes().isEmpty()) {
+            Picasso.with(mContext).load(menu.getImagenes().get(0).getRuta()).resize(405, 200).centerCrop().into(imagen);
+        }
 
     }
 

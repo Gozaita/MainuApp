@@ -148,11 +148,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
             menu.setPrimeros(getPlatos(oPrimeros));
             menu.setSegundos(getPlatos(oSegundos));
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
