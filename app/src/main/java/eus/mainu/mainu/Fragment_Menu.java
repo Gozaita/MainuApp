@@ -25,16 +25,17 @@ import eus.mainu.mainu.datalayer.Plato;
 public class Fragment_Menu extends Fragment {
 
     private static final String TAG = "Menu";
-
     private IActivityMain mIActivityMain;
 
-    //private TextView titulo;
+    //Elementos de la vista
     private Context mContext;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView lvPrimeros;
     private ListView lvSegundos;
     private ListView lvPostres;
     private ImageView imagen;
+
+    //Variables
     private Menu menu = new Menu();
     private boolean actualizado = false;
 
@@ -51,11 +52,15 @@ public class Fragment_Menu extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //mIActivityMain.setTitulo(TAG);//Pasamos el titulo que queremos que tenga la toolbar
-
-        Bundle bundle = this.getArguments();
-        if(bundle != null) {
-            menu = (Menu) bundle.getSerializable("Menu");
+        //mIActivityMain.setTexto(TAG);//Pasamos un texto a la actividad Main
+        //Cogemos el contexto
+        mContext = getContext();
+        //Creamos un objeto para hacer las peticiones get y para hacer los hilos
+        HttpGetRequest request = new HttpGetRequest();
+        //Comprobamos si hay conexion para hacer las peticiones de los arrays
+        if(request.isConnected(mContext) ){
+            //Pedimos los complementos a la API
+            menu = request.getMenu();
         }
     }
 
@@ -63,12 +68,6 @@ public class Fragment_Menu extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
-
-
-        // ATENCION ERROR Attempt to invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on a null object reference
-        //Ponemos el titulo en la toolbat
-        //titulo = view.findViewById(R.id.textViewActividad);
-        //titulo.setText(getString(R.string.menuDelDia));
 
         //Cogemos el contexto
         mContext = view.getContext();
@@ -79,20 +78,46 @@ public class Fragment_Menu extends Fragment {
         lvPostres  = view.findViewById(R.id.listaPostres);
         imagen = view.findViewById(R.id.imagenMenu);
 
-
-        //Creamos un objeto para hacer las peticiones get y para hacer los hilos
-        HttpGetRequest request = new HttpGetRequest();
-
-        //Comprobamos si hay conexion para hacer las peticiones de los arrays
-        if(request.isConnected(mContext) ){
-
-            setListView(request);
-
-        }
-
-        //Ponemos escuchando el SwipeToRefresh
+        //Ponemos el SwipeToRefresh
         swipeRefreshLayout = view.findViewById(R.id.swipeMenu);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+
+        //Inflamos la vista
+        setListView();
+
+        //Escuchamos un posible swipe to refresh
+        escuchamosSwipe();
+
+        return view;
+    }
+
+    //Metodo para inflar los listviews y las imagenes
+    public void setListView(){
+
+        inflaListView(menu.getPrimeros(),lvPrimeros);
+        inflaListView(menu.getSegundos(),lvSegundos);
+        inflaListView(menu.getPostres(),lvPostres);
+        if(!menu.getImagenes().isEmpty()) {
+            Picasso.with(mContext).load(menu.getImagenes().get(0).getRuta()).resize(405, 200).centerCrop().into(imagen);
+        }
+
+    }
+
+    //Metodo para inflar un listview cualquiera
+    private void inflaListView(ArrayList<Plato> platos, ListView listView) {
+
+        //Quitamos las divisiones
+        listView.setDivider(null);
+        //Adaptamos la informacion que va dentro de ellos (los nombres)
+        PlatosListViewAdapter adaptador = new PlatosListViewAdapter(getContext(),platos);
+        //Metemos dentro la informacion
+        listView.setAdapter(adaptador);
+
+    }
+
+    //Metodo para definir la accion del swipe to refresh
+    private void escuchamosSwipe() {
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             //Accion que se ejecuta cuando se activa
             @Override
@@ -106,7 +131,8 @@ public class Fragment_Menu extends Fragment {
 
 
                 if(request.isConnected(mContext) && menu.getNombres().isEmpty()){
-                    setListView(request);
+                    menu = request.getMenu();
+                    setListView();
                 }
 
                 //Esto es para ejecutar un hilo que se encarga de hacer la accion, creo
@@ -118,38 +144,7 @@ public class Fragment_Menu extends Fragment {
                 }, 2000);   //Tiempo en ms durante el cual se muestra el icono de refresh
             }
         });
-
-
-        return view;
     }
-
-    //Metodo para hacer la peticion de los bocadillos e inflar la vista
-    public void setListView(HttpGetRequest request){
-
-        menu = request.getMenu();
-
-        inflaListView(menu.getPrimeros(),lvPrimeros);
-        inflaListView(menu.getSegundos(),lvSegundos);
-        inflaListView(menu.getPostres(),lvPostres);
-        if(!menu.getImagenes().isEmpty()) {
-            Picasso.with(mContext).load(menu.getImagenes().get(0).getRuta()).resize(405, 200).centerCrop().into(imagen);
-        }
-
-    }
-
-    private void inflaListView(ArrayList<Plato> platos, ListView listView) {
-
-        //Quitamos las divisiones
-        listView.setDivider(null);
-
-        //Adaptamos la informacion que va dentro de ellos (los nombres)
-        PlatosListViewAdapter adaptador = new PlatosListViewAdapter(getContext(),platos);
-
-        //Metemos dentro la informacion
-        listView.setAdapter(adaptador);
-
-    }
-
 
 
 

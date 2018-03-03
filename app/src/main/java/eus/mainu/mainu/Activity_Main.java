@@ -9,16 +9,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import eus.mainu.mainu.Utilidades.AdaptadorDeSeccionesPagerView;
 import eus.mainu.mainu.Utilidades.IActivityMain;
+import eus.mainu.mainu.Utilidades.Menu;
+import eus.mainu.mainu.datalayer.Bocadillo;
+import eus.mainu.mainu.datalayer.Complemento;
 
 public class Activity_Main extends AppCompatActivity {
 
     private static final String TAG = "Activity MAIN";
 
+    //Elementos de la vista
     private TextView titulo;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+
+    //Variables que inicializo
+    //private Menu menu;
+    //private ArrayList<Bocadillo> arrayBocadillos;
+    //private ArrayList<Complemento> arrayComplementos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -23,14 +23,30 @@ public class Fragment_Bocadillos extends Fragment{
 
     private static final String TAG = "Bocadillos";
 
-    //private TextView titulo;
+    //Elementos Layout
     private Context mContext;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private ArrayList<Bocadillo> arrayBocadillos =new ArrayList<Bocadillo>();
-    private boolean actualizado = false;
     private android.support.v7.widget.RecyclerView recyclerView;
 
+    //Variables
+    private ArrayList<Bocadillo> arrayBocadillos =new ArrayList<Bocadillo>();
+    private boolean actualizado = false;
 
+    //Metodo que se llama antes de onCreateView, se suelen coger las variables aqui
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //Cogemos el contexto
+        mContext = getContext();
+        //Creamos un objeto para hacer las peticiones get y para hacer los hilos
+        HttpGetRequest request = new HttpGetRequest();
+        //Comprobamos si hay conexion para hacer las peticiones de los arrays
+        if(request.isConnected(mContext) ){
+            //Pedimos los complementos a la API
+            arrayBocadillos = request.getBocadillos();
+        }
+    }
 
     //Metodo que se ejecuta al visualizar el fragmento, se representa en funcion del layout fragment_bocadillos
     @Nullable
@@ -38,32 +54,37 @@ public class Fragment_Bocadillos extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bocadillos, container, false);
 
-        // ATENCION ERROR Attempt to invoke virtual method 'void android.widget.TextView.setText(java.lang.CharSequence)' on a null object reference
-        //Ponemos el titulo en la toolbat
-        //titulo = view.findViewById(R.id.textViewActividad);
-        //titulo.setText(getString(R.string.bocadillos));
-
-        //Cogemos el contexto
-        mContext = view.getContext();
-
         //Cogemos el recycling view
         recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);
-
-
-        //Creamos un objeto para hacer las peticiones get y para hacer los hilos
-        HttpGetRequest request = new HttpGetRequest();
-
-
-        //Comprobamos si hay conexion para hacer las peticiones de los arrays
-        if(request.isConnected(mContext) ){
-
-            setBocadillos(request);
-
-        }
-
-        //Ponemos escuchando el SwipeToRefresh
+        //Ponemos el SwipeToRefresh
         swipeRefreshLayout = view.findViewById(R.id.swipeBocadillos);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+
+        //Inflamos la vista
+        setBocadillos();
+
+        //Escuchamos un posible swipe to refresh
+        escuchamosSwipe();
+
+        return view;
+    }
+
+
+    //Clase para crear y adaptar la informacion al recycling view
+    private void setBocadillos(){
+
+        //Creamos el objeto de la clase adaptador
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(arrayBocadillos, getActivity());
+
+        //Adaptamos el recyclingview
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    //Metodo para definir la accion del swipe to refresh
+    private void escuchamosSwipe() {
+
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             //Accion que se ejecuta cuando se activa
             @Override
@@ -77,7 +98,8 @@ public class Fragment_Bocadillos extends Fragment{
 
 
                 if(request.isConnected(mContext) && arrayBocadillos.isEmpty()){
-                    setBocadillos(request);
+                    arrayBocadillos = request.getBocadillos();
+                    setBocadillos();
                 }
 
                 //Esto es para ejecutar un hilo que se encarga de hacer la accion, creo
@@ -89,42 +111,6 @@ public class Fragment_Bocadillos extends Fragment{
                 }, 2000);   //Tiempo en ms durante el cual se muestra el icono de refresh
             }
         });
-
-
-        return view;
-    }
-
-
-    //Clase para crear y adaptar la informacion al recycling view
-    private void setBocadillos(HttpGetRequest request){
-
-
-
-        arrayBocadillos = request.getBocadillos();
-
-        /*
-        AdministradorDeCache cache = new AdministradorDeCache();
-        //Copia de seguridad de los datos
-        ArrayList<Bocadillo> a = arrayBocadillos;
-        //Guardamos en cache
-        cache.guardarArrayBocadillos(mContext,"arrayB",arrayBocadillos);
-        //Leemos lo que acabamos de guardar
-        arrayBocadillos = (ArrayList<Bocadillo>) cache.leeObjetoCache(mContext, "arrayB");
-        if(arrayBocadillos != null) {
-            Log.d("Es null","NO HA LEIDO NADA");
-            arrayBocadillos = a;
-        }
-        else{
-            Log.d("BIEN","HA LEIDO ALGO");
-        }*/
-
-        //Creamos el objeto de la clase adaptador
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(arrayBocadillos, getActivity());
-
-        //Adaptamos el recyclingview
-        recyclerView.setAdapter(adapter);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
 
