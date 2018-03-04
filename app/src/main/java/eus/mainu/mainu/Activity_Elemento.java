@@ -14,7 +14,8 @@ import eus.mainu.mainu.datalayer.Complemento;
 public class Activity_Elemento extends AppCompatActivity {
 
     private static final String TAG = "Activity Elemento";
-    TextView textView;
+    TextView nombre;
+    TextView puntuacion;
     RatingBar ratingBar;
     
     @Override
@@ -22,7 +23,8 @@ public class Activity_Elemento extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__elemento);
 
-        textView = findViewById(R.id.textViewNombre);
+        nombre = findViewById(R.id.textViewNombre);
+        puntuacion = findViewById(R.id.textViewPuntuacion);
         ratingBar = findViewById(R.id.estrellitasElemento);
         //Para poner las estrellas blancas
         LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
@@ -35,13 +37,13 @@ public class Activity_Elemento extends AppCompatActivity {
     //Metodo para recibir la informacion que se pasa a la actividad
     private void getInformacion() {
 
-        //Vemos si la info es de bocadillos
+        //Vemos si la info es de un bocadillo
         if(getIntent().hasExtra("Bocadillo")){
 
             Bocadillo bocadillo = (Bocadillo) getIntent().getSerializableExtra("Bocadillo");
             setBocadillo(bocadillo);
         }
-        //Vemos si la info es de complementos
+        //Vemos si la info es de un complemento
         if(getIntent().hasExtra("Complemento")){
 
             Complemento complemento = (Complemento) getIntent().getSerializableExtra("Complemento");
@@ -52,14 +54,16 @@ public class Activity_Elemento extends AppCompatActivity {
 
     private void setBocadillo(Bocadillo bocadillo) {
 
-        textView.setText(bocadillo.getNombre());
-        ratingBar.setRating(3.5f);
+        nombre.setText(bocadillo.getNombre());
+        puntuacion.setText(Double.toString(bocadillo.getPuntuacion()));
+        ratingBar.setRating((float) bocadillo.getPuntuacion());
     }
 
     private void setComplemento(Complemento complemento) {
 
-        textView.setText(complemento.getNombre());
-        ratingBar.setRating(3.5f);
+        nombre.setText(complemento.getNombre());
+        puntuacion.setText(Double.toString(complemento.getPuntuacion()));
+        ratingBar.setRating((float) complemento.getPuntuacion());
     }
 
 }

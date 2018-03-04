@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,11 @@ public class Fragment_Bocadillos extends Fragment{
 
         //Cogemos el recycling view
         recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);
+
+        //Añadimos una linea debajo de cada objeto
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mContext, new LinearLayoutManager(mContext).getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
         //Ponemos el SwipeToRefresh
         swipeRefreshLayout = view.findViewById(R.id.swipeBocadillos);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));

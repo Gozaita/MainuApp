@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/nombreTextView"
         android:layout_marginTop="2dp"
+        android:layout_marginBottom="10dp"
         android:textAllCaps="true"
         android:text="Descripcion"
         android:textSize="11sp"
