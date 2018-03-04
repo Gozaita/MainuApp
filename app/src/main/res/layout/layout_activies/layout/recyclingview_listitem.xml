@@ -51,8 +51,8 @@
 
     <ImageView
         android:id="@+id/estrella"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:layout_alignEnd="@+id/precioTextView"
         android:layout_below="@+id/precioTextView"
         android:layout_marginTop="3dp"
@@ -64,7 +64,6 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/estrella"
         android:layout_toStartOf="@+id/estrella"
-        android:layout_marginBottom="6dp"
         android:layout_marginRight="6dp"
         android:fontFamily="@font/gothamlight"
         android:text="4.5"

@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.IActivityMain;
@@ -98,7 +99,9 @@ public class Fragment_Menu extends Fragment {
         inflaListView(menu.getSegundos(),lvSegundos);
         inflaListView(menu.getPostres(),lvPostres);
         if(!menu.getImagenes().isEmpty()) {
-            Picasso.with(mContext).load(menu.getImagenes().get(0).getRuta()).resize(405, 200).centerCrop().into(imagen);
+            Random rand = new Random();
+            int r = rand.nextInt((6 - 0) + 1) + 0;
+            Picasso.with(mContext).load(menu.getImagenes().get(r).getRuta()).resize(405, 220).centerCrop().into(imagen);
         }
 
     }

@@ -18,21 +18,22 @@
         <TextView
             android:id="@+id/textViewActividad"
             android:layout_width="250dp"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/configuracionButton"
             android:layout_marginStart="20dp"
             android:text="MainU for U"
+            android:textAllCaps="true"
             android:textColor="@color/blanco"
-            android:textSize="24sp"
-            android:fontFamily="@font/gothamblack" />
+            android:textSize="18sp"
+            android:fontFamily="@font/gothambold" />
 
         <ImageButton
             android:id="@+id/configuracionButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/textViewActividad"
+            android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
             android:background="@color/colorPrimary"
             app:srcCompat="@drawable/ic_menu_navigation" />
