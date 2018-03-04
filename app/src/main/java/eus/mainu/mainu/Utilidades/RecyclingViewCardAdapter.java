@@ -79,7 +79,7 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imagen;
-        ImageView estrella;
+        //ImageView estrella;
         TextView nombre;
         TextView precio;
         TextView puntuacion;
@@ -88,7 +88,7 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
         public ViewHolder(View itemView) {
             super(itemView);
             this.imagen = itemView.findViewById(R.id.imagen_card);
-            this.estrella = itemView.findViewById(R.id.estrella);
+            //this.estrella = itemView.findViewById(R.id.estrella);
             this.nombre = itemView.findViewById(R.id.nombre_card);
             this.precio = itemView.findViewById(R.id.precio_card);
             this.puntuacion = itemView.findViewById(R.id.puntuacionTextView);

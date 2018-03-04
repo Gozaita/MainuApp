@@ -86,7 +86,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView ingredientes;
         TextView precio;
         TextView puntuacion;
-        ImageView estrella;
+        //ImageView estrella;
         RelativeLayout bocadillo_layout;
 
         public ViewHolder(View itemView) {
@@ -96,7 +96,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             precio = itemView.findViewById(R.id.precioTextView);
             puntuacion = itemView.findViewById(R.id.puntuacionTextView);
             bocadillo_layout = itemView.findViewById(R.id.bocadillo_layout);
-            estrella = itemView.findViewById(R.id.estrella);
+            //estrella = itemView.findViewById(R.id.estrella);
         }
     }
 
