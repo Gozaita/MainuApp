@@ -3,6 +3,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -19,7 +20,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/descripcionTextView"
         android:text="Nombre"
-        android:textSize="20sp"
+        android:textAllCaps="true"
+        android:textSize="15sp"
         android:fontFamily="@font/gothambold"
         />
 
@@ -31,9 +33,8 @@
         android:layout_marginTop="2dp"
         android:textAllCaps="true"
         android:text="Descripcion"
-        android:textSize="12sp"
-        android:fontFamily="@font/gothamlight"
-        />
+        android:textSize="11sp"
+        android:fontFamily="@font/gothamlight"/>
 
 
     <TextView
@@ -41,12 +42,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="11dp"
+        android:fontFamily="@font/gothambold"
         android:text="X.XX€"
-        android:textSize="20sp"
-        android:fontFamily="@font/gothamroundedbook"
-        />
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/estrella"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/precioTextView"
+        android:layout_below="@+id/precioTextView"
+        android:layout_marginTop="3dp"
+        app:srcCompat="@drawable/ic_star_half_mainu_24dp" />
+
+    <TextView
+        android:id="@+id/puntuacionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/estrella"
+        android:layout_toStartOf="@+id/estrella"
+        android:layout_marginBottom="6dp"
+        android:layout_marginRight="6dp"
+        android:fontFamily="@font/gothamlight"
+        android:text="4.5"
+        android:textSize="12sp" />
+
+
 
 
 </RelativeLayout>

@@ -87,22 +87,16 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
             JSONArray obj = new JSONArray(result);
             for (int i = 0; i < obj.length(); i++){
                 JSONObject o = obj.getJSONObject(i);
-
                 //Cogemos la lista de los ingredientes
                 JSONArray ingredientes = o.getJSONArray("ingredientes");
-
                 //Mapeamos la lista de JSON en ingredientes
                 ArrayList<Ingrediente> arrayingredientes = new ArrayList<Ingrediente>();
                 for(int j = 0; j < ingredientes.length(); j++) {
                     JSONObject a = ingredientes.getJSONObject(j);
                     arrayingredientes.add(new Ingrediente(getInt(a,"id"),getString(a,"nombre")));
                 }
-
                 //Creamos el bocadillo
-                arrayBocadillos.add(
-                        new Bocadillo( getInt(o,"id"), getString(o,"nombre"), getDouble(o,"precio"),getDouble(o,"puntuacion"), arrayingredientes)
-                );
-
+                arrayBocadillos.add(new Bocadillo( getInt(o,"id"), getString(o,"nombre"), getDouble(o,"precio"),getDouble(o,"puntuacion"), arrayingredientes));
                 //Ordenamos por nombre
                 Collections.sort(arrayBocadillos, new Comparator<Bocadillo>() {
                     @Override
@@ -167,16 +161,9 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
                     JSONObject a = images.getJSONObject(j);
                     arrayimagenes.add( new Imagen(a.getInt("id"),a.getString("url")));
                 }
-
-                double puntuacion = 0;
-
-                if(!o.isNull("puntuacion")) {
-                    puntuacion = o.getDouble("puntuacion");
-                }
-
-                    plato.add(new Plato(o.getInt("id"), o.getString("nombre"), "",puntuacion, getImagenes(o)));
+                //Añadimos al array el plato
+                plato.add(new Plato(getInt(o,"id"), getString(o,"nombre"), getString(o,"descripcion"),getDouble(o,"puntuacion"), getImagenes(o)));
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -196,7 +183,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
             for (int i = 0; i < obj.length(); i++){
                 JSONObject o = obj.getJSONObject(i);
                     arrayComplementos.add(
-                        new Complemento( getInt(o,"id"), getString(o,"nombre"), o.getDouble("precio"), getDouble(o,"puntuacion"), getImagenes(o))
+                        new Complemento( getInt(o,"id"), getString(o,"nombre"), getDouble(o,"precio"), getDouble(o,"puntuacion"), getImagenes(o))
                 );
             }
 

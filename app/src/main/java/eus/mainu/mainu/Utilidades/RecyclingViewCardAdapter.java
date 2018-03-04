@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import eus.mainu.mainu.Activity_Elemento;
@@ -48,6 +50,8 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
 
         holder.nombre.setText(arrayComplementos.get(position).getNombre());
         holder.precio.setText(String.format("%.2f€",arrayComplementos.get(position).getPrecio()));
+        holder.puntuacion.setText(String.format("%.1f",arrayComplementos.get(position).getPuntuacion()));
+
 
         //Accion que se ejecuta al pulsar en un objeto de la lista
         holder.complemento_layout.setOnClickListener((new View.OnClickListener() {
@@ -75,15 +79,19 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imagen;
+        ImageView estrella;
         TextView nombre;
         TextView precio;
+        TextView puntuacion;
         RelativeLayout complemento_layout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.imagen = itemView.findViewById(R.id.imagen_card);
+            this.estrella = itemView.findViewById(R.id.estrella);
             this.nombre = itemView.findViewById(R.id.nombre_card);
             this.precio = itemView.findViewById(R.id.precio_card);
+            this.puntuacion = itemView.findViewById(R.id.puntuacionTextView);
             this.complemento_layout = itemView.findViewById(R.id.complemento_layout);
         }
 
