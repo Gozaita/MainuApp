@@ -12,14 +12,10 @@ public class Imagen implements Serializable{
 
     private int id;
     private String ruta;
-    private boolean visible;
-    private boolean oficial;
 
-    public Imagen(int id, String ruta, boolean visible, boolean oficial) {
+    public Imagen(int id, String ruta) {
         this.id = id;
         this.ruta = ruta;
-        this.visible = visible;
-        this.oficial = oficial;
     }
 
     public int getId() {
@@ -36,21 +32,5 @@ public class Imagen implements Serializable{
 
     public void setRuta(String ruta) {
         this.ruta = ruta;
-    }
-
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
-
-    public boolean isOficial() {
-        return oficial;
-    }
-
-    public void setOficial(boolean oficial) {
-        this.oficial = oficial;
     }
 }

@@ -21,16 +21,6 @@ public class Bocadillo implements Serializable {
         this.ingredientes = ingredientes;
     }
 
-    public Bocadillo(int id, String nombre, double precio, double puntuacion, ArrayList<Ingrediente> ingredientes, ArrayList<Valoracion> valoraciones, ArrayList<Imagen> fotos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.puntuacion = puntuacion;
-        this.ingredientes = ingredientes;
-        this.valoraciones = valoraciones;
-        this.fotos = fotos;
-    }
-
     public int getId() {
         return id;
     }

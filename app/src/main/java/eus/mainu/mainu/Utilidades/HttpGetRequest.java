@@ -1,6 +1,7 @@
 package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -82,7 +83,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
         String result;
         try {
-            result = execute("https://api.mainu.eus/get_bocadillos").get();
+            result = execute("https://api.mainu.eus/bocadillos").get();
             JSONArray obj = new JSONArray(result);
             for (int i = 0; i < obj.length(); i++){
                 JSONObject o = obj.getJSONObject(i);
@@ -93,20 +94,13 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
                 //Mapeamos la lista de JSON en ingredientes
                 ArrayList<Ingrediente> arrayingredientes = new ArrayList<Ingrediente>();
                 for(int j = 0; j < ingredientes.length(); j++) {
-
-                    Ingrediente ingrediente = new Ingrediente(j,(String )ingredientes.get(j));
-                    arrayingredientes.add(ingrediente);
-                }
-
-                double puntuacion = 0;
-
-                if(!o.isNull("puntuacion")) {
-                    puntuacion = o.getDouble("puntuacion");
+                    JSONObject a = ingredientes.getJSONObject(j);
+                    arrayingredientes.add(new Ingrediente(getInt(a,"id"),getString(a,"nombre")));
                 }
 
                 //Creamos el bocadillo
                 arrayBocadillos.add(
-                        new Bocadillo( o.getInt("id"), o.getString("nombre"), o.getDouble("precio"),puntuacion, arrayingredientes)
+                        new Bocadillo( getInt(o,"id"), getString(o,"nombre"), getDouble(o,"precio"),getDouble(o,"puntuacion"), arrayingredientes)
                 );
 
                 //Ordenamos por nombre
@@ -134,7 +128,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         String result;
 
         try {
-            result = execute("https://api.mainu.eus/get_menu").get();
+            result = execute("https://api.mainu.eus/menu").get();
 
             JSONObject obj = new JSONObject(result);
 
@@ -165,17 +159,22 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
             for(int i = 0; i < obj.length(); i++){
                 JSONObject o = obj.getJSONObject(i);
 
+                //Cogemos la lista de imagenes
+                JSONArray images = o.getJSONArray("images");
+                //Mapeamos la lista de JSON en ingredientes
+                ArrayList<Imagen> arrayimagenes = new ArrayList<Imagen>();
+                for(int j = 0; j < images.length(); j++) {
+                    JSONObject a = images.getJSONObject(j);
+                    arrayimagenes.add( new Imagen(a.getInt("id"),a.getString("url")));
+                }
+
                 double puntuacion = 0;
 
                 if(!o.isNull("puntuacion")) {
                     puntuacion = o.getDouble("puntuacion");
                 }
 
-                ArrayList<Imagen> imagenes = new ArrayList<>();
-                Imagen imagen = new Imagen(0,o.getString("imagen"),true,true);
-                imagenes.add(imagen);
-
-                    plato.add(new Plato(o.getInt("id"), o.getString("nombre"), "",puntuacion, imagenes));
+                    plato.add(new Plato(o.getInt("id"), o.getString("nombre"), "",puntuacion, getImagenes(o)));
             }
 
         } catch (JSONException e) {
@@ -192,19 +191,12 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
         String result;
         try {
-            result = execute("https://api.mainu.eus/get_otros").get();
+            result = execute("https://api.mainu.eus/otros").get();
             JSONArray obj = new JSONArray(result);
             for (int i = 0; i < obj.length(); i++){
                 JSONObject o = obj.getJSONObject(i);
-
-                double puntuacion = 0;
-
-                if(!o.isNull("puntuacion")) {
-                    puntuacion = o.getDouble("puntuacion");
-                }
-
                     arrayComplementos.add(
-                        new Complemento( o.getInt("id"), o.getString("nombre"), o.getDouble("precio"),puntuacion)
+                        new Complemento( getInt(o,"id"), getString(o,"nombre"), o.getDouble("precio"), getDouble(o,"puntuacion"), getImagenes(o))
                 );
             }
 
@@ -220,6 +212,62 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         }
 
         return arrayComplementos;
+    }
+
+
+    //Metodo para leer un INT de un JSONObject
+    private int getInt(JSONObject o, String campo) throws JSONException {
+
+        int id = 0;
+
+        if(!o.isNull(campo)) {
+            id = o.getInt(campo);
+        }
+
+        return id;
+    }
+
+    //Metodo para leer un String de un JSONObject
+    private String getString(JSONObject o, String campo) throws JSONException {
+
+        String texto = "";
+
+        if(!o.isNull(campo)) {
+            texto = o.getString(campo);
+        }
+
+        return texto;
+    }
+
+
+    //Metodo para leer la puntuacion de un JSONObject
+    private double getDouble(JSONObject o, String nombre) throws JSONException {
+
+        double puntuacion = 0;
+
+        if(!o.isNull(nombre)) {
+            puntuacion = o.getDouble(nombre);
+        }
+
+        return puntuacion;
+    }
+
+
+    //Metodo para leer las imagenes de un elemento
+    private ArrayList<Imagen> getImagenes(JSONObject o) throws JSONException {
+
+        ArrayList<Imagen> arrayImagenes = new ArrayList<>();
+
+        //Cogemos la lista de imagenes
+        JSONArray images = o.getJSONArray("images");
+
+        //Mapeamos la lista de JSON en ingredientes
+        for(int j = 0; j < images.length(); j++) {
+            JSONObject a = images.getJSONObject(j);
+            arrayImagenes.add( new Imagen(a.getInt("id"),a.getString("url")));
+        }
+
+        return arrayImagenes;
     }
 
 

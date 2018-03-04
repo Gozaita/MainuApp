@@ -70,14 +70,16 @@ public class Activity_Main extends AppCompatActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if(position==0) {
-                    titulo.setText("Menu del dia");
-                }
-                if(position==1) {
-                    titulo.setText("Bocadillos");
-                }
-                if(position==2) {
-                    titulo.setText("Otros");
+                switch (position) {
+                    case 0:
+                        titulo.setText(R.string.menuDelDia);
+                        break;
+                    case 1:
+                        titulo.setText(R.string.bocadillos);
+                        break;
+                    case 2:
+                        titulo.setText(R.string.complementos);
+                        break;
                 }
             }
             @Override

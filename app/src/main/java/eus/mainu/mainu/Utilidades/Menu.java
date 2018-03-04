@@ -72,29 +72,24 @@ public class Menu implements Serializable{
 
         //Cogemos las imagenes oficiales de los platos
         for(i = 0; i < primeros.size(); i++) {
-            for(j = 0; j < primeros.get(i).getFotos().size(); j++){
-                if(primeros.get(i).getFotos().get(j).isOficial()){
-                    imagenes.add(primeros.get(i).getFotos().get(j));
-                }
+            if(!primeros.get(i).getFotos().get(0).getRuta().isEmpty()){
+                imagenes.add(primeros.get(i).getFotos().get(0));
             }
         }
 
+        //Cogemos las imagenes oficiales de los platos
         for(i = 0; i < segundos.size(); i++) {
-            for(j = 0; j < segundos.get(i).getFotos().size(); j++){
-                if(segundos.get(i).getFotos().get(j).isOficial()){
-                    imagenes.add(segundos.get(i).getFotos().get(j));
-                }
+            if(!segundos.get(i).getFotos().get(0).getRuta().isEmpty()){
+                imagenes.add(segundos.get(i).getFotos().get(0));
             }
         }
 
+        //Cogemos las imagenes oficiales de los platos
         for(i = 0; i < postres.size(); i++) {
-            for(j = 0; j < postres.get(i).getFotos().size(); j++){
-                if(postres.get(i).getFotos().get(j).isOficial()){
-                    imagenes.add(postres.get(i).getFotos().get(j));
-                }
+            if(!postres.get(i).getFotos().get(0).getRuta().isEmpty()){
+                imagenes.add(postres.get(i).getFotos().get(0));
             }
         }
-
 
         return imagenes;
     }

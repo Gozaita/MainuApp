@@ -17,21 +17,13 @@ public class Complemento implements Serializable {
     private ArrayList<Valoracion> valoraciones;
     private ArrayList<Imagen> fotos;
 
-    public Complemento(int id, String nombre, double precio, double puntuacion) {
+    public Complemento(int id, String nombre, double precio, double puntuacion, ArrayList<Imagen> fotos) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.puntuacion = puntuacion;
     }
 
-    public Complemento(int id, String nombre, double precio, double puntuacion, ArrayList<Valoracion> valoraciones, ArrayList<Imagen> fotos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.puntuacion = puntuacion;
-        this.valoraciones = valoraciones;
-        this.fotos = fotos;
-    }
 
     public int getId() {
         return id;
