@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 import eus.mainu.mainu.datalayer.Bocadillo;
@@ -234,6 +235,9 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
         if(!o.isNull(nombre)) {
             puntuacion = o.getDouble(nombre);
+        }
+        else {
+            puntuacion = 1 + (5 - 1)*(new Random()).nextDouble();
         }
 
         return puntuacion;

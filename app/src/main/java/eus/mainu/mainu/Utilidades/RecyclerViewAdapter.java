@@ -55,7 +55,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     holder.nombre.setText(arrayBocadillos.get(position).getNombre());
     holder.ingredientes.setText(getIngredientes(position));
     holder.precio.setText(String.format("%.2f€",arrayBocadillos.get(position).getPrecio()));
-    holder.puntuacion.setText(String.format("%.1f",arrayBocadillos.get(position).getPuntuacion()));
+    if(arrayBocadillos.get(position).getPuntuacion() != 0){
+        holder.puntuacion.setText(String.format("%.1f",arrayBocadillos.get(position).getPuntuacion()));
+    }
+    else {
+        holder.puntuacion.setText("N/A");
+    }
 
     //Accion que se ejecuta al pulsar en un objeto de la lista
     holder.bocadillo_layout.setOnClickListener((new View.OnClickListener() {

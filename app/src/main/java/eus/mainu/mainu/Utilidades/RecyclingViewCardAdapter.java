@@ -50,7 +50,12 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
 
         holder.nombre.setText(arrayComplementos.get(position).getNombre());
         holder.precio.setText(String.format("%.2f€",arrayComplementos.get(position).getPrecio()));
-        holder.puntuacion.setText(String.format("%.1f",arrayComplementos.get(position).getPuntuacion()));
+        if(arrayComplementos.get(position).getPuntuacion() != 0){
+            holder.puntuacion.setText(String.format("%.1f",arrayComplementos.get(position).getPuntuacion()));
+        }
+        else {
+            holder.puntuacion.setText("N/A");
+        }
 
 
         //Accion que se ejecuta al pulsar en un objeto de la lista
