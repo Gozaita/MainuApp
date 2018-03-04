@@ -55,9 +55,9 @@ public class Activity_Elemento extends AppCompatActivity {
     private void setBocadillo(Bocadillo bocadillo) {
 
         nombre.setText(bocadillo.getNombre());
-        
+
         if(bocadillo.getPuntuacion() != 0){
-            puntuacion.setText(Double.toString(bocadillo.getPuntuacion()));
+            puntuacion.setText(String.format("%.1f",bocadillo.getPuntuacion()));
             ratingBar.setRating((float) bocadillo.getPuntuacion());
 
         }
@@ -71,7 +71,7 @@ public class Activity_Elemento extends AppCompatActivity {
         nombre.setText(complemento.getNombre());
 
         if(complemento.getPuntuacion() != 0){
-            puntuacion.setText(Double.toString(complemento.getPuntuacion()));
+            puntuacion.setText(String.format("%.1f",complemento.getPuntuacion()));
             ratingBar.setRating((float) complemento.getPuntuacion());
         }
         else{
