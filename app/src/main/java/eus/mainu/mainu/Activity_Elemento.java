@@ -75,8 +75,11 @@ public class Activity_Elemento extends AppCompatActivity {
         precio.setText(String.format("%.2f€",bocadillo.getPrecio()));
 
         if(bocadillo.getFotos() != null){
-            Picasso.with(this).load(bocadillo.getFotos().get(0).getRuta()).into(imagen);
-        }
+            Picasso.with(this)
+                    .load(bocadillo.getFotos().get(0).getRuta())
+                    .fit()
+                    .centerCrop()
+                    .into(imagen);        }
 
         if(bocadillo.getPuntuacion() != 0){
             puntuacion.setText(String.format("%.1f",bocadillo.getPuntuacion()));
@@ -94,8 +97,11 @@ public class Activity_Elemento extends AppCompatActivity {
         precio.setText(String.format("%.2f€",complemento.getPrecio()));
 
         if(complemento.getFotos() != null){
-            Picasso.with(this).load(complemento.getFotos().get(0).getRuta()).into(imagen);
-        }
+            Picasso.with(this)
+                    .load(complemento.getFotos().get(0).getRuta())
+                    .fit()
+                    .centerCrop()
+                    .into(imagen);        }
 
         if(complemento.getPuntuacion() != 0){
             puntuacion.setText(String.format("%.1f",complemento.getPuntuacion()));
@@ -113,7 +119,11 @@ public class Activity_Elemento extends AppCompatActivity {
         precio.setVisibility(View.GONE);
 
         if(plato.getFotos() != null){
-            Picasso.with(this).load(plato.getFotos().get(0).getRuta()).into(imagen);
+            Picasso.with(this)
+                    .load(plato.getFotos().get(0).getRuta())
+                    .fit()
+                    .centerCrop()
+                    .into(imagen);
         }
 
         if(plato.getPuntuacion() != 0){

@@ -101,7 +101,11 @@ public class Fragment_Menu extends Fragment {
         if(!menu.getImagenes().isEmpty()) {
             Random rand = new Random();
             int r = rand.nextInt((6 - 0) + 1) + 0;
-            Picasso.with(mContext).load(menu.getImagenes().get(r).getRuta()).resize(405, 220).centerCrop().into(imagen);
+            Picasso.with(mContext)
+                    .load(menu.getImagenes().get(r).getRuta())
+                    .fit()
+                    .centerCrop()
+                    .into(imagen);
         }
 
     }

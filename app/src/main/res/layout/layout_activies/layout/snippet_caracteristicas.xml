@@ -5,13 +5,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="85dp"
         android:layout_marginTop="225dp"
         android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/textViewNombre"
-            android:layout_width="250dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
@@ -36,9 +36,10 @@
             android:id="@+id/textViewPuntuacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textViewNombre"
             android:layout_alignBottom="@+id/textViewNombre"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@+id/textViewNombre"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@+id/estrellitasElemento"
             android:fontFamily="@font/gothammedium"
             android:text="3.5"
             android:textColor="@color/blanco"
@@ -49,9 +50,9 @@
             style="@style/Base.Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_alignTop="@+id/textViewPuntuacion"
-            android:layout_toEndOf="@+id/textViewPuntuacion" />
+            android:layout_marginRight="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/textViewPuntuacion" />
 
     </RelativeLayout>
 

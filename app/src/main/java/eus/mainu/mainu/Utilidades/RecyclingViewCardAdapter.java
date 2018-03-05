@@ -57,6 +57,16 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
             holder.puntuacion.setText("N/A");
         }
 
+        //SI hay fotos, pon la primera como oficial
+        if(arrayComplementos.get(position).getFotos() != null) {
+            Picasso.with(mContext)
+                    .load(arrayComplementos.get(position).getFotos().get(0).getRuta())
+                    .fit()
+                    .centerCrop()
+                    .into(holder.imagen);
+        }
+
+
 
         //Accion que se ejecuta al pulsar en un objeto de la lista
         holder.complemento_layout.setOnClickListener((new View.OnClickListener() {

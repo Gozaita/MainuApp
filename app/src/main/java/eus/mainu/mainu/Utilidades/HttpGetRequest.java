@@ -1,11 +1,9 @@
 package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
 
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
@@ -184,7 +181,11 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
             for (int i = 0; i < obj.length(); i++){
                 JSONObject o = obj.getJSONObject(i);
                     arrayComplementos.add(
-                        new Complemento( getInt(o,"id"), getString(o,"nombre"), getDouble(o,"precio"), getDouble(o,"puntuacion"), getImagenes(o))
+                        new Complemento( getInt(o,"id"),
+                                getString(o,"nombre"),
+                                getDouble(o,"precio"),
+                                getDouble(o,"puntuacion"),
+                                getImagenes(o))
                 );
             }
 
