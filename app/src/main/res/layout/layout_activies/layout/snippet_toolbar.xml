@@ -40,28 +40,19 @@
             app:srcCompat="@drawable/ic_search_24dp"
             android:background="@color/colorPrimary"/>
 
-        <RelativeLayout
+
+        <EditText
+            android:id="@+id/searchFilter"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/searchFilter"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF"
-                android:visibility="invisible"
-                android:layout_margin="5dp"/>
-
-            <ListView
-                android:id="@+id/theList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/searchFilter"
-                android:visibility="invisible"/>
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:visibility="invisible"
+            android:maxLines="1"
+            android:layout_margin="5dp"
+            android:imeOptions="actionDone"/>
 
         </RelativeLayout>
 
-    </RelativeLayout>
 
 
 </merge>

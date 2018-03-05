@@ -64,6 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/estrella"
         android:layout_toStartOf="@+id/estrella"
+        android:layout_marginBottom="2dp"
         android:layout_marginRight="6dp"
         android:fontFamily="@font/gothamlight"
         android:text="4.5"
