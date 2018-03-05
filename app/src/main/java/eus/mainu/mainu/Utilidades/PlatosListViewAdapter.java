@@ -1,6 +1,7 @@
 package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -9,10 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import eus.mainu.mainu.Activity_Elemento;
 import eus.mainu.mainu.R;
 import eus.mainu.mainu.datalayer.Plato;
 
@@ -49,7 +52,7 @@ public class PlatosListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
 
         if (view == null) {
             view = LayoutInflater.from(mContext).
@@ -63,11 +66,27 @@ public class PlatosListViewAdapter extends BaseAdapter {
         TextView textView = view.findViewById(R.id.nombreTextView);
         RatingBar estrellitas = view.findViewById(R.id.ratingBarEstrellitas);
         LayerDrawable stars = (LayerDrawable) estrellitas.getProgressDrawable();
+        RelativeLayout platos_layout = view.findViewById(R.id.plato_layout);
         stars.getDrawable(2).setColorFilter(Color.parseColor("#0E70B7"), PorterDuff.Mode.SRC_ATOP);
 
         //sets the text for item name and item description from the current item object
         textView.setText(plato.getNombre());
         estrellitas.setRating((float) plato.getPuntuacion());
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Decimos que queremos navegar a la clase Elemento
+                Intent intent = new Intent(mContext, Activity_Elemento.class);
+                //Le pasamos la informacion que necesita la clase
+                intent.putExtra("Plato",platos.get(i));
+                //Iniciamos la actividad
+                mContext.startActivity(intent);
+            }
+        });
+
+
+
 
         // returns the view for the current row
         return view;
