@@ -16,7 +16,7 @@
             android:layout_height="wrap_content">
 
             <ImageButton
-                android:id="@+id/botonElemento"
+                android:id="@+id/botonImagenElemento"
                 android:layout_width="match_parent"
                 android:layout_height="225dp"
                 android:adjustViewBounds="true"
