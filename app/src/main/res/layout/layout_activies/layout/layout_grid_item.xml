@@ -27,7 +27,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:background="@color/grisT"
+                android:background="@color/colorPrimary"
                 android:layout_alignBottom="@id/imagen_card">
 
                 <TextView
@@ -67,6 +67,7 @@
                     android:layout_marginRight="4dp"
                     android:layout_alignStart="@+id/precio_card"
                     android:fontFamily="@font/gothamlight"
+                    android:textColor="@color/blanco"
                     android:text="4.5"
                     android:textSize="12sp" />
 
