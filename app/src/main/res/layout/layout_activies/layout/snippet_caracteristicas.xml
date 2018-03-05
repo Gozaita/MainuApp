@@ -11,7 +11,8 @@
 
         <TextView
             android:id="@+id/textViewNombre"
-            android:layout_width="230dp"
+            android:layout_width="wrap_content"
+            android:maxWidth="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
