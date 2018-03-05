@@ -1,36 +1,28 @@
 package eus.mainu.mainu;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import eus.mainu.mainu.Utilidades.AdaptadorDeSeccionesPagerView;
-import eus.mainu.mainu.Utilidades.IActivityMain;
-import eus.mainu.mainu.Utilidades.Menu;
-import eus.mainu.mainu.datalayer.Bocadillo;
-import eus.mainu.mainu.datalayer.Complemento;
 
 public class Activity_Main extends AppCompatActivity {
 
     private static final String TAG = "Activity MAIN";
-
-    //Elementos de la vista
     private TextView titulo;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-
-    //Variables que inicializo
-    //private Menu menu;
-    //private ArrayList<Bocadillo> arrayBocadillos;
-    //private ArrayList<Complemento> arrayComplementos;
-
+    private ImageButton searchButton;
+    private ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +32,36 @@ public class Activity_Main extends AppCompatActivity {
         titulo = findViewById(R.id.textViewActividad);
         viewPager = findViewById(R.id.contenedor);
         tabLayout = findViewById(R.id.tabs);
+        searchButton = findViewById(R.id.search_button);
+
+        ListView list = (ListView) findViewById(R.id.theList);
+        EditText thefilter = (EditText) findViewById(R.id.searchFilter);
+
+        ArrayList<String> names = new ArrayList<>();
+        names.add("bobo");
+        names.add("estupido");
+        names.add("subnormal");
+        names.add("bocachancla");
+
+        adapter = new ArrayAdapter(this, R.layout.listivew_search, names);
+        list.setAdapter(adapter);
+
+        thefilter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                (Activity_Main.this).adapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         setupViewPager();
         setUpTitulo();
@@ -63,6 +85,8 @@ public class Activity_Main extends AppCompatActivity {
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_sandwich);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_french_fries);
 
+
+        searchButton.setOnClickListener(searchClickListener);
     }
 
     //Metodo que sirve para cambiar el titulo de la toolbar en funcion del fragmento
@@ -92,5 +116,15 @@ public class Activity_Main extends AppCompatActivity {
             }
         });
     }
+
+    View.OnClickListener searchClickListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            if (v.equals(searchButton)) {
+                findViewById(R.id.searchFilter).setVisibility(View.VISIBLE);
+                findViewById(R.id.theList).setVisibility(View.VISIBLE);
+            }
+        }
+    };
+
 
 }

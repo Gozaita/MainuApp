@@ -1,19 +1,11 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorPrimary">
-
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/busquedaToolBar">
-
-        </android.support.v7.widget.Toolbar>
 
         <TextView
             android:id="@+id/textViewActividad"
@@ -38,6 +30,36 @@
             android:background="@color/colorPrimary"
             app:srcCompat="@drawable/ic_menu_navigation" />
 
+        <ImageButton
+            android:id="@+id/search_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            app:srcCompat="@drawable/ic_search_24dp"
+            android:background="@color/colorPrimary"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/searchFilter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"
+                android:visibility="invisible"
+                android:layout_margin="5dp"/>
+
+            <ListView
+                android:id="@+id/theList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/searchFilter"
+                android:visibility="invisible"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

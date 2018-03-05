@@ -11,17 +11,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
-
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.RecyclerViewAdapter;
 import eus.mainu.mainu.datalayer.Bocadillo;
 
 //Clase del fragmento responsable de visualizar los bocadillos
 public class Fragment_Bocadillos extends Fragment{
-
-
     private static final String TAG = "Bocadillos";
 
     //Elementos Layout
@@ -30,7 +26,7 @@ public class Fragment_Bocadillos extends Fragment{
     private android.support.v7.widget.RecyclerView recyclerView;
 
     //Variables
-    private ArrayList<Bocadillo> arrayBocadillos =new ArrayList<Bocadillo>();
+    private ArrayList<Bocadillo> arrayBocadillos = new ArrayList<Bocadillo>();
     private boolean actualizado = false;
 
     //Metodo que se llama antes de onCreateView, se suelen coger las variables aqui
