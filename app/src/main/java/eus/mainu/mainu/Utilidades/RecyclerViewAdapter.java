@@ -106,6 +106,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private String getIngredientes(int position){
 
         StringBuffer ingredientes = new StringBuffer();
+        String descripcion = "";
         int i;
 
         ArrayList<Ingrediente> arrayIngredientes = arrayBocadillos.get(position).getIngredientes();
@@ -116,9 +117,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         if(!arrayBocadillos.get(position).getIngredientes().isEmpty()){
             ingredientes.setLength(ingredientes.length()-2);
+            descripcion = ingredientes.substring(0, 1).toUpperCase() + ingredientes.substring(1).toLowerCase();
         }
 
-        return ingredientes.toString();
+
+        return descripcion;
     }
 
 }

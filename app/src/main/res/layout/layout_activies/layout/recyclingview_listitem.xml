@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_marginTop="4dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
     android:id="@+id/bocadillo_layout">
@@ -21,6 +22,7 @@
         android:layout_alignStart="@+id/descripcionTextView"
         android:fontFamily="@font/roboto_light"
         android:text="Nombre"
+        android:textStyle="bold"
         android:textColor="@color/negro"
         android:textSize="15sp" />
 
@@ -29,8 +31,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/nombreTextView"
-        android:layout_marginTop="2dp"
-        android:layout_alignBottom="@id/estrella"
+        android:layout_marginTop="10dp"
         android:text="Descripcion"
         android:textSize="11sp"
         android:fontFamily="@font/roboto_light"
@@ -52,17 +53,17 @@
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_alignEnd="@+id/precioTextView"
-        android:layout_below="@+id/precioTextView"
-        android:layout_marginTop="3dp"
+        android:layout_alignTop="@id/descripcionTextView"
         app:srcCompat="@drawable/ic_star_mainu_24dp" />
 
     <TextView
         android:id="@+id/puntuacionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/estrella"
+        android:layout_alignTop="@+id/descripcionTextView"
         android:layout_toStartOf="@+id/estrella"
-        android:layout_marginBottom="2dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="1dp"
         android:fontFamily="@font/roboto_light"
         android:text="4.5"
         android:textSize="12sp" />
