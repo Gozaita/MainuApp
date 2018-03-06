@@ -7,9 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:layout_marginTop="4dp"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
-    android:layout_marginTop="15dp"
     android:id="@+id/bocadillo_layout">
 
 
@@ -19,11 +19,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/descripcionTextView"
+        android:fontFamily="@font/roboto_light"
         android:text="Nombre"
-        android:textAllCaps="true"
-        android:textSize="15sp"
-        android:fontFamily="@font/gothambold"
-        />
+        android:textColor="@color/negro"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/descripcionTextView"
@@ -31,11 +30,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/nombreTextView"
         android:layout_marginTop="2dp"
-        android:layout_marginBottom="10dp"
-        android:textAllCaps="true"
+        android:layout_alignBottom="@id/estrella"
         android:text="Descripcion"
         android:textSize="11sp"
-        android:fontFamily="@font/gothamlight"/>
+        android:fontFamily="@font/roboto_light"
+        />
 
 
     <TextView
@@ -44,8 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="11dp"
-        android:fontFamily="@font/gothambold"
+        android:fontFamily="@font/roboto_light"
         android:text="X.XX€"
         android:textSize="15sp" />
 
@@ -65,8 +63,7 @@
         android:layout_alignBottom="@id/estrella"
         android:layout_toStartOf="@+id/estrella"
         android:layout_marginBottom="2dp"
-        android:layout_marginRight="6dp"
-        android:fontFamily="@font/gothamlight"
+        android:fontFamily="@font/roboto_light"
         android:text="4.5"
         android:textSize="12sp" />
 
