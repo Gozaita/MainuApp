@@ -7,17 +7,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import java.util.ArrayList;
+
 import eus.mainu.mainu.Utilidades.AdaptadorDeSeccionesPagerView;
 
 public class Activity_Main extends AppCompatActivity {
@@ -27,7 +25,9 @@ public class Activity_Main extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ImageButton searchButton;
+    private ImageButton backArrow;
     private EditText filter;
+    private RelativeLayout layoutblanco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,8 @@ public class Activity_Main extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabs);
         searchButton = findViewById(R.id.search_button);
         filter = findViewById(R.id.searchFilter);
+        backArrow = findViewById(R.id.back_button);
+        layoutblanco = findViewById(R.id.barra_blanca);
 
         setUpTitulo();
 
@@ -46,6 +48,9 @@ public class Activity_Main extends AppCompatActivity {
 
         setIntroduceTextoEditText();
         setEnterEditText();
+
+        setBackButton();
+
 
     }
 
@@ -81,6 +86,8 @@ public class Activity_Main extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(viewPager.getWindowToken(), 0);
                 //Reseteamos la toolbar
                 filter.setVisibility(View.GONE);
+                layoutblanco.setVisibility(View.GONE);
+                backArrow.setVisibility(View.GONE);
                 filter.setText("");
 
                 switch (position) {
@@ -110,6 +117,8 @@ public class Activity_Main extends AppCompatActivity {
         public void onClick(View v) {
             if (v.equals(searchButton)) {
                 //Mostramos el cuadro de texto
+                layoutblanco.setVisibility(View.VISIBLE);
+                backArrow.setVisibility(View.VISIBLE);
                 findViewById(R.id.searchFilter).setVisibility(View.VISIBLE);
                 //Focuseamos el cuadro
                 filter.requestFocus();
@@ -132,6 +141,8 @@ public class Activity_Main extends AppCompatActivity {
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     //Esconde texto
                     filter.setVisibility(View.GONE);
+                    backArrow.setVisibility(View.GONE);
+                    layoutblanco.setVisibility(View.GONE);
                     return true;
                 }
                 return false;
@@ -154,6 +165,22 @@ public class Activity_Main extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
 
+            }
+        });
+    }
+
+    private void setBackButton(){
+        backArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layoutblanco.setVisibility(View.GONE);
+                backArrow.setVisibility(View.GONE);
+                filter.setVisibility(View.GONE);
+                filter.setText("");
+                //Esconde teclado
+                //Quitamos el teclado si esta abierto
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(viewPager.getWindowToken(), 0);
             }
         });
     }
