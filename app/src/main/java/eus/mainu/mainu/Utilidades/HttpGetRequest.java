@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
@@ -85,16 +86,9 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
             JSONArray obj = new JSONArray(result);
             for (int i = 0; i < obj.length(); i++){
                 JSONObject o = obj.getJSONObject(i);
-                //Cogemos la lista de los ingredientes
-                JSONArray ingredientes = o.getJSONArray("ingredientes");
-                //Mapeamos la lista de JSON en ingredientes
-                ArrayList<Ingrediente> arrayingredientes = new ArrayList<Ingrediente>();
-                for(int j = 0; j < ingredientes.length(); j++) {
-                    JSONObject a = ingredientes.getJSONObject(j);
-                    arrayingredientes.add(new Ingrediente(getInt(a,"id"),getString(a,"nombre")));
-                }
+
                 //Creamos el bocadillo
-                arrayBocadillos.add(new Bocadillo( getInt(o,"id"), getString(o,"nombre"), getDouble(o,"precio"),getDouble(o,"puntuacion"), arrayingredientes));
+                arrayBocadillos.add(new Bocadillo( getInt(o,"id"), getString(o,"nombre"), getDouble(o,"precio"),getDouble(o,"puntuacion"), getIngredientes(o)));
                 //Ordenamos por nombre
                 Collections.sort(arrayBocadillos, new Comparator<Bocadillo>() {
                     @Override
@@ -150,17 +144,8 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         try {
             for(int i = 0; i < obj.length(); i++){
                 JSONObject o = obj.getJSONObject(i);
-
-                //Cogemos la lista de imagenes
-                JSONArray images = o.getJSONArray("images");
-                //Mapeamos la lista de JSON en ingredientes
-                ArrayList<Imagen> arrayimagenes = new ArrayList<Imagen>();
-                for(int j = 0; j < images.length(); j++) {
-                    JSONObject a = images.getJSONObject(j);
-                    arrayimagenes.add( new Imagen(a.getInt("id"),a.getString("url")));
-                }
                 //Añadimos al array el plato
-                plato.add(new Plato(getInt(o,"id"), getString(o,"nombre"), getString(o,"descripcion"),getDouble(o,"puntuacion"), getImagenes(o)));
+                plato.add(new Plato(getInt(o,"id"), getString(o,"nombre"), getDouble(o,"puntuacion"), getImagenes(o)));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -204,6 +189,86 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
     }
 
 
+    //Para recuperar un solo bocadillo a partir de su id
+    public Bocadillo getBocadillo(int id){
+
+        Bocadillo bocadillo = new Bocadillo();
+
+        StringBuffer url = new StringBuffer();
+        url.append("https://api.mainu.eus/bocadillos/");
+        url.append(id);
+
+        try {
+            //Cogemos el bocadillo de esta direccion
+            JSONObject o = new JSONObject(execute(url.toString()).get());
+
+            bocadillo = new Bocadillo( getInt(o,"id"),
+                    getString(o,"nombre"),
+                    getDouble(o,"precio"),
+                    getDouble(o,"puntuacion"),
+                    getIngredientes(o),
+                    getImagenes(o));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return bocadillo;
+    }
+
+    //Para recuperar un solo complemento a partir de su id
+    public Complemento getComplemento(int id){
+
+        Complemento complemento = new Complemento();
+
+        StringBuffer url = new StringBuffer();
+        url.append("https://api.mainu.eus/otros/");
+        url.append(id);
+
+        try {
+            //Cogemos el bocadillo de esta direccion
+            JSONObject o = new JSONObject(execute(url.toString()).get());
+
+            complemento = new Complemento( getInt(o,"id"),
+                    getString(o,"nombre"),
+                    getDouble(o,"precio"),
+                    getDouble(o,"puntuacion"),
+                    getImagenes(o));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return complemento;
+    }
+
+    //Para recuperar un solo bocadillo a partir de su id
+    public Plato getPlato(int id){
+
+        Plato plato = new Plato();
+
+        StringBuffer url = new StringBuffer();
+        url.append("https://api.mainu.eus/menu/");
+        url.append(id);
+
+        try {
+            //Cogemos el bocadillo de esta direccion
+            JSONObject o = new JSONObject(execute(url.toString()).get());
+
+            plato = new Plato(getInt(o,"id"),
+                    getString(o,"nombre"),
+                    getDouble(o,"puntuacion"),
+                    getImagenes(o));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return plato;
+    }
+
+
+
     //Metodo para leer un INT de un JSONObject
     private int getInt(JSONObject o, String campo) throws JSONException {
 
@@ -238,7 +303,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
             puntuacion = o.getDouble(nombre);
         }
         else {
-            puntuacion = 1 + (5 - 1)*(new Random()).nextDouble();
+            puntuacion = 3 + (5 - 3)*(new Random()).nextDouble();
         }
 
         return puntuacion;
@@ -256,10 +321,27 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         //Mapeamos la lista de JSON en ingredientes
         for(int j = 0; j < images.length(); j++) {
             JSONObject a = images.getJSONObject(j);
-            arrayImagenes.add( new Imagen(a.getInt("id"),a.getString("url")));
+            arrayImagenes.add( new Imagen(a.getInt("id"),
+                    a.getString("url")));
         }
 
         return arrayImagenes;
+    }
+
+    private ArrayList<Ingrediente> getIngredientes(JSONObject o) throws JSONException {
+
+        //Cogemos la lista de los ingredientes
+        JSONArray ingredientes = o.getJSONArray("ingredientes");
+
+        //Mapeamos la lista de JSON en ingredientes
+        ArrayList<Ingrediente> arrayIngredientes = new ArrayList<Ingrediente>();
+
+        for(int j = 0; j < ingredientes.length(); j++) {
+            JSONObject a = ingredientes.getJSONObject(j);
+            arrayIngredientes.add(new Ingrediente(getInt(a,"id"),getString(a,"nombre")));
+        }
+
+        return arrayIngredientes;
     }
 
 

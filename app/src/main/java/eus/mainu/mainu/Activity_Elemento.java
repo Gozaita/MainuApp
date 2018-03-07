@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
 import eus.mainu.mainu.datalayer.Plato;
@@ -71,15 +72,25 @@ public class Activity_Elemento extends AppCompatActivity {
 
     private void setBocadillo(Bocadillo bocadillo) {
 
+        HttpGetRequest request = new HttpGetRequest();
+        Bocadillo nuevo = request.getBocadillo(bocadillo.getId());
+
         nombre.setText(bocadillo.getNombre());
         precio.setText(String.format("%.2f€",bocadillo.getPrecio()));
 
+        //Metemos la nueva informacion en el bocadillo
+        bocadillo.setFotos(nuevo.getFotos());
+        bocadillo.setValoraciones(nuevo.getValoraciones());
+
         if(bocadillo.getFotos() != null){
-            Picasso.with(this)
-                    .load(bocadillo.getFotos().get(0).getRuta())
-                    .fit()
-                    .centerCrop()
-                    .into(imagen);        }
+            if(!bocadillo.getFotos().isEmpty()){
+                Picasso.with(this)
+                        .load(bocadillo.getFotos().get(0).getRuta())
+                        .fit()
+                        .centerCrop()
+                        .into(imagen);
+            }
+        }
 
         if(bocadillo.getPuntuacion() != 0){
             puntuacion.setText(String.format("%.1f",bocadillo.getPuntuacion()));
@@ -93,15 +104,25 @@ public class Activity_Elemento extends AppCompatActivity {
 
     private void setComplemento(Complemento complemento) {
 
+        HttpGetRequest request = new HttpGetRequest();
+        Complemento nuevo = request.getComplemento(complemento.getId());
+
         nombre.setText(complemento.getNombre());
         precio.setText(String.format("%.2f€",complemento.getPrecio()));
 
+        //Metemos la nueva informacion
+        complemento.setFotos(nuevo.getFotos());
+        complemento.getValoraciones();
+
         if(complemento.getFotos() != null){
-            Picasso.with(this)
-                    .load(complemento.getFotos().get(0).getRuta())
-                    .fit()
-                    .centerCrop()
-                    .into(imagen);        }
+            if(!complemento.getFotos().isEmpty()){
+                Picasso.with(this)
+                        .load(complemento.getFotos().get(0).getRuta())
+                        .fit()
+                        .centerCrop()
+                        .into(imagen);
+            }
+       }
 
         if(complemento.getPuntuacion() != 0){
             puntuacion.setText(String.format("%.1f",complemento.getPuntuacion()));
@@ -115,15 +136,25 @@ public class Activity_Elemento extends AppCompatActivity {
 
     private void setPlato(Plato plato) {
 
+        HttpGetRequest request = new HttpGetRequest();
+        Plato nuevo = request.getPlato(plato.getId());
+
         nombre.setText(plato.getNombre());
         precio.setVisibility(View.GONE);
 
+        //Metemos la nueva informacion
+        plato.setFotos(nuevo.getFotos());
+        plato.setValoraciones(nuevo.getValoraciones());
+
+
         if(plato.getFotos() != null){
-            Picasso.with(this)
-                    .load(plato.getFotos().get(0).getRuta())
-                    .fit()
-                    .centerCrop()
-                    .into(imagen);
+            if(!plato.getFotos().isEmpty()){
+                Picasso.with(this)
+                        .load(plato.getFotos().get(0).getRuta())
+                        .fit()
+                        .centerCrop()
+                        .into(imagen);
+            }
         }
 
         if(plato.getPuntuacion() != 0){

@@ -12,15 +12,16 @@ public class Plato implements Serializable {
 
     private int id;
     private String nombre;
-    private String descripcion;
     private double puntuacion;
     private ArrayList<Valoracion> valoraciones;
     private ArrayList<Imagen> fotos;
 
-    public Plato(int id, String nombre, String descripcion, double puntuacion, ArrayList<Imagen> fotos) {
+    public Plato(){
+    }
+
+    public Plato(int id, String nombre, double puntuacion, ArrayList<Imagen> fotos) {
         this.id = id;
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.puntuacion = puntuacion;
         this.fotos = fotos;
     }
@@ -39,14 +40,6 @@ public class Plato implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public double getPuntuacion() {

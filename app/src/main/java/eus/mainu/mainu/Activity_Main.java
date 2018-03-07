@@ -3,6 +3,7 @@ package eus.mainu.mainu;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -28,6 +29,12 @@ public class Activity_Main extends AppCompatActivity {
     private ImageButton backArrow;
     private EditText filter;
     private RelativeLayout layoutblanco;
+
+    //Fragmentos
+    private Fragment_Menu fMenu = new Fragment_Menu();
+    private Fragment_Bocadillos fBocadillos = new Fragment_Bocadillos();
+    private Fragment_Otros fOtros = new Fragment_Otros();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +66,9 @@ public class Activity_Main extends AppCompatActivity {
 
         //Creamos los fragmentos
         AdaptadorDeSeccionesPagerView adapter = new AdaptadorDeSeccionesPagerView(getSupportFragmentManager());
-        adapter.addFragment(new Fragment_Menu()); //index 0
-        adapter.addFragment(new Fragment_Bocadillos()); //index 1
-        adapter.addFragment(new Fragment_Otros()); //index 2
+        adapter.addFragment(fMenu); //index 0
+        adapter.addFragment(fBocadillos); //index 1
+        adapter.addFragment(fOtros); //index 2
 
         //Creamos las tabulaciones
         viewPager.setAdapter(adapter);

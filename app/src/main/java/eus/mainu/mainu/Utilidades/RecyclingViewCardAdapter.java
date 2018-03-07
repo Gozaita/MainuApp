@@ -59,8 +59,22 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
 
         //SI hay fotos, pon la primera como oficial
         if(arrayComplementos.get(position).getFotos() != null) {
+            if(!arrayComplementos.get(position).getFotos().isEmpty()){
+                Picasso.with(mContext)
+                        .load(arrayComplementos.get(position).getFotos().get(0).getRuta())
+                        .fit()
+                        .centerCrop()
+                        .into(holder.imagen);
+            }else {
+                Picasso.with(mContext)
+                        .load(R.drawable.otros_1)
+                        .fit()
+                        .centerCrop()
+                        .into(holder.imagen);
+            }
+        }else {
             Picasso.with(mContext)
-                    .load(arrayComplementos.get(position).getFotos().get(0).getRuta())
+                    .load(R.drawable.otros_1)
                     .fit()
                     .centerCrop()
                     .into(holder.imagen);
