@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -35,6 +36,9 @@ public class Fragment_Menu extends Fragment {
     private ListView lvSegundos;
     private ListView lvPostres;
     private ImageView imagen;
+    private ImageButton flecha_izquierda;
+    private ImageButton flecha_derecha;
+    private int contador;
 
     //Variables
     private Menu menu = new Menu();
@@ -78,6 +82,8 @@ public class Fragment_Menu extends Fragment {
         lvSegundos = view.findViewById(R.id.listaSegundos);
         lvPostres  = view.findViewById(R.id.listaPostres);
         imagen = view.findViewById(R.id.imagenMenu);
+        flecha_izquierda = view.findViewById(R.id.flecha_izquierda);
+        flecha_derecha = view.findViewById(R.id.flecha_derecha);
 
         //Ponemos el SwipeToRefresh
         swipeRefreshLayout = view.findViewById(R.id.swipeMenu);
@@ -85,6 +91,9 @@ public class Fragment_Menu extends Fragment {
 
         //Inflamos la vista
         setListView();
+
+        setFlechaDerecha();
+        setFlechaIzquierda();
 
         //Escuchamos un posible swipe to refresh
         escuchamosSwipe();
@@ -100,9 +109,9 @@ public class Fragment_Menu extends Fragment {
         inflaListView(menu.getPostres(),lvPostres);
         if(!menu.getImagenes().isEmpty()) {
             Random rand = new Random();
-            int r = rand.nextInt((6 - 0) + 1) + 0;
+            contador = rand.nextInt((5 - 0) + 1) + 0;
             Picasso.with(mContext)
-                    .load(menu.getImagenes().get(r).getRuta())
+                    .load(menu.getImagenes().get(contador).getRuta())
                     .fit()
                     .centerCrop()
                     .into(imagen);
@@ -149,6 +158,46 @@ public class Fragment_Menu extends Fragment {
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 }, 2000);   //Tiempo en ms durante el cual se muestra el icono de refresh
+            }
+        });
+    }
+
+    private void setFlechaDerecha(){
+        flecha_derecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!menu.getImagenes().isEmpty()) {
+                    if (contador == 6) {
+                        contador = 0;
+                    } else {
+                        contador++;
+                    }
+                    Picasso.with(mContext)
+                            .load(menu.getImagenes().get(contador).getRuta())
+                            .fit()
+                            .centerCrop()
+                            .into(imagen);
+                }
+            }
+        });
+    }
+
+    private void setFlechaIzquierda(){
+        flecha_izquierda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!menu.getImagenes().isEmpty()) {
+                    if (contador == 0) {
+                        contador = 6;
+                    } else {
+                        contador--;
+                    }
+                    Picasso.with(mContext)
+                            .load(menu.getImagenes().get(contador).getRuta())
+                            .fit()
+                            .centerCrop()
+                            .into(imagen);
+                }
             }
         });
     }

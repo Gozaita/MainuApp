@@ -19,41 +19,42 @@
             android:text="Nombre"
             android:textColor="@color/blanco"
             android:textSize="18sp"
-            android:fontFamily="@font/gothammedium"/>
+            android:fontFamily="@font/roboto_light"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/textViewPrecio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textViewNombre"
-            android:layout_below="@+id/textViewNombre"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/gothambold"
-            android:text="5.5€"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/textViewNombre"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="X.XX€"
             android:textColor="@color/blanco"
-            android:textSize="15sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewPuntuacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textViewNombre"
-            android:layout_alignBottom="@+id/textViewNombre"
-            android:layout_marginEnd="5dp"
-            android:layout_toStartOf="@+id/estrellitasElemento"
-            android:fontFamily="@font/gothammedium"
+            android:layout_alignStart="@+id/textViewNombre"
+            android:layout_below="@+id/textViewNombre"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/roboto_light"
             android:text="3.5"
             android:textColor="@color/blanco"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
 
         <RatingBar
             android:id="@+id/estrellitasElemento"
             style="@style/Base.Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/textViewPuntuacion" />
+            android:layout_alignBottom="@+id/textViewPuntuacion"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/textViewPuntuacion" />
 
     </RelativeLayout>
 

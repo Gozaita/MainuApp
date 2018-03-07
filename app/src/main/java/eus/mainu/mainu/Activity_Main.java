@@ -93,12 +93,15 @@ public class Activity_Main extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         titulo.setText(R.string.menuDelDia);
+                        searchButton.setVisibility(View.GONE);
                         break;
                     case 1:
                         titulo.setText(R.string.bocadillos);
+                        searchButton.setVisibility(View.VISIBLE);
                         break;
                     case 2:
                         titulo.setText(R.string.complementos);
+                        searchButton.setVisibility(View.VISIBLE);
                         break;
                 }
             }

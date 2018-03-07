@@ -5,12 +5,10 @@
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="68dp"
     android:orientation="horizontal"
-    android:layout_marginTop="20dp"
-    android:layout_marginBottom="20dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp"
+    android:layout_marginStart="11dp"
+    android:layout_marginEnd="11dp"
     android:id="@+id/bocadillo_layout">
 
 
@@ -20,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/descripcionTextView"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_light"
         android:text="Nombre"
         android:textStyle="bold"
@@ -31,7 +30,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/nombreTextView"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="Descripcion"
         android:textSize="11sp"
         android:fontFamily="@font/roboto_light"
@@ -43,15 +42,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@id/nombreTextView"
         android:fontFamily="@font/roboto_light"
         android:text="X.XX€"
         android:textSize="15sp" />
 
     <ImageView
         android:id="@+id/estrella"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="17dp"
+        android:layout_height="17dp"
         android:layout_alignEnd="@+id/precioTextView"
         android:layout_alignTop="@id/descripcionTextView"
         app:srcCompat="@drawable/ic_star_mainu_24dp" />
@@ -66,7 +65,7 @@
         android:layout_marginTop="1dp"
         android:fontFamily="@font/roboto_light"
         android:text="4.5"
-        android:textSize="12sp" />
+        android:textSize="11sp" />
 
 
 
