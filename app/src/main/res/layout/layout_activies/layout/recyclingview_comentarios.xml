@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Plantilla para el recycling view de los Bocadillos, se representara en funcion de este layout-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginStart="11dp"
+    android:layout_marginEnd="11dp"
+    android:id="@+id/bocadillo_layout">
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/fotoUsuario"
+        app:srcCompat="@drawable/ic_french_fries"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="7dp"
+        android:layout_toEndOf="@id/fotoUsuario"
+        android:fontFamily="@font/roboto_light"
+        android:text="Nombre"
+        android:textStyle="bold"
+        android:id="@+id/nombreUsuario"/>
+
+    <TextView
+        android:id="@+id/comentarioUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fotoUsuario"
+        android:layout_alignStart="@+id/nombreUsuario"
+        android:fontFamily="@font/roboto_light"
+        android:text="Comentario"
+        android:textColor="@color/negro"
+        android:textSize="15sp" />
+
+    <RatingBar
+        android:id="@+id/puntuacionUsuario"
+        style="@style/Base.Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/nombreUsuario"
+        android:layout_below="@id/nombreUsuario"
+        />
+
+
+</RelativeLayout>

@@ -3,7 +3,6 @@ package eus.mainu.mainu;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -30,6 +29,11 @@ public class Activity_Main extends AppCompatActivity {
     private EditText filter;
     private RelativeLayout layoutblanco;
 
+    //Variables
+    private String busqueda;
+    //private ITaskAcabada taskAcabada;
+
+
     //Fragmentos
     private Fragment_Menu fMenu = new Fragment_Menu();
     private Fragment_Bocadillos fBocadillos = new Fragment_Bocadillos();
@@ -48,6 +52,8 @@ public class Activity_Main extends AppCompatActivity {
         filter = findViewById(R.id.searchFilter);
         backArrow = findViewById(R.id.back_button);
         layoutblanco = findViewById(R.id.barra_blanca);
+
+        //taskAcabada = (ITaskAcabada) this;
 
         setUpTitulo();
 
@@ -114,7 +120,6 @@ public class Activity_Main extends AppCompatActivity {
             }
             @Override
             public void onPageSelected(int position) {
-
             }
             @Override
             public void onPageScrollStateChanged(int state) {
@@ -146,6 +151,7 @@ public class Activity_Main extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 //Comprueba si se devuelve un 0
                 if (actionId == EditorInfo.IME_NULL) {
+                    //taskAcabada.setTexto(busqueda);
                     //Esconde teclado
                     InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -153,6 +159,9 @@ public class Activity_Main extends AppCompatActivity {
                     filter.setVisibility(View.GONE);
                     backArrow.setVisibility(View.GONE);
                     layoutblanco.setVisibility(View.GONE);
+
+
+
                     return true;
                 }
                 return false;
@@ -169,6 +178,7 @@ public class Activity_Main extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                busqueda = charSequence.toString();
             }
 
             @Override

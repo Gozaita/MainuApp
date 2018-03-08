@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
-import eus.mainu.mainu.Utilidades.IActivityMain;
 import eus.mainu.mainu.Utilidades.Menu;
 import eus.mainu.mainu.Utilidades.PlatosListViewAdapter;
 import eus.mainu.mainu.datalayer.Plato;
@@ -27,7 +26,6 @@ import eus.mainu.mainu.datalayer.Plato;
 public class Fragment_Menu extends Fragment {
 
     private static final String TAG = "Menu";
-    private IActivityMain mIActivityMain;
 
     //Elementos de la vista
     private Context mContext;

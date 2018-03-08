@@ -5,7 +5,7 @@ package eus.mainu.mainu.Utilidades;
  * Interfaz que se implementa en la actividad Main, para la comunicacion entre fragmentos
  */
 
-public interface IActivityMain {
+public interface ITaskAcabada {
 
     void setTexto(String fragmentTag);
 }

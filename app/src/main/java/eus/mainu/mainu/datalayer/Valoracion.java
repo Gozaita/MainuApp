@@ -1,7 +1,6 @@
 package eus.mainu.mainu.datalayer;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by narciso on 2/03/18.
@@ -16,7 +15,7 @@ public class Valoracion implements Serializable{
     private String comentario;
     private Usuario usuario;
 
-    public Valoracion(int id, String nombre, double puntuacion, String comentario, Usuario usuario) {
+    public Valoracion(int id, String nombre, double puntuacion, String comentario) {
         this.id = id;
         this.nombre = nombre;
         this.puntuacion = puntuacion;

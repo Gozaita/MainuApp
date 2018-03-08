@@ -13,11 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import java.util.ArrayList;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
+import eus.mainu.mainu.Utilidades.ITaskAcabada;
 import eus.mainu.mainu.Utilidades.RecyclerViewAdapter;
 import eus.mainu.mainu.datalayer.Bocadillo;
 
 //Clase del fragmento responsable de visualizar los bocadillos
-public class Fragment_Bocadillos extends Fragment{
+public class Fragment_Bocadillos extends Fragment implements ITaskAcabada{
     private static final String TAG = "Bocadillos";
 
     //Elementos Layout
@@ -27,6 +28,7 @@ public class Fragment_Bocadillos extends Fragment{
 
     //Variables
     private ArrayList<Bocadillo> arrayBocadillos = new ArrayList<Bocadillo>();
+    RecyclerViewAdapter adapter;
     private boolean actualizado = false;
 
     //Metodo que se llama antes de onCreateView, se suelen coger las variables aqui
@@ -76,7 +78,7 @@ public class Fragment_Bocadillos extends Fragment{
     private void setBocadillos(){
 
         //Creamos el objeto de la clase adaptador
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(arrayBocadillos, getActivity());
+        adapter = new RecyclerViewAdapter(arrayBocadillos, getActivity());
 
         //Adaptamos el recyclingview
         recyclerView.setAdapter(adapter);
@@ -116,5 +118,24 @@ public class Fragment_Bocadillos extends Fragment{
     }
 
 
+    @Override
+    public void setTexto(String fragmentTag) {
 
+        ArrayList<Bocadillo> bocadillosfiltrado = new ArrayList<>();
+        int i;
+
+        for(i = 0; i < arrayBocadillos.size(); i++){
+            if(arrayBocadillos.get(i).getNombre().contains(fragmentTag)){
+                bocadillosfiltrado.add(arrayBocadillos.get(i));
+            }
+        }
+
+        adapter = new RecyclerViewAdapter(arrayBocadillos, getActivity());
+
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+    }
 }

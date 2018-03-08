@@ -5,6 +5,8 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
@@ -12,10 +14,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
+import eus.mainu.mainu.Utilidades.AdaptadorComentarios;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
 import eus.mainu.mainu.datalayer.Plato;
+import eus.mainu.mainu.datalayer.Valoracion;
 
 public class Activity_Elemento extends AppCompatActivity {
 
@@ -26,6 +32,9 @@ public class Activity_Elemento extends AppCompatActivity {
     private TextView precio;
     private ImageButton imagen;
     private RatingBar ratingBar;
+    private RecyclerView listaComentarios;
+
+    ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +47,33 @@ public class Activity_Elemento extends AppCompatActivity {
         ratingBar = findViewById(R.id.estrellitasElemento);
         precio = findViewById(R.id.textViewPrecio);
         imagen = findViewById(R.id.botonImagenElemento);
+        listaComentarios = findViewById(R.id.recycler_view_lista_comentarios);
+
         //Para poner las estrellas blancas
         LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
         stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 
         //Miramos la informacion que nos pasan
         getInformacion();
+
+        //Creamos comentarios para probar el adaptador de comenatarios
+        arrayValoraciones.add(new Valoracion(1,"Pepito",5,"Lo mejor que he probado nunca"));
+        arrayValoraciones.add(new Valoracion(2,"Juanjita",5,"Supercalifragilisticoespialidoso"));
+        arrayValoraciones.add(new Valoracion(3,"Anita",5,"Se dice nucelar"));
+        arrayValoraciones.add(new Valoracion(4,"Andresita",5,"Sabe como a fuego"));
+        arrayValoraciones.add(new Valoracion(5,"Menganita",5,"Metete en tus asuntos"));
+        arrayValoraciones.add(new Valoracion(6,"Armandito",5,"4 8 15 16 23 42"));
+        arrayValoraciones.add(new Valoracion(7,"Fidelita",5,"Cryptotracker"));
+        arrayValoraciones.add(new Valoracion(8,"Juanjito",5,"No siento las piernas"));
+        arrayValoraciones.add(new Valoracion(9,"Elvitira",5,"Voy a hacer lo posible, si me es posible, y lo imposible si es posible"));
+
+        AdaptadorComentarios adapter = new AdaptadorComentarios(arrayValoraciones, this);
+
+        //Adaptamos el recyclingview
+        listaComentarios.setFocusable(false );
+        listaComentarios.setAdapter(adapter);
+        listaComentarios.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     //Metodo para recibir la informacion que se pasa a la actividad
