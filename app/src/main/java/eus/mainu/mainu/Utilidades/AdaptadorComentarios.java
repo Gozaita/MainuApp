@@ -45,24 +45,27 @@ public class AdaptadorComentarios extends RecyclerView.Adapter<AdaptadorComentar
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         Log.d(TAG, "onBindViewHolder: Called");
-        String url = String.valueOf(R.drawable.ic_french_fries);
 
         holder.comentario.setText(arrayValoraciones.get(position).getComentario());
+        holder.nombre.setText(arrayValoraciones.get(position).getNombre());
+
         if(arrayValoraciones.get(position).getUsuario() != null){
-            holder.nombre.setText(arrayValoraciones.get(position).getNombre());
             holder.estrellas.setRating((float) arrayValoraciones.get(position).getPuntuacion());
 
             if(!arrayValoraciones.get(position).getUsuario().getFoto().isEmpty()){
-                   url = arrayValoraciones.get(position).getUsuario().getFoto();
+                Picasso.with(mContext)
+                        .load(arrayValoraciones.get(position).getUsuario().getFoto())
+                        .fit()
+                        .into(holder.foto);
             }
         }
         else{
-
+            Picasso.with(mContext)
+                    .load(R.drawable.mainu_logo)
+                    .fit()
+                    .into(holder.foto);
         }
-        Picasso.with(mContext)
-                .load(url)
-                .fit()
-                .into(holder.foto);
+
 
     }
 

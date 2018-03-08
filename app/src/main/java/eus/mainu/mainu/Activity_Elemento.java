@@ -49,6 +49,9 @@ public class Activity_Elemento extends AppCompatActivity {
         imagen = findViewById(R.id.botonImagenElemento);
         listaComentarios = findViewById(R.id.recycler_view_lista_comentarios);
 
+        //Para que no influya en el scroll
+        listaComentarios.setNestedScrollingEnabled(false);
+
         //Para poner las estrellas blancas
         LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
         stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);

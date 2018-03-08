@@ -42,7 +42,8 @@
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="310dp"
+                android:layout_marginTop="315dp"
+                android:layout_marginBottom="25dp"
                 android:id="@+id/recycler_view_lista_comentarios"/>
 
 
