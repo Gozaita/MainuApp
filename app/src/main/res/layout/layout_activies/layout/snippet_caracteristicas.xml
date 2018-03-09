@@ -54,7 +54,9 @@
             android:layout_alignBottom="@+id/textViewPuntuacion"
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="5dp"
-            android:layout_toEndOf="@+id/textViewPuntuacion" />
+            android:layout_toEndOf="@+id/textViewPuntuacion"
+            android:stepSize="0.5"
+            android:isIndicator="true"/>
 
     </RelativeLayout>
 

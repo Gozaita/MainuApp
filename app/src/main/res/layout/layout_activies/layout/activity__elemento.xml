@@ -23,6 +23,25 @@
                 android:background="@color/negro"
                 app:srcCompat="@drawable/otros_1" />
 
+            <ImageButton
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/botonCamara"
+                android:background="@color/transparente"
+                android:id="@+id/botonPlus"
+                app:srcCompat="@drawable/ic_exposure_plus_1_black_24dp" />
+
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignBottom="@+id/botonImagenElemento"
+                android:layout_alignParentEnd="true"
+                app:srcCompat="@drawable/ic_camera_alt_black_24dp"
+                android:background="@color/transparente"
+                android:id="@+id/botonCamara" />
+
+
             <!--Quitamos el boton de atras
             <ImageButton
                 android:id="@+id/atrasButton"
@@ -39,11 +58,57 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/caracteristicas" />
 
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/fotoPerfil"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="325dp"
+                android:src="@drawable/mainu_logo"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/botonEnviar"
+                app:srcCompat="@drawable/ic_send_24dp"
+                android:layout_marginEnd="11dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@+id/editText"
+                android:layout_marginBottom="7dp"
+                android:visibility="visible"/>
+
+            <RatingBar
+                android:id="@+id/ratingBarUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/fotoPerfil"
+                android:layout_toEndOf="@+id/fotoPerfil"
+                style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
+                android:isIndicator="false"
+                android:stepSize="0.5" />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText"
+                android:layout_toEndOf="@+id/fotoPerfil"
+                android:layout_toStartOf="@id/botonEnviar"
+                android:layout_below="@id/ratingBarUsuario"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_light"
+                android:textSize="15sp"
+                android:focusable="false"/>
+
+
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="315dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="25dp"
+                android:layout_below="@+id/editText"
                 android:id="@+id/recycler_view_lista_comentarios"/>
 
 
