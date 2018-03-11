@@ -52,9 +52,10 @@ public class Activity_Elemento extends AppCompatActivity {
         //Para que no influya en el scroll
         listaComentarios.setNestedScrollingEnabled(false);
 
-        //Para poner las estrellas blancas
-        LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
-        stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        //Para poner las estrellas blancas mediante codigo,
+        //Las ponemos mediante el xml, aunque solo funciona para la version de android 5.0 en adelante
+        //LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
+        //stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 
         //Miramos la informacion que nos pasan
         getInformacion();
