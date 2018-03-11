@@ -56,7 +56,7 @@ public class AdaptadorComentarios extends RecyclerView.Adapter<AdaptadorComentar
         holder.estrellas.setRating((float) arrayValoraciones.get(position).getPuntuacion());
 
         //Ponemos la imagen del usuario circular
-        Picasso.with(mContext).load(arrayValoraciones.get(position).getUsuario().getFoto()).into(holder.foto, new Callback() {
+        Picasso.with(mContext).load(arrayValoraciones.get(position).getUsuario().getFoto()).fit().into(holder.foto, new Callback() {
             @Override
             public void onSuccess() {
                 Bitmap imageBitmap = ((BitmapDrawable) holder.foto.getDrawable()).getBitmap();
