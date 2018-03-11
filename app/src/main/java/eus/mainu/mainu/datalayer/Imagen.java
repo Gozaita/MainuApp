@@ -12,10 +12,20 @@ public class Imagen implements Serializable{
 
     private int id;
     private String ruta;
+    private Usuario usuario;
 
-    public Imagen(int id, String ruta) {
+    public Imagen(int id, String ruta, Usuario usuario) {
         this.id = id;
         this.ruta = ruta;
+        this.usuario = usuario;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public int getId() {

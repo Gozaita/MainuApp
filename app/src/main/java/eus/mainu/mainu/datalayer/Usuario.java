@@ -12,14 +12,22 @@ public class Usuario implements Serializable{
 
     private int id;
     private String nombre;
-    private String email;
     private String foto;
+    private boolean verificado;
 
-    public Usuario(int id, String nombre, String email, String foto) {
+    public Usuario(int id, String nombre, String foto, boolean verificado) {
         this.id = id;
         this.nombre = nombre;
-        this.email = email;
         this.foto = foto;
+        this.verificado = verificado;
+    }
+
+    public boolean isVerificado() {
+        return verificado;
+    }
+
+    public void setVerificado(boolean verificado) {
+        this.verificado = verificado;
     }
 
     public int getId() {
@@ -36,14 +44,6 @@ public class Usuario implements Serializable{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getFoto() {

@@ -24,6 +24,7 @@ import eus.mainu.mainu.datalayer.Complemento;
 import eus.mainu.mainu.datalayer.Imagen;
 import eus.mainu.mainu.datalayer.Ingrediente;
 import eus.mainu.mainu.datalayer.Plato;
+import eus.mainu.mainu.datalayer.Usuario;
 
 
 //Clase para hacer las peticiones GET
@@ -309,6 +310,17 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         return puntuacion;
     }
 
+    private boolean getBoolean(JSONObject o, String nombre) throws JSONException {
+
+        boolean booleano = false;
+
+        if(!o.isNull(nombre)){
+            booleano = o.getBoolean(nombre);
+        }
+
+        return booleano;
+    }
+
 
     //Metodo para leer las imagenes de un elemento
     private ArrayList<Imagen> getImagenes(JSONObject o) throws JSONException {
@@ -321,8 +333,12 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         //Mapeamos la lista de JSON en ingredientes
         for(int j = 0; j < images.length(); j++) {
             JSONObject a = images.getJSONObject(j);
-            arrayImagenes.add( new Imagen(a.getInt("id"),
-                    a.getString("url")));
+            arrayImagenes.add( new Imagen(getInt(a,"id"),
+                    getString(a,"url"),
+                    new Usuario(getInt(a,"id"),
+                            getString(a,"nombre"),
+                            getString(a,"foto"),
+                            getBoolean(a,"verificado"))));
         }
 
         return arrayImagenes;
