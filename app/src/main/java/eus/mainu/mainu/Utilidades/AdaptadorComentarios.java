@@ -47,25 +47,20 @@ public class AdaptadorComentarios extends RecyclerView.Adapter<AdaptadorComentar
         Log.d(TAG, "onBindViewHolder: Called");
 
         holder.comentario.setText(arrayValoraciones.get(position).getComentario());
-        holder.nombre.setText(arrayValoraciones.get(position).getNombre());
+        holder.nombre.setText(arrayValoraciones.get(position).getUsuario().getNombre());
+        holder.estrellas.setRating((float) arrayValoraciones.get(position).getPuntuacion());
 
-        if(arrayValoraciones.get(position).getUsuario() != null){
-            holder.estrellas.setRating((float) arrayValoraciones.get(position).getPuntuacion());
-
-            if(!arrayValoraciones.get(position).getUsuario().getFoto().isEmpty()){
-                Picasso.with(mContext)
-                        .load(arrayValoraciones.get(position).getUsuario().getFoto())
-                        .fit()
-                        .into(holder.foto);
-            }
-        }
-        else{
+        if(!arrayValoraciones.get(position).getUsuario().getFoto().isEmpty()) {
+            Picasso.with(mContext)
+                    .load(arrayValoraciones.get(position).getUsuario().getFoto())
+                    .fit()
+                    .into(holder.foto);
+        }else{
             Picasso.with(mContext)
                     .load(R.drawable.mainu_logo)
                     .fit()
                     .into(holder.foto);
         }
-
 
     }
 

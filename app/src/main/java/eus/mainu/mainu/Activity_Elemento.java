@@ -60,23 +60,8 @@ public class Activity_Elemento extends AppCompatActivity {
         //Miramos la informacion que nos pasan
         getInformacion();
 
-        //Creamos comentarios para probar el adaptador de comenatarios
-        arrayValoraciones.add(new Valoracion(1,"Pepito",5,"Lo mejor que he probado nunca"));
-        arrayValoraciones.add(new Valoracion(2,"Juanjita",5,"Supercalifragilisticoespialidoso"));
-        arrayValoraciones.add(new Valoracion(3,"Anita",5,"Se dice nucelar"));
-        arrayValoraciones.add(new Valoracion(4,"Andresita",5,"Sabe como a fuego"));
-        arrayValoraciones.add(new Valoracion(5,"Menganita",5,"Metete en tus asuntos"));
-        arrayValoraciones.add(new Valoracion(6,"Armandito",5,"4 8 15 16 23 42"));
-        arrayValoraciones.add(new Valoracion(7,"Fidelita",5,"Cryptotracker"));
-        arrayValoraciones.add(new Valoracion(8,"Juanjito",5,"No siento las piernas"));
-        arrayValoraciones.add(new Valoracion(9,"Elvitira",5,"Voy a hacer lo posible, si me es posible, y lo imposible si es posible"));
-
-        AdaptadorComentarios adapter = new AdaptadorComentarios(arrayValoraciones, this);
-
-        //Adaptamos el recyclingview
-        listaComentarios.setFocusable(false );
-        listaComentarios.setAdapter(adapter);
-        listaComentarios.setLayoutManager(new LinearLayoutManager(this));
+        //Mostramos las valoraciones en el recycling view
+        setValoraciones();
 
     }
 
@@ -104,6 +89,16 @@ public class Activity_Elemento extends AppCompatActivity {
         }
     }
 
+    private void setValoraciones(){
+
+        //Inicializamos el adaptador de las valoraciones
+        AdaptadorComentarios adapter = new AdaptadorComentarios(arrayValoraciones, this);
+
+        listaComentarios.setFocusable(false );
+        listaComentarios.setAdapter(adapter);
+        listaComentarios.setLayoutManager(new LinearLayoutManager(this));
+    }
+
     private void setBocadillo(Bocadillo bocadillo) {
 
         HttpGetRequest request = new HttpGetRequest();
@@ -115,6 +110,8 @@ public class Activity_Elemento extends AppCompatActivity {
         //Metemos la nueva informacion en el bocadillo
         bocadillo.setFotos(nuevo.getFotos());
         bocadillo.setValoraciones(nuevo.getValoraciones());
+
+        arrayValoraciones = bocadillo.getValoraciones();
 
         if(bocadillo.getFotos() != null){
             if(!bocadillo.getFotos().isEmpty()){
@@ -148,6 +145,8 @@ public class Activity_Elemento extends AppCompatActivity {
         complemento.setFotos(nuevo.getFotos());
         complemento.getValoraciones();
 
+        arrayValoraciones = complemento.getValoraciones();
+
         if(complemento.getFotos() != null){
             if(!complemento.getFotos().isEmpty()){
                 Picasso.with(this)
@@ -179,6 +178,8 @@ public class Activity_Elemento extends AppCompatActivity {
         //Metemos la nueva informacion
         plato.setFotos(nuevo.getFotos());
         plato.setValoraciones(nuevo.getValoraciones());
+
+        arrayValoraciones = plato.getValoraciones();
 
 
         if(plato.getFotos() != null){

@@ -13,20 +13,20 @@ public class Usuario implements Serializable{
     private int id;
     private String nombre;
     private String foto;
-    private boolean verificado;
+    private int verificado;
 
-    public Usuario(int id, String nombre, String foto, boolean verificado) {
+    public Usuario(int id, String nombre, String foto, int verificado) {
         this.id = id;
         this.nombre = nombre;
         this.foto = foto;
         this.verificado = verificado;
     }
 
-    public boolean isVerificado() {
+    public int getVerificado() {
         return verificado;
     }
 
-    public void setVerificado(boolean verificado) {
+    public void setVerificado(int verificado) {
         this.verificado = verificado;
     }
 

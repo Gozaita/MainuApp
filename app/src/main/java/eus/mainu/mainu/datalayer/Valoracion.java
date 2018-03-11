@@ -10,18 +10,17 @@ import java.io.Serializable;
 public class Valoracion implements Serializable{
 
     private int id;
-    private String nombre;
     private double puntuacion;
     private String comentario;
     private Usuario usuario;
 
-    public Valoracion(int id, String nombre, double puntuacion, String comentario) {
+    public Valoracion(int id, double puntuacion, String comentario, Usuario usuario) {
         this.id = id;
-        this.nombre = nombre;
         this.puntuacion = puntuacion;
         this.comentario = comentario;
         this.usuario = usuario;
     }
+
 
     public int getId() {
         return id;
@@ -29,14 +28,6 @@ public class Valoracion implements Serializable{
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public double getPuntuacion() {

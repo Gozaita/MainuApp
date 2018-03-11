@@ -28,6 +28,14 @@ public class Complemento implements Serializable {
         this.fotos = fotos;
     }
 
+    public Complemento(int id, String nombre, double precio, double puntuacion, ArrayList<Imagen> fotos, ArrayList<Valoracion> valoraciones) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.puntuacion = puntuacion;
+        this.valoraciones = valoraciones;
+        this.fotos = fotos;
+    }
 
     public int getId() {
         return id;

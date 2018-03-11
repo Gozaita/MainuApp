@@ -25,6 +25,7 @@ import eus.mainu.mainu.datalayer.Imagen;
 import eus.mainu.mainu.datalayer.Ingrediente;
 import eus.mainu.mainu.datalayer.Plato;
 import eus.mainu.mainu.datalayer.Usuario;
+import eus.mainu.mainu.datalayer.Valoracion;
 
 
 //Clase para hacer las peticiones GET
@@ -208,7 +209,8 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
                     getDouble(o,"precio"),
                     getDouble(o,"puntuacion"),
                     getIngredientes(o),
-                    getImagenes(o));
+                    getImagenes(o),
+                    getValoraciones(o));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -234,7 +236,8 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
                     getString(o,"nombre"),
                     getDouble(o,"precio"),
                     getDouble(o,"puntuacion"),
-                    getImagenes(o));
+                    getImagenes(o),
+                    getValoraciones(o));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -259,7 +262,8 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
             plato = new Plato(getInt(o,"id"),
                     getString(o,"nombre"),
                     getDouble(o,"puntuacion"),
-                    getImagenes(o));
+                    getImagenes(o),
+                    getValoraciones(o));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -310,15 +314,13 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         return puntuacion;
     }
 
-    private boolean getBoolean(JSONObject o, String nombre) throws JSONException {
 
-        boolean booleano = false;
+    private Usuario getUsuario(JSONObject o) throws JSONException {
 
-        if(!o.isNull(nombre)){
-            booleano = o.getBoolean(nombre);
-        }
-
-        return booleano;
+        return new Usuario(getInt(o,"id"),
+                getString(o,"nombre"),
+                getString(o,"foto"),
+                getInt(o, "verificado"));
     }
 
 
@@ -335,14 +337,32 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
             JSONObject a = images.getJSONObject(j);
             arrayImagenes.add( new Imagen(getInt(a,"id"),
                     getString(a,"url"),
-                    new Usuario(getInt(a,"id"),
-                            getString(a,"nombre"),
-                            getString(a,"foto"),
-                            getBoolean(a,"verificado"))));
+                    getUsuario(a.getJSONObject("usuario"))));
         }
 
         return arrayImagenes;
     }
+
+    private ArrayList<Valoracion> getValoraciones(JSONObject o) throws JSONException{
+
+        ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
+
+        //Cogemos la lista de valoraciones
+        JSONArray valoraciones = o.getJSONArray("valoraciones");
+
+        //Mapeamos la lista de JSON en valoraciones
+        for(int i = 0; i < valoraciones.length(); i++){
+            JSONObject a = valoraciones.getJSONObject(i);
+            arrayValoraciones.add(new Valoracion(getInt(a,"id"),
+                    getDouble(a,"puntuacion"),
+                    getString(a,"texto"),
+                    getUsuario(a.getJSONObject("usuario"))));
+        }
+
+
+        return arrayValoraciones;
+    }
+
 
     private ArrayList<Ingrediente> getIngredientes(JSONObject o) throws JSONException {
 
