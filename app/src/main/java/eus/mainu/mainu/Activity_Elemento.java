@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -33,6 +34,8 @@ public class Activity_Elemento extends AppCompatActivity {
     private ImageButton imagen;
     private RatingBar ratingBar;
     private RecyclerView listaComentarios;
+    private EditText comentario;
+
 
     ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
     
@@ -48,9 +51,14 @@ public class Activity_Elemento extends AppCompatActivity {
         precio = findViewById(R.id.textViewPrecio);
         imagen = findViewById(R.id.botonImagenElemento);
         listaComentarios = findViewById(R.id.recycler_view_lista_comentarios);
+        comentario = findViewById(R.id.editText);
 
         //Para que no influya en el scroll
         listaComentarios.setNestedScrollingEnabled(false);
+
+        //Para que no se muestre seleccionado al entrar en la actividad
+        comentario.setCursorVisible(false);
+
 
         //Para poner las estrellas blancas mediante codigo,
         //Las ponemos mediante el xml, aunque solo funciona para la version de android 5.0 en adelante
@@ -64,6 +72,7 @@ public class Activity_Elemento extends AppCompatActivity {
         setValoraciones();
 
     }
+    
 
     //Metodo para recibir la informacion que se pasa a la actividad
     private void getInformacion() {
