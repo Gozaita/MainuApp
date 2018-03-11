@@ -1,6 +1,10 @@
 package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -42,7 +47,7 @@ public class AdaptadorComentarios extends RecyclerView.Adapter<AdaptadorComentar
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         Log.d(TAG, "onBindViewHolder: Called");
 
@@ -50,17 +55,22 @@ public class AdaptadorComentarios extends RecyclerView.Adapter<AdaptadorComentar
         holder.nombre.setText(arrayValoraciones.get(position).getUsuario().getNombre());
         holder.estrellas.setRating((float) arrayValoraciones.get(position).getPuntuacion());
 
-        if(!arrayValoraciones.get(position).getUsuario().getFoto().isEmpty()) {
-            Picasso.with(mContext)
-                    .load(arrayValoraciones.get(position).getUsuario().getFoto())
-                    .fit()
-                    .into(holder.foto);
-        }else{
-            Picasso.with(mContext)
-                    .load(R.drawable.mainu_logo)
-                    .fit()
-                    .into(holder.foto);
-        }
+        //Ponemos la imagen del usuario circular
+        Picasso.with(mContext).load(arrayValoraciones.get(position).getUsuario().getFoto()).into(holder.foto, new Callback() {
+            @Override
+            public void onSuccess() {
+                Bitmap imageBitmap = ((BitmapDrawable) holder.foto.getDrawable()).getBitmap();
+                RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(mContext.getResources(), imageBitmap);
+                imageDrawable.setCircular(true);
+                imageDrawable.setCornerRadius(Math.max(imageBitmap.getWidth(), imageBitmap.getHeight()) / 2.0f);
+                holder.foto.setImageDrawable(imageDrawable);
+            }
+
+            @Override
+            public void onError() {
+                holder.foto.setImageResource(R.drawable.mainu_logo);
+            }
+        });
 
     }
 
