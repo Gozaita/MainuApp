@@ -1,8 +1,5 @@
 package eus.mainu.mainu;
 
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -152,7 +149,7 @@ public class Activity_Elemento extends AppCompatActivity {
 
         //Metemos la nueva informacion
         complemento.setFotos(nuevo.getFotos());
-        complemento.getValoraciones();
+        complemento.setValoraciones(nuevo.getValoraciones());
 
         arrayValoraciones = complemento.getValoraciones();
 
