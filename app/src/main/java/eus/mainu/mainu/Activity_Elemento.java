@@ -39,7 +39,7 @@ public class Activity_Elemento extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity__elemento);
+        setContentView(R.layout.activity_elemento);
 
 
         nombre = findViewById(R.id.textViewNombre);
