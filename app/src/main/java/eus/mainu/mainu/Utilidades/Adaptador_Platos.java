@@ -24,14 +24,14 @@ import eus.mainu.mainu.datalayer.Plato;
  * Clase para adaptar los platos al listview, en este momento no vale para nada, hace que la aplicacion cargue mas despacio
  */
 
-public class PlatosListViewAdapter extends BaseAdapter {
+public class Adaptador_Platos extends BaseAdapter {
 
     private static final String TAG = "Adaptador de Plato";
 
     private Context mContext;
     private ArrayList<Plato> platos;
 
-    public PlatosListViewAdapter(Context mContext, ArrayList<Plato> platos) {
+    public Adaptador_Platos(Context mContext, ArrayList<Plato> platos) {
         this.mContext = mContext;
         this.platos = platos;
     }
@@ -92,7 +92,7 @@ public class PlatosListViewAdapter extends BaseAdapter {
     }
 
 /*
-    public PlatosListViewAdapter(@NonNull Context context, int resource, @NonNull List<Plato> objects) {
+    public Adaptador_Platos(@NonNull Context context, int resource, @NonNull List<Plato> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;

@@ -17,7 +17,7 @@ import eus.mainu.mainu.datalayer.Bocadillo;
  * Clase para administrar la cache
  */
 
-public class AdministradorDeCache {
+public class Administrador_Cache {
 
     //Metodo para guardar el array
     public void guardarArrayBocadillos (Context context, String nombreArchivo, ArrayList<Bocadillo> arrayBocadillos) {

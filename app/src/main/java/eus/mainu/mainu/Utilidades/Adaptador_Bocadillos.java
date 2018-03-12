@@ -22,15 +22,15 @@ import eus.mainu.mainu.datalayer.Ingrediente;
  * Clase para la adaptar el contenido al recycling view
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class Adaptador_Bocadillos extends RecyclerView.Adapter<Adaptador_Bocadillos.ViewHolder> {
 
     //Para debbuguear
-    private static final String TAG = "RecyclerViewAdapter";
+    private static final String TAG = "Adaptador_Bocadillos";
     ArrayList<Bocadillo> arrayBocadillos = new ArrayList<Bocadillo>();
     private Context mContext;
 
 
-    public RecyclerViewAdapter(ArrayList<Bocadillo> arrayBocadillos, Context context) {
+    public Adaptador_Bocadillos(ArrayList<Bocadillo> arrayBocadillos, Context context) {
         this.arrayBocadillos = arrayBocadillos;
         mContext = context;
     }

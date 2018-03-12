@@ -27,14 +27,14 @@ import eus.mainu.mainu.datalayer.Valoracion;
  * Clase para adaptar los comentarios de los usuarios
  */
 
-public class AdaptadorComentarios extends RecyclerView.Adapter<AdaptadorComentarios.ViewHolder> {
+public class Adaptador_Comentarios extends RecyclerView.Adapter<Adaptador_Comentarios.ViewHolder> {
 
     //Para debuggear
-    private static final String TAG = "AdaptadorComentarios";
+    private static final String TAG = "Adaptador_Comentarios";
     ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
     private Context mContext;
 
-    public AdaptadorComentarios (ArrayList<Valoracion> arrayValoraciones, Context context) {
+    public Adaptador_Comentarios(ArrayList<Valoracion> arrayValoraciones, Context context) {
         this.arrayValoraciones = arrayValoraciones;
         mContext = context;
     }

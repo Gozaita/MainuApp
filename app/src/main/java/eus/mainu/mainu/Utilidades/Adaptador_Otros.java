@@ -24,7 +24,7 @@ import eus.mainu.mainu.datalayer.Complemento;
  * Clase para inflar las cards del recycling view
  */
 
-public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingViewCardAdapter.ViewHolder> {
+public class Adaptador_Otros extends RecyclerView.Adapter<Adaptador_Otros.ViewHolder> {
 
     private static final String TAG = "RecyclingViewCardAdapte";
 
@@ -32,7 +32,7 @@ public class RecyclingViewCardAdapter extends RecyclerView.Adapter<RecyclingView
     private Context mContext;
 
 
-    public RecyclingViewCardAdapter(Context mContext,ArrayList<Complemento> arrayComplementos) {
+    public Adaptador_Otros(Context mContext, ArrayList<Complemento> arrayComplementos) {
         this.arrayComplementos = arrayComplementos;
         this.mContext = mContext;
     }

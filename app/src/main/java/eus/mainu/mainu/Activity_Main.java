@@ -16,7 +16,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import eus.mainu.mainu.Utilidades.AdaptadorDeSeccionesPagerView;
+import eus.mainu.mainu.Utilidades.Adaptador_Fragmentos;
 
 public class Activity_Main extends AppCompatActivity {
 
@@ -71,7 +71,7 @@ public class Activity_Main extends AppCompatActivity {
     private void setupViewPager(){
 
         //Creamos los fragmentos
-        AdaptadorDeSeccionesPagerView adapter = new AdaptadorDeSeccionesPagerView(getSupportFragmentManager());
+        Adaptador_Fragmentos adapter = new Adaptador_Fragmentos(getSupportFragmentManager());
         adapter.addFragment(fMenu); //index 0
         adapter.addFragment(fBocadillos); //index 1
         adapter.addFragment(fOtros); //index 2

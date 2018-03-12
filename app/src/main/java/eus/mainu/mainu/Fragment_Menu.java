@@ -18,9 +18,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Random;
 
+import eus.mainu.mainu.Utilidades.Adaptador_Platos;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.Menu;
-import eus.mainu.mainu.Utilidades.PlatosListViewAdapter;
 import eus.mainu.mainu.datalayer.Plato;
 
 public class Fragment_Menu extends Fragment {
@@ -123,7 +123,7 @@ public class Fragment_Menu extends Fragment {
         //Quitamos las divisiones
         listView.setDivider(null);
         //Adaptamos la informacion que va dentro de ellos (los nombres)
-        PlatosListViewAdapter adaptador = new PlatosListViewAdapter(getContext(),platos);
+        Adaptador_Platos adaptador = new Adaptador_Platos(getContext(),platos);
         //Metemos dentro la informacion
         listView.setAdapter(adaptador);
 

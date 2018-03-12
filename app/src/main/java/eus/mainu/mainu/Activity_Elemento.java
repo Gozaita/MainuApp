@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import eus.mainu.mainu.Utilidades.AdaptadorComentarios;
+import eus.mainu.mainu.Utilidades.Adaptador_Comentarios;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
@@ -98,7 +98,7 @@ public class Activity_Elemento extends AppCompatActivity {
     private void setValoraciones(){
 
         //Inicializamos el adaptador de las valoraciones
-        AdaptadorComentarios adapter = new AdaptadorComentarios(arrayValoraciones, this);
+        Adaptador_Comentarios adapter = new Adaptador_Comentarios(arrayValoraciones, this);
 
         listaComentarios.setFocusable(false );
         listaComentarios.setAdapter(adapter);

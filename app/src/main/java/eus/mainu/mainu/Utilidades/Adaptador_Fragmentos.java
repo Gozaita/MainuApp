@@ -12,14 +12,14 @@ import java.util.List;
  * Clase para adaptar los diferentes fragments al PagerView
  */
 
-public class AdaptadorDeSeccionesPagerView extends FragmentPagerAdapter {
+public class Adaptador_Fragmentos extends FragmentPagerAdapter {
 
     private static final String TAG = "SectionsPagerAdapter";
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
 
 
-    public AdaptadorDeSeccionesPagerView(FragmentManager fm) {
+    public Adaptador_Fragmentos(FragmentManager fm) {
         super(fm);
     }
 

@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
-import eus.mainu.mainu.Utilidades.RecyclingViewCardAdapter;
+import eus.mainu.mainu.Utilidades.Adaptador_Otros;
 import eus.mainu.mainu.datalayer.Complemento;
 
 public class Fragment_Otros extends Fragment{
@@ -73,7 +73,7 @@ public class Fragment_Otros extends Fragment{
     private void setOtros(){
 
         //Primero creamos el objeto de la clase adaptador
-        RecyclingViewCardAdapter recyclingViewCardAdapter = new RecyclingViewCardAdapter(getActivity(),arrayComplementos);
+        Adaptador_Otros recyclingViewCardAdapter = new Adaptador_Otros(getActivity(),arrayComplementos);
 
         //Creamos el objeto de la clase que nos lo va a poner en dos columnas
         StaggeredGridLayoutManager recyclingViewCardAdapterManager = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
