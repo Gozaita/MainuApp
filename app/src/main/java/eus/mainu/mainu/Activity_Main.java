@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Fragmentos;
+import eus.mainu.mainu.Utilidades.Administrador_Cache;
 
 public class Activity_Main extends AppCompatActivity {
 
@@ -88,6 +89,7 @@ public class Activity_Main extends AppCompatActivity {
 
         searchButton.setOnClickListener(searchClickListener);
     }
+
 
     //Metodo que sirve para cambiar el titulo de la toolbar en funcion del fragmento
     private void setUpTitulo(){
