@@ -1,78 +1,79 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <RelativeLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary">
+        android:layout_height="50dp">
 
-        <TextView
-            android:id="@+id/textViewActividad"
-            android:layout_width="250dp"
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/configuracionButton"
-            android:fontFamily="@font/gothambold"
-            android:text="MainU for U"
-            android:textAllCaps="true"
-            android:textColor="@color/blanco"
-            android:textSize="18sp" />
-
-        <ImageButton
-            android:id="@+id/configuracionButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="15dp"
-            android:background="@color/colorPrimary"
-            app:srcCompat="@drawable/ic_menu_navigation" />
-
-        <ImageButton
-            android:id="@+id/search_button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:background="@color/colorPrimary"
-            app:srcCompat="@drawable/ic_search_24dp"
-            android:visibility="gone"/>
+            android:id="@+id/toolbar">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/blanco"
-            android:id="@+id/barra_blanca"
-            android:visibility="gone">
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/textViewActividad"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/configuracionButton"
+                android:fontFamily="@font/gothambold"
+                android:text="MainU for U"
+                android:textAllCaps="true"
+                android:textColor="@color/blanco"
+                android:textSize="18sp" />
+
+
+            <ImageButton
+                android:id="@+id/search_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:background="@color/colorPrimary"
+                app:srcCompat="@drawable/ic_search_24dp"
+                android:visibility="gone"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/blanco"
+                android:id="@+id/barra_blanca"
+                android:visibility="gone">
+
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignTop="@+id/searchFilter"
+                android:layout_toStartOf="@+id/textViewActividad"
+                android:background="@color/blanco"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_arrow_back_24dp" />
+
+            <EditText
+                android:id="@+id/searchFilter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_toEndOf="@id/back_button"
+                android:background="#FFFFFF"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:text="Buscar..."
+                android:visibility="gone" />
 
         </RelativeLayout>
 
-        <ImageButton
-            android:id="@+id/back_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignTop="@+id/searchFilter"
-            android:layout_toStartOf="@+id/textViewActividad"
-            android:background="@color/blanco"
-            android:visibility="gone"
-            app:srcCompat="@drawable/ic_arrow_back_24dp" />
+    </android.support.v7.widget.Toolbar>
 
-        <EditText
-            android:id="@+id/searchFilter"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_toEndOf="@id/back_button"
-            android:background="#FFFFFF"
-            android:imeOptions="actionDone"
-            android:maxLines="1"
-            android:text="Buscar..."
-            android:visibility="gone" />
-
-    </RelativeLayout>
-
-
+    </android.support.design.widget.AppBarLayout>
 </merge>

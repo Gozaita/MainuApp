@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:id="@+id/relLayout2"
-        android:layout_below="@id/relLayout1"
         android:layout_marginBottom="50dp"
         >
 

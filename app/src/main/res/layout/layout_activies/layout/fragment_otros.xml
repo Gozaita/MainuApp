@@ -13,8 +13,7 @@
     <RelativeLayout
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:id="@+id/relLayout2"
-        android:layout_below="@id/relLayout1">
+        android:id="@+id/relLayout2">
 
 
     <android.support.v7.widget.RecyclerView
