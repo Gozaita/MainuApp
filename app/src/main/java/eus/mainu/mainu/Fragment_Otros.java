@@ -11,9 +11,8 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
-
+import eus.mainu.mainu.Utilidades.Administrador_Cache;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.Adaptador_Otros;
 import eus.mainu.mainu.datalayer.Complemento;
@@ -37,16 +36,8 @@ public class Fragment_Otros extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Cogemos el contexto
         mContext = getContext();
-        //Creamos un objeto para hacer las peticiones get y para hacer los hilos
-        HttpGetRequest request = new HttpGetRequest();
-        //Comprobamos si hay conexion para hacer las peticiones de los arrays
-        if(request.isConnected(mContext) ){
-            //Pedimos los complementos a la API
-            arrayComplementos = request.getOtros();
-        }
-
+        administraPeticionesCacheOtros();
     }
 
     @Nullable
@@ -69,6 +60,36 @@ public class Fragment_Otros extends Fragment{
         return view;
     }
 
+
+    //**********************************************************************************************
+    private void administraPeticionesCacheOtros(){
+        //Cada request se puede usar una vez
+        HttpGetRequest request1 = new HttpGetRequest();
+        HttpGetRequest request2 = new HttpGetRequest();
+
+        //Comprobamos si hay conexion para hacer las peticiones de los arrays
+        Administrador_Cache cache = new Administrador_Cache();
+        boolean usarCache = false;
+        if(request1.isConnected(mContext) ){
+
+            String remoteLastUpdate = request1.getLastUpdate("otros");
+            String localLastUpdate  = cache.leerLastUpdate( mContext, "otros").toString();
+
+            if(!remoteLastUpdate.equalsIgnoreCase(localLastUpdate) ){
+                arrayComplementos = request2.getOtros();
+                cache.guardarLastUpdate(mContext, "otros", remoteLastUpdate);
+                cache.guardarListaOtros(mContext, arrayComplementos);
+            } else{
+                usarCache = true;
+            }
+        } else{ //Si no hay internet, uso la cache
+            usarCache = true;
+        }
+        if(usarCache)
+            arrayComplementos = (ArrayList<Complemento>) cache.leerListaOtros( mContext);
+    }
+
+    //**********************************************************************************************
     //Metodo para rellenar el cardview
     private void setOtros(){
 

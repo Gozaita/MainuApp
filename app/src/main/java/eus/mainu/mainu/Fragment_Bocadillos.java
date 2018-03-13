@@ -11,9 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
-
+import eus.mainu.mainu.Utilidades.Administrador_Cache;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.Adaptador_Bocadillos;
 import eus.mainu.mainu.datalayer.Bocadillo;
@@ -32,20 +31,12 @@ public class Fragment_Bocadillos extends Fragment {
     Adaptador_Bocadillos adapter;
     private boolean actualizado = false;
 
-    //Metodo que se llama antes de onCreateView, se suelen coger las variables aqui
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Cogemos el contexto
         mContext = getContext();
-        //Creamos un objeto para hacer las peticiones get y para hacer los hilos
-        HttpGetRequest request = new HttpGetRequest();
-        //Comprobamos si hay conexion para hacer las peticiones de los arrays
-        if(request.isConnected(mContext) ){
-            //Pedimos los complementos a la API
-            arrayBocadillos = request.getBocadillos();
-        }
+        administraPeticionesCacheBocadillos();
     }
 
     //Metodo que se ejecuta al visualizar el fragmento, se representa en funcion del layout fragment_bocadillos
@@ -68,22 +59,47 @@ public class Fragment_Bocadillos extends Fragment {
         //Inflamos la vista
         setBocadillos();
 
-        //Escuchamos un posible swipe to refresh
         escuchamosSwipe();
 
         return view;
     }
 
+    //**********************************************************************************************
+    private void administraPeticionesCacheBocadillos(){
+        //Cada request se puede usar una vez
+        HttpGetRequest request1 = new HttpGetRequest();
+        HttpGetRequest request2 = new HttpGetRequest();
 
+        //Comprobamos si hay conexion para hacer las peticiones de los arrays
+        Administrador_Cache cache = new Administrador_Cache();
+        boolean usarCache = false;
+        if(request1.isConnected(mContext) ){
+
+            String remoteLastUpdate = request1.getLastUpdate("bocadillos");
+            String localLastUpdate  = cache.leerLastUpdate( mContext, "bocadillos").toString();
+
+            if(!remoteLastUpdate.equalsIgnoreCase(localLastUpdate) ){
+                arrayBocadillos = request2.getBocadillos();
+                cache.guardarLastUpdate(mContext, "bocadillos", remoteLastUpdate);
+                cache.guardarListaBocadillos(mContext, arrayBocadillos);
+            } else{
+                usarCache = true;
+            }
+        } else{ //Si no hay internet, uso la cache
+            usarCache = true;
+        }
+        if(usarCache)
+            arrayBocadillos = (ArrayList<Bocadillo>) cache.leerListaBocadillos( mContext);
+    }
+
+    //**********************************************************************************************
     //Clase para crear y adaptar la informacion al recycling view
     private void setBocadillos(){
-
         //Creamos el objeto de la clase adaptador
         adapter = new Adaptador_Bocadillos(arrayBocadillos, getActivity());
 
         //Adaptamos el recyclingview
         recyclerView.setAdapter(adapter);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
@@ -94,13 +110,11 @@ public class Fragment_Bocadillos extends Fragment {
             //Accion que se ejecuta cuando se activa
             @Override
             public void onRefresh() {
-
                 //Creamos otro request porque solo se puede llamar al asynctask una vez
                 HttpGetRequest request = new HttpGetRequest();
 
                 //Chequeamos si tenemos el menu actualizado
                 //request.checkMenuActualizados();
-
 
                 if(request.isConnected(mContext) && arrayBocadillos.isEmpty()){
                     arrayBocadillos = request.getBocadillos();

@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
@@ -64,6 +65,21 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         super.onPostExecute(result);
     }
 
+
+    //**********************************************************************************************
+    public String getLastUpdate(String tipo){
+        String lastUpdate = "0";
+
+        if(tipo == "bocadillos" || tipo == "menu" || tipo == "otros"){
+            try{
+                lastUpdate = execute("https://api.mainu.eus/last_update/" + tipo).get();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        lastUpdate = lastUpdate.replaceAll("\"","");
+        return lastUpdate;
+    }
 
     //Metodo para pedir el listado de bocadillos, todas las operaciones de parseo del mensaje JSON se hacen dentro de el
     public ArrayList<Bocadillo> getBocadillos(){
