@@ -1,14 +1,18 @@
 package eus.mainu.mainu;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -24,11 +28,13 @@ import eus.mainu.mainu.datalayer.Valoracion;
 public class Activity_Elemento extends AppCompatActivity {
 
     private static final String TAG = "Activity Elemento";
+    private static final int CAMERA_REQUEST_CODE = 5;
 
     private TextView nombre;
     private TextView puntuacion;
     private TextView precio;
     private ImageButton imagen;
+    private ImageButton botonCamara;
     private RatingBar ratingBar;
     private RecyclerView listaComentarios;
     private EditText comentario;
@@ -49,6 +55,8 @@ public class Activity_Elemento extends AppCompatActivity {
         imagen = findViewById(R.id.botonImagenElemento);
         listaComentarios = findViewById(R.id.recycler_view_lista_comentarios);
         comentario = findViewById(R.id.editText);
+        botonCamara = findViewById(R.id.botonCamara);
+
 
         //Para que no influya en el scroll
         listaComentarios.setNestedScrollingEnabled(false);
@@ -67,6 +75,8 @@ public class Activity_Elemento extends AppCompatActivity {
 
         //Mostramos las valoraciones en el recycling view
         setValoraciones();
+
+        setBotonCamara();
 
     }
 
@@ -208,4 +218,23 @@ public class Activity_Elemento extends AppCompatActivity {
 
     }
 
+    //Metodo para abrir la camara y sacar una foto
+    private void setBotonCamara(){
+        botonCamara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+
+            }
+        });
+    }
+
+    //Metodo que se ejecuta despues de sacar la foto
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(this, "¡Gracias por tu colaboración!", Toast.LENGTH_LONG).show();
+
+    }
 }

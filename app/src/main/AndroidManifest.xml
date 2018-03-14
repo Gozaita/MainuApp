@@ -6,6 +6,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Para comprobar si hay internet -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Para usar la camara y poder leer y guardar las fotos en la galeria -->
+
+
+
+
 
     <application
         android:allowBackup="true"

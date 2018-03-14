@@ -23,23 +23,7 @@
                 android:background="@color/negro"
                 app:srcCompat="@drawable/otros_1" />
 
-            <ImageButton
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignTop="@+id/botonCamara"
-                android:background="@color/transparente"
-                android:id="@+id/botonPlus"
-                app:srcCompat="@drawable/ic_exposure_plus_1_black_24dp" />
 
-            <ImageButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignBottom="@+id/botonImagenElemento"
-                android:layout_alignParentEnd="true"
-                app:srcCompat="@drawable/ic_camera_alt_black_24dp"
-                android:background="@color/transparente"
-                android:id="@+id/botonCamara" />
 
 
             <!--Quitamos el boton de atras
@@ -53,64 +37,65 @@
                 app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
                 -->
 
-            <include layout="@layout/snippet_caracteristicas"
+            <include
+                android:id="@+id/caracteristicas"
+                layout="@layout/snippet_caracteristicas"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/caracteristicas" />
+                android:layout_height="wrap_content" />
 
             <ImageView
+                android:id="@+id/fotoPerfil"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:id="@+id/fotoPerfil"
                 android:layout_marginStart="11dp"
                 android:layout_marginTop="325dp"
-                android:src="@drawable/mainu_logo"/>
+                android:src="@drawable/mainu_logo" />
 
             <ImageView
+                android:id="@+id/botonEnviar"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:id="@+id/botonEnviar"
-                app:srcCompat="@drawable/ic_send_24dp"
-                android:layout_marginEnd="11dp"
-                android:layout_alignParentEnd="true"
                 android:layout_alignBottom="@+id/editText"
+                android:layout_alignParentEnd="true"
                 android:layout_marginBottom="7dp"
-                android:visibility="visible"/>
+                android:layout_marginEnd="11dp"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_send_24dp" />
 
             <RatingBar
                 android:id="@+id/ratingBarUsuario"
+                style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/fotoPerfil"
                 android:layout_toEndOf="@+id/fotoPerfil"
-                style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
                 android:isIndicator="false"
                 android:stepSize="0.5" />
 
 
             <EditText
+                android:id="@+id/editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText"
+                android:layout_below="@id/ratingBarUsuario"
+                android:layout_marginEnd="11dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@+id/fotoPerfil"
                 android:layout_toStartOf="@id/botonEnviar"
-                android:layout_below="@id/ratingBarUsuario"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="11dp"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_light"
-                android:textSize="15sp"
                 android:focusable="true"
-                android:focusableInTouchMode="true"/>
+                android:focusableInTouchMode="true"
+                android:fontFamily="@font/roboto_light"
+                android:textSize="15sp" />
 
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_lista_comentarios"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="25dp"
                 android:layout_below="@+id/editText"
-                android:id="@+id/recycler_view_lista_comentarios"/>
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="15dp" />
 
 
         </RelativeLayout>
