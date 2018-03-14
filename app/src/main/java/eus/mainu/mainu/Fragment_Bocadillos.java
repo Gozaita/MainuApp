@@ -77,58 +77,13 @@ public class Fragment_Bocadillos extends Fragment {
         HttpGetRequest request1 = new HttpGetRequest();
         HttpGetRequest request2 = new HttpGetRequest();
 
-        Administrador_Cache cache = new Administrador_Cache();
-        Object cacheLastUpdate = cache.leerLastUpdate(mContext,"bocadillos");
-
-        //Comprueba si hay conexion
-        if(request1.isConnected(mContext)){
-            try {
-                //Comprueba si la cache esta actualizada
-                String remoteLastUpdate = request1.getLastUpdate("bocadillos");
-
-                //Comprobamos si existe cache
-                if(cacheLastUpdate != null){
-                    DateFormat formato = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss", Locale.ENGLISH);
-                    Date fechaServidor = formato.parse(remoteLastUpdate);
-                    Date fechaCache = formato.parse(cacheLastUpdate.toString());
-
-                    //Comprobamos la fecha del servidor
-                    if(fechaServidor.after(fechaCache)){
-                        arrayBocadillos = request2.getBocadillos();
-                    } else {
-                        arrayBocadillos = (ArrayList<Bocadillo>) cache.leerListaBocadillos( mContext);
-                    }
-
-                }else{
-                    //Leemos los bocadillos de la api
-                    arrayBocadillos = request2.getBocadillos();
-                    //Guardamos en cache
-                    cache.guardarLastUpdate(mContext, "bocadillos", remoteLastUpdate);
-                    cache.guardarListaBocadillos(mContext, arrayBocadillos);
-                }
-
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        //Si no hay conexion, leemos de cache
-        } else {
-            //Si no existe cache, no leemos
-            if(cacheLastUpdate != null) {
-                arrayBocadillos = (ArrayList<Bocadillo>) cache.leerListaBocadillos( mContext);
-            }
-        }
-
-        /*
         //Comprobamos si hay conexion para hacer las peticiones de los arrays
         Administrador_Cache cache = new Administrador_Cache();
         boolean usarCache = false;
-        if(request1.isConnected(mContext) ){
 
+        if(request1.isConnected(mContext) ){
             String remoteLastUpdate = request1.getLastUpdate("bocadillos");
-            String localLastUpdate  = "";
-            if(cache.leerLastUpdate( mContext, "bocadillos") != null){
-                localLastUpdate = cache.leerLastUpdate( mContext, "bocadillos").toString();
-            }
+            String localLastUpdate  = cache.leerLastUpdate( mContext, "bocadillos");
 
             if(!remoteLastUpdate.equalsIgnoreCase(localLastUpdate) ){
                 arrayBocadillos = request2.getBocadillos();
@@ -142,7 +97,6 @@ public class Fragment_Bocadillos extends Fragment {
         }
         if(usarCache)
             arrayBocadillos = (ArrayList<Bocadillo>) cache.leerListaBocadillos( mContext);
-            */
     }
 
     //**********************************************************************************************

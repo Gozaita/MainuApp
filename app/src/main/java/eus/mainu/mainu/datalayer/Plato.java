@@ -13,8 +13,8 @@ public class Plato implements Serializable {
     private int id;
     private String nombre;
     private double puntuacion;
-    private ArrayList<Valoracion> valoraciones;
-    private ArrayList<Imagen> fotos;
+    private ArrayList<Valoracion> valoraciones  = new ArrayList<>();
+    private ArrayList<Imagen> fotos             = new ArrayList<>();
 
     public Plato(){
     }

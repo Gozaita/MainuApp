@@ -9,9 +9,9 @@ public class Bocadillo implements Serializable {
     private String nombre;
     private double precio;
     private double puntuacion;
-    private ArrayList<Ingrediente> ingredientes;
-    private ArrayList<Valoracion> valoraciones;
-    private ArrayList<Imagen> fotos;
+    private ArrayList<Ingrediente> ingredientes = new ArrayList<>();
+    private ArrayList<Valoracion> valoraciones  = new ArrayList<>();
+    private ArrayList<Imagen> fotos             = new ArrayList<>();
 
     public Bocadillo() {
     }
