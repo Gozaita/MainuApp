@@ -37,7 +37,7 @@ public class Fragment_Otros extends Fragment{
         super.onCreate(savedInstanceState);
 
         mContext = getContext();
-        administraPeticionesCacheOtros();
+        //administraPeticionesCacheOtros();
     }
 
     @Nullable
@@ -67,13 +67,17 @@ public class Fragment_Otros extends Fragment{
         HttpGetRequest request1 = new HttpGetRequest();
         HttpGetRequest request2 = new HttpGetRequest();
 
+
         //Comprobamos si hay conexion para hacer las peticiones de los arrays
         Administrador_Cache cache = new Administrador_Cache();
         boolean usarCache = false;
         if(request1.isConnected(mContext) ){
 
             String remoteLastUpdate = request1.getLastUpdate("otros");
-            String localLastUpdate  = cache.leerLastUpdate( mContext, "otros").toString();
+            String localLastUpdate  = "";
+            if(cache.leerLastUpdate( mContext, "bocadillos") != null){
+                localLastUpdate = cache.leerLastUpdate( mContext, "bocadillos").toString();
+            }
 
             if(!remoteLastUpdate.equalsIgnoreCase(localLastUpdate) ){
                 arrayComplementos = request2.getOtros();

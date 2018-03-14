@@ -69,7 +69,7 @@ public class Activity_Elemento extends AppCompatActivity {
         setValoraciones();
 
     }
-    
+
 
     //Metodo para recibir la informacion que se pasa a la actividad
     private void getInformacion() {

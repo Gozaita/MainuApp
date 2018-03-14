@@ -1,6 +1,8 @@
 package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -28,12 +30,15 @@ public class Administrador_Cache {
     public Object leerLastUpdate (Context context, String tipo) {
 
         Object object = null;
+        String fichero = "lastUdate"+tipo;
         try {
-            FileInputStream fis = context.openFileInput("lastUpdate" + tipo);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            object = ois.readObject();
-            ois.close();
-            fis.close();
+            if(compruebaFichero(context,fichero)) {
+                FileInputStream fis = context.openFileInput(fichero);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                object = ois.readObject();
+                ois.close();
+                fis.close();
+            }
 
         } catch (Exception e) {
             guardarLastUpdate(context, tipo, "0");
@@ -105,5 +110,16 @@ public class Administrador_Cache {
         }
 
         return listaOtros;
+    }
+
+    //Metodo para comprobar si es
+    private boolean compruebaFichero(Context context, String nombre){
+
+        File fichero = context.getFileStreamPath(nombre);
+        if(fichero == null || !fichero.exists()) {
+            return false;
+        }
+
+        return true;
     }
 }
