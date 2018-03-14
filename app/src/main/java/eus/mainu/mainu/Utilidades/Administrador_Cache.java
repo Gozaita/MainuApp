@@ -65,7 +65,7 @@ public class Administrador_Cache {
 
     public Object leerListaBocadillos (Context context) {
 
-        Object object = null;
+        Object object = new ArrayList<Bocadillo>();
         try {
             FileInputStream fis = context.openFileInput("arrayBocadillos");
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -97,7 +97,7 @@ public class Administrador_Cache {
 
     public Object leerListaOtros (Context context) {
 
-        Object listaOtros = null;
+        Object listaOtros = new ArrayList<Complemento>();
         try {
             FileInputStream fis = context.openFileInput("arrayOtros");
             ObjectInputStream ois = new ObjectInputStream(fis);
