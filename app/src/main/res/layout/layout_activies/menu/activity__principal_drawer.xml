@@ -16,14 +16,14 @@
             android:id="@+id/comparte"
             android:icon="@drawable/ic_menu_share"
             android:title="@string/Comparte" />
-    </group>
-
-    <item android:title="@string/Ayudanos">
-    <menu>
         <item
             android:id="@+id/error"
             android:icon="@drawable/ic_warning_black_24dp"
             android:title="@string/Error" />
+    </group>
+
+    <item android:title="@string/Ajustes">
+    <menu>
         <item
             android:id="@+id/cerrarSesion"
             android:icon="@drawable/ic_remove_circle_outline_black_24dp"

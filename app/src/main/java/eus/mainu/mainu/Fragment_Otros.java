@@ -109,7 +109,7 @@ public class Fragment_Otros extends Fragment{
             usarCache = true;
         }
         if(usarCache)
-            arrayComplementos = (ArrayList<Complemento>) cache.leerListaOtros( mContext);
+            arrayComplementos = (ArrayList<Complemento>) cache.leerListaOtros(mContext);
     }
 
 
