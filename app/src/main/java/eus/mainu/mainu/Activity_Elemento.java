@@ -1,6 +1,9 @@
 package eus.mainu.mainu;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Comentarios;
@@ -64,19 +68,20 @@ public class Activity_Elemento extends AppCompatActivity {
         //Para que no se muestre seleccionado al entrar en la actividad
         comentario.setCursorVisible(false);
 
-
-        //Para poner las estrellas blancas mediante codigo,
-        //Las ponemos mediante el xml, aunque solo funciona para la version de android 5.0 en adelante
-        //LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
-        //stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-
         //Miramos la informacion que nos pasan
         getInformacion();
 
         //Mostramos las valoraciones en el recycling view
         setValoraciones();
 
+        //Todo el codigo que teniene que ver con el boton la camara
         setBotonCamara();
+
+
+        //Para poner las estrellas blancas mediante codigo,
+        //Las ponemos mediante el xml, aunque solo funciona para la version de android 5.0 en adelante
+        //LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
+        //stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 
     }
 
@@ -118,7 +123,11 @@ public class Activity_Elemento extends AppCompatActivity {
     private void setBocadillo(Bocadillo bocadillo) {
 
         HttpGetRequest request = new HttpGetRequest();
-        Bocadillo nuevo = request.getBocadillo(bocadillo.getId());
+
+        Bocadillo nuevo = new Bocadillo();
+        if(request.isConnected(this)){
+            nuevo = request.getBocadillo(bocadillo.getId());
+        }
 
         nombre.setText(bocadillo.getNombre());
         precio.setText(String.format("%.2f€",bocadillo.getPrecio()));
@@ -152,7 +161,11 @@ public class Activity_Elemento extends AppCompatActivity {
     private void setComplemento(Complemento complemento) {
 
         HttpGetRequest request = new HttpGetRequest();
-        Complemento nuevo = request.getComplemento(complemento.getId());
+
+        Complemento nuevo = new Complemento();
+        if(request.isConnected(this)){
+            nuevo = request.getComplemento(complemento.getId());
+        }
 
         nombre.setText(complemento.getNombre());
         precio.setText(String.format("%.2f€",complemento.getPrecio()));
@@ -186,7 +199,11 @@ public class Activity_Elemento extends AppCompatActivity {
     private void setPlato(Plato plato) {
 
         HttpGetRequest request = new HttpGetRequest();
-        Plato nuevo = request.getPlato(plato.getId());
+
+        Plato nuevo = new Plato();
+        if(request.isConnected(this)){
+            nuevo = request.getPlato(plato.getId());
+        }
 
         nombre.setText(plato.getNombre());
         precio.setVisibility(View.GONE);
@@ -218,7 +235,7 @@ public class Activity_Elemento extends AppCompatActivity {
 
     }
 
-    //Metodo para abrir la camara y sacar una foto
+    //Metodo para llamar a la camara
     private void setBotonCamara(){
         botonCamara.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,11 +247,25 @@ public class Activity_Elemento extends AppCompatActivity {
         });
     }
 
-    //Metodo que se ejecuta despues de sacar la foto
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(this, "¡Gracias por tu colaboración!", Toast.LENGTH_LONG).show();
+
+        //Comprobamos que se ha sacado la foto con el result_ok, comprobamos que es el codigo de la camara al que llaman
+        if(resultCode == Activity.RESULT_OK && requestCode == CAMERA_REQUEST_CODE){
+            Log.d(TAG, "onActivityResult: done taking a photo.");
+            Log.d(TAG, "onActivityResult: attempting to navigate to final share screen.");
+
+            Bitmap bitmap;
+            bitmap = (Bitmap) data.getExtras().get("data");
+
+            if(bitmap != null){
+                Toast.makeText(this, R.string.agradecimiento, Toast.LENGTH_LONG).show();
+                imagen.setImageBitmap(bitmap);
+            }
+        }
 
     }
+
+
 }

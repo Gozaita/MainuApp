@@ -110,6 +110,7 @@ public class Administrador_JSON {
                                 getString(o,"nombre"),
                                 getDouble(o,"precio"),
                                 getDouble(o,"puntuacion"),
+                                getInt(o,"tipo"),
                                 getImagenes(o))
                 );
             }

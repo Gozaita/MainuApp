@@ -14,18 +14,20 @@ public class Complemento implements Serializable {
     private String nombre;
     private double precio;
     private double puntuacion;
+    private int tipo;
     private ArrayList<Valoracion> valoraciones  = new ArrayList<>();
     private ArrayList<Imagen> fotos             = new ArrayList<>();
 
     public Complemento() {
     }
 
-    public Complemento(int id, String nombre, double precio, double puntuacion, ArrayList<Imagen> fotos) {
+    public Complemento(int id, String nombre, double precio, double puntuacion, int tipo,ArrayList<Imagen> fotos) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.puntuacion = puntuacion;
         this.fotos = fotos;
+        this.tipo = tipo;
     }
 
     public Complemento(int id, String nombre, double precio, double puntuacion, ArrayList<Imagen> fotos, ArrayList<Valoracion> valoraciones) {
@@ -35,6 +37,14 @@ public class Complemento implements Serializable {
         this.puntuacion = puntuacion;
         this.valoraciones = valoraciones;
         this.fotos = fotos;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
 
     public int getId() {
