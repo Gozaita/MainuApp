@@ -1,9 +1,15 @@
 package eus.mainu.mainu;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -19,15 +25,32 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Fragmentos;
 import eus.mainu.mainu.Utilidades.Administrador_Cache;
 
-public class Activity_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Activity_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "Activity MAIN";
+    private static final int SIGN_IN_CODE = 777; //Es 777 porque yo he querido, podria ser cualquiera
+
     private TextView titulo;
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -36,15 +59,23 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     private EditText filter;
     private RelativeLayout layoutblanco;
 
+    //NavigationView
+    NavigationView navigationView;
+
+    //Datos del usuario
+    private ImageView fotoUsuario;
+    private TextView nombre, email;
+
     //Variables
     private String busqueda;
-    //private ITaskAcabada taskAcabada;
+    private GoogleApiClient googleApiClient;
 
 
     //Fragmentos
     private Fragment_Menu fMenu = new Fragment_Menu();
     private Fragment_Bocadillos fBocadillos = new Fragment_Bocadillos();
     private Fragment_Otros fOtros = new Fragment_Otros();
+
 
 
     @Override
@@ -59,9 +90,27 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         filter = findViewById(R.id.searchFilter);
         backArrow = findViewById(R.id.back_button);
         layoutblanco = findViewById(R.id.barra_blanca);
+        navigationView = findViewById(R.id.nav_view);
+
+        //Nav
+        View header = navigationView.getHeaderView(0);
+        fotoUsuario = header.findViewById(R.id.imagenUsuario);
+        nombre = header.findViewById(R.id.nombre);
+        email = header.findViewById(R.id.correo);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)//Asi seria el normal
+                .requestEmail()//asi pedimos el id
+                .build();
+
+        //Autenticacion
+        googleApiClient = new GoogleApiClient.Builder(this).
+                enableAutoManage(this,this) //permite gestionar el ciclo de vida con la actividad y dice quien escucha en caso de que algo salga mal
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
 
         //taskAcabada = (ITaskAcabada) this;
 
@@ -85,6 +134,57 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
+        if(opr.isDone()) {
+            GoogleSignInResult result = opr.get();
+            resultadoSilentSingIn(result);
+        } else {
+            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+                @Override
+                public void onResult(@NonNull GoogleSignInResult result) {
+                    resultadoSilentSingIn(result);
+                }
+            });
+        }
+    }
+
+    //Comprobamos si el loggin ha sido exitoso y accedemos a la informacion del usuario
+    private void resultadoSilentSingIn(GoogleSignInResult result){
+
+        if(result.isSuccess()) {
+
+            GoogleSignInAccount cuenta = result.getSignInAccount();
+
+            //Ponemos los datos del usuario
+            nombre.setText(cuenta.getDisplayName());
+            email.setText(cuenta.getEmail());
+
+            Picasso.with(this).load(cuenta.getPhotoUrl()).fit().into(fotoUsuario, new Callback() {
+                @Override
+                public void onSuccess() {
+                    Bitmap imageBitmap = ((BitmapDrawable) fotoUsuario.getDrawable()).getBitmap();
+                    RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(getResources(), imageBitmap);
+                    imageDrawable.setCircular(true);
+                    imageDrawable.setCornerRadius(Math.max(imageBitmap.getWidth(), imageBitmap.getHeight()) / 2.0f);
+                    fotoUsuario.setImageDrawable(imageDrawable);
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+
+
+        } else {
+            //No se ha autenticado bien
+        }
     }
 
     //Responsable de añadir 3 fragmentos: Bocadillos, Menu, Otros
@@ -181,8 +281,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                     backArrow.setVisibility(View.GONE);
                     layoutblanco.setVisibility(View.GONE);
 
-
-
                     return true;
                 }
                 return false;
@@ -234,14 +332,52 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            // Handle the camera action
+
         } else if (id == R.id.informacion) {
 
         } else if (id == R.id.comparte) {
 
         } else if (id == R.id.error) {
 
+        } else if (id == R.id.iniciarSesion) {
+
+            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+            startActivityForResult(signInIntent, SIGN_IN_CODE); //Codigo unico que devuelve al registrarse
+
+
         } else if (id == R.id.cerrarSesion) {
+
+            Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+                @Override
+                public void onResult(@NonNull Status status) {
+                    if(status.isSuccess()){
+                        Toast.makeText(Activity_Main.this, R.string.despedida, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Activity_Main.this, R.string.fail, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+
+            nombre.setText(R.string.nombre);
+            email.setText(R.string.email);
+
+            Picasso.with(this).load(R.drawable.logo_blanco).fit().into(fotoUsuario, new Callback() {
+                @Override
+                public void onSuccess() {
+                    Bitmap imageBitmap = ((BitmapDrawable) fotoUsuario.getDrawable()).getBitmap();
+                    RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(getResources(), imageBitmap);
+                    imageDrawable.setCircular(true);
+                    imageDrawable.setCornerRadius(Math.max(imageBitmap.getWidth(), imageBitmap.getHeight()) / 2.0f);
+                    fotoUsuario.setImageDrawable(imageDrawable);
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+
             
         }
 
@@ -250,6 +386,51 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         return true;
     }
 
+    //Cuando algo sale mal en la conexion
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == SIGN_IN_CODE){
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            resultadoSignIn(result);
+        }
+    }
+
+    //Metodo que gestiona el resultado del sign in
+    private  void resultadoSignIn(GoogleSignInResult result){
+
+        if (result.isSuccess()){
+            Toast.makeText(this,R.string.agradecimiento,Toast.LENGTH_SHORT).show();
+
+            GoogleSignInAccount cuenta = result.getSignInAccount();
+            nombre.setText(cuenta.getDisplayName());
+            email.setText(cuenta.getEmail());
+
+            Picasso.with(this).load(cuenta.getPhotoUrl()).fit().into(fotoUsuario, new Callback() {
+                @Override
+                public void onSuccess() {
+                    Bitmap imageBitmap = ((BitmapDrawable) fotoUsuario.getDrawable()).getBitmap();
+                    RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(getResources(), imageBitmap);
+                    imageDrawable.setCircular(true);
+                    imageDrawable.setCornerRadius(Math.max(imageBitmap.getWidth(), imageBitmap.getHeight()) / 2.0f);
+                    fotoUsuario.setImageDrawable(imageDrawable);
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+        } else {
+            Toast.makeText(this, R.string.fail ,Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
 }

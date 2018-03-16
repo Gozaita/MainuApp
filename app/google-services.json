@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "475979136676",
+    "firebase_url": "https://mainu-709a7.firebaseio.com",
+    "project_id": "mainu-709a7",
+    "storage_bucket": "mainu-709a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475979136676:android:ed9000bb1f1930d6",
+        "android_client_info": {
+          "package_name": "eus.mainu.mainu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475979136676-hrcd5ivev6542b3uecpoj2fqjer7rag4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eus.mainu.mainu",
+            "certificate_hash": "4c7117cda328ac9846c516f683bccf1796c96c15"
+          }
+        },
+        {
+          "client_id": "475979136676-h38iuiqdo0tg51a36perr16i6ms62bq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnGp4UraDCtxD9s0QHCjdnA9C0cImIMok"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475979136676-h38iuiqdo0tg51a36perr16i6ms62bq8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -12,29 +12,26 @@
     <string name="bocadillos">Bocadillos</string>
     <string name="menuDelDia">Menu del dia</string>
     <string name="agradecimiento">¡Gracias por tu colaboración!</string>
-
     <string name="tipo1">Tostas y mini pizzas</string>
     <string name="tipo2">Bolleria</string>
     <string name="tipo3">Bebidas calientes</string>
     <string name="tipo4">Bebidas frias</string>
     <string name="tipo5">Otros...</string>
-
     <string name="Home">Home</string>
     <string name="Informacion">Informacion</string>
     <string name="Comparte">Comparte</string>
     <string name="Error">Reportar error</string>
+    <string name="fail">Algo salio mal</string>
     <string name="IniciarSesion">Iniciar sesion</string>
     <string name="CerrarSesion">Cerrar sesion</string>
     <string name="Ayudanos">Ayudanos a mejorar</string>
     <string name="Ajustes">Ajustes</string>
-
-
-
-
-
+    <string name="despedida">Chao chaito</string>
     <string name="getBocadillos">Menu del dia</string>
     <string name="getMenu">Menu del dia</string>
     <string name="getComplementos">https://api.mainu.eus/get_otros</string>
+    <string name="nombre">Nombre</string>
+    <string name="email">Email</string>
 
 
 
