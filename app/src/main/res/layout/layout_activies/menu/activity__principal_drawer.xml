@@ -3,36 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group >
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/Home" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/informacion"
+            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:title="@string/Informacion" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/comparte"
+            android:icon="@drawable/ic_menu_share"
+            android:title="@string/Comparte" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
+    <item android:title="@string/Ayudanos">
+    <menu>
+        <item
+            android:id="@+id/error"
+            android:icon="@drawable/ic_warning_black_24dp"
+            android:title="@string/Error" />
+        <item
+            android:id="@+id/cerrarSesion"
+            android:icon="@drawable/ic_remove_circle_outline_black_24dp"
+            android:title="@string/CerrarSesion" />
+    </menu>
     </item>
 
 </menu>

@@ -12,11 +12,23 @@
     <string name="bocadillos">Bocadillos</string>
     <string name="menuDelDia">Menu del dia</string>
     <string name="agradecimiento">¡Gracias por tu colaboración!</string>
+
     <string name="tipo1">Tostas y mini pizzas</string>
     <string name="tipo2">Bolleria</string>
     <string name="tipo3">Bebidas calientes</string>
-    <string name="tipo4">Bebidas fras</string>
-    <string name="tipo5">Mas...</string>
+    <string name="tipo4">Bebidas frias</string>
+    <string name="tipo5">Otros...</string>
+
+    <string name="Home">Home</string>
+    <string name="Informacion">Informacion</string>
+    <string name="Comparte">Comparte</string>
+    <string name="Error">Reportar error</string>
+    <string name="IniciarSesion">Iniciar sesion</string>
+    <string name="CerrarSesion">Cerrar sesion</string>
+    <string name="Ayudanos">Ayudanos a mejorar</string>
+
+
+
 
 
 
