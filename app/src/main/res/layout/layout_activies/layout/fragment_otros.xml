@@ -8,118 +8,15 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeComplementos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"/>
 
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="100dp">
 
-            <RelativeLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:id="@+id/relLayout2">
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rec1"
+        android:layout_marginBottom="50dp"/>
 
-            <TextView
-                android:id="@+id/bebidasCalientes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/tipo3"
-                android:textColor="@color/colorPrimary"
-                android:textSize="15sp"
-                android:fontFamily="@font/roboto_light" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/rec1"
-                android:layout_below="@id/bebidasCalientes"/>
-
-            <TextView
-                android:id="@+id/bebidasFrias"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/bebidasCalientes"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_below="@id/rec1"
-                android:text="@string/tipo4"
-                android:textColor="@color/colorPrimary"
-                android:textSize="15sp"
-                android:fontFamily="@font/roboto_light" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/rec2"
-                android:layout_below="@+id/bebidasFrias"/>
-
-            <TextView
-                android:id="@+id/tostasPizzas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/bebidasCalientes"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_below="@id/rec2"
-                android:text="@string/tipo1"
-                android:textColor="@color/colorPrimary"
-                android:textSize="15sp"
-                android:fontFamily="@font/roboto_light" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tostasPizzas"
-                android:id="@+id/rec3"/>
-
-            <TextView
-                android:id="@+id/bolleria"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/bebidasCalientes"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_below="@id/rec3"
-                android:text="@string/tipo2"
-                android:textColor="@color/colorPrimary"
-                android:textSize="15sp"
-                android:fontFamily="@font/roboto_light" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/bolleria"
-                android:id="@+id/rec4"/>
-
-            <TextView
-                android:id="@+id/mas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/bebidasCalientes"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_below="@id/rec4"
-                android:text="@string/tipo5"
-                android:textColor="@color/colorPrimary"
-                android:textSize="15sp"
-                android:fontFamily="@font/roboto_light" />
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/mas"
-                android:id="@+id/rec5"
-                android:layout_marginBottom="65dp"/>
-
-        </RelativeLayout>
-
-    </ScrollView>
-
-</android.support.v4.widget.SwipeRefreshLayout>
 
 
 </RelativeLayout>

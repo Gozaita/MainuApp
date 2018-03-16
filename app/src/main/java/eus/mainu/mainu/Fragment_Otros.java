@@ -26,15 +26,10 @@ public class Fragment_Otros extends Fragment{
     //Elementos de la vista
     private Context mContext;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private android.support.v7.widget.RecyclerView rec1, rec2, rec3, rec4, rec5;
+    private RecyclerView recyclerView;
 
-    //Arrays
-    ArrayList<Complemento> arrayComplementos = new ArrayList<Complemento>();
-    ArrayList<Complemento> arrayBebidasCalientes = new ArrayList<Complemento>();
-    ArrayList<Complemento> arrayBebidasFrias = new ArrayList<Complemento>();
-    ArrayList<Complemento> arrayTostasPizzas = new ArrayList<Complemento>();
-    ArrayList<Complemento> arrayBolleria = new ArrayList<>();
-    ArrayList<Complemento> arrayMas = new ArrayList<Complemento>();
+    //Array
+    ArrayList<Complemento> arrayComplementos = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,30 +37,27 @@ public class Fragment_Otros extends Fragment{
 
         mContext = getContext();
         administraPeticionesCacheOtros();
-        clasifica();
-    }
-
-    //Clasificamos el arrayComplementos en 5 categorias
-    private void clasifica(){
+        /*
+        //Clasificamos el array en 5 categorias
         for(Complemento comp : arrayComplementos){
             switch (comp.getTipo()) {
                 case 1:
-                    arrayTostasPizzas.add(comp);
-                    break;
-                case 2:
-                    arrayBolleria.add(comp);
-                    break;
-                case 3:
                     arrayBebidasCalientes.add(comp);
                     break;
-                case 4:
+                case 2:
                     arrayBebidasFrias.add(comp);
+                    break;
+                case 3:
+                    arrayTostasPizzas.add(comp);
+                    break;
+                case 4:
+                    arrayBolleria.add(comp);
                     break;
                 default:
                     arrayMas.add(comp);
                     break;
             }
-        }
+        }*/
     }
 
     @Nullable
@@ -73,24 +65,12 @@ public class Fragment_Otros extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_otros, container, false);
 
-        //Cogemos los  RecyclingViews
-        rec1 = view.findViewById(R.id.rec1);
-        rec2 = view.findViewById(R.id.rec2);
-        rec3 = view.findViewById(R.id.rec3);
-        rec4 = view.findViewById(R.id.rec4);
-        rec5 = view.findViewById(R.id.rec5);
+        //Cogemos los elementos del layout
+        recyclerView = view.findViewById(R.id.rec1);
+        swipeRefreshLayout = view.findViewById(R.id.swipeComplementos);
 
         //Ponemos escuchando el SwipeToRefresh
-        swipeRefreshLayout = view.findViewById(R.id.swipeComplementos);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
-
-        //Quitamos el scroll en ellos
-        rec1.setNestedScrollingEnabled(false);
-        rec2.setNestedScrollingEnabled(false);
-        rec3.setNestedScrollingEnabled(false);
-        rec4.setNestedScrollingEnabled(false);
-        rec5.setNestedScrollingEnabled(false);
-
 
         //Inflamos la vista
         setOtros();
@@ -104,10 +84,10 @@ public class Fragment_Otros extends Fragment{
 
     //**********************************************************************************************
     private void administraPeticionesCacheOtros(){
-
         //Cada request se puede usar una vez
         HttpGetRequest request1 = new HttpGetRequest();
         HttpGetRequest request2 = new HttpGetRequest();
+
 
         //Comprobamos si hay conexion para hacer las peticiones de los arrays
         Administrador_Cache cache = new Administrador_Cache();
@@ -116,6 +96,7 @@ public class Fragment_Otros extends Fragment{
 
             String remoteLastUpdate = request1.getLastUpdate("otros");
             String localLastUpdate  = cache.leerLastUpdate( mContext, "bocadillos");
+
 
             if(!remoteLastUpdate.equalsIgnoreCase(localLastUpdate) ){
                 arrayComplementos = request2.getOtros();
@@ -131,32 +112,21 @@ public class Fragment_Otros extends Fragment{
             arrayComplementos = (ArrayList<Complemento>) cache.leerListaOtros( mContext);
     }
 
-    //Metodo para rellenar los recyclerViews
+
+    //**********************************************************************************************
+    //Metodo para rellenar el cardview
     private void setOtros(){
-        setRecyclerView(arrayBebidasCalientes,rec1);
-        setRecyclerView(arrayBebidasFrias,rec2);
-        setRecyclerView(arrayTostasPizzas,rec3);
-        setRecyclerView(arrayBolleria,rec4);
-        setRecyclerView(arrayMas,rec5);
-    }
 
-    private void setRecyclerView(ArrayList<Complemento> array, RecyclerView recyclerView){
+        Adaptador_Otros adaptador = new Adaptador_Otros(getActivity(),arrayComplementos);
 
-        //Creamos el objeto adaptador para todos los arrays
-        Adaptador_Otros adaptador = new Adaptador_Otros(getActivity(),array);
-
-        //Creamos el objeto de la clase que nos lo va a poner en dos columnas
         StaggeredGridLayoutManager cardAdapter = new StaggeredGridLayoutManager(NUM_COLUMNS, LinearLayoutManager.VERTICAL);
 
-        //Adaptamos el cardview
         recyclerView.setLayoutManager(cardAdapter);
 
         //Adaptamos el contenido
         recyclerView.setAdapter(adaptador);
 
     }
-
-    //**********************************************************************************************
 
     //Metodo para definir la accion del swipe to refresh
     private void escuchamosSwipe() {
@@ -170,6 +140,7 @@ public class Fragment_Otros extends Fragment{
 
                 //Chequeamos si tenemos el menu actualizado
                 //request.checkMenuActualizados();
+
 
                 if(request.isConnected(mContext) && arrayComplementos.isEmpty()){
                     arrayComplementos = request.getOtros();
