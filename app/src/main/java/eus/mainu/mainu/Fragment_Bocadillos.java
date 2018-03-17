@@ -42,31 +42,6 @@ public class Fragment_Bocadillos extends Fragment {
         administraPeticionesCacheBocadillos();
     }
 
-    //Metodo que se ejecuta al visualizar el fragmento, se representa en funcion del layout fragment_bocadillos
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_bocadillos, container, false);
-
-        //Cogemos el recycling view
-        recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);
-
-        //Añadimos una linea debajo de cada objeto
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mContext, new LinearLayoutManager(mContext).getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
-
-        //Ponemos el SwipeToRefresh
-        swipeRefreshLayout = view.findViewById(R.id.swipeBocadillos);
-        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
-
-        //Inflamos la vista
-        setBocadillos();
-
-        escuchamosSwipe();
-
-        return view;
-    }
-
     //**********************************************************************************************
     private void administraPeticionesCacheBocadillos(){
         //Cada request se puede usar una vez
@@ -93,6 +68,31 @@ public class Fragment_Bocadillos extends Fragment {
         }
         if(usarCache)
             arrayBocadillos = (ArrayList<Bocadillo>) cache.leerListaBocadillos( mContext);
+    }
+
+    //Metodo que se ejecuta al visualizar el fragmento, se representa en funcion del layout fragment_bocadillos
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_bocadillos, container, false);
+
+        //Cogemos el recycling view
+        recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);
+
+        //Añadimos una linea debajo de cada objeto
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mContext, new LinearLayoutManager(mContext).getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        //Ponemos el SwipeToRefresh
+        swipeRefreshLayout = view.findViewById(R.id.swipeBocadillos);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+
+        //Inflamos la vista
+        setBocadillos();
+
+        escuchamosSwipe();
+
+        return view;
     }
 
     //**********************************************************************************************

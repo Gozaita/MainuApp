@@ -16,18 +16,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,27 +40,20 @@ import eus.mainu.mainu.Utilidades.Adaptador_Fragmentos;
 
 public class Activity_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
 
+    //Variables globales
     private static final String TAG = "Activity MAIN";
     private static final int SIGN_IN_CODE = 777; //Es 777 porque yo he querido, podria ser cualquiera
 
-    private TextView titulo;
+    //Elementos layout
+    private DrawerLayout drawer;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private ImageButton searchButton;
-    private ImageButton backArrow;
-    private EditText filter;
-    private RelativeLayout layoutblanco;
-
-    //NavigationView
-    NavigationView navigationView;
-
-    //Datos del usuario
+    private Toolbar toolbar;
     private ImageView fotoUsuario;
     private TextView nombre, email;
 
-    //Variables
+    //Datos del usuario
     private GoogleApiClient googleApiClient;
-
 
     //Fragmentos
     private Fragment_Menu fMenu = new Fragment_Menu();
@@ -83,62 +69,197 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
         Log.d(TAG, "onCreate: Inicia Main Activity");
 
-        titulo = findViewById(R.id.textViewActividad);
+        //Seccion para referenciar a todos los elementos layout
+        drawer = findViewById(R.id.drawer_layout);
         viewPager = findViewById(R.id.contenedor);
         tabLayout = findViewById(R.id.tabs);
-        searchButton = findViewById(R.id.search_button);
-        filter = findViewById(R.id.searchFilter);
-        backArrow = findViewById(R.id.back_button);
-        layoutblanco = findViewById(R.id.barra_blanca);
-        navigationView = findViewById(R.id.nav_view);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        //Nav
+        //Hay que hacer esto para referenciar los elementos del nav header
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
         View header = navigationView.getHeaderView(0);
         fotoUsuario = header.findViewById(R.id.imagenUsuario);
         nombre = header.findViewById(R.id.nombre);
         email = header.findViewById(R.id.correo);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setToolbar();
+        setCuenta();
+        setDrawer();
+        setupViewPager();
 
+    }
+
+    /********************************************************************************************/
+
+    private void setCuenta(){
+
+        Log.d(TAG, "setCuenta");
+
+        //Pedimos la cuenta del usuario con nuestro codigo de la API
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)//Asi seria el normal
                 .requestEmail()//asi pedimos el id
                 .build();
 
-        //Autenticacion
-        googleApiClient = new GoogleApiClient.Builder(this).
-                enableAutoManage(this,this) //permite gestionar el ciclo de vida con la actividad y dice quien escucha en caso de que algo salga mal
+        ///Permite gestionar el ciclo de vida de la autenticacion con el de la actividad y dice quien escucha en caso de que algo salga mal
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this,this) //El segundo parametro dice quien escucha
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+    }
 
+    //Metodo para customizar la toolbar e implementar la busqueda, se puede convinar con el metodo on page scroll
+    private void setToolbar(){
+        getSupportActionBar().setTitle(R.string.menuDelDia);
+    }
 
-        //taskAcabada = (ITaskAcabada) this;
+    private void setDrawer(){
 
-        setUpTitulo();
+        Log.d(TAG, "setDrawer");
 
-        setupViewPager();
-
-        setIntroduceTextoEditText();
-        setEnterEditText();
-
-        setBackButton();
-
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.blanco));
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+    }
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+
+    //Responsable de añadir 3 fragmentos: Bocadillos, Menu, Otros
+    private void setupViewPager(){
+
+        Log.d(TAG, "setupViewPager");
+
+        //Creamos los fragmentos
+        Adaptador_Fragmentos adapter = new Adaptador_Fragmentos(getSupportFragmentManager());
+        adapter.addFragment(fMenu); //index 0
+        adapter.addFragment(fBocadillos); //index 1
+        adapter.addFragment(fOtros); //index 2
+
+        //Creamos las tabulaciones
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+        //Añadimos 3 iconos
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_sandwich);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_french_fries);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //Quitamos el teclado si esta abierto
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(viewPager.getWindowToken(), 0);
+                switch (position) {
+                    case 0:
+                        getSupportActionBar().setTitle(R.string.menuDelDia);
+                        break;
+                    case 1:
+                        getSupportActionBar().setTitle(R.string.bocadillos);
+                        break;
+                    case 2:
+                        getSupportActionBar().setTitle(R.string.complementos);
+                        break;
+                }
+            }
+            @Override
+            public void onPageSelected(int position) {
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
+     /********************************************************************************************
+     * Codigo que tiene que ver con el registro del usuario con Google
+     *
+     */
+
+    //Configuramos el navigation Drawer
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        Log.d(TAG, "onNavigationItemSelected: " + item.getItemId());
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.home) {
+
+        } else if (id == R.id.informacion) {
+
+        } else if (id == R.id.comparte) {
+
+        } else if (id == R.id.error) {
+
+        } else if (id == R.id.iniciarSesion) {
+
+            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+            startActivityForResult(signInIntent, SIGN_IN_CODE); //Codigo unico que devuelve al registrarse
+
+        } else if (id == R.id.cerrarSesion) {
+
+            //Cerramos la sesion del usuario e indicamos con un Toast como ha ido
+            Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+                @Override
+                public void onResult(@NonNull Status status) {
+                    if(status.isSuccess()){
+                        Toast.makeText(Activity_Main.this, R.string.despedida, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Activity_Main.this, R.string.fail, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+            resetNavigationDrawer();
+
+        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    /********************************************************************************************/
+
+    private void resetNavigationDrawer(){
+
+        Log.d(TAG, "resetNavigationDrawer");
+
+        nombre.setText(R.string.nombre);
+        email.setText(R.string.email);
+
+        Picasso.with(this).load(R.drawable.logo_blanco).fit().into(fotoUsuario, new Callback() {
+            @Override
+            public void onSuccess() {
+                Bitmap imageBitmap = ((BitmapDrawable) fotoUsuario.getDrawable()).getBitmap();
+                RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(getResources(), imageBitmap);
+                imageDrawable.setCircular(true);
+                imageDrawable.setCornerRadius(Math.max(imageBitmap.getWidth(), imageBitmap.getHeight()) / 2.0f);
+                fotoUsuario.setImageDrawable(imageDrawable);
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
+    }
+
+    /********************************************************************************************/
+
+
+    //Se hace un silent sing in cuando se inicia la actividad
     @Override
     protected void onStart() {
         super.onStart();
+
+        Log.d(TAG, "onStart");
 
         OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
         if(opr.isDone()) {
@@ -154,8 +275,12 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         }
     }
 
-    //Comprobamos si el loggin ha sido exitoso y accedemos a la informacion del usuario
+    /********************************************************************************************/
+
+    //Comprobamos si el silent sign in ha sido existoso y mostramos la informacion si ha sido asi
     private void resultadoSilentSingIn(GoogleSignInResult result){
+
+        Log.d(TAG, "resultadoSilentSingIn: "+ result.isSuccess());
 
         if(result.isSuccess()) {
 
@@ -180,220 +305,29 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
                 }
             });
-
-
         } /*else {
             //No se ha autenticado bien
         }*/
     }
 
-    //Responsable de añadir 3 fragmentos: Bocadillos, Menu, Otros
-    private void setupViewPager(){
-
-        //Creamos los fragmentos
-        Adaptador_Fragmentos adapter = new Adaptador_Fragmentos(getSupportFragmentManager());
-        adapter.addFragment(fMenu); //index 0
-        adapter.addFragment(fBocadillos); //index 1
-        adapter.addFragment(fOtros); //index 2
-
-        //Creamos las tabulaciones
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-
-        //Añadimos 3 iconos
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_sandwich);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_french_fries);
-
-
-        searchButton.setOnClickListener(searchClickListener);
-    }
-
-
-    //Metodo que sirve para cambiar el titulo de la toolbar en funcion del fragmento
-    private void setUpTitulo(){
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                //Quitamos el teclado si esta abierto
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(viewPager.getWindowToken(), 0);
-                //Reseteamos la toolbar
-                filter.setVisibility(View.GONE);
-                layoutblanco.setVisibility(View.GONE);
-                backArrow.setVisibility(View.GONE);
-                filter.setText("");
-
-                switch (position) {
-                    case 0:
-                        titulo.setText(R.string.menuDelDia);
-                        searchButton.setVisibility(View.GONE);
-                        break;
-                    case 1:
-                        titulo.setText(R.string.bocadillos);
-                        searchButton.setVisibility(View.VISIBLE);
-                        break;
-                    case 2:
-                        titulo.setText(R.string.complementos);
-                        searchButton.setVisibility(View.VISIBLE);
-                        break;
-                }
-            }
-            @Override
-            public void onPageSelected(int position) {
-            }
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-    }
-
-    View.OnClickListener searchClickListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            if (v.equals(searchButton)) {
-                //Mostramos el cuadro de texto
-                layoutblanco.setVisibility(View.VISIBLE);
-                backArrow.setVisibility(View.VISIBLE);
-                findViewById(R.id.searchFilter).setVisibility(View.VISIBLE);
-                //Focuseamos el cuadro
-                filter.requestFocus();
-                //Abrimos el teclado en el cuadro de texto
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(filter, InputMethodManager.SHOW_IMPLICIT);
-            }
-        }
-    };
-
-    //Metodo para saber si se ha pulsado el enter, esconder el teclado y el cuadro de texto
-    private void setEnterEditText(){
-        filter.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                //Comprueba si se devuelve un 0
-                if (actionId == EditorInfo.IME_NULL) {
-                    //taskAcabada.setTexto(busqueda);
-                    //Esconde teclado
-                    InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    //Esconde texto
-                    filter.setVisibility(View.GONE);
-                    backArrow.setVisibility(View.GONE);
-                    layoutblanco.setVisibility(View.GONE);
-
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
-    //Metodo que gestiona la introduccion del texto en el filtro
-    private void setIntroduceTextoEditText(){
-        filter.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-
-            }
-        });
-    }
-
-    private void setBackButton(){
-        backArrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                layoutblanco.setVisibility(View.GONE);
-                backArrow.setVisibility(View.GONE);
-                filter.setVisibility(View.GONE);
-                filter.setText("");
-                //Esconde teclado
-                //Quitamos el teclado si esta abierto
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(viewPager.getWindowToken(), 0);
-            }
-        });
-    }
-
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.home) {
-
-        } else if (id == R.id.informacion) {
-
-        } else if (id == R.id.comparte) {
-
-        } else if (id == R.id.error) {
-
-        } else if (id == R.id.iniciarSesion) {
-
-            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-            startActivityForResult(signInIntent, SIGN_IN_CODE); //Codigo unico que devuelve al registrarse
-
-
-        } else if (id == R.id.cerrarSesion) {
-
-            Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
-                @Override
-                public void onResult(@NonNull Status status) {
-                    if(status.isSuccess()){
-                        Toast.makeText(Activity_Main.this, R.string.despedida, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(Activity_Main.this, R.string.fail, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-
-            nombre.setText(R.string.nombre);
-            email.setText(R.string.email);
-
-            Picasso.with(this).load(R.drawable.logo_blanco).fit().into(fotoUsuario, new Callback() {
-                @Override
-                public void onSuccess() {
-                    Bitmap imageBitmap = ((BitmapDrawable) fotoUsuario.getDrawable()).getBitmap();
-                    RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(getResources(), imageBitmap);
-                    imageDrawable.setCircular(true);
-                    imageDrawable.setCornerRadius(Math.max(imageBitmap.getWidth(), imageBitmap.getHeight()) / 2.0f);
-                    fotoUsuario.setImageDrawable(imageDrawable);
-                }
-
-                @Override
-                public void onError() {
-
-                }
-            });
-
-            
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+    /********************************************************************************************/
 
     //Cuando algo sale mal en la conexion
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+        Log.d(TAG, "onConnectionFailed");
+
+        Toast.makeText(this, R.string.fail ,Toast.LENGTH_SHORT).show();
     }
+
+    /********************************************************************************************/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        Log.d(TAG, "onActivityResult");
 
         if(requestCode == SIGN_IN_CODE){
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -401,8 +335,12 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         }
     }
 
+    /********************************************************************************************/
+
     //Metodo que gestiona el resultado del sign in
     private  void resultadoSignIn(GoogleSignInResult result){
+
+        Log.d(TAG, "resultadoSignIn: "+ result.isSuccess());
 
         if (result.isSuccess()){
             Toast.makeText(this,R.string.agradecimiento,Toast.LENGTH_SHORT).show();
@@ -414,6 +352,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
             Picasso.with(this).load(cuenta.getPhotoUrl()).fit().into(fotoUsuario, new Callback() {
                 @Override
                 public void onSuccess() {
+                    Log.d(TAG, "onSuccess");
                     Bitmap imageBitmap = ((BitmapDrawable) fotoUsuario.getDrawable()).getBitmap();
                     RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(getResources(), imageBitmap);
                     imageDrawable.setCircular(true);
@@ -423,6 +362,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
                 @Override
                 public void onError() {
+                    Log.d(TAG, "onError");
 
                 }
             });

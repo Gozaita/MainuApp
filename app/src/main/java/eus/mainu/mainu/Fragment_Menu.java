@@ -43,13 +43,6 @@ public class Fragment_Menu extends Fragment {
     private Menu menu = new Menu();
     //private boolean actualizado = false;
 
-    //Metodo que se llama antes de onCreate
-    //Siempre se instancian las interfaces aqui
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        //mIActivityMain = (IActivityMain) getActivity();
-    }
 
     //Metodo que se llama antes de onCreateView, se suelen coger las variables aqui
     @Override
@@ -58,7 +51,6 @@ public class Fragment_Menu extends Fragment {
 
         Log.d(TAG, "onCreate: Fragmento Menu");
 
-        //mIActivityMain.setTexto(TAG);//Pasamos un texto a la actividad Main
         //Cogemos el contexto
         mContext = getContext();
         //Creamos un objeto para hacer las peticiones get y para hacer los hilos

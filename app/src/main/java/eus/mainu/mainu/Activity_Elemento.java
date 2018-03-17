@@ -84,31 +84,7 @@ public class Activity_Elemento extends AppCompatActivity {
 
     }
 
-
-    //Metodo para recibir la informacion que se pasa a la actividad
-    private void getInformacion() {
-
-        //Vemos si la info es de un bocadillo
-        if(getIntent().hasExtra("Bocadillo")){
-
-            Bocadillo bocadillo = (Bocadillo) getIntent().getSerializableExtra("Bocadillo");
-            setBocadillo(bocadillo);
-        }
-        //Vemos si la info es de un complemento
-        if(getIntent().hasExtra("Complemento")){
-
-            Complemento complemento = (Complemento) getIntent().getSerializableExtra("Complemento");
-            setComplemento(complemento);
-
-        }
-
-        if(getIntent().hasExtra("Plato")){
-            Plato plato = (Plato) getIntent().getSerializableExtra("Plato");
-            setPlato(plato);
-
-        }
-    }
-
+    //Metodo para inflar el recyclingview de los comentarios
     private void setValoraciones(){
 
         //Inicializamos el adaptador de las valoraciones
@@ -119,7 +95,36 @@ public class Activity_Elemento extends AppCompatActivity {
         listaComentarios.setLayoutManager(new LinearLayoutManager(this));
     }
 
+
+    /** Metodos que estan relacionados con leer la informacion que se le pasa a la actividad
+     * y deciden si es un Plato/Bocadillo/Complemento
+     */
+
+    //Metodo para recibir la informacion que se pasa a la actividad
+    private void getInformacion() {
+
+        //Vemos si la info es de un bocadillo
+        if(getIntent().hasExtra("Bocadillo")){
+            Bocadillo bocadillo = (Bocadillo) getIntent().getSerializableExtra("Bocadillo");
+            setBocadillo(bocadillo);
+        }
+        //Vemos si la info es de un complemento
+        if(getIntent().hasExtra("Complemento")){
+
+            Complemento complemento = (Complemento) getIntent().getSerializableExtra("Complemento");
+            setComplemento(complemento);
+        }
+        //Vemos si es un plato
+        if(getIntent().hasExtra("Plato")){
+            Plato plato = (Plato) getIntent().getSerializableExtra("Plato");
+            setPlato(plato);
+
+        }
+    }
+
     private void setBocadillo(Bocadillo bocadillo) {
+
+        Log.d(TAG, "setBocadillo: "+ bocadillo.getNombre());
 
         HttpGetRequest request = new HttpGetRequest();
 
@@ -159,6 +164,8 @@ public class Activity_Elemento extends AppCompatActivity {
 
     private void setComplemento(Complemento complemento) {
 
+        Log.d(TAG, "setComplemento: " + complemento.getNombre());
+
         HttpGetRequest request = new HttpGetRequest();
 
         Complemento nuevo = new Complemento();
@@ -197,6 +204,8 @@ public class Activity_Elemento extends AppCompatActivity {
 
     private void setPlato(Plato plato) {
 
+        Log.d(TAG, "setPlato: " +plato.getNombre());
+
         HttpGetRequest request = new HttpGetRequest();
 
         Plato nuevo = new Plato();
@@ -234,11 +243,16 @@ public class Activity_Elemento extends AppCompatActivity {
 
     }
 
+    /** Metodos que estan relacionados con el uso de la camara
+     *
+     */
+
     //Metodo para llamar a la camara
     private void setBotonCamara(){
         botonCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "onClick: Boton Camara");
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
 

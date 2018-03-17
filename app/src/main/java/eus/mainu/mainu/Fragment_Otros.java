@@ -63,28 +63,6 @@ public class Fragment_Otros extends Fragment{
         }*/
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_otros, container, false);
-
-        //Cogemos los elementos del layout
-        recyclerView = view.findViewById(R.id.rec1);
-        swipeRefreshLayout = view.findViewById(R.id.swipeComplementos);
-
-        //Ponemos escuchando el SwipeToRefresh
-        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
-
-        //Inflamos la vista
-        setOtros();
-
-        //Escuchamos un posible swipe to refresh
-        escuchamosSwipe();
-
-        return view;
-    }
-
-
     //**********************************************************************************************
     private void administraPeticionesCacheOtros(){
         //Cada request se puede usar una vez
@@ -114,6 +92,28 @@ public class Fragment_Otros extends Fragment{
         if(usarCache)
             arrayComplementos = (ArrayList<Complemento>) cache.leerListaOtros(mContext);
     }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_otros, container, false);
+
+        //Cogemos los elementos del layout
+        recyclerView = view.findViewById(R.id.rec1);
+        swipeRefreshLayout = view.findViewById(R.id.swipeComplementos);
+
+        //Ponemos escuchando el SwipeToRefresh
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+
+        //Inflamos la vista
+        setOtros();
+
+        //Escuchamos un posible swipe to refresh
+        escuchamosSwipe();
+
+        return view;
+    }
+
 
 
     //**********************************************************************************************
