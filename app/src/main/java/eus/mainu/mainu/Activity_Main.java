@@ -109,10 +109,14 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 .build();
     }
 
+    /********************************************************************************************/
+
     //Metodo para customizar la toolbar e implementar la busqueda, se puede convinar con el metodo on page scroll
     private void setToolbar(){
         getSupportActionBar().setTitle(R.string.menuDelDia);
     }
+
+    /********************************************************************************************/
 
     private void setDrawer(){
 
@@ -125,6 +129,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         toggle.syncState();
     }
 
+    /********************************************************************************************/
 
     //Responsable de añadir 3 fragmentos: Bocadillos, Menu, Otros
     private void setupViewPager(){
@@ -186,44 +191,90 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     public boolean onNavigationItemSelected(MenuItem item) {
 
         Log.d(TAG, "onNavigationItemSelected: " + item.getItemId());
-        // Handle navigation view item clicks here.
+
+        // Para definir las acciones de los iconos
+
         int id = item.getItemId();
 
         if (id == R.id.home) {
+
+            homeClick();
 
         } else if (id == R.id.informacion) {
 
         } else if (id == R.id.comparte) {
 
+            comparteClick();
+
         } else if (id == R.id.error) {
 
         } else if (id == R.id.iniciarSesion) {
 
-            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-            startActivityForResult(signInIntent, SIGN_IN_CODE); //Codigo unico que devuelve al registrarse
+            iniciarSesionClick();
 
         } else if (id == R.id.cerrarSesion) {
 
-            //Cerramos la sesion del usuario e indicamos con un Toast como ha ido
-            Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
-                @Override
-                public void onResult(@NonNull Status status) {
-                    if(status.isSuccess()){
-                        Toast.makeText(Activity_Main.this, R.string.despedida, Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(Activity_Main.this, R.string.fail, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-            resetNavigationDrawer();
+            cerrarSesionClick();
 
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        //Cerramos el drawer
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
+
+    /********************************************************************************************/
+
+    private void homeClick(){
+
+        //Decimos que queremos navegar a la clase Elemento
+        Intent intent = new Intent(this, Activity_Main.class);
+        //Limpiamos el backstack
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        //Iniciamos la actividad
+        startActivity(intent);
+        finish();
+    }
+
+    /********************************************************************************************/
+
+    private void comparteClick(){
+
+        //Metodo para enviar un mensaje a otra aplicacion
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT,"¡Mira como mola! --> www.mainu.eus");
+        startActivity(Intent.createChooser(intent,"Compartir con"));
+    }
+
+    /********************************************************************************************/
+
+    private void iniciarSesionClick(){
+
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+        startActivityForResult(signInIntent, SIGN_IN_CODE); //Codigo unico que devuelve al registrarse
+    }
+
+    /********************************************************************************************/
+
+    private void cerrarSesionClick(){
+
+        //Cerramos la sesion del usuario e indicamos con un Toast como ha ido
+        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
+            @Override
+            public void onResult(@NonNull Status status) {
+                if(status.isSuccess()){
+                    Toast.makeText(Activity_Main.this, R.string.despedida, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Activity_Main.this, R.string.fail, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        resetNavigationDrawer();
+    }
+
 
     /********************************************************************************************/
 
@@ -252,7 +303,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     }
 
     /********************************************************************************************/
-
 
     //Se hace un silent sing in cuando se inicia la actividad
     @Override

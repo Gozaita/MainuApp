@@ -51,8 +51,6 @@ public class Adaptador_Platos extends BaseAdapter {
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
 
-        Log.d(TAG, "getView plato: " +i);
-
         if (view == null) {
             view = LayoutInflater.from(mContext).
                     inflate(R.layout.listview_platos, viewGroup, false);
