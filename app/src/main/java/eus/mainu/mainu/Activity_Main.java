@@ -228,13 +228,8 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
     private void homeClick(){
 
-        //Decimos que queremos navegar a la clase Elemento
-        Intent intent = new Intent(this, Activity_Main.class);
-        //Limpiamos el backstack
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        //Iniciamos la actividad
-        startActivity(intent);
-        finish();
+        drawer.closeDrawer(GravityCompat.START);
+
     }
 
     /********************************************************************************************/
