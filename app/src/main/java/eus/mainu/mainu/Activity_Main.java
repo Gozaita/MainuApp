@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +32,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -44,7 +44,6 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Fragmentos;
-import eus.mainu.mainu.Utilidades.Administrador_Cache;
 
 public class Activity_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
 
@@ -67,7 +66,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     private TextView nombre, email;
 
     //Variables
-    private String busqueda;
     private GoogleApiClient googleApiClient;
 
 
@@ -82,6 +80,8 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Log.d(TAG, "onCreate: Inicia Main Activity");
 
         titulo = findViewById(R.id.textViewActividad);
         viewPager = findViewById(R.id.contenedor);
@@ -98,7 +98,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         nombre = header.findViewById(R.id.nombre);
         email = header.findViewById(R.id.correo);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)//Asi seria el normal
@@ -124,14 +124,14 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         setBackButton();
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.blanco));
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
     }
@@ -182,9 +182,9 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
             });
 
 
-        } else {
+        } /*else {
             //No se ha autenticado bien
-        }
+        }*/
     }
 
     //Responsable de añadir 3 fragmentos: Bocadillos, Menu, Otros
@@ -297,7 +297,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                busqueda = charSequence.toString();
             }
 
             @Override
@@ -381,7 +380,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
             
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

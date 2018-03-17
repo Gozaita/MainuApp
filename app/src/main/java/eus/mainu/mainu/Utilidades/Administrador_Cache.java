@@ -2,7 +2,6 @@ package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -29,7 +28,7 @@ public class Administrador_Cache {
 
     public String leerLastUpdate (Context context, String tipo) {
 
-        Object object = null;
+        Object object;
         String fichero = "lastUdate"+tipo;
         try {
             FileInputStream fis = context.openFileInput(fichero);

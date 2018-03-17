@@ -13,15 +13,15 @@ import eus.mainu.mainu.datalayer.Plato;
 
 public class Menu implements Serializable{
 
-    ArrayList<Plato> primeros = new ArrayList<>();
-    ArrayList<Plato> segundos = new ArrayList<>();
-    ArrayList<Plato> postres = new ArrayList<>();
+    private ArrayList<Plato> primeros = new ArrayList<>();
+    private ArrayList<Plato> segundos = new ArrayList<>();
+    private ArrayList<Plato> postres = new ArrayList<>();
 
     public ArrayList<Plato> getPrimeros() {
         return primeros;
     }
 
-    public void setPrimeros(ArrayList<Plato> primeros) {
+    void setPrimeros(ArrayList<Plato> primeros) {
         this.primeros = primeros;
     }
 
@@ -29,7 +29,7 @@ public class Menu implements Serializable{
         return segundos;
     }
 
-    public void setSegundos(ArrayList<Plato> segundos) {
+    void setSegundos(ArrayList<Plato> segundos) {
         this.segundos = segundos;
     }
 
@@ -37,13 +37,13 @@ public class Menu implements Serializable{
         return postres;
     }
 
-    public void setPostres(ArrayList<Plato> postres) {
+    void setPostres(ArrayList<Plato> postres) {
         this.postres = postres;
     }
 
     public ArrayList<String> getNombres()
     {
-        ArrayList<String> nombres = new ArrayList<String>();
+        ArrayList<String> nombres = new ArrayList<>();
         int i;
 
         for(i = 0; i < primeros.size(); i++)
@@ -66,9 +66,9 @@ public class Menu implements Serializable{
 
     public ArrayList<Imagen> getImagenes(){
 
-        ArrayList<Imagen> imagenes = new ArrayList<Imagen>();
+        ArrayList<Imagen> imagenes = new ArrayList<>();
 
-        int i,j;
+        int i;
 
         //Cogemos las imagenes oficiales de los platos
         for(i = 0; i < primeros.size(); i++) {

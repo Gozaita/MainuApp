@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import eus.mainu.mainu.Activity_Elemento;
 import eus.mainu.mainu.R;
@@ -41,17 +42,16 @@ public class Adaptador_Otros extends RecyclerView.Adapter<Adaptador_Otros.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.layout_grid_item,parent,false);
-        ViewHolder holder = new ViewHolder(view);
-    return holder;
+    return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder,final int position) {
 
         holder.nombre.setText(arrayComplementos.get(position).getNombre());
-        holder.precio.setText(String.format("%.2f€",arrayComplementos.get(position).getPrecio()));
+        holder.precio.setText(String.format(Locale.getDefault(),"%.2f€",arrayComplementos.get(position).getPrecio()));
         if(arrayComplementos.get(position).getPuntuacion() != 0){
-            holder.puntuacion.setText(String.format("%.1f",arrayComplementos.get(position).getPuntuacion()));
+            holder.puntuacion.setText(String.format(Locale.getDefault(),"%.1f",arrayComplementos.get(position).getPuntuacion()));
         }
         else {
             holder.puntuacion.setText("N/A");
@@ -105,7 +105,7 @@ public class Adaptador_Otros extends RecyclerView.Adapter<Adaptador_Otros.ViewHo
         return arrayComplementos.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imagen;
         //ImageView estrella;
@@ -114,7 +114,7 @@ public class Adaptador_Otros extends RecyclerView.Adapter<Adaptador_Otros.ViewHo
         TextView puntuacion;
         RelativeLayout complemento_layout;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             this.imagen = itemView.findViewById(R.id.imagen_card);
             //this.estrella = itemView.findViewById(R.id.estrella);

@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
@@ -70,7 +69,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
     public String getLastUpdate(String tipo){
         String lastUpdate = "0";
 
-        if(tipo == "bocadillos" || tipo == "menu" || tipo == "otros"){
+        if(tipo.equals("bocadillos") || tipo.equals("menu") || tipo.equals("otros")){
             try{
                 lastUpdate = execute("https://api.mainu.eus/last_update/" + tipo).get();
             } catch (Exception e) {
@@ -84,7 +83,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
     //Metodo para pedir el listado de bocadillos, todas las operaciones de parseo del mensaje JSON se hacen dentro de el
     public ArrayList<Bocadillo> getBocadillos(){
 
-        ArrayList<Bocadillo> arrayBocadillos = new ArrayList<Bocadillo>();
+        ArrayList<Bocadillo> arrayBocadillos = new ArrayList<>();
 
         try {
             String result = execute("https://api.mainu.eus/bocadillos").get();
@@ -148,7 +147,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
         Bocadillo bocadillo = new Bocadillo();
 
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append("https://api.mainu.eus/bocadillos/");
         url.append(id);
 
@@ -170,7 +169,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
         Complemento complemento = new Complemento();
 
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append("https://api.mainu.eus/otros/");
         url.append(id);
 
@@ -192,7 +191,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
         Plato plato = new Plato();
 
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append("https://api.mainu.eus/menu/");
         url.append(id);
 

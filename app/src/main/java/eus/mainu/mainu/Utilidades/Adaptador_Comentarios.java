@@ -31,7 +31,7 @@ public class Adaptador_Comentarios extends RecyclerView.Adapter<Adaptador_Coment
 
     //Para debuggear
     private static final String TAG = "Adaptador_Comentarios";
-    ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
+    private ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
     private Context mContext;
 
     public Adaptador_Comentarios(ArrayList<Valoracion> arrayValoraciones, Context context) {
@@ -42,8 +42,7 @@ public class Adaptador_Comentarios extends RecyclerView.Adapter<Adaptador_Coment
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.recyclingview_comentarios, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -79,14 +78,14 @@ public class Adaptador_Comentarios extends RecyclerView.Adapter<Adaptador_Coment
         return arrayValoraciones.size();
     }
 
-    public class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
+    class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
 
         TextView comentario;
         ImageButton foto;
         TextView nombre;
         RatingBar estrellas;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             comentario = itemView.findViewById(R.id.comentarioUsuario);
             foto = itemView.findViewById(R.id.fotoUsuario);

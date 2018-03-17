@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import eus.mainu.mainu.Activity_Elemento;
 import eus.mainu.mainu.R;
@@ -24,10 +25,12 @@ import eus.mainu.mainu.datalayer.Ingrediente;
 
 public class Adaptador_Bocadillos extends RecyclerView.Adapter<Adaptador_Bocadillos.ViewHolder> {
 
-    //Para debbuguear
+    //Globales
     private static final String TAG = "Adaptador_Bocadillos";
-    ArrayList<Bocadillo> arrayBocadillos = new ArrayList<Bocadillo>();
+
+    //Variables
     private Context mContext;
+    private ArrayList<Bocadillo> arrayBocadillos = new ArrayList<>();
 
 
     public Adaptador_Bocadillos(ArrayList<Bocadillo> arrayBocadillos, Context context) {
@@ -40,8 +43,7 @@ public class Adaptador_Bocadillos extends RecyclerView.Adapter<Adaptador_Bocadil
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.recyclingview_listitem, parent,false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
 
@@ -51,9 +53,9 @@ public class Adaptador_Bocadillos extends RecyclerView.Adapter<Adaptador_Bocadil
 
     holder.nombre.setText(arrayBocadillos.get(position).getNombre());
     holder.ingredientes.setText(getIngredientes(position));
-    holder.precio.setText(String.format("%.2f€",arrayBocadillos.get(position).getPrecio()));
+    holder.precio.setText(String.format(Locale.getDefault(),"%.2f€",arrayBocadillos.get(position).getPrecio()));
     if(arrayBocadillos.get(position).getPuntuacion() != 0){
-        holder.puntuacion.setText(String.format("%.1f",arrayBocadillos.get(position).getPuntuacion()));
+        holder.puntuacion.setText(String.format(Locale.getDefault(),"%.1f",arrayBocadillos.get(position).getPuntuacion()));
     }
     else {
         holder.puntuacion.setText("N/A");
@@ -82,7 +84,7 @@ public class Adaptador_Bocadillos extends RecyclerView.Adapter<Adaptador_Bocadil
         return arrayBocadillos.size();
     }
 
-    public class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
+    class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
 
         TextView nombre;
         TextView ingredientes;
@@ -91,7 +93,7 @@ public class Adaptador_Bocadillos extends RecyclerView.Adapter<Adaptador_Bocadil
         //ImageView estrella;
         RelativeLayout bocadillo_layout;
 
-        public ViewHolder(View itemView) {
+        private ViewHolder(View itemView) {
             super(itemView);
             nombre = itemView.findViewById(R.id.nombreTextView);
             ingredientes = itemView.findViewById(R.id.descripcionTextView);
@@ -105,14 +107,14 @@ public class Adaptador_Bocadillos extends RecyclerView.Adapter<Adaptador_Bocadil
     //Metodo para poner los ingredientes en String
     private String getIngredientes(int position){
 
-        StringBuffer ingredientes = new StringBuffer();
+        StringBuilder ingredientes = new StringBuilder();
         String descripcion = "";
         int i;
 
         ArrayList<Ingrediente> arrayIngredientes = arrayBocadillos.get(position).getIngredientes();
 
         for(i = 0; i < arrayIngredientes.size();i++){
-            ingredientes.append(arrayIngredientes.get(i).getNombre()+", ");
+            ingredientes.append(arrayIngredientes.get(i).getNombre()).append(", ");
         }
 
         if(!arrayBocadillos.get(position).getIngredientes().isEmpty()){

@@ -19,14 +19,15 @@ import eus.mainu.mainu.datalayer.Valoracion;
 
 /**
  * Created by Manole on 12/03/2018.
+ * Clase para administrar los JSON que recibimos de la API
  */
 
-public class Administrador_JSON {
+class Administrador_JSON {
 
     //Metodo para pedir el listado de bocadillos, todas las operaciones de parseo del mensaje JSON se hacen dentro de el
-    public ArrayList<Bocadillo> getBocadillos(String result){
+    ArrayList<Bocadillo> getBocadillos(String result){
 
-        ArrayList<Bocadillo> arrayBocadillos = new ArrayList<Bocadillo>();
+        ArrayList<Bocadillo> arrayBocadillos = new ArrayList<>();
 
         try {
             JSONArray obj = new JSONArray(result);
@@ -53,7 +54,7 @@ public class Administrador_JSON {
 
 
     //Metodo para pedir el menu del dia, todas las operaciones de parseo del mensaje JSON se hacen dentro de el
-    public Menu getMenu(String result) {
+    Menu getMenu(String result) {
 
         Menu menu = new Menu();
 
@@ -97,7 +98,7 @@ public class Administrador_JSON {
     }
 
     //Método para crear el array de Complementos
-    public ArrayList<Complemento> getOtros(String result)
+    ArrayList<Complemento> getOtros(String result)
     {
         ArrayList<Complemento> arrayComplementos = new ArrayList<>();
 
@@ -131,7 +132,7 @@ public class Administrador_JSON {
 
 
     //Para recuperar un solo bocadillo a partir de su id
-    public Bocadillo getBocadillo(String result){
+    Bocadillo getBocadillo(String result){
 
         Bocadillo bocadillo = new Bocadillo();
 
@@ -155,7 +156,7 @@ public class Administrador_JSON {
     }
 
     //Para recuperar un solo complemento a partir de su id
-    public Complemento getComplemento(String result){
+    Complemento getComplemento(String result){
 
         Complemento complemento = new Complemento();
 
@@ -178,7 +179,7 @@ public class Administrador_JSON {
     }
 
     //Para recuperar un solo bocadillo a partir de su id
-    public Plato getPlato(String result){
+    Plato getPlato(String result){
 
         Plato plato = new Plato();
         
@@ -230,7 +231,7 @@ public class Administrador_JSON {
     //Metodo para leer la puntuacion de un JSONObject
     private double getDouble(JSONObject o, String nombre) throws JSONException {
 
-        double puntuacion = 0;
+        double puntuacion;
 
         if(!o.isNull(nombre)) {
             puntuacion = o.getDouble(nombre);
@@ -298,7 +299,7 @@ public class Administrador_JSON {
         JSONArray ingredientes = o.getJSONArray("ingredientes");
 
         //Mapeamos la lista de JSON en ingredientes
-        ArrayList<Ingrediente> arrayIngredientes = new ArrayList<Ingrediente>();
+        ArrayList<Ingrediente> arrayIngredientes = new ArrayList<>();
 
         for(int j = 0; j < ingredientes.length(); j++) {
             JSONObject a = ingredientes.getJSONObject(j);

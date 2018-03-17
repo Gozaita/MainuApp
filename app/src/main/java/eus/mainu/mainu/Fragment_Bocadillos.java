@@ -8,17 +8,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-
 import eus.mainu.mainu.Utilidades.Administrador_Cache;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.Adaptador_Bocadillos;
@@ -26,6 +21,7 @@ import eus.mainu.mainu.datalayer.Bocadillo;
 
 //Clase del fragmento responsable de visualizar los bocadillos
 public class Fragment_Bocadillos extends Fragment {
+
     private static final String TAG = "Bocadillos";
 
     //Elementos Layout
@@ -34,13 +30,13 @@ public class Fragment_Bocadillos extends Fragment {
     private android.support.v7.widget.RecyclerView recyclerView;
 
     //Variables
-    private ArrayList<Bocadillo> arrayBocadillos = new ArrayList<Bocadillo>();
-    Adaptador_Bocadillos adapter;
-    private boolean actualizado = false;
+    private ArrayList<Bocadillo> arrayBocadillos = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(TAG, "onCreate: Inicia Fragment Bocadillos");
 
         mContext = getContext();
         administraPeticionesCacheBocadillos();
@@ -103,7 +99,7 @@ public class Fragment_Bocadillos extends Fragment {
     //Clase para crear y adaptar la informacion al recycling view
     private void setBocadillos(){
         //Creamos el objeto de la clase adaptador
-        adapter = new Adaptador_Bocadillos(arrayBocadillos, getActivity());
+        Adaptador_Bocadillos adapter = new Adaptador_Bocadillos(arrayBocadillos, getActivity());
 
         //Adaptamos el recyclingview
         recyclerView.setAdapter(adapter);

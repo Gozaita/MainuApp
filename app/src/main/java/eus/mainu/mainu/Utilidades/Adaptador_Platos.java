@@ -2,15 +2,12 @@ package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.LayerDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -54,6 +51,8 @@ public class Adaptador_Platos extends BaseAdapter {
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
 
+        Log.d(TAG, "getView plato: " +i);
+
         if (view == null) {
             view = LayoutInflater.from(mContext).
                     inflate(R.layout.listview_platos, viewGroup, false);
@@ -65,8 +64,6 @@ public class Adaptador_Platos extends BaseAdapter {
         // get the TextView for item name and item description
         TextView textView = view.findViewById(R.id.nombreTextView);
         RatingBar estrellitas = view.findViewById(R.id.ratingBarEstrellitas);
-        RelativeLayout platos_layout = view.findViewById(R.id.plato_layout);
-
 
         //sets the text for item name and item description from the current item object
         textView.setText(plato.getNombre());
@@ -91,32 +88,4 @@ public class Adaptador_Platos extends BaseAdapter {
         return view;
     }
 
-/*
-    public Adaptador_Platos(@NonNull Context context, int resource, @NonNull List<Plato> objects) {
-        super(context, resource, objects);
-        mContext = context;
-        mResource = resource;
-    }
-
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
-        //Cogemos la informacion de cada plato
-        String nombre = getItem(position).getNombre();
-        double puntuacion = getItem(position).getValoracion();
-
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        convertView = inflater.inflate(mResource, parent,false);
-
-        TextView textView = convertView.findViewById(R.id.nombreTextView);
-        RatingBar estrellita = convertView.findViewById(R.id.ratingBarEstrellitas);
-
-        textView.setText(nombre);
-        estrellita.setRating((float)puntuacion);
-
-
-        return convertView;
-
-    } */
 }

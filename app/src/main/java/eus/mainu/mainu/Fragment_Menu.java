@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ public class Fragment_Menu extends Fragment {
 
     //Variables
     private Menu menu = new Menu();
-    private boolean actualizado = false;
+    //private boolean actualizado = false;
 
     //Metodo que se llama antes de onCreate
     //Siempre se instancian las interfaces aqui
@@ -54,6 +55,8 @@ public class Fragment_Menu extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d(TAG, "onCreate: Fragmento Menu");
 
         //mIActivityMain.setTexto(TAG);//Pasamos un texto a la actividad Main
         //Cogemos el contexto
@@ -107,7 +110,7 @@ public class Fragment_Menu extends Fragment {
         inflaListView(menu.getPostres(),lvPostres);
         if(!menu.getImagenes().isEmpty()) {
             Random rand = new Random();
-            contador = rand.nextInt((5 - 0) + 1) + 0;
+            contador = rand.nextInt((5) + 1);
             Picasso.with(mContext)
                     .load(menu.getImagenes().get(contador).getRuta())
                     .fit()

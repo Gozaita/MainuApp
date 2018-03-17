@@ -3,7 +3,6 @@ package eus.mainu.mainu;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -19,8 +18,8 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Comentarios;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
@@ -130,7 +129,7 @@ public class Activity_Elemento extends AppCompatActivity {
         }
 
         nombre.setText(bocadillo.getNombre());
-        precio.setText(String.format("%.2f€",bocadillo.getPrecio()));
+        precio.setText(String.format(Locale.getDefault(),"%.2f€",bocadillo.getPrecio()));
 
         //Metemos la nueva informacion en el bocadillo
         bocadillo.setFotos(nuevo.getFotos());
@@ -149,7 +148,7 @@ public class Activity_Elemento extends AppCompatActivity {
         }
 
         if(bocadillo.getPuntuacion() != 0){
-            puntuacion.setText(String.format("%.1f",bocadillo.getPuntuacion()));
+            puntuacion.setText(String.format(Locale.getDefault(),"%.1f",bocadillo.getPuntuacion()));
             ratingBar.setRating((float) bocadillo.getPuntuacion());
 
         }
@@ -168,7 +167,7 @@ public class Activity_Elemento extends AppCompatActivity {
         }
 
         nombre.setText(complemento.getNombre());
-        precio.setText(String.format("%.2f€",complemento.getPrecio()));
+        precio.setText(String.format(Locale.getDefault(),"%.2f€",complemento.getPrecio()));
 
         //Metemos la nueva informacion
         complemento.setFotos(nuevo.getFotos());
@@ -187,7 +186,7 @@ public class Activity_Elemento extends AppCompatActivity {
        }
 
         if(complemento.getPuntuacion() != 0){
-            puntuacion.setText(String.format("%.1f",complemento.getPuntuacion()));
+            puntuacion.setText(String.format(Locale.getDefault(),"%.1f",complemento.getPuntuacion()));
             ratingBar.setRating((float) complemento.getPuntuacion());
         }
         else{
@@ -226,7 +225,7 @@ public class Activity_Elemento extends AppCompatActivity {
         }
 
         if(plato.getPuntuacion() != 0){
-            puntuacion.setText(String.format("%.1f",plato.getPuntuacion()));
+            puntuacion.setText(String.format(Locale.getDefault(),"%.1f",plato.getPuntuacion()));
             ratingBar.setRating((float) plato.getPuntuacion());
         }
         else{
