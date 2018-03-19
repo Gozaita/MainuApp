@@ -1,5 +1,6 @@
 package eus.mainu.mainu;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -60,8 +61,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     private Fragment_Bocadillos fBocadillos = new Fragment_Bocadillos();
     private Fragment_Otros fOtros = new Fragment_Otros();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +93,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     /********************************************************************************************/
 
     private void setCuenta(){
-
         Log.d(TAG, "setCuenta");
 
         //Pedimos la cuenta del usuario con nuestro codigo de la API
@@ -117,9 +115,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     }
 
     /********************************************************************************************/
-
     private void setDrawer(){
-
         Log.d(TAG, "setDrawer");
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -130,10 +126,8 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     }
 
     /********************************************************************************************/
-
     //Responsable de añadir 3 fragmentos: Bocadillos, Menu, Otros
     private void setupViewPager(){
-
         Log.d(TAG, "setupViewPager");
 
         //Creamos los fragmentos
@@ -189,32 +183,29 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
-        Log.d(TAG, "onNavigationItemSelected: " + item.getItemId());
-
         // Para definir las acciones de los iconos
 
         int id = item.getItemId();
 
-        if (id == R.id.home) {
-
-            homeClick();
-
-        } else if (id == R.id.informacion) {
-
-        } else if (id == R.id.comparte) {
-
-            comparteClick();
-
-        } else if (id == R.id.error) {
-
-        } else if (id == R.id.iniciarSesion) {
-
-            iniciarSesionClick();
-
-        } else if (id == R.id.cerrarSesion) {
-
-            cerrarSesionClick();
+        switch (id){
+            case R.id.home:
+                homeClick();
+                break;
+            case R.id.informacion:
+                Intent intent = new Intent(this, Activity_Info.class);
+                this.startActivity(intent);
+                break;
+            case R.id.comparte:
+                comparteClick();
+                break;
+            case R.id.error:
+                break;
+            case R.id.iniciarSesion:
+                iniciarSesionClick();
+                break;
+            case R.id.cerrarSesion:
+                cerrarSesionClick();
+                break;
 
         }
 
@@ -225,17 +216,13 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     }
 
     /********************************************************************************************/
-
     private void homeClick(){
-
         drawer.closeDrawer(GravityCompat.START);
 
     }
 
     /********************************************************************************************/
-
     private void comparteClick(){
-
         //Metodo para enviar un mensaje a otra aplicacion
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
@@ -244,17 +231,13 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     }
 
     /********************************************************************************************/
-
     private void iniciarSesionClick(){
-
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(signInIntent, SIGN_IN_CODE); //Codigo unico que devuelve al registrarse
     }
 
     /********************************************************************************************/
-
     private void cerrarSesionClick(){
-
         //Cerramos la sesion del usuario e indicamos con un Toast como ha ido
         Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override
@@ -272,9 +255,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
 
     /********************************************************************************************/
-
     private void resetNavigationDrawer(){
-
         Log.d(TAG, "resetNavigationDrawer");
 
         nombre.setText(R.string.nombre);
@@ -298,7 +279,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     }
 
     /********************************************************************************************/
-
     //Se hace un silent sing in cuando se inicia la actividad
     @Override
     protected void onStart() {
@@ -321,10 +301,8 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     }
 
     /********************************************************************************************/
-
     //Comprobamos si el silent sign in ha sido existoso y mostramos la informacion si ha sido asi
     private void resultadoSilentSingIn(GoogleSignInResult result){
-
         Log.d(TAG, "resultadoSilentSingIn: "+ result.isSuccess());
 
         if(result.isSuccess()) {
@@ -356,18 +334,15 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     }
 
     /********************************************************************************************/
-
     //Cuando algo sale mal en la conexion
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
         Log.d(TAG, "onConnectionFailed");
 
         Toast.makeText(this, R.string.fail ,Toast.LENGTH_SHORT).show();
     }
 
     /********************************************************************************************/
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -381,7 +356,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     }
 
     /********************************************************************************************/
-
     //Metodo que gestiona el resultado del sign in
     private  void resultadoSignIn(GoogleSignInResult result){
 

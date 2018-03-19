@@ -30,7 +30,7 @@ import eus.mainu.mainu.datalayer.Complemento;
 import eus.mainu.mainu.datalayer.Plato;
 import eus.mainu.mainu.datalayer.Valoracion;
 
-public class Activity_Elemento extends AppCompatActivity{
+public class Activity_Elemento extends AppCompatActivity {
 
     private static final String TAG = "Activity Elemento";
     private static final int CAMERA_REQUEST_CODE = 5;
@@ -46,14 +46,14 @@ public class Activity_Elemento extends AppCompatActivity{
 
 
     ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elemento);
 
         //Para swype back
-        gestureDetector = new GestureDetector( this, new SwipeDetector());
+        gestureDetector = new GestureDetector(this, new SwipeDetector());
 
         nombre = findViewById(R.id.textViewNombre);
         puntuacion = findViewById(R.id.textViewPuntuacion);
@@ -89,18 +89,19 @@ public class Activity_Elemento extends AppCompatActivity{
     }
 
     //Metodo para inflar el recyclingview de los comentarios
-    private void setValoraciones(){
+    private void setValoraciones() {
 
         //Inicializamos el adaptador de las valoraciones
         Adaptador_Comentarios adapter = new Adaptador_Comentarios(arrayValoraciones, this);
 
-        listaComentarios.setFocusable(false );
+        listaComentarios.setFocusable(false);
         listaComentarios.setAdapter(adapter);
         listaComentarios.setLayoutManager(new LinearLayoutManager(this));
     }
 
 
-    /** Metodos que estan relacionados con leer la informacion que se le pasa a la actividad
+    /**
+     * Metodos que estan relacionados con leer la informacion que se le pasa a la actividad
      * y deciden si es un Plato/Bocadillo/Complemento
      */
 
@@ -108,18 +109,18 @@ public class Activity_Elemento extends AppCompatActivity{
     private void getInformacion() {
 
         //Vemos si la info es de un bocadillo
-        if(getIntent().hasExtra("Bocadillo")){
+        if (getIntent().hasExtra("Bocadillo")) {
             Bocadillo bocadillo = (Bocadillo) getIntent().getSerializableExtra("Bocadillo");
             setBocadillo(bocadillo);
         }
         //Vemos si la info es de un complemento
-        if(getIntent().hasExtra("Complemento")){
+        if (getIntent().hasExtra("Complemento")) {
 
             Complemento complemento = (Complemento) getIntent().getSerializableExtra("Complemento");
             setComplemento(complemento);
         }
         //Vemos si es un plato
-        if(getIntent().hasExtra("Plato")){
+        if (getIntent().hasExtra("Plato")) {
             Plato plato = (Plato) getIntent().getSerializableExtra("Plato");
             setPlato(plato);
 
@@ -128,17 +129,17 @@ public class Activity_Elemento extends AppCompatActivity{
 
     private void setBocadillo(Bocadillo bocadillo) {
 
-        Log.d(TAG, "setBocadillo: "+ bocadillo.getNombre());
+        Log.d(TAG, "setBocadillo: " + bocadillo.getNombre());
 
         HttpGetRequest request = new HttpGetRequest();
 
         Bocadillo nuevo = new Bocadillo();
-        if(request.isConnected(this)){
+        if (request.isConnected(this)) {
             nuevo = request.getBocadillo(bocadillo.getId());
         }
 
         nombre.setText(bocadillo.getNombre());
-        precio.setText(String.format(Locale.getDefault(),"%.2f€",bocadillo.getPrecio()));
+        precio.setText(String.format(Locale.getDefault(), "%.2f€", bocadillo.getPrecio()));
 
         //Metemos la nueva informacion en el bocadillo
         bocadillo.setFotos(nuevo.getFotos());
@@ -146,8 +147,8 @@ public class Activity_Elemento extends AppCompatActivity{
 
         arrayValoraciones = bocadillo.getValoraciones();
 
-        if(bocadillo.getFotos() != null){
-            if(!bocadillo.getFotos().isEmpty()){
+        if (bocadillo.getFotos() != null) {
+            if (!bocadillo.getFotos().isEmpty()) {
                 Picasso.with(this)
                         .load(bocadillo.getFotos().get(0).getRuta())
                         .fit()
@@ -156,12 +157,11 @@ public class Activity_Elemento extends AppCompatActivity{
             }
         }
 
-        if(bocadillo.getPuntuacion() != 0){
-            puntuacion.setText(String.format(Locale.getDefault(),"%.1f",bocadillo.getPuntuacion()));
+        if (bocadillo.getPuntuacion() != 0) {
+            puntuacion.setText(String.format(Locale.getDefault(), "%.1f", bocadillo.getPuntuacion()));
             ratingBar.setRating((float) bocadillo.getPuntuacion());
 
-        }
-        else{
+        } else {
             puntuacion.setText("N/A");
         }
     }
@@ -173,12 +173,12 @@ public class Activity_Elemento extends AppCompatActivity{
         HttpGetRequest request = new HttpGetRequest();
 
         Complemento nuevo = new Complemento();
-        if(request.isConnected(this)){
+        if (request.isConnected(this)) {
             nuevo = request.getComplemento(complemento.getId());
         }
 
         nombre.setText(complemento.getNombre());
-        precio.setText(String.format(Locale.getDefault(),"%.2f€",complemento.getPrecio()));
+        precio.setText(String.format(Locale.getDefault(), "%.2f€", complemento.getPrecio()));
 
         //Metemos la nueva informacion
         complemento.setFotos(nuevo.getFotos());
@@ -186,21 +186,20 @@ public class Activity_Elemento extends AppCompatActivity{
 
         arrayValoraciones = complemento.getValoraciones();
 
-        if(complemento.getFotos() != null){
-            if(!complemento.getFotos().isEmpty()){
+        if (complemento.getFotos() != null) {
+            if (!complemento.getFotos().isEmpty()) {
                 Picasso.with(this)
                         .load(complemento.getFotos().get(0).getRuta())
                         .fit()
                         .centerCrop()
                         .into(imagen);
             }
-       }
-
-        if(complemento.getPuntuacion() != 0){
-            puntuacion.setText(String.format(Locale.getDefault(),"%.1f",complemento.getPuntuacion()));
-            ratingBar.setRating((float) complemento.getPuntuacion());
         }
-        else{
+
+        if (complemento.getPuntuacion() != 0) {
+            puntuacion.setText(String.format(Locale.getDefault(), "%.1f", complemento.getPuntuacion()));
+            ratingBar.setRating((float) complemento.getPuntuacion());
+        } else {
             puntuacion.setText("N/A");
         }
 
@@ -208,12 +207,12 @@ public class Activity_Elemento extends AppCompatActivity{
 
     private void setPlato(Plato plato) {
 
-        Log.d(TAG, "setPlato: " +plato.getNombre());
+        Log.d(TAG, "setPlato: " + plato.getNombre());
 
         HttpGetRequest request = new HttpGetRequest();
 
         Plato nuevo = new Plato();
-        if(request.isConnected(this)){
+        if (request.isConnected(this)) {
             nuevo = request.getPlato(plato.getId());
         }
 
@@ -227,8 +226,8 @@ public class Activity_Elemento extends AppCompatActivity{
         arrayValoraciones = plato.getValoraciones();
 
 
-        if(plato.getFotos() != null){
-            if(!plato.getFotos().isEmpty()){
+        if (plato.getFotos() != null) {
+            if (!plato.getFotos().isEmpty()) {
                 Picasso.with(this)
                         .load(plato.getFotos().get(0).getRuta())
                         .fit()
@@ -237,22 +236,21 @@ public class Activity_Elemento extends AppCompatActivity{
             }
         }
 
-        if(plato.getPuntuacion() != 0){
-            puntuacion.setText(String.format(Locale.getDefault(),"%.1f",plato.getPuntuacion()));
+        if (plato.getPuntuacion() != 0) {
+            puntuacion.setText(String.format(Locale.getDefault(), "%.1f", plato.getPuntuacion()));
             ratingBar.setRating((float) plato.getPuntuacion());
-        }
-        else{
+        } else {
             puntuacion.setText("N/A");
         }
 
     }
 
-    /** Metodos que estan relacionados con el uso de la camara
-     *
+    /**
+     * Metodos que estan relacionados con el uso de la camara
      */
 
     //Metodo para llamar a la camara
-    private void setBotonCamara(){
+    private void setBotonCamara() {
         botonCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -269,56 +267,20 @@ public class Activity_Elemento extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
 
         //Comprobamos que se ha sacado la foto con el result_ok, comprobamos que es el codigo de la camara al que llaman
-        if(resultCode == Activity.RESULT_OK && requestCode == CAMERA_REQUEST_CODE){
+        if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_REQUEST_CODE) {
             Log.d(TAG, "onActivityResult: done taking a photo.");
             Log.d(TAG, "onActivityResult: attempting to navigate to final share screen.");
 
             Bitmap bitmap;
             bitmap = (Bitmap) data.getExtras().get("data");
 
-            if(bitmap != null){
+            if (bitmap != null) {
                 Toast.makeText(this, R.string.agradecimiento, Toast.LENGTH_LONG).show();
                 imagen.setImageBitmap(bitmap);
             }
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     private static final int SWIPE_MIN_DISTANCE = 120;
@@ -335,34 +297,27 @@ public class Activity_Elemento extends AppCompatActivity{
         //TO-DO
     }
 
-    public class SwipeDetector extends GestureDetector.SimpleOnGestureListener
-    {
+    public class SwipeDetector extends GestureDetector.SimpleOnGestureListener {
         @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
-        {
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
             // Check movement along the Y-axis. If it exceeds SWIPE_MAX_OFF_PATH,
             // then dismiss the swipe.
-            if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
-            {
+            if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
                 return false;
             }
 
             //toast( "start = "+String.valueOf( e1.getX() )+" | end = "+String.valueOf( e2.getX() )  );
             //from left to right
-            if( e2.getX() > e1.getX() )
-            {
-                if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY)
-                {
+            if (e2.getX() > e1.getX()) {
+                if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                     onSwipeRight();
                     return true;
                 }
             }
 
-            if( e1.getX() > e2.getX() )
-            {
-                if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY)
-                {
+            if (e1.getX() > e2.getX()) {
+                if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
                     onSwipeLeft();
                     return true;
                 }
@@ -373,11 +328,9 @@ public class Activity_Elemento extends AppCompatActivity{
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev)
-    {
+    public boolean dispatchTouchEvent(MotionEvent ev) {
         // TouchEvent dispatcher.
-        if (gestureDetector != null)
-        {
+        if (gestureDetector != null) {
             if (gestureDetector.onTouchEvent(ev))
                 // If the gestureDetector handles the event, a swipe has been
                 // executed and no more needs to be done.
@@ -388,12 +341,9 @@ public class Activity_Elemento extends AppCompatActivity{
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
+    public boolean onTouchEvent(MotionEvent event) {
         return gestureDetector.onTouchEvent(event);
     }
-
-
 
 
 }

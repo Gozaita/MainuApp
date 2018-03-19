@@ -29,7 +29,7 @@ public class Administrador_Cache {
     public String leerLastUpdate (Context context, String tipo) {
 
         Object object;
-        String fichero = "lastUdate"+tipo;
+        String fichero = "lastUpdate"+tipo;
         try {
             FileInputStream fis = context.openFileInput(fichero);
             ObjectInputStream ois = new ObjectInputStream(fis);
