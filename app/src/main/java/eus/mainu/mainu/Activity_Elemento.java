@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -28,7 +30,7 @@ import eus.mainu.mainu.datalayer.Complemento;
 import eus.mainu.mainu.datalayer.Plato;
 import eus.mainu.mainu.datalayer.Valoracion;
 
-public class Activity_Elemento extends AppCompatActivity {
+public class Activity_Elemento extends AppCompatActivity{
 
     private static final String TAG = "Activity Elemento";
     private static final int CAMERA_REQUEST_CODE = 5;
@@ -50,6 +52,8 @@ public class Activity_Elemento extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elemento);
 
+        //Para swype back
+        gestureDetector = new GestureDetector( this, new SwipeDetector());
 
         nombre = findViewById(R.id.textViewNombre);
         puntuacion = findViewById(R.id.textViewPuntuacion);
@@ -279,6 +283,117 @@ public class Activity_Elemento extends AppCompatActivity {
         }
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private static final int SWIPE_MIN_DISTANCE = 120;
+    private static final int SWIPE_MAX_OFF_PATH = 250;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+    private GestureDetector gestureDetector;
+
+    protected void onSwipeRight() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+
+    protected void onSwipeLeft() {
+        //TO-DO
+    }
+
+    public class SwipeDetector extends GestureDetector.SimpleOnGestureListener
+    {
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+        {
+
+            // Check movement along the Y-axis. If it exceeds SWIPE_MAX_OFF_PATH,
+            // then dismiss the swipe.
+            if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
+            {
+                return false;
+            }
+
+            //toast( "start = "+String.valueOf( e1.getX() )+" | end = "+String.valueOf( e2.getX() )  );
+            //from left to right
+            if( e2.getX() > e1.getX() )
+            {
+                if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY)
+                {
+                    onSwipeRight();
+                    return true;
+                }
+            }
+
+            if( e1.getX() > e2.getX() )
+            {
+                if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY)
+                {
+                    onSwipeLeft();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev)
+    {
+        // TouchEvent dispatcher.
+        if (gestureDetector != null)
+        {
+            if (gestureDetector.onTouchEvent(ev))
+                // If the gestureDetector handles the event, a swipe has been
+                // executed and no more needs to be done.
+                return true;
+        }
+
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        return gestureDetector.onTouchEvent(event);
+    }
+
+
 
 
 }
