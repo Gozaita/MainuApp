@@ -8,8 +8,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,7 +24,7 @@ import eus.mainu.mainu.Utilidades.Adaptador_Bocadillos;
 import eus.mainu.mainu.datalayer.Bocadillo;
 
 //Clase del fragmento responsable de visualizar los bocadillos
-public class Fragment_Bocadillos extends Fragment {
+public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener {
 
     private static final String TAG = "Bocadillos";
 
@@ -135,6 +139,53 @@ public class Fragment_Bocadillos extends Fragment {
         });
     }
 
+    /*@Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.activity__principal, menu);
+        MenuItem itemBusqueda = menu.findItem(R.id.buscar);
+        SearchView searchView = searchI
+    }*/
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
 
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        if (newText != null || newText.trim().isEmpty()) {
+            resetLista();
+            return false;
+        }
+
+        ArrayList<Bocadillo> listaFiltrada = new ArrayList<>();
+        for (Bocadillo bocadillo : arrayBocadillos) {
+            if (bocadillo.getNombre().contains(newText)) {
+                listaFiltrada.add(bocadillo);
+            }
+        }
+
+        Adaptador_Bocadillos adapter = new Adaptador_Bocadillos(listaFiltrada, getActivity());
+        //Adaptamos el recyclingview
+        recyclerView.setAdapter(adapter);
+
+        return false;
+    }
+
+    private void resetLista(){
+        //Creamos el objeto de la clase adaptador
+        Adaptador_Bocadillos adapter = new Adaptador_Bocadillos(arrayBocadillos, getActivity());
+        //Adaptamos el recyclingview
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onMenuItemActionExpand(MenuItem menuItem) {
+        return true;
+    }
+
+    @Override
+    public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+        return true;
+    }
 }

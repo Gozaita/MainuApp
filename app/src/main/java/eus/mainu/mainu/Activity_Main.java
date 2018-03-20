@@ -258,8 +258,8 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     private void resetNavigationDrawer(){
         Log.d(TAG, "resetNavigationDrawer");
 
-        nombre.setText(R.string.nombre);
-        email.setText(R.string.email);
+        nombre.setText(R.string.iniciaSesion);
+        email.setText(R.string.utilizaGoogle);
 
         Picasso.with(this).load(R.drawable.logo_blanco).fit().into(fotoUsuario, new Callback() {
             @Override

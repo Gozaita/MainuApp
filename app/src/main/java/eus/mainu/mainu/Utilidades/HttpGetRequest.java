@@ -76,7 +76,9 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
                 e.printStackTrace();
             }
         }
-        lastUpdate = lastUpdate.replaceAll("\"","");
+        if(lastUpdate != null){
+            lastUpdate = lastUpdate.replaceAll("\"","");
+        }
         return lastUpdate;
     }
 

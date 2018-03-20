@@ -26,12 +26,13 @@ public class HttpPostRequest extends AsyncTask<String, Void, String> {
         try {
 
             httpURLConnection = (HttpURLConnection) new URL(strings[0]).openConnection();
-            httpURLConnection.setRequestMethod("POST");
-
             httpURLConnection.setDoOutput(true);
+            httpURLConnection.setRequestMethod("POST");
+            //httpURLConnection.setRequestProperty("Content-Type","application/json; charset=utf-8");
+            httpURLConnection.setRequestProperty("Content-Type","application/json; charset=utf-8");
 
             DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
-            wr.writeBytes("PostData=" + strings[1]);
+            wr.writeBytes(strings[1]);
             wr.flush();
             wr.close();
 

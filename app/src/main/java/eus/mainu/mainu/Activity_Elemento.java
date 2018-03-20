@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -20,9 +21,11 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +57,7 @@ public class Activity_Elemento extends AppCompatActivity {
 
     private String tipo = "";
     private int id=0;
+    private int tokenid = 0;
 
 
     ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
@@ -107,41 +111,22 @@ public class Activity_Elemento extends AppCompatActivity {
         enviar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                /*
-                HttpClient httpClient = new DefaultHttpClient();
-                HttpPost httpPost = new HttpPost("https://yourbackend.example.com/tokensignin");
-
                 try {
-                    List nameValuePairs = new ArrayList(1);
-                    nameValuePairs.add(new BasicNameValuePair("idToken", idToken));
-                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                    JSONObject postData = new JSONObject();
+                    postData.put("idToken",tokenid);
+                    JSONObject valoracion = new JSONObject();
 
-                    HttpResponse response = httpClient.execute(httpPost);
-                    int statusCode = response.getStatusLine().getStatusCode();
-                    final String responseBody = EntityUtils.toString(response.getEntity());
-                    Log.i(TAG, "Signed in as: " + responseBody);
-                } catch (ClientProtocolException e) {
-                    Log.e(TAG, "Error sending ID token to backend.", e);
-                } catch (IOException e) {
-                    Log.e(TAG, "Error sending ID token to backend.", e);
-                }*/
+                    valoracion.put("puntuacion",ratingBar.getNumStars());
+                    valoracion.put("texto",comentario.getText().toString());
 
-                JSONObject postData = new JSONObject();
-                try {
-
-                    int tokenid = 1234;
-                    Valoracion val = new Valoracion(id, ratingBar.getNumStars(), comentario.getText().toString(), new Usuario(1, "pepito", "hola", 1));
-
-
-
-                    postData.put("tokenid", Integer.toString(tokenid));
-                    postData.put("valoracion", val.toString());
+                    postData.put("valoracion",valoracion);
 
                     new HttpPostRequest().execute("https://api.mainu.eus/add_valoracion/" + tipo+"/"+id, postData.toString());
                     new HttpPostRequest().execute("https://api.mainu.eus/test_upload", postData.toString());
 
-                    Toast.makeText(getApplicationContext(), R.string.despedida, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.agradecimiento, Toast.LENGTH_SHORT).show();
 
+                    enviar.setVisibility(View.GONE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -170,11 +155,18 @@ public class Activity_Elemento extends AppCompatActivity {
     //Metodo para recibir la informacion que se pasa a la actividad
     private void getInformacion() {
 
+        if (getIntent().hasExtra("tokenid")) {
+            tokenid = getIntent().getIntExtra("tokenid",0);
+        }
+        else {
+            tokenid = 666;
+        }
+
         //Vemos si la info es de un bocadillo
         if (getIntent().hasExtra("Bocadillo")) {
             Bocadillo bocadillo = (Bocadillo) getIntent().getSerializableExtra("Bocadillo");
             setBocadillo(bocadillo);
-            tipo = "bocadillo";
+            tipo = "bocadillos";
             id = bocadillo.getId();
 
         }
@@ -347,6 +339,26 @@ public class Activity_Elemento extends AppCompatActivity {
             if (bitmap != null) {
                 Toast.makeText(this, R.string.agradecimiento, Toast.LENGTH_LONG).show();
                 imagen.setImageBitmap(bitmap);
+
+                //Para comprimir la imagen en JPEG
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+                //Enviamos la imagen en un JSON codificada en Base 64
+                try {
+                    JSONObject postData = new JSONObject();
+                    postData.put("idToken",VariablesGlobales.idToken);
+                    postData.put("foto",encodedImage);
+
+                    new HttpPostRequest().execute("https://api.mainu.eus/test_upload", postData.toString());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                //MultipartEntityBuilder
             }
         }
 
