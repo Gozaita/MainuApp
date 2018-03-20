@@ -51,7 +51,7 @@
                 android:layout_marginTop="325dp"
                 android:src="@drawable/mainu_logo" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/botonEnviar"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
@@ -60,6 +60,7 @@
                 android:layout_marginBottom="7dp"
                 android:layout_marginEnd="11dp"
                 android:visibility="visible"
+                android:background="@color/transparente"
                 app:srcCompat="@drawable/ic_send_24dp" />
 
             <RatingBar

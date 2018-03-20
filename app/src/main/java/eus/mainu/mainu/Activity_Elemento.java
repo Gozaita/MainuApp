@@ -20,14 +20,21 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Comentarios;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
+import eus.mainu.mainu.Utilidades.HttpPostRequest;
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
 import eus.mainu.mainu.datalayer.Plato;
+import eus.mainu.mainu.datalayer.Usuario;
 import eus.mainu.mainu.datalayer.Valoracion;
 
 public class Activity_Elemento extends AppCompatActivity {
@@ -40,9 +47,13 @@ public class Activity_Elemento extends AppCompatActivity {
     private TextView precio;
     private ImageButton imagen;
     private ImageButton botonCamara;
+    private ImageButton enviar;
     private RatingBar ratingBar;
     private RecyclerView listaComentarios;
     private EditText comentario;
+
+    private String tipo = "";
+    private int id=0;
 
 
     ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
@@ -63,6 +74,7 @@ public class Activity_Elemento extends AppCompatActivity {
         listaComentarios = findViewById(R.id.recycler_view_lista_comentarios);
         comentario = findViewById(R.id.editText);
         botonCamara = findViewById(R.id.botonCamara);
+        enviar = findViewById(R.id.botonEnviar);
 
 
         //Para que no influya en el scroll
@@ -80,12 +92,62 @@ public class Activity_Elemento extends AppCompatActivity {
         //Todo el codigo que teniene que ver con el boton la camara
         setBotonCamara();
 
+        sendValoracion();
 
         //Para poner las estrellas blancas mediante codigo,
         //Las ponemos mediante el xml, aunque solo funciona para la version de android 5.0 en adelante
         //LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
         //stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 
+    }
+
+    //Metodo para poner escuchando el cuadro de texto y enviar la valoracion
+    private void sendValoracion() {
+
+        enviar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                /*
+                HttpClient httpClient = new DefaultHttpClient();
+                HttpPost httpPost = new HttpPost("https://yourbackend.example.com/tokensignin");
+
+                try {
+                    List nameValuePairs = new ArrayList(1);
+                    nameValuePairs.add(new BasicNameValuePair("idToken", idToken));
+                    httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                    HttpResponse response = httpClient.execute(httpPost);
+                    int statusCode = response.getStatusLine().getStatusCode();
+                    final String responseBody = EntityUtils.toString(response.getEntity());
+                    Log.i(TAG, "Signed in as: " + responseBody);
+                } catch (ClientProtocolException e) {
+                    Log.e(TAG, "Error sending ID token to backend.", e);
+                } catch (IOException e) {
+                    Log.e(TAG, "Error sending ID token to backend.", e);
+                }*/
+
+                JSONObject postData = new JSONObject();
+                try {
+
+                    int tokenid = 1234;
+                    Valoracion val = new Valoracion(id, ratingBar.getNumStars(), comentario.getText().toString(), new Usuario(1, "pepito", "hola", 1));
+
+
+
+                    postData.put("tokenid", Integer.toString(tokenid));
+                    postData.put("valoracion", val.toString());
+
+                    new HttpPostRequest().execute("https://api.mainu.eus/add_valoracion/" + tipo+"/"+id, postData.toString());
+                    new HttpPostRequest().execute("https://api.mainu.eus/test_upload", postData.toString());
+
+                    Toast.makeText(getApplicationContext(), R.string.despedida, Toast.LENGTH_SHORT).show();
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     //Metodo para inflar el recyclingview de los comentarios
@@ -112,17 +174,25 @@ public class Activity_Elemento extends AppCompatActivity {
         if (getIntent().hasExtra("Bocadillo")) {
             Bocadillo bocadillo = (Bocadillo) getIntent().getSerializableExtra("Bocadillo");
             setBocadillo(bocadillo);
+            tipo = "bocadillo";
+            id = bocadillo.getId();
+
         }
         //Vemos si la info es de un complemento
         if (getIntent().hasExtra("Complemento")) {
 
             Complemento complemento = (Complemento) getIntent().getSerializableExtra("Complemento");
             setComplemento(complemento);
+            tipo = "otro";
+            id = complemento.getId();
+
         }
         //Vemos si es un plato
         if (getIntent().hasExtra("Plato")) {
             Plato plato = (Plato) getIntent().getSerializableExtra("Plato");
             setPlato(plato);
+            tipo = "menu";
+            id = plato.getId();
 
         }
     }
@@ -281,6 +351,10 @@ public class Activity_Elemento extends AppCompatActivity {
         }
 
     }
+
+    /**
+     * Metodos que estan relacionados con el swipe
+     */
 
 
     private static final int SWIPE_MIN_DISTANCE = 120;
