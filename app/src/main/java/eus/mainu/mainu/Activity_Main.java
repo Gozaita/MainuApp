@@ -16,15 +16,17 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -37,7 +39,11 @@ import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
+import eus.mainu.mainu.Utilidades.Adaptador_Busqueda;
 import eus.mainu.mainu.Utilidades.Adaptador_Fragmentos;
+import eus.mainu.mainu.datalayer.Bocadillo;
 
 public class Activity_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
 
@@ -52,6 +58,13 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     private Toolbar toolbar;
     private ImageView fotoUsuario;
     private TextView nombre, email;
+    private SearchView searchView;
+
+    private String[] posiblesBocadillos = new String[]{"atun con queso", "bacon", "ensalada cesar"};
+    private ListView searchResult;
+    private ArrayList<Bocadillo> arrayList;
+    private ArrayList<String> arrayListSring = new ArrayList<String>();
+    private ArrayAdapter adapter;
 
     //Datos del usuario
     private GoogleApiClient googleApiClient;
@@ -73,6 +86,8 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         viewPager = findViewById(R.id.contenedor);
         tabLayout = findViewById(R.id.tabs);
         toolbar = findViewById(R.id.toolbar);
+        searchView = findViewById(R.id.searchView);
+        searchResult = findViewById(R.id.searchResult);
         setSupportActionBar(toolbar);
 
         //Hay que hacer esto para referenciar los elementos del nav header
@@ -88,6 +103,26 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         setDrawer();
         setupViewPager();
 
+        searchView.setIconified(true);
+        arrayListSring.add("atun");
+        arrayListSring.add("bacon");
+        arrayListSring.add("ensalada");
+        adapter = new ArrayAdapter<String>(this, R.layout.listview_testtt, arrayListSring);
+        searchResult.setAdapter(adapter);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                System.out.println("bobo \n\n\n");
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Activity_Main.this.adapter.getFilter().filter(newText);
+
+                return false;
+            }
+        });
     }
 
     /********************************************************************************************/

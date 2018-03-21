@@ -1,5 +1,4 @@
 package eus.mainu.mainu.Utilidades;
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -9,19 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Locale;
-
 import eus.mainu.mainu.Activity_Elemento;
 import eus.mainu.mainu.R;
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Ingrediente;
-
-/**
- * Created by narciso on 15/02/18.
- * Clase para la adaptar el contenido al recycling view
- */
 
 public class Adaptador_Bocadillos extends RecyclerView.Adapter<Adaptador_Bocadillos.ViewHolder> {
 
