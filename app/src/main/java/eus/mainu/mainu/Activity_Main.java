@@ -90,22 +90,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
     }
 
-    /********************************************************************************************/
-
-    private void setCuenta(){
-        Log.d(TAG, "setCuenta");
-
-        //Pedimos la cuenta del usuario con nuestro codigo de la API
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)//Asi seria el normal
-                .requestEmail()//asi pedimos el id
-                .build();
-
-        ///Permite gestionar el ciclo de vida de la autenticacion con el de la actividad y dice quien escucha en caso de que algo salga mal
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this,this) //El segundo parametro dice quien escucha
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-    }
 
     /********************************************************************************************/
 
@@ -255,6 +239,25 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
 
     /********************************************************************************************/
+
+    private void setCuenta(){
+        Log.d(TAG, "setCuenta");
+
+        //Pedimos la cuenta del usuario con nuestro codigo de la API
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)//Asi seria el normal
+                .requestIdToken(getString(R.string.server_client_id))
+                .requestEmail()
+                .build();
+
+        ///Permite gestionar el ciclo de vida de la autenticacion con el de la actividad y dice quien escucha en caso de que algo salga mal
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this,this) //El segundo parametro dice quien escucha
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+    }
+
+
+    /********************************************************************************************/
     private void resetNavigationDrawer(){
         Log.d(TAG, "resetNavigationDrawer");
 
@@ -312,6 +315,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
             //Ponemos los datos del usuario
             nombre.setText(cuenta.getDisplayName());
             email.setText(cuenta.getEmail());
+            VariablesGlobales.idToken = cuenta.getIdToken();
 
             Picasso.with(this).load(cuenta.getPhotoUrl()).fit().into(fotoUsuario, new Callback() {
                 @Override
@@ -367,6 +371,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
             GoogleSignInAccount cuenta = result.getSignInAccount();
             nombre.setText(cuenta.getDisplayName());
             email.setText(cuenta.getEmail());
+            VariablesGlobales.idToken = cuenta.getIdToken();
 
             Picasso.with(this).load(cuenta.getPhotoUrl()).fit().into(fotoUsuario, new Callback() {
                 @Override

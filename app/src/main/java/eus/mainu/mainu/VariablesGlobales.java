@@ -7,5 +7,5 @@ package eus.mainu.mainu;
 
 public class VariablesGlobales {
 
-    public static int idToken = 666;
+    public static String idToken = "666";
 }
