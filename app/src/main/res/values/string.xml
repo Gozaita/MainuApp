@@ -32,6 +32,11 @@
     <string name="getComplementos">https://api.mainu.eus/get_otros</string>
     <string name="nombre">Nombre</string>
     <string name="email">Email</string>
+    <string name="iniciaSesion">Inicia sesion para poder comentar</string>
+    <string name="utilizaGoogle">Utiliza tu cuenta de Google</string>
+    <string name="buscar">Buscar</string>
+    <string name="server_client_id">423305197397-t9t6lfv9fj8gqddapa2hpitmj2ggjen8.apps.googleusercontent.com</string>
+
 
     <string name="comparteTitulo">¡Mira como mola!</string>
     <string name="comparteBody">MainU App www.mainu.eus</string>

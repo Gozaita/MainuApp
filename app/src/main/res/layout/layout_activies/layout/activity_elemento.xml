@@ -43,14 +43,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <ImageView
-                android:id="@+id/fotoPerfil"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="325dp"
-                android:src="@drawable/mainu_logo" />
-
             <ImageButton
                 android:id="@+id/botonEnviar"
                 android:layout_width="25dp"
@@ -68,8 +60,7 @@
                 style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/fotoPerfil"
-                android:layout_toEndOf="@+id/fotoPerfil"
+                android:layout_marginTop="325dp"
                 android:isIndicator="false"
                 android:stepSize="0.5" />
 
@@ -82,7 +73,6 @@
                 android:layout_marginEnd="11dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_toEndOf="@+id/fotoPerfil"
                 android:layout_toStartOf="@id/botonEnviar"
                 android:focusable="true"
                 android:focusableInTouchMode="true"

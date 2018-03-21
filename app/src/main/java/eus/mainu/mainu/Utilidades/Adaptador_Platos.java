@@ -80,8 +80,6 @@ public class Adaptador_Platos extends BaseAdapter {
         });
 
 
-
-
         // returns the view for the current row
         return view;
     }
