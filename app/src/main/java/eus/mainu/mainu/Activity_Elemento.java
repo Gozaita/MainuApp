@@ -58,10 +58,11 @@ public class Activity_Elemento extends AppCompatActivity {
     private TextView puntuacion;
     private TextView precio;
     private TextView primerComentario;
+    private ImageButton atras;
     private ImageButton imagen;
     private ImageButton botonCamara;
     private ImageButton enviar;
-    private RatingBar ratingBar;
+    private RatingBar ratingBar,ratUsuario;
     private RecyclerView listaComentarios;
     private EditText comentario;
 
@@ -85,12 +86,14 @@ public class Activity_Elemento extends AppCompatActivity {
         primerComentario = findViewById(R.id.primerComentario);
         puntuacion = findViewById(R.id.textViewPuntuacion);
         ratingBar = findViewById(R.id.estrellitasElemento);
+        ratUsuario = findViewById(R.id.ratingBarUsuario);
         precio = findViewById(R.id.textViewPrecio);
         imagen = findViewById(R.id.botonImagenElemento);
         listaComentarios = findViewById(R.id.recycler_view_lista_comentarios);
         comentario = findViewById(R.id.editText);
         botonCamara = findViewById(R.id.botonCamara);
         enviar = findViewById(R.id.botonEnviar);
+        atras = findViewById(R.id.atrasButton);
 
 
         //Para que no influya en el scroll
@@ -109,6 +112,8 @@ public class Activity_Elemento extends AppCompatActivity {
         if(arrayValoraciones.isEmpty()){
             primerComentario.setVisibility(View.VISIBLE);
         }
+
+        setAtrasButton();
 
         //Todo el codigo que teniene que ver con el boton la camara
         setBotonCamara();
@@ -162,6 +167,16 @@ public class Activity_Elemento extends AppCompatActivity {
         }
     }
 
+    private void setAtrasButton(){
+
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
 
     //Metodo para poner escuchando el cuadro de texto y enviar la valoracion
     private void sendValoracion() {
@@ -179,8 +194,8 @@ public class Activity_Elemento extends AppCompatActivity {
                     JSONObject postData = new JSONObject();
                     postData.put("idToken",idToken);
                     JSONObject valoracion = new JSONObject();
-                    valoracion.put("puntuacion",ratingBar.getRating());
-                    ratingBar.setEnabled(false);
+                    valoracion.put("puntuacion",ratUsuario.getRating());
+                    ratUsuario.setEnabled(false);
                     valoracion.put("texto",comentario.getText().toString());
                     comentario.setEnabled(false);
                     postData.put("valoracion",valoracion);

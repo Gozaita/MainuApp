@@ -24,24 +24,86 @@
                 app:srcCompat="@drawable/otros_1" />
 
 
-
-
-            <!--Quitamos el boton de atras
+            <!--Quitamos el boton de atras -->
             <ImageButton
                 android:id="@+id/atrasButton"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="4dp"
                 android:background="@color/transparente"
-                app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
-                -->
+                app:srcCompat="@drawable/ic_arrow_back_24dp" />
 
-            <include
-                android:id="@+id/caracteristicas"
-                layout="@layout/snippet_caracteristicas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="225dp"
+                android:background="@color/colorPrimary"
+                android:id="@+id/caracteristicas">
+
+                <TextView
+                    android:id="@+id/textViewNombre"
+                    android:layout_width="wrap_content"
+                    android:maxWidth="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="Nombre"
+                    android:textColor="@color/blanco"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/roboto_light"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/textViewPrecio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@+id/textViewNombre"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="X.XX€"
+                    android:textColor="@color/blanco"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewPuntuacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textViewNombre"
+                    android:layout_below="@+id/textViewNombre"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="3.5"
+                    android:textColor="@color/blanco"
+                    android:textSize="15sp" />
+
+                <RatingBar
+                    android:id="@+id/estrellitasElemento"
+                    style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                    android:progressTint="@color/blanco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textViewPuntuacion"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/textViewPuntuacion"
+                    android:stepSize="0.5"
+                    android:isIndicator="true"/>
+
+                <ImageButton
+                    android:id="@+id/botonCamara"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/estrellitasElemento"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/transparente"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/camera" />
+
+            </RelativeLayout>
 
             <ImageButton
                 android:id="@+id/botonEnviar"
@@ -60,7 +122,8 @@
                 style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="325dp"
+                android:layout_below="@+id/caracteristicas"
+                android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 android:isIndicator="false"
                 android:stepSize="0.5" />
@@ -86,7 +149,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/primerComentario"
                 android:layout_below="@id/editText"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/roboto"
                 android:gravity="center"
