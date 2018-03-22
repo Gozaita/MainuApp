@@ -7,7 +7,10 @@
     <!-- Para comprobar si hay internet -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- Para guardar en la tarjeta sd -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Para usar la camara -->
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"

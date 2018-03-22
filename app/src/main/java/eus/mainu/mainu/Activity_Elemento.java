@@ -2,12 +2,15 @@ package eus.mainu.mainu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,6 +42,7 @@ import java.util.Locale;
 import eus.mainu.mainu.Utilidades.Adaptador_Comentarios;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.HttpPostRequest;
+import eus.mainu.mainu.Utilidades.Permisos;
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
 import eus.mainu.mainu.datalayer.Plato;
@@ -49,6 +53,8 @@ public class Activity_Elemento extends AppCompatActivity {
 
     private static final String TAG = "Activity Elemento";
     private static final int CAMERA_REQUEST_CODE = 5;
+    private static final int COMPRUEBA_PERMISOS = 1;
+
 
     private TextView nombre;
     private TextView puntuacion;
@@ -110,6 +116,47 @@ public class Activity_Elemento extends AppCompatActivity {
         //stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 
     }
+
+    public void pidePermisos(String[] permisos){
+        Log.d(TAG, "compruebaPermisos: Comprobando permisos");
+
+        ActivityCompat.requestPermissions(
+                this,
+                permisos,
+                COMPRUEBA_PERMISOS
+        );
+
+    }
+
+
+    /**
+     * Metodos para pedir permisos
+     */
+
+    private boolean checkPermisos(String[] permisos){
+
+        for (String check : permisos) {
+            if (!checkPermiso(check)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkPermiso(String permiso){
+
+        int peticionPermisos = ActivityCompat.checkSelfPermission(this,permiso);
+
+        if(peticionPermisos != PackageManager.PERMISSION_GRANTED){
+            Log.d(TAG, "checkPermiso: \n NO tenemos permisos para: " + permiso);
+            return false;
+        }
+        else{
+            Log.d(TAG, "checkPermiso: \n SI tenemos permisos para " + permiso);
+            return true;
+        }
+    }
+
 
     //Metodo para poner escuchando el cuadro de texto y enviar la valoracion
     private void sendValoracion() {
@@ -320,24 +367,38 @@ public class Activity_Elemento extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d(TAG, "onClick: Boton Camara");
 
-                //Para tener los permisos para abrir la camara
-                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-                StrictMode.setVmPolicy(builder.build());
 
-                //Iniciamos la camara intent
-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if(checkPermisos(Permisos.PERMISOS)){
+                    //Tenemos permisos, comprobamos internet
+                    if(new HttpGetRequest().isConnected(view.getContext())){
+                        //Hay conexion
 
-                //Abrimos el directorio donde guardamos la imagen
-                File directorioImagenes = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                //Creamos un nombre unico para cada imagen
-                String nombre = getNombre();
-                //Juntamos el directorio y el nombre
-                File imagen = new File(directorioImagenes,nombre);
-                //Lo pasamos a este formato
-                imagenUri = Uri.fromFile(imagen);
-                //Decimos que se guarde en la uri
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imagenUri);
-                startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+                        //Iniciamos la camara intent
+                        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                        //Abrimos el directorio donde guardamos la imagen
+                        File directorioImagenes = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                        //Creamos un nombre unico para cada imagen
+                        String nombre = getNombre();
+                        //Juntamos el directorio y el nombre
+                        File imagen = new File(directorioImagenes,nombre);
+                        //Lo pasamos a este formato
+                        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                        StrictMode.setVmPolicy(builder.build());
+                        imagenUri = Uri.fromFile(imagen);
+                        //imagenUri = FileProvider.getUriForFile(view.getContext(), view.getContext().getPackageName(), imagen);
+                        //Decimos que se guarde en la uri
+                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imagenUri);
+                        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+
+
+                    }else {
+                        Toast.makeText(view.getContext(), R.string.noConexion, Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    pidePermisos(Permisos.PERMISOS);
+                }
             }
         });
     }
@@ -359,21 +420,16 @@ public class Activity_Elemento extends AppCompatActivity {
             Log.d(TAG, "onActivityResult: done taking a photo.");
             Log.d(TAG, "onActivityResult: attempting to navigate to final share screen.");
 
-            Toast.makeText(this, R.string.agradecimiento, Toast.LENGTH_LONG).show();
-
             if (imagenUri != null ) {
 
                 try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imagenUri);
-
-                Toast.makeText(this, R.string.agradecimiento, Toast.LENGTH_LONG).show();
                 imagen.setImageBitmap(bitmap);
 
                 //Para comprimir la imagen en JPEG
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
-                String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                String encodedImage = Base64.encodeToString(stream.toByteArray(), Base64.DEFAULT);
 
                 //Enviamos la imagen en un JSON codificada en Base 64
 
@@ -387,7 +443,7 @@ public class Activity_Elemento extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                //MultipartEntityBuilder
+                Toast.makeText(this, R.string.agradecimiento, Toast.LENGTH_LONG).show();
             }
         }
 

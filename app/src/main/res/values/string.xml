@@ -36,6 +36,7 @@
     <string name="utilizaGoogle">Utiliza tu cuenta de Google</string>
     <string name="buscar">Buscar</string>
     <string name="server_client_id">423305197397-t9t6lfv9fj8gqddapa2hpitmj2ggjen8.apps.googleusercontent.com</string>
+    <string name="noConexion">No hay conexion</string>
 
 
     <string name="comparteTitulo">¡Mira como mola!</string>
