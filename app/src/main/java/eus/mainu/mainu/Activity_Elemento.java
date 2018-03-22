@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +42,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Comentarios;
+import eus.mainu.mainu.Utilidades.Adaptador_Imagenes_Swipe;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.HttpPostRequest;
 import eus.mainu.mainu.Utilidades.Permisos;
@@ -54,12 +57,13 @@ public class Activity_Elemento extends AppCompatActivity {
     private static final int CAMERA_REQUEST_CODE = 5;
     private static final int COMPRUEBA_PERMISOS = 1;
 
+    private Adaptador_Imagenes_Swipe adaptadorImagenes;
+
     private TextView nombre;
     private TextView puntuacion;
     private TextView precio;
-    private TextView primerComentario;
     private ImageButton atras;
-    private ImageButton imagen;
+    //private ImageButton imagen;
     private ImageButton botonCamara;
     private ImageButton enviar;
     private RatingBar ratingBar,ratUsuario;
@@ -79,16 +83,16 @@ public class Activity_Elemento extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elemento);
 
-        //Para swype back
-        gestureDetector = new GestureDetector(this, new SwipeDetector());
-
+        //Para swype back, da problemas con el
+        //gestureDetector = new GestureDetector(this, new SwipeDetector());
+        ViewPager viewPager = findViewById(R.id.viewPagerElemento);
         nombre = findViewById(R.id.textViewNombre);
-        primerComentario = findViewById(R.id.primerComentario);
+        TextView primerComentario = findViewById(R.id.primerComentario);
         puntuacion = findViewById(R.id.textViewPuntuacion);
         ratingBar = findViewById(R.id.estrellitasElemento);
         ratUsuario = findViewById(R.id.ratingBarUsuario);
         precio = findViewById(R.id.textViewPrecio);
-        imagen = findViewById(R.id.botonImagenElemento);
+        //imagen = findViewById(R.id.botonImagenElemento);
         listaComentarios = findViewById(R.id.recycler_view_lista_comentarios);
         comentario = findViewById(R.id.editText);
         botonCamara = findViewById(R.id.botonCamara);
@@ -105,6 +109,9 @@ public class Activity_Elemento extends AppCompatActivity {
 
         //Miramos la informacion que nos pasan
         getInformacion();
+
+        //Ponemos el adaptador
+        viewPager.setAdapter(adaptadorImagenes);
 
         //Mostramos las valoraciones en el recycling view
         setValoraciones();
@@ -282,7 +289,9 @@ public class Activity_Elemento extends AppCompatActivity {
         bocadillo.setValoraciones(nuevo.getValoraciones());
 
         arrayValoraciones = bocadillo.getValoraciones();
+        adaptadorImagenes = new Adaptador_Imagenes_Swipe(bocadillo.getFotos(),this);
 
+        /*
         if (bocadillo.getFotos() != null) {
             if (!bocadillo.getFotos().isEmpty()) {
                 Picasso.with(this)
@@ -292,6 +301,7 @@ public class Activity_Elemento extends AppCompatActivity {
                         .into(imagen);
             }
         }
+        */
 
         if (bocadillo.getPuntuacion() != 0) {
             puntuacion.setText(String.format(Locale.getDefault(), "%.1f", bocadillo.getPuntuacion()));
@@ -321,7 +331,9 @@ public class Activity_Elemento extends AppCompatActivity {
         complemento.setValoraciones(nuevo.getValoraciones());
 
         arrayValoraciones = complemento.getValoraciones();
+        adaptadorImagenes = new Adaptador_Imagenes_Swipe(complemento.getFotos(),this);
 
+        /*
         if (complemento.getFotos() != null) {
             if (!complemento.getFotos().isEmpty()) {
                 Picasso.with(this)
@@ -331,6 +343,7 @@ public class Activity_Elemento extends AppCompatActivity {
                         .into(imagen);
             }
         }
+        */
 
         if (complemento.getPuntuacion() != 0) {
             puntuacion.setText(String.format(Locale.getDefault(), "%.1f", complemento.getPuntuacion()));
@@ -360,8 +373,9 @@ public class Activity_Elemento extends AppCompatActivity {
         plato.setValoraciones(nuevo.getValoraciones());
 
         arrayValoraciones = plato.getValoraciones();
+        adaptadorImagenes = new Adaptador_Imagenes_Swipe(plato.getFotos(),this);
 
-
+        /*
         if (plato.getFotos() != null) {
             if (!plato.getFotos().isEmpty()) {
                 Picasso.with(this)
@@ -370,7 +384,7 @@ public class Activity_Elemento extends AppCompatActivity {
                         .centerCrop()
                         .into(imagen);
             }
-        }
+        }*/
 
         if (plato.getPuntuacion() != 0) {
             puntuacion.setText(String.format(Locale.getDefault(), "%.1f", plato.getPuntuacion()));
@@ -449,7 +463,7 @@ public class Activity_Elemento extends AppCompatActivity {
 
                 try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imagenUri);
-                imagen.setImageBitmap(bitmap);
+                //imagen.setImageBitmap(bitmap);
 
                 //Para comprimir la imagen en JPEG
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
