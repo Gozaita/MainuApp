@@ -17,7 +17,7 @@
     <string name="tipo3">Bebidas calientes</string>
     <string name="tipo4">Bebidas frias</string>
     <string name="tipo5">Otros...</string>
-    <string name="Home">Home</string>
+    <string name="Inicio">Inicio</string>
     <string name="Informacion">Informacion</string>
     <string name="Comparte">Comparte</string>
     <string name="Error">Reportar error</string>
@@ -35,10 +35,12 @@
     <string name="iniciaSesion">Inicia sesion para poder comentar</string>
     <string name="utilizaGoogle">Utiliza tu cuenta de Google</string>
     <string name="buscar">Buscar</string>
-    <string name="server_client_id">423305197397-t9t6lfv9fj8gqddapa2hpitmj2ggjen8.apps.googleusercontent.com</string>
+    <string name="server_client_id">423305197397-t9t6lfv9fj8gqddapa2hpitmj2ggjen8.apps.googleusercontent.com</string>#${GITIGNORE.CLIENT}
     <string name="noConexion">No hay conexion</string>
 
 
+
+    <string name="danos">Danos tu opinion...</string>
     <string name="comparteTitulo">¡Mira como mola!</string>
     <string name="comparteBody">MainU App www.mainu.eus</string>
     <string name="comparteTitutlo">Compartir con</string>

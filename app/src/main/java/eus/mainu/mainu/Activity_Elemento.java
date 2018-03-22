@@ -1,6 +1,7 @@
 package eus.mainu.mainu;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -10,7 +11,6 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
@@ -36,7 +37,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Comentarios;
@@ -46,7 +46,6 @@ import eus.mainu.mainu.Utilidades.Permisos;
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
 import eus.mainu.mainu.datalayer.Plato;
-import eus.mainu.mainu.datalayer.Usuario;
 import eus.mainu.mainu.datalayer.Valoracion;
 
 public class Activity_Elemento extends AppCompatActivity {
@@ -55,10 +54,10 @@ public class Activity_Elemento extends AppCompatActivity {
     private static final int CAMERA_REQUEST_CODE = 5;
     private static final int COMPRUEBA_PERMISOS = 1;
 
-
     private TextView nombre;
     private TextView puntuacion;
     private TextView precio;
+    private TextView primerComentario;
     private ImageButton imagen;
     private ImageButton botonCamara;
     private ImageButton enviar;
@@ -70,9 +69,9 @@ public class Activity_Elemento extends AppCompatActivity {
     private int id=0;
     private String idToken = "777";
     private Uri imagenUri;
-
-
     ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +82,7 @@ public class Activity_Elemento extends AppCompatActivity {
         gestureDetector = new GestureDetector(this, new SwipeDetector());
 
         nombre = findViewById(R.id.textViewNombre);
+        primerComentario = findViewById(R.id.primerComentario);
         puntuacion = findViewById(R.id.textViewPuntuacion);
         ratingBar = findViewById(R.id.estrellitasElemento);
         precio = findViewById(R.id.textViewPrecio);
@@ -98,12 +98,17 @@ public class Activity_Elemento extends AppCompatActivity {
 
         //Para que no se muestre seleccionado al entrar en la actividad
         comentario.setCursorVisible(false);
+        comentario.setHint(R.string.danos);
 
         //Miramos la informacion que nos pasan
         getInformacion();
 
         //Mostramos las valoraciones en el recycling view
         setValoraciones();
+
+        if(arrayValoraciones.isEmpty()){
+            primerComentario.setVisibility(View.VISIBLE);
+        }
 
         //Todo el codigo que teniene que ver con el boton la camara
         setBotonCamara();
@@ -165,21 +170,25 @@ public class Activity_Elemento extends AppCompatActivity {
             public void onClick(View v) {
 
                 try {
+                    enviar.setVisibility(View.GONE);
+                    //Quitamos el teclado si esta abierto
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                    //Creamos el JSON
                     JSONObject postData = new JSONObject();
                     postData.put("idToken",idToken);
                     JSONObject valoracion = new JSONObject();
-
-                    valoracion.put("puntuacion",ratingBar.getNumStars());
+                    valoracion.put("puntuacion",ratingBar.getRating());
+                    ratingBar.setEnabled(false);
                     valoracion.put("texto",comentario.getText().toString());
-
+                    comentario.setEnabled(false);
                     postData.put("valoracion",valoracion);
 
                     new HttpPostRequest().execute("https://api.mainu.eus/add_valoracion/" + tipo+"/"+id, postData.toString());
-                    new HttpPostRequest().execute("https://api.mainu.eus/test_upload", postData.toString());
+
 
                     Toast.makeText(getApplicationContext(), R.string.agradecimiento, Toast.LENGTH_SHORT).show();
-
-                    enviar.setVisibility(View.GONE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -194,6 +203,7 @@ public class Activity_Elemento extends AppCompatActivity {
         //Inicializamos el adaptador de las valoraciones
         Adaptador_Comentarios adapter = new Adaptador_Comentarios(arrayValoraciones, this);
 
+        //Inflamos la lista de comentarios
         listaComentarios.setFocusable(false);
         listaComentarios.setAdapter(adapter);
         listaComentarios.setLayoutManager(new LinearLayoutManager(this));

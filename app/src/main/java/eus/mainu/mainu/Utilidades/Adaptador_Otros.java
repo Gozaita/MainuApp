@@ -95,6 +95,7 @@ public class Adaptador_Otros extends RecyclerView.Adapter<Adaptador_Otros.ViewHo
                 //Iniciamos la actividad
                 mContext.startActivity(intent);
 
+
             }
         }));
     }
