@@ -77,7 +77,6 @@ public class Activity_Elemento extends AppCompatActivity {
     ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

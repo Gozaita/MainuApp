@@ -4,10 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -19,6 +22,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Random;
 
+import eus.mainu.mainu.Utilidades.Adaptador_Imagenes_Swipe;
 import eus.mainu.mainu.Utilidades.Adaptador_Platos;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.Menu;
@@ -34,10 +38,9 @@ public class Fragment_Menu extends Fragment {
     private ListView lvPrimeros;
     private ListView lvSegundos;
     private ListView lvPostres;
-    private ImageView imagen;
-    private ImageButton flecha_izquierda;
-    private ImageButton flecha_derecha;
-    private int contador;
+    //private ImageView imagen;
+    //private ImageButton flecha_izquierda;
+    //private ImageButton flecha_derecha;
 
     //Variables
     private Menu menu = new Menu();
@@ -67,16 +70,26 @@ public class Fragment_Menu extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        //Cogemos el contexto
-        mContext = view.getContext();
+        //Ponemos el viewPager
+        ViewPager viewPager = view.findViewById(R.id.viewPagerMenu);
+        Adaptador_Imagenes_Swipe adaptadorImagenes = new Adaptador_Imagenes_Swipe(menu.getImagenes(),mContext);
+        viewPager.setAdapter(adaptadorImagenes);
+        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_fotos_menu);
+        tabLayout.setupWithViewPager(viewPager, true);
+
+        viewPager.setCurrentItem((int)(Math.random() * (5 + 1)));
+
+        setViewPager(viewPager);
+
+
 
         //Referenciamos los listViews
         lvPrimeros = view.findViewById(R.id.listaPrimeros);
         lvSegundos = view.findViewById(R.id.listaSegundos);
         lvPostres  = view.findViewById(R.id.listaPostres);
-        imagen = view.findViewById(R.id.imagenMenu);
-        flecha_izquierda = view.findViewById(R.id.flecha_izquierda);
-        flecha_derecha = view.findViewById(R.id.flecha_derecha);
+        //imagen = view.findViewById(R.id.imagenMenu);
+        //flecha_izquierda = view.findViewById(R.id.flecha_izquierda);
+        //flecha_derecha = view.findViewById(R.id.flecha_derecha);
 
         //Ponemos el SwipeToRefresh
         swipeRefreshLayout = view.findViewById(R.id.swipeMenu);
@@ -85,13 +98,36 @@ public class Fragment_Menu extends Fragment {
         //Inflamos la vista
         setListView();
 
-        setFlechaDerecha();
-        setFlechaIzquierda();
+        //setFlechaDerecha();
+        //setFlechaIzquierda();
 
         //Escuchamos un posible swipe to refresh
         escuchamosSwipe();
 
         return view;
+    }
+
+
+    //Metodo para que el swipe to refresh y el view pager no se molesten
+    private void setViewPager(ViewPager viewPager){
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_MOVE:
+                        swipeRefreshLayout.setEnabled(false);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_CANCEL:
+                        swipeRefreshLayout.setEnabled(true);
+                        break;
+                }
+                return false;
+            }
+        });
+
+        //viewPager.addOnPageChangeListener(...); Para hacer el loop infinito
     }
 
     //Metodo para inflar los listviews y las imagenes
@@ -100,16 +136,6 @@ public class Fragment_Menu extends Fragment {
         inflaListView(menu.getPrimeros(),lvPrimeros);
         inflaListView(menu.getSegundos(),lvSegundos);
         inflaListView(menu.getPostres(),lvPostres);
-        if(!menu.getImagenes().isEmpty()) {
-            Random rand = new Random();
-            contador = rand.nextInt((5) + 1);
-            Picasso.with(mContext)
-                    .load(menu.getImagenes().get(contador).getRuta())
-                    .fit()
-                    .centerCrop()
-                    .into(imagen);
-        }
-
     }
 
     //Metodo para inflar un listview cualquiera
@@ -155,6 +181,7 @@ public class Fragment_Menu extends Fragment {
         });
     }
 
+    /*
     private void setFlechaDerecha(){
         flecha_derecha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,7 +221,7 @@ public class Fragment_Menu extends Fragment {
             }
         });
     }
-
+    */
 
 
 }
