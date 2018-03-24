@@ -24,18 +24,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +51,7 @@ import eus.mainu.mainu.datalayer.Valoracion;
 public class Activity_Elemento extends AppCompatActivity {
 
     private static final String TAG = "Activity Elemento";
-    private static final int CAMERA_REQUEST_CODE = 5;
+    private static final int CAMERA_REQUEST_CODE = 2;
     private static final int COMPRUEBA_PERMISOS = 1;
 
     private Adaptador_Imagenes_Swipe adaptadorImagenes;
@@ -62,7 +59,7 @@ public class Activity_Elemento extends AppCompatActivity {
     private TextView nombre;
     private TextView puntuacion;
     private TextView precio;
-    private ImageButton atras;
+    private ImageButton atras, flechaIzquierda, flechaDerecha;
     //private ImageButton imagen;
     private ImageButton botonCamara;
     private ImageButton enviar;
@@ -84,7 +81,7 @@ public class Activity_Elemento extends AppCompatActivity {
 
         //Para swype back, da problemas con el
         //gestureDetector = new GestureDetector(this, new SwipeDetector());
-        ViewPager viewPager = findViewById(R.id.viewPagerElemento);
+        final ViewPager viewPager = findViewById(R.id.viewPagerElemento);
         nombre = findViewById(R.id.textViewNombre);
         TextView primerComentario = findViewById(R.id.primerComentario);
         puntuacion = findViewById(R.id.textViewPuntuacion);
@@ -97,6 +94,8 @@ public class Activity_Elemento extends AppCompatActivity {
         botonCamara = findViewById(R.id.botonCamara);
         enviar = findViewById(R.id.botonEnviar);
         atras = findViewById(R.id.atrasButton);
+        flechaIzquierda = findViewById(R.id.flecha_izquierda);
+        flechaDerecha = findViewById(R.id.flecha_derecha);
 
 
         //Para que no influya en el scroll
@@ -111,6 +110,40 @@ public class Activity_Elemento extends AppCompatActivity {
 
         //Ponemos el adaptador
         viewPager.setAdapter(adaptadorImagenes);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if(adaptadorImagenes.getCount() == 1){
+                    flechaIzquierda.setVisibility(View.GONE);
+                    flechaDerecha.setVisibility(View.GONE);
+                } else {
+                    if(position == 0){
+                        flechaIzquierda.setVisibility(View.GONE);
+                        flechaDerecha.setVisibility(View.VISIBLE);
+                    } else if(position == adaptadorImagenes.getCount()-1){
+                        flechaIzquierda.setVisibility(View.VISIBLE);
+                        flechaDerecha.setVisibility(View.GONE);
+                    } else {
+                        flechaDerecha.setVisibility(View.VISIBLE);
+                        flechaIzquierda.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        setFlechaIzquierda(viewPager);
+        setFlechaDerecha(viewPager);
+
 
         //Mostramos las valoraciones en el recycling view
         setValoraciones();
@@ -132,6 +165,28 @@ public class Activity_Elemento extends AppCompatActivity {
         //stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 
     }
+
+
+    private void setFlechaIzquierda(final ViewPager viewPager){
+        flechaIzquierda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(viewPager.getCurrentItem()-1);
+            }
+        });
+
+    }
+
+    private void setFlechaDerecha(final ViewPager viewPager){
+
+        flechaDerecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+            }
+        });
+    }
+
 
     public void pidePermisos(String[] permisos){
         Log.d(TAG, "compruebaPermisos: Comprobando permisos");

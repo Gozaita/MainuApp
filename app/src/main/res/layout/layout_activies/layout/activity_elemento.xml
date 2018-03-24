@@ -31,13 +31,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="225dp" />
 
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@+id/viewPagerElemento"
+                android:layout_alignTop="@id/viewPagerElemento"
+                android:background="@color/transparente"
+                app:srcCompat="@drawable/ic_keyboard_arrow_left_24dp"
+                android:id="@+id/flecha_izquierda"/>
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@+id/viewPagerElemento"
+                android:layout_alignTop="@id/viewPagerElemento"
+                android:background="@color/transparente"
+                app:srcCompat="@drawable/ic_keyboard_arrow_right_24dp"
+                android:id="@+id/flecha_derecha" />
+
             <!--Quitamos el boton de atras -->
             <ImageButton
                 android:id="@+id/atrasButton"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="2dp"
                 android:background="@color/transparente"
                 app:srcCompat="@drawable/ic_arrow_back_24dp" />
 
