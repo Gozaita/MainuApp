@@ -35,9 +35,9 @@ public class Fragment_Menu extends Fragment {
     //Elementos de la vista
     private Context mContext;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private ListView lvPrimeros;
-    private ListView lvSegundos;
-    private ListView lvPostres;
+    private ListView listaMenu;
+    //private ListView lvSegundos;
+    //private ListView lvPostres;
     //private ImageView imagen;
     //private ImageButton flecha_izquierda;
     //private ImageButton flecha_derecha;
@@ -74,19 +74,17 @@ public class Fragment_Menu extends Fragment {
         ViewPager viewPager = view.findViewById(R.id.viewPagerMenu);
         Adaptador_Imagenes_Swipe adaptadorImagenes = new Adaptador_Imagenes_Swipe(menu.getImagenes(),mContext);
         viewPager.setAdapter(adaptadorImagenes);
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_fotos_menu);
+        TabLayout tabLayout = view.findViewById(R.id.tab_fotos_menu);
         tabLayout.setupWithViewPager(viewPager, true);
 
         viewPager.setCurrentItem((int)(Math.random() * (5 + 1)));
 
         setViewPager(viewPager);
 
-
-
         //Referenciamos los listViews
-        lvPrimeros = view.findViewById(R.id.listaPrimeros);
-        lvSegundos = view.findViewById(R.id.listaSegundos);
-        lvPostres  = view.findViewById(R.id.listaPostres);
+        listaMenu = view.findViewById(R.id.listaMenu);
+        //lvSegundos = view.findViewById(R.id.listaSegundos);
+        //lvPostres  = view.findViewById(R.id.listaPostres);
         //imagen = view.findViewById(R.id.imagenMenu);
         //flecha_izquierda = view.findViewById(R.id.flecha_izquierda);
         //flecha_derecha = view.findViewById(R.id.flecha_derecha);
@@ -133,9 +131,9 @@ public class Fragment_Menu extends Fragment {
     //Metodo para inflar los listviews y las imagenes
     public void setListView(){
 
-        inflaListView(menu.getPrimeros(),lvPrimeros);
-        inflaListView(menu.getSegundos(),lvSegundos);
-        inflaListView(menu.getPostres(),lvPostres);
+        inflaListView(menu.getPlatos(),listaMenu);
+        //inflaListView(menu.getSegundos(),lvSegundos);
+        //inflaListView(menu.getPostres(),lvPostres);
     }
 
     //Metodo para inflar un listview cualquiera
@@ -164,8 +162,7 @@ public class Fragment_Menu extends Fragment {
                 //Chequeamos si tenemos el menu actualizado
                 //request.checkMenuActualizados();
 
-
-                if(request.isConnected(mContext) && menu.getNombres().isEmpty()){
+                if(request.isConnected(mContext) && menu.getPlatos().isEmpty()){
                     menu = request.getMenu();
                     setListView();
                 }

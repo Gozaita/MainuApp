@@ -1,7 +1,9 @@
 package eus.mainu.mainu;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -19,10 +21,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -218,6 +222,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 comparteClick();
                 break;
             case R.id.error:
+                muestraCuadroTexto();
                 break;
             case R.id.iniciarSesion:
                 iniciarSesionClick();
@@ -248,6 +253,33 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         intent.putExtra(Intent.EXTRA_TEXT,"¡Mira como mola! --> www.mainu.eus");
         startActivity(Intent.createChooser(intent,"Compartir con"));
     }
+
+    /********************************************************************************************/
+
+    public void muestraCuadroTexto() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.alert_box, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText edt = (EditText) dialogView.findViewById(R.id.edit1);
+
+        dialogBuilder.setTitle(R.string.Ayudanos);
+        dialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //do something with edt.getText().toString();
+                Toast.makeText(Activity_Main.this,R.string.agradecimiento,Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialogBuilder.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //pass
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+    }
+
 
     /********************************************************************************************/
     private void iniciarSesionClick(){
