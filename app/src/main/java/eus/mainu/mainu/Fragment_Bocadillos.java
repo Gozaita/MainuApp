@@ -36,6 +36,10 @@ public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryT
     //Variables
     private ArrayList<Bocadillo> arrayBocadillos = new ArrayList<>();
 
+    public Fragment_Bocadillos(){
+
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +52,7 @@ public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryT
     }
 
     //**********************************************************************************************
-    private void administraPeticionesCacheBocadillos(){
+    public ArrayList<Bocadillo> administraPeticionesCacheBocadillos(){
         //Cada request se puede usar una vez
         HttpGetRequest request1 = new HttpGetRequest();
         HttpGetRequest request2 = new HttpGetRequest();
@@ -73,6 +77,8 @@ public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryT
         }
         if(usarCache)
             arrayBocadillos = (ArrayList<Bocadillo>) cache.leerListaBocadillos( mContext);
+
+        return arrayBocadillos;
     }
 
     //Metodo que se ejecuta al visualizar el fragmento, se representa en funcion del layout fragment_bocadillos

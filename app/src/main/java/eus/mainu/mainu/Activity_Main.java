@@ -43,6 +43,7 @@ import java.util.ArrayList;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Busqueda;
 import eus.mainu.mainu.Utilidades.Adaptador_Fragmentos;
+import eus.mainu.mainu.Utilidades.Administrador_Cache;
 import eus.mainu.mainu.datalayer.Bocadillo;
 
 public class Activity_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
@@ -60,9 +61,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     private TextView nombre, email;
     private SearchView searchView;
 
-    private String[] posiblesBocadillos = new String[]{"atun con queso", "bacon", "ensalada cesar"};
     private ListView searchResult;
-    private ArrayList<Bocadillo> arrayList;
     private ArrayList<String> arrayListSring = new ArrayList<String>();
     private ArrayAdapter adapter;
 
@@ -104,15 +103,31 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         setupViewPager();
 
         searchView.setIconified(true);
-        arrayListSring.add("atun");
+
+
+        Administrador_Cache cache = new Administrador_Cache();
+        ArrayList<Bocadillo> a = (ArrayList<Bocadillo>) cache.leerListaBocadillos(this);
+
+        arrayListSring.add("atun con queso");
         arrayListSring.add("bacon");
         arrayListSring.add("ensalada");
         adapter = new ArrayAdapter<String>(this, R.layout.listview_testtt, arrayListSring);
         searchResult.setAdapter(adapter);
+        searchResult.setDivider(null);
+        searchResult.setVisibility(View.INVISIBLE); //Empieza oculto hasta darle a la lupa
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus)
+                    searchResult.setVisibility(View.VISIBLE);
+                else
+                    searchResult.setVisibility(View.INVISIBLE);
+            }
+        });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                System.out.println("bobo \n\n\n");
+
                 return false;
             }
 
