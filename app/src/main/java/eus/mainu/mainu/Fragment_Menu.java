@@ -30,7 +30,7 @@ import eus.mainu.mainu.datalayer.Plato;
 
 public class Fragment_Menu extends Fragment {
 
-    private static final String TAG = "Menu";
+    private final String TAG = "Menu";
 
     //Elementos de la vista
     private Context mContext;

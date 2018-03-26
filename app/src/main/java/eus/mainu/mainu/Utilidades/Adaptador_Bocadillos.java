@@ -18,7 +18,7 @@ import eus.mainu.mainu.datalayer.Ingrediente;
 public class Adaptador_Bocadillos extends RecyclerView.Adapter<Adaptador_Bocadillos.ViewHolder> {
 
     //Globales
-    private static final String TAG = "Adaptador_Bocadillos";
+    private final String TAG = "Adaptador_Bocadillos";
 
     //Variables
     private Context mContext;

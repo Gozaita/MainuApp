@@ -26,7 +26,7 @@ import eus.mainu.mainu.datalayer.Bocadillo;
 //Clase del fragmento responsable de visualizar los bocadillos
 public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener {
 
-    private static final String TAG = "Bocadillos";
+    private final String TAG = "Bocadillos";
 
     //Elementos Layout
     private Context mContext;

@@ -30,7 +30,7 @@ import eus.mainu.mainu.datalayer.Valoracion;
 public class Adaptador_Comentarios extends RecyclerView.Adapter<Adaptador_Comentarios.ViewHolder> {
 
     //Para debuggear
-    private static final String TAG = "Adaptador_Comentarios";
+    private final String TAG = "Adaptador_Comentarios";
     private ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
     private Context mContext;
 

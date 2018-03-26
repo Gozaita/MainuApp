@@ -23,7 +23,7 @@ import eus.mainu.mainu.datalayer.Plato;
 
 public class Adaptador_Platos extends BaseAdapter {
 
-    private static final String TAG = "Adaptador de Plato";
+    private final String TAG = "Adaptador de Plato";
 
     private Context mContext;
     private ArrayList<Plato> platos;

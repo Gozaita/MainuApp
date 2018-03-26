@@ -48,8 +48,8 @@ import eus.mainu.mainu.datalayer.Bocadillo;
 public class Activity_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
 
     //Variables globales
-    private static final String TAG = "Activity MAIN";
-    private static final int SIGN_IN_CODE = 777; //Es 777 porque yo he querido, podria ser cualquiera
+    private final String TAG = "Activity MAIN";
+    private final int SIGN_IN_CODE = 777; //Es 777 porque yo he querido, podria ser cualquiera
 
     //Elementos layout
     private DrawerLayout drawer;

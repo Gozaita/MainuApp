@@ -53,9 +53,9 @@ import eus.mainu.mainu.datalayer.Valoracion;
 
 public class Activity_Elemento extends AppCompatActivity {
 
-    private static final String TAG = "Activity Elemento";
-    private static final int CAMERA_REQUEST_CODE = 5;
-    private static final int COMPRUEBA_PERMISOS = 1;
+    private final String TAG = "Activity Elemento";
+    private final int CAMERA_REQUEST_CODE = 5;
+    private final int COMPRUEBA_PERMISOS = 1;
 
     private Adaptador_Imagenes_Swipe adaptadorImagenes;
 
@@ -63,6 +63,7 @@ public class Activity_Elemento extends AppCompatActivity {
     private TextView puntuacion;
     private TextView precio;
     private ImageButton atras;
+
     //private ImageButton imagen;
     private ImageButton botonCamara;
     private ImageButton enviar;
@@ -475,7 +476,7 @@ public class Activity_Elemento extends AppCompatActivity {
                     postData.put("idToken",VariablesGlobales.idToken);
                     postData.put("foto",encodedImage);
 
-                    new HttpPostRequest().execute("https://api.mainu.eus/test_upload", postData.toString());
+                    new HttpPostRequest().execute("https://api.mainu.eus/add_img/"+tipo+"/"+id, postData.toString());
 
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -1,49 +1,57 @@
 <resources>
+    <!--Títulos-->
     <string name="app_name">MainU</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_bocadillos">Bocadillos</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="primer_Plato">Primeros</string>
-    <string name="segundo_Plato">Segundos</string>
-    <string name="postre">Postre</string>
     <string name="complementos">Otros</string>
     <string name="bocadillos">Bocadillos</string>
-    <string name="menuDelDia">Menu del dia</string>
-    <string name="agradecimiento">¡Gracias por tu colaboración!</string>
-    <string name="tipo1">Tostas y mini pizzas</string>
-    <string name="tipo2">Bolleria</string>
-    <string name="tipo3">Bebidas calientes</string>
-    <string name="tipo4">Bebidas frias</string>
-    <string name="tipo5">Otros...</string>
-    <string name="Inicio">Inicio</string>
-    <string name="Informacion">Informacion</string>
-    <string name="Comparte">Comparte</string>
-    <string name="Error">Reportar error</string>
-    <string name="fail">Algo salio mal</string>
-    <string name="IniciarSesion">Iniciar sesion</string>
-    <string name="CerrarSesion">Cerrar sesion</string>
+    <string name="menuDelDia">Menú del dia</string>
+
+    <!--Texto Suelto-->
     <string name="Ayudanos">Ayudanos a mejorar</string>
-    <string name="Ajustes">Ajustes</string>
-    <string name="despedida">Chao chaito</string>
-    <string name="getBocadillos">Menu del dia</string>
-    <string name="getMenu">Menu del dia</string>
-    <string name="getComplementos">https://api.mainu.eus/get_otros</string>
-    <string name="nombre">Nombre</string>
-    <string name="email">Email</string>
-    <string name="iniciaSesion">Inicia sesion para poder comentar</string>
+    <string name="iniciaSesion">Es necesario iniciar sesión</string>
     <string name="utilizaGoogle">Utiliza tu cuenta de Google</string>
     <string name="buscar">Buscar</string>
-    <string name="server_client_id">423305197397-t9t6lfv9fj8gqddapa2hpitmj2ggjen8.apps.googleusercontent.com</string>#${GITIGNORE.CLIENT}
-    <string name="noConexion">No hay conexion</string>
-
-
-
-    <string name="danos">Danos tu opinion...</string>
+    <string name="danos">Danos tu opinión&#8230;</string>
     <string name="comparteTitulo">¡Mira como mola!</string>
     <string name="comparteBody">MainU App www.mainu.eus</string>
     <string name="comparteTitutlo">Compartir con</string>
+
+    <!--Texto clickable-->
+        <!--Navigation Drawer-->
+        <string name="Inicio">Inicio</string>
+        <string name="Informacion">Información</string>
+        <string name="Comparte">Comparte</string>
+        <string name="Error">Reportar error</string>
+        <string name="IniciarSesion">Iniciar sesión</string>
+        <string name="CerrarSesion">Cerrar sesión</string>
+
+    <!--Secciones-->
+        <!--Navigation Drawer-->
+        <string name="ajustes">Ajustes</string>
+        <!--Fragmento Menú-->
+        <string name="primer_Plato">Primeros</string>
+        <string name="segundo_Plato">Segundos</string>
+        <string name="postre">Postre</string>
+    <!--Fragmento Otros-->
+        <string name="tipo1">Tostas y mini pizzas</string>
+        <string name="tipo2">Bollería</string>
+        <string name="tipo3">Bebidas calientes</string>
+        <string name="tipo4">Bebidas frías</string>
+        <string name="tipo5">Otros&#8230;</string>
+
+
+    <!--Toasts-->
+    <string name="agradecimiento">¡Gracias por tu colaboración!</string>
+    <string name="fail">Algo salió mal</string>
+    <string name="despedida">Chao chaito</string>
+    <string name="noConexion">No hay conexión</string>
+
+    <!--Urls-->
+    <string name="getBocadillos">https://api.mainu.eus/bocadillos</string>
+    <string name="getMenu">https://api.mainu.eus/menu</string>
+    <string name="getComplementos">https://api.mainu.eus/otros</string>
+
+    <!--Claves-->
+    <string name="server_client_id">423305197397-t9t6lfv9fj8gqddapa2hpitmj2ggjen8.apps.googleusercontent.com</string>#${GITIGNORE.CLIENT}
 
 
 

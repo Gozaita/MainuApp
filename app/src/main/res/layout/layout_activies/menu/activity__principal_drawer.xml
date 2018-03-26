@@ -22,7 +22,7 @@
             android:title="@string/Error" />
     </group>
 
-    <item android:title="@string/Ajustes">
+    <item android:title="@string/ajustes">
     <menu>
         <item
             android:id="@+id/iniciarSesion"
