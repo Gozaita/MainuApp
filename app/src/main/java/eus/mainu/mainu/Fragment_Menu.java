@@ -61,7 +61,7 @@ public class Fragment_Menu extends Fragment {
         //Comprobamos si hay conexion para hacer las peticiones de los arrays
         if(request.isConnected(mContext) ){
             //Pedimos los complementos a la API
-            menu = request.getMenu();
+           menu = request.getMenu();
         }
     }
 

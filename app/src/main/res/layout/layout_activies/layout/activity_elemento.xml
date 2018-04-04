@@ -167,7 +167,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:fontFamily="@font/roboto_light"
-                android:hint="Danos tu opinion..."
+                android:hint="@string/danos"
                 android:textSize="15sp" />
 
             <TextView
@@ -178,7 +178,7 @@
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/roboto"
                 android:gravity="center"
-                android:text="¡Sé el primero en comentar!"
+                android:text="@string/primero"
                 android:textSize="20sp"
                 android:visibility="gone"/>
 

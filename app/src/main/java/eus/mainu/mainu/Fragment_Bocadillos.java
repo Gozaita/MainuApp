@@ -52,7 +52,7 @@ public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryT
     }
 
     //**********************************************************************************************
-    public ArrayList<Bocadillo> administraPeticionesCacheBocadillos(){
+    private void administraPeticionesCacheBocadillos(){
         //Cada request se puede usar una vez
         HttpGetRequest request1 = new HttpGetRequest();
         HttpGetRequest request2 = new HttpGetRequest();
@@ -75,10 +75,10 @@ public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryT
         } else{ //Si no hay internet, uso la cache
             usarCache = true;
         }
-        if(usarCache)
-            arrayBocadillos = (ArrayList<Bocadillo>) cache.leerListaBocadillos( mContext);
+        if(usarCache) {
+            arrayBocadillos = (ArrayList<Bocadillo>) cache.leerListaBocadillos(mContext);
+        }
 
-        return arrayBocadillos;
     }
 
     //Metodo que se ejecuta al visualizar el fragmento, se representa en funcion del layout fragment_bocadillos

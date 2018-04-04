@@ -11,6 +11,7 @@
     <string name="utilizaGoogle">Utiliza tu cuenta de Google</string>
     <string name="buscar">Buscar</string>
     <string name="danos">Danos tu opinión&#8230;</string>
+    <string name="primero">¡Deja tu comenatario!</string>
     <string name="comparteTitulo">¡Mira como mola!</string>
     <string name="comparteBody">MainU App www.mainu.eus</string>
     <string name="comparteTitutlo">Compartir con</string>
@@ -23,6 +24,11 @@
         <string name="Error">Reportar error</string>
         <string name="IniciarSesion">Iniciar sesión</string>
         <string name="CerrarSesion">Cerrar sesión</string>
+    <!--AlertBox-->
+        <string name="aceptar">Aceptar</string>
+        <string name="cancelar">Cancelar</string>
+
+
 
     <!--Secciones-->
         <!--Navigation Drawer-->
@@ -38,7 +44,6 @@
         <string name="tipo4">Bebidas frías</string>
         <string name="tipo5">Otros&#8230;</string>
 
-
     <!--Toasts-->
     <string name="agradecimiento">¡Gracias por tu colaboración!</string>
     <string name="fail">Algo salió mal</string>
@@ -53,11 +58,8 @@
     <!--Claves-->
     <string name="server_client_id">423305197397-t9t6lfv9fj8gqddapa2hpitmj2ggjen8.apps.googleusercontent.com</string>#${GITIGNORE.CLIENT}
 
-
     <!-- Emojis -->
     <string name="emoji_Corazon">Otros&#8230;</string>
-
-
 
 
 </resources>

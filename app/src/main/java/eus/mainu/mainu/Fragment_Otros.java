@@ -76,7 +76,7 @@ public class Fragment_Otros extends Fragment{
         if(request1.isConnected(mContext) ){
 
             String remoteLastUpdate = request1.getLastUpdate("otros");
-            String localLastUpdate  = cache.leerLastUpdate( mContext, "bocadillos");
+            String localLastUpdate  = cache.leerLastUpdate( mContext, "otros");
 
 
             if(!remoteLastUpdate.equalsIgnoreCase(localLastUpdate) ){
