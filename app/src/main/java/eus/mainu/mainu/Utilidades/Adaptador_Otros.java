@@ -27,7 +27,7 @@ import eus.mainu.mainu.datalayer.Complemento;
 
 public class Adaptador_Otros extends RecyclerView.Adapter<Adaptador_Otros.ViewHolder> {
 
-    private static final String TAG = "RecyclingViewCardAdapte";
+    private final String TAG = "RecyclingViewCardAdapte";
 
     private ArrayList<Complemento> arrayComplementos = new ArrayList<>();
     private Context mContext;

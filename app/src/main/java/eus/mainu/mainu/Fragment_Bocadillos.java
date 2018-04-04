@@ -26,7 +26,7 @@ import eus.mainu.mainu.datalayer.Bocadillo;
 //Clase del fragmento responsable de visualizar los bocadillos
 public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener {
 
-    private static final String TAG = "Bocadillos";
+    private final String TAG = "Bocadillos";
 
     //Elementos Layout
     private Context mContext;
@@ -35,6 +35,10 @@ public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryT
 
     //Variables
     private ArrayList<Bocadillo> arrayBocadillos = new ArrayList<>();
+
+    public Fragment_Bocadillos(){
+
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +52,7 @@ public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryT
     }
 
     //**********************************************************************************************
-    private void administraPeticionesCacheBocadillos(){
+    public ArrayList<Bocadillo> administraPeticionesCacheBocadillos(){
         //Cada request se puede usar una vez
         HttpGetRequest request1 = new HttpGetRequest();
         HttpGetRequest request2 = new HttpGetRequest();
@@ -73,6 +77,8 @@ public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryT
         }
         if(usarCache)
             arrayBocadillos = (ArrayList<Bocadillo>) cache.leerListaBocadillos( mContext);
+
+        return arrayBocadillos;
     }
 
     //Metodo que se ejecuta al visualizar el fragmento, se representa en funcion del layout fragment_bocadillos

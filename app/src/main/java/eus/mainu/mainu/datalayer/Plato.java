@@ -19,6 +19,10 @@ public class Plato implements Serializable {
     public Plato(){
     }
 
+    public Plato(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Plato(int id, String nombre, double puntuacion, ArrayList<Imagen> fotos) {
         this.id = id;
         this.nombre = nombre;

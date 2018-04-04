@@ -48,7 +48,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hecho por y para estudiantes 3"/>
+            android:text="Hecho por y para estudiantes 0x1F60A"/>
 
         <TextView
             android:layout_width="wrap_content"
