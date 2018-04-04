@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import eus.mainu.mainu.Utilidades.Administrador_Cache;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.Adaptador_Otros;
+import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
 
 public class Fragment_Otros extends Fragment{
@@ -39,7 +40,12 @@ public class Fragment_Otros extends Fragment{
         Log.d(TAG, "onCreate: Fragment Otros");
         
         mContext = getContext();
-        administraPeticionesCacheOtros();
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            arrayComplementos = (ArrayList<Complemento>) bundle.getSerializable("listaOtros");
+        }
+
+        //administraPeticionesCacheOtros();
         /*
         //Clasificamos el array en 5 categorias
         for(Complemento comp : arrayComplementos){

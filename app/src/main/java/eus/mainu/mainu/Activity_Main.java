@@ -48,7 +48,9 @@ import java.util.ArrayList;
 import eus.mainu.mainu.Utilidades.Adaptador_Busqueda;
 import eus.mainu.mainu.Utilidades.Adaptador_Fragmentos;
 import eus.mainu.mainu.Utilidades.Administrador_Cache;
+import eus.mainu.mainu.Utilidades.Menu;
 import eus.mainu.mainu.datalayer.Bocadillo;
+import eus.mainu.mainu.datalayer.Complemento;
 
 public class Activity_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
 
@@ -104,6 +106,23 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         setToolbar();
         setCuenta();
         setDrawer();
+
+        Menu menu = (Menu) getIntent().getSerializableExtra("Menu");
+        ArrayList<Bocadillo> listaBocadillos = (ArrayList<Bocadillo>) getIntent().getSerializableExtra("listaBocadillos");
+        ArrayList<Complemento> listaOtros = (ArrayList<Complemento>) getIntent().getSerializableExtra("listaOtros");
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("Menu", menu);
+        fMenu.setArguments(bundle);
+
+        bundle = new Bundle();
+        bundle.putSerializable("listaBocadillos", listaBocadillos);
+        fBocadillos.setArguments(bundle);
+
+        bundle = new Bundle();
+        bundle.putSerializable("listaOtros", listaOtros);
+        fOtros.setArguments(bundle);
+
         setupViewPager();
 
         searchView.setIconified(true);

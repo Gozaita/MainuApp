@@ -22,7 +22,7 @@ public class Activity_Inicio extends AppCompatActivity {
 
     private final String TAG = "Activity Inicio";
     //Duracion Splash Screen
-    private static final long SPLASH_SCREEN_DELAY = 0;
+    private static final long SPLASH_SCREEN_DELAY = 500;
 
     private Menu menu;
     private ArrayList<Bocadillo> listaBocadillos;

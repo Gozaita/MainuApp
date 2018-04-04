@@ -56,13 +56,19 @@ public class Fragment_Menu extends Fragment {
 
         //Cogemos el contexto
         mContext = getContext();
-        //Creamos un objeto para hacer las peticiones get y para hacer los hilos
-        HttpGetRequest request = new HttpGetRequest();
-        //Comprobamos si hay conexion para hacer las peticiones de los arrays
-        if(request.isConnected(mContext) ){
-            //Pedimos los complementos a la API
-           menu = request.getMenu();
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            menu = (Menu )bundle.getSerializable("Menu");
         }
+
+        //Creamos un objeto para hacer las peticiones get y para hacer los hilos
+        //HttpGetRequest request = new HttpGetRequest();
+        //Comprobamos si hay conexion para hacer las peticiones de los arrays
+        //if(request.isConnected(mContext) ){
+            //Pedimos los complementos a la API
+           //menu = request.getMenu();
+        //}
     }
 
     @Nullable

@@ -47,8 +47,12 @@ public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryT
         Log.d(TAG, "onCreate: Inicia Fragment Bocadillos");
 
         mContext = getContext();
-        administraPeticionesCacheBocadillos();
+        //administraPeticionesCacheBocadillos();
 
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+             arrayBocadillos = (ArrayList<Bocadillo>) bundle.getSerializable("listaBocadillos");
+        }
     }
 
     //**********************************************************************************************
