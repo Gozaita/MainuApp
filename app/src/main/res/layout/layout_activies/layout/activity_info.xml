@@ -18,9 +18,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Acerca de MainU"
-            style="@style/Base.TextAppearance.AppCompat.Title"
-            android:layout_marginVertical="10dp"
+            style="@style/Base.TextAppearance.AppCompat.Headline"
+            android:layout_marginTop="10dp"
             android:textColor="#000"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:text="Staff:"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:text="Devs:"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="  Ismael Estalayo \n  Guillermo Carlos Ozaita\n  Andreea Stanciu\n  Adrián Vazquez"/>
 
     </LinearLayout>
 
@@ -48,7 +65,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hecho por y para estudiantes 0x1F60A"/>
+            android:text="Hecho por y para estudiantes ❤"/>
 
         <TextView
             android:layout_width="wrap_content"
