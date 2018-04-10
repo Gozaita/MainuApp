@@ -24,7 +24,7 @@ import eus.mainu.mainu.Utilidades.Adaptador_Bocadillos;
 import eus.mainu.mainu.datalayer.Bocadillo;
 
 //Clase del fragmento responsable de visualizar los bocadillos
-public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryTextListener, MenuItem.OnActionExpandListener {
+public class Fragment_Bocadillos extends Fragment implements MenuItem.OnActionExpandListener {
 
     private final String TAG = "Bocadillos";
 
@@ -47,7 +47,6 @@ public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryT
         Log.d(TAG, "onCreate: Inicia Fragment Bocadillos");
 
         mContext = getContext();
-        //administraPeticionesCacheBocadillos();
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -56,35 +55,6 @@ public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryT
     }
 
     //**********************************************************************************************
-    private void administraPeticionesCacheBocadillos(){
-        //Cada request se puede usar una vez
-        HttpGetRequest request1 = new HttpGetRequest();
-        HttpGetRequest request2 = new HttpGetRequest();
-
-        //Comprobamos si hay conexion para hacer las peticiones de los arrays
-        Administrador_Cache cache = new Administrador_Cache();
-        boolean usarCache = false;
-
-        if(request1.isConnected(mContext) ){
-            String remoteLastUpdate = request1.getLastUpdate("bocadillos");
-            String localLastUpdate  = cache.leerLastUpdate( mContext, "bocadillos");
-
-            if(!remoteLastUpdate.equalsIgnoreCase(localLastUpdate) ){
-                arrayBocadillos = request2.getBocadillos();
-                cache.guardarLastUpdate(mContext, "bocadillos", remoteLastUpdate);
-                cache.guardarListaBocadillos(mContext, arrayBocadillos);
-            } else{
-                usarCache = true;
-            }
-        } else{ //Si no hay internet, uso la cache
-            usarCache = true;
-        }
-        if(usarCache) {
-            arrayBocadillos = (ArrayList<Bocadillo>) cache.leerListaBocadillos(mContext);
-        }
-
-    }
-
     //Metodo que se ejecuta al visualizar el fragmento, se representa en funcion del layout fragment_bocadillos
     @Nullable
     @Override
@@ -156,32 +126,6 @@ public class Fragment_Bocadillos extends Fragment implements SearchView.OnQueryT
         MenuItem itemBusqueda = menu.findItem(R.id.buscar);
         SearchView searchView = searchI
     }*/
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        if (newText != null || newText.trim().isEmpty()) {
-            resetLista();
-            return false;
-        }
-
-        ArrayList<Bocadillo> listaFiltrada = new ArrayList<>();
-        for (Bocadillo bocadillo : arrayBocadillos) {
-            if (bocadillo.getNombre().contains(newText)) {
-                listaFiltrada.add(bocadillo);
-            }
-        }
-
-        Adaptador_Bocadillos adapter = new Adaptador_Bocadillos(listaFiltrada, getActivity());
-        //Adaptamos el recyclingview
-        recyclerView.setAdapter(adapter);
-
-        return false;
-    }
 
     private void resetLista(){
         //Creamos el objeto de la clase adaptador

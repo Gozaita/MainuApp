@@ -45,7 +45,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import eus.mainu.mainu.Utilidades.Adaptador_Busqueda;
 import eus.mainu.mainu.Utilidades.Adaptador_Fragmentos;
 import eus.mainu.mainu.Utilidades.Administrador_Cache;
 import eus.mainu.mainu.Utilidades.Menu;
@@ -127,13 +126,13 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
         searchView.setIconified(true);
 
-
         Administrador_Cache cache = new Administrador_Cache();
         ArrayList<Bocadillo> a = (ArrayList<Bocadillo>) cache.leerListaBocadillos(this);
 
-        arrayListSring.add("atun con queso");
-        arrayListSring.add("bacon");
-        arrayListSring.add("ensalada");
+        for (int i = 0; i < a.size(); i++){
+            arrayListSring.add(a.get(i).getNombre() );
+        }
+
         adapter = new ArrayAdapter<String>(this, R.layout.listview_testtt, arrayListSring);
         searchResult.setAdapter(adapter);
         searchResult.setDivider(null);
@@ -141,16 +140,20 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus)
+                if(hasFocus) {
                     searchResult.setVisibility(View.VISIBLE);
-                else
+                    tabLayout.setVisibility(View.GONE);
+                }
+                else {
                     searchResult.setVisibility(View.INVISIBLE);
+                    tabLayout.setVisibility(View.VISIBLE);
+                }
             }
         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
+                
                 return false;
             }
 
@@ -211,12 +214,17 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 switch (position) {
                     case 0:
                         getSupportActionBar().setTitle(R.string.menuDelDia);
+                        searchView.setVisibility(View.INVISIBLE);
+                        searchResult.setVisibility(View.INVISIBLE);
                         break;
                     case 1:
                         getSupportActionBar().setTitle(R.string.bocadillos);
+                        searchView.setVisibility(View.VISIBLE);
                         break;
                     case 2:
                         getSupportActionBar().setTitle(R.string.complementos);
+                        searchView.setVisibility(View.INVISIBLE);
+                        searchResult.setVisibility(View.INVISIBLE);
                         break;
                 }
             }
@@ -233,7 +241,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
      /********************************************************************************************
      * Codigo que tiene que ver con el registro del usuario con Google
-     *
      */
 
     //Configuramos el navigation Drawer
@@ -264,7 +271,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
             case R.id.cerrarSesion:
                 cerrarSesionClick();
                 break;
-
         }
 
         //Cerramos el drawer
@@ -289,7 +295,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     }
 
     /********************************************************************************************/
-
     public void muestraCuadroTexto() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
@@ -340,7 +345,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
 
     /********************************************************************************************/
-
     private void setCuenta(){
         Log.d(TAG, "setCuenta");
 
