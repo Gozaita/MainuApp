@@ -528,9 +528,9 @@ public class Activity_Elemento extends AppCompatActivity {
 
                     JSONObject postData = new JSONObject();
                     postData.put("idToken",VariablesGlobales.idToken);
-                    postData.put("foto",encodedImage);
+                    postData.put("imagen",encodedImage);
 
-                    new HttpPostRequest().execute("https://api.mainu.eus/test_upload", postData.toString());
+                    new HttpPostRequest().execute("https://api.mainu.eus/upload_images/"+tipo+"/"+id, postData.toString());
 
                 } catch (Exception e) {
                     e.printStackTrace();

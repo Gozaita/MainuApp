@@ -43,11 +43,15 @@ import com.google.android.gms.common.api.Status;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Busqueda;
 import eus.mainu.mainu.Utilidades.Adaptador_Fragmentos;
 import eus.mainu.mainu.Utilidades.Administrador_Cache;
+import eus.mainu.mainu.Utilidades.HttpPostRequest;
 import eus.mainu.mainu.Utilidades.Menu;
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
@@ -302,6 +306,15 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         dialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //do something with edt.getText().toString();
+                try {
+                    JSONObject postData = new JSONObject();
+                    postData.put("report",edt.getText().toString());
+                    new HttpPostRequest().execute("https://api.mainu.eus/report", postData.toString());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 Toast.makeText(Activity_Main.this,R.string.agradecimiento,Toast.LENGTH_SHORT).show();
             }
         });

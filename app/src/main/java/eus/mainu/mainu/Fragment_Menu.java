@@ -23,10 +23,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Imagenes_Swipe;
+import eus.mainu.mainu.Utilidades.Adaptador_Menu;
 import eus.mainu.mainu.Utilidades.Adaptador_Platos;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.Menu;
+import eus.mainu.mainu.Utilidades.Menu;
 import eus.mainu.mainu.datalayer.Plato;
+
 
 public class Fragment_Menu extends Fragment {
 
@@ -137,20 +140,29 @@ public class Fragment_Menu extends Fragment {
     //Metodo para inflar los listviews y las imagenes
     public void setListView(){
 
-        inflaListView(menu.getPlatos(),listaMenu);
-        //inflaListView(menu.getSegundos(),lvSegundos);
-        //inflaListView(menu.getPostres(),lvPostres);
-    }
+        //inflaListView(menu.getPlatos(),listaMenu);
+        Adaptador_Menu mAdapter = new Adaptador_Menu(mContext);
+        /*for (int i = 1; i < 30; i++) {
+            mAdapter.addItem("Row Item #" + i);
+            if (i % 4 == 0) {
+                mAdapter.addSectionHeaderItem("Section #" + i);
+            }
+        }*/
+        mAdapter.addSectionHeaderItem(getResources().getString(R.string.primer_Plato));
+        for(int i = 0; i < menu.getPrimeros().size(); i++){
+            mAdapter.addItem(menu.getPrimeros().get(i));
+        }
+        mAdapter.addSectionHeaderItem(getResources().getString(R.string.segundo_Plato));
+        for(int i = 0; i < menu.getSegundos().size(); i++){
+            mAdapter.addItem(menu.getSegundos().get(i));
+        }
+        mAdapter.addSectionHeaderItem(getResources().getString(R.string.postre));
+        for(int i = 0; i < menu.getPostres().size(); i++){
+            mAdapter.addItem(menu.getPostres().get(i));
+        }
+        listaMenu.setDivider(null);
+        listaMenu.setAdapter(mAdapter);
 
-    //Metodo para inflar un listview cualquiera
-    private void inflaListView(ArrayList<Plato> platos, ListView listView) {
-
-        //Quitamos las divisiones
-        listView.setDivider(null);
-        //Adaptamos la informacion que va dentro de ellos (los nombres)
-        Adaptador_Platos adaptador = new Adaptador_Platos(getContext(),platos);
-        //Metemos dentro la informacion
-        listView.setAdapter(adaptador);
 
     }
 
