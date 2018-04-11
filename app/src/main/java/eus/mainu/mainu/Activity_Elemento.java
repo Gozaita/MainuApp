@@ -547,7 +547,7 @@ public class Activity_Elemento extends AppCompatActivity {
                     postData.put("idToken",VariablesGlobales.idToken);
                     postData.put("imagen",encodedImage);
 
-                    new HttpPostRequest().execute("https://api.mainu.eus/upload_images/"+tipo+"/"+id, postData.toString());
+                    new HttpPostRequest().execute("https://api.mainu.eus/upload_image/"+tipo+"/"+id, postData.toString());
 
                 } catch (Exception e) {
                     e.printStackTrace();
