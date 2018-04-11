@@ -341,6 +341,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
     /********************************************************************************************/
     private void cerrarSesionClick(){
+        VariablesGlobales.idToken = "666";
         //Cerramos la sesion del usuario e indicamos con un Toast como ha ido
         Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new ResultCallback<Status>() {
             @Override

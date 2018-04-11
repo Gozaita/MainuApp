@@ -94,7 +94,7 @@ public class Adaptador_Menu extends BaseAdapter {
                     });
                     break;
                 case TYPE_SEPARATOR:
-                    convertView = mInflater.inflate(R.layout.list_view_titulo, null);
+                    convertView = mInflater.inflate(R.layout.listview_titulo, null);
                     holder.textView = (TextView) convertView.findViewById(R.id.header);
                     holder.textView.setText(mData.get(position).getNombre());
                     break;

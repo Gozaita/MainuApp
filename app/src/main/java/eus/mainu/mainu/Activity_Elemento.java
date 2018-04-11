@@ -69,7 +69,7 @@ public class Activity_Elemento extends AppCompatActivity {
 
     private String tipo = "";
     private int id=0;
-    private String idToken = "777";
+    //private String idToken = "666";
     private Uri imagenUri;
     ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
 
@@ -101,12 +101,25 @@ public class Activity_Elemento extends AppCompatActivity {
         //Para que no influya en el scroll
         listaComentarios.setNestedScrollingEnabled(false);
 
-        //Para que no se muestre seleccionado al entrar en la actividad
-        comentario.setCursorVisible(false);
-        comentario.setHint(R.string.danos);
-
         //Miramos la informacion que nos pasan
         getInformacion();
+
+
+        if(VariablesGlobales.idToken.equals("666")) {
+            comentario.setHint(R.string.noRegistro);
+            comentario.setEnabled(false);
+            ratUsuario.setEnabled(false);
+            enviar.setEnabled(false);;
+            //botonCamara.setEnabled(false);
+        } else {
+            //Para que no se muestre seleccionado al entrar en la actividad
+            comentario.setCursorVisible(false);
+            comentario.setHint(R.string.danos);
+            sendValoracion();
+        }
+        setBotonCamara();
+
+
 
         //Ponemos el adaptador
         viewPager.setAdapter(adaptadorImagenes);
@@ -154,10 +167,6 @@ public class Activity_Elemento extends AppCompatActivity {
 
         setAtrasButton();
 
-        //Todo el codigo que teniene que ver con el boton la camara
-        setBotonCamara();
-
-        sendValoracion();
 
         //Para poner las estrellas blancas mediante codigo,
         //Las ponemos mediante el xml, aunque solo funciona para la version de android 5.0 en adelante
@@ -253,7 +262,7 @@ public class Activity_Elemento extends AppCompatActivity {
 
                     //Creamos el JSON
                     JSONObject postData = new JSONObject();
-                    postData.put("idToken",idToken);
+                    postData.put("idToken",VariablesGlobales.idToken);
                     JSONObject valoracion = new JSONObject();
                     valoracion.put("puntuacion",ratUsuario.getRating());
                     ratUsuario.setEnabled(false);
@@ -295,8 +304,7 @@ public class Activity_Elemento extends AppCompatActivity {
     private void getInformacion() {
 
 
-        idToken = VariablesGlobales.idToken;
-
+        //idToken = VariablesGlobales.idToken;
         //Vemos si la info es de un bocadillo
         if (getIntent().hasExtra("Bocadillo")) {
             Bocadillo bocadillo = (Bocadillo) getIntent().getSerializableExtra("Bocadillo");
@@ -460,38 +468,47 @@ public class Activity_Elemento extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d(TAG, "onClick: Boton Camara");
 
+                if(!VariablesGlobales.idToken.equals("666")) {
+                    if(checkPermisos(Permisos.PERMISOS)){
+                        //Tenemos permisos, comprobamos internet
+                        if(new HttpGetRequest().isConnected(view.getContext())){
+                            //Hay conexion
 
-                if(checkPermisos(Permisos.PERMISOS)){
-                    //Tenemos permisos, comprobamos internet
-                    if(new HttpGetRequest().isConnected(view.getContext())){
-                        //Hay conexion
+                            //Iniciamos la camara intent
+                            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-                        //Iniciamos la camara intent
-                        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            //Abrimos el directorio donde guardamos la imagen
+                            File directorioImagenes = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
-                        //Abrimos el directorio donde guardamos la imagen
-                        File directorioImagenes = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                        //Creamos un nombre unico para cada imagen
-                        String nombre = getNombre();
-                        //Juntamos el directorio y el nombre
-                        File imagen = new File(directorioImagenes,nombre);
-                        //Lo pasamos a este formato
-                        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-                        StrictMode.setVmPolicy(builder.build());
-                        imagenUri = Uri.fromFile(imagen);
-                        //imagenUri = FileProvider.getUriForFile(view.getContext(), view.getContext().getPackageName(), imagen);
-                        //Decimos que se guarde en la uri
-                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imagenUri);
-                        startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+                            //Creamos un nombre unico para cada imagen
+                            String nombre = getNombre();
+
+                            //Juntamos el directorio y el nombre
+                            File imagen = new File(directorioImagenes,nombre);
+
+                            //Lo pasamos a este formato
+                            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                            StrictMode.setVmPolicy(builder.build());
+                            imagenUri = Uri.fromFile(imagen);
+
+                            //imagenUri = FileProvider.getUriForFile(view.getContext(), view.getContext().getPackageName(), imagen);
+                            //Decimos que se guarde en la uri
+                            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imagenUri);
+                            startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
 
 
-                    }else {
-                        Toast.makeText(view.getContext(), R.string.noConexion, Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(view.getContext(), R.string.noConexion, Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        pidePermisos(Permisos.PERMISOS);
                     }
-                }else{
-                    pidePermisos(Permisos.PERMISOS);
+                } else {
+                    Toast.makeText(view.getContext(), R.string.noRegistro, Toast.LENGTH_SHORT).show();
                 }
+
+
             }
         });
     }

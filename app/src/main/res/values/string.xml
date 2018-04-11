@@ -49,6 +49,8 @@
     <string name="fail">Algo salió mal</string>
     <string name="despedida">Chao chaito</string>
     <string name="noConexion">No hay conexión</string>
+    <string name="noRegistro">Hace falta iniciar sesión</string>
+
 
     <!--Urls-->
     <string name="getBocadillos">https://api.mainu.eus/bocadillos</string>
