@@ -70,34 +70,6 @@ public class Fragment_Otros extends Fragment{
     }
 
     //**********************************************************************************************
-    private void administraPeticionesCacheOtros(){
-        //Cada request se puede usar una vez
-        HttpGetRequest request1 = new HttpGetRequest();
-        HttpGetRequest request2 = new HttpGetRequest();
-
-
-        //Comprobamos si hay conexion para hacer las peticiones de los arrays
-        Administrador_Cache cache = new Administrador_Cache();
-        boolean usarCache = false;
-        if(request1.isConnected(mContext) ){
-
-            String remoteLastUpdate = request1.getLastUpdate("otros");
-            String localLastUpdate  = cache.leerLastUpdate( mContext, "otros");
-
-
-            if(!remoteLastUpdate.equalsIgnoreCase(localLastUpdate) ){
-                arrayComplementos = request2.getOtros();
-                cache.guardarLastUpdate(mContext, "otros", remoteLastUpdate);
-                cache.guardarListaOtros(mContext, arrayComplementos);
-            } else{
-                usarCache = true;
-            }
-        } else{ //Si no hay internet, uso la cache
-            usarCache = true;
-        }
-        if(usarCache)
-            arrayComplementos = (ArrayList<Complemento>) cache.leerListaOtros(mContext);
-    }
 
     @Nullable
     @Override

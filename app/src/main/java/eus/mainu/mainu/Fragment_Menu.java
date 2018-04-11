@@ -39,15 +39,8 @@ public class Fragment_Menu extends Fragment {
     private Context mContext;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listaMenu;
-    //private ListView lvSegundos;
-    //private ListView lvPostres;
-    //private ImageView imagen;
-    //private ImageButton flecha_izquierda;
-    //private ImageButton flecha_derecha;
 
-    //Variables
     private Menu menu = new Menu();
-    //private boolean actualizado = false;
 
 
     //Metodo que se llama antes de onCreateView, se suelen coger las variables aqui
@@ -65,13 +58,7 @@ public class Fragment_Menu extends Fragment {
             menu = (Menu )bundle.getSerializable("Menu");
         }
 
-        //Creamos un objeto para hacer las peticiones get y para hacer los hilos
-        //HttpGetRequest request = new HttpGetRequest();
-        //Comprobamos si hay conexion para hacer las peticiones de los arrays
-        //if(request.isConnected(mContext) ){
-            //Pedimos los complementos a la API
-           //menu = request.getMenu();
-        //}
+
     }
 
     @Nullable
@@ -92,11 +79,6 @@ public class Fragment_Menu extends Fragment {
 
         //Referenciamos los listViews
         listaMenu = view.findViewById(R.id.listaMenu);
-        //lvSegundos = view.findViewById(R.id.listaSegundos);
-        //lvPostres  = view.findViewById(R.id.listaPostres);
-        //imagen = view.findViewById(R.id.imagenMenu);
-        //flecha_izquierda = view.findViewById(R.id.flecha_izquierda);
-        //flecha_derecha = view.findViewById(R.id.flecha_derecha);
 
         //Ponemos el SwipeToRefresh
         swipeRefreshLayout = view.findViewById(R.id.swipeMenu);
@@ -104,9 +86,6 @@ public class Fragment_Menu extends Fragment {
 
         //Inflamos la vista
         setListView();
-
-        //setFlechaDerecha();
-        //setFlechaIzquierda();
 
         //Escuchamos un posible swipe to refresh
         escuchamosSwipe();
@@ -134,20 +113,13 @@ public class Fragment_Menu extends Fragment {
             }
         });
 
-        //viewPager.addOnPageChangeListener(...); Para hacer el loop infinito
     }
 
     //Metodo para inflar los listviews y las imagenes
     public void setListView(){
 
-        //inflaListView(menu.getPlatos(),listaMenu);
         Adaptador_Menu mAdapter = new Adaptador_Menu(mContext);
-        /*for (int i = 1; i < 30; i++) {
-            mAdapter.addItem("Row Item #" + i);
-            if (i % 4 == 0) {
-                mAdapter.addSectionHeaderItem("Section #" + i);
-            }
-        }*/
+
         mAdapter.addSectionHeaderItem(getResources().getString(R.string.primer_Plato));
         for(int i = 0; i < menu.getPrimeros().size(); i++){
             mAdapter.addItem(menu.getPrimeros().get(i));
@@ -196,47 +168,6 @@ public class Fragment_Menu extends Fragment {
         });
     }
 
-    /*
-    private void setFlechaDerecha(){
-        flecha_derecha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!menu.getImagenes().isEmpty()) {
-                    if (contador == 6) {
-                        contador = 0;
-                    } else {
-                        contador++;
-                    }
-                    Picasso.with(mContext)
-                            .load(menu.getImagenes().get(contador).getRuta())
-                            .fit()
-                            .centerCrop()
-                            .into(imagen);
-                }
-            }
-        });
-    }
-
-    private void setFlechaIzquierda(){
-        flecha_izquierda.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!menu.getImagenes().isEmpty()) {
-                    if (contador == 0) {
-                        contador = 6;
-                    } else {
-                        contador--;
-                    }
-                    Picasso.with(mContext)
-                            .load(menu.getImagenes().get(contador).getRuta())
-                            .fit()
-                            .centerCrop()
-                            .into(imagen);
-                }
-            }
-        });
-    }
-    */
 
 
 }

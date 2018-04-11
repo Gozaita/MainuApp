@@ -16,33 +16,7 @@ public class Menu implements Serializable{
     private ArrayList<Plato> primeros = new ArrayList<>();
     private ArrayList<Plato> segundos = new ArrayList<>();
     private ArrayList<Plato> postres = new ArrayList<>();
-    private int numPrimeros;
-    private int numSegundos;
-    private int numPostres;
 
-    public int getNumPrimeros() {
-        return numPrimeros;
-    }
-
-    public void setNumPrimeros(int numPrimeros) {
-        this.numPrimeros = numPrimeros;
-    }
-
-    public int getNumSegundos() {
-        return numSegundos;
-    }
-
-    public void setNumSegundos(int numSegundos) {
-        this.numSegundos = numSegundos;
-    }
-
-    public int getNumPostres() {
-        return numPostres;
-    }
-
-    public void setNumPostres(int numPostres) {
-        this.numPostres = numPostres;
-    }
 
     public ArrayList<Plato> getPrimeros() {
         return primeros;
@@ -72,9 +46,6 @@ public class Menu implements Serializable{
     {
         ArrayList<Plato> platos = new ArrayList<>();
         int i;
-        numPrimeros = primeros.size();
-        numSegundos = segundos.size();
-        numPostres = postres.size();
 
         for(i = 0; i < primeros.size(); i++)
         {
