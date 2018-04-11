@@ -351,7 +351,7 @@ public class Activity_Elemento extends AppCompatActivity {
         bocadillo.setValoraciones(nuevo.getValoraciones());
 
         arrayValoraciones = bocadillo.getValoraciones();
-        adaptadorImagenes = new Adaptador_Imagenes_Swipe(bocadillo.getFotos(),this);
+        adaptadorImagenes = new Adaptador_Imagenes_Swipe(bocadillo.getFotos(),this,1);
 
         /*
         if (bocadillo.getFotos() != null) {
@@ -393,7 +393,7 @@ public class Activity_Elemento extends AppCompatActivity {
         complemento.setValoraciones(nuevo.getValoraciones());
 
         arrayValoraciones = complemento.getValoraciones();
-        adaptadorImagenes = new Adaptador_Imagenes_Swipe(complemento.getFotos(),this);
+        adaptadorImagenes = new Adaptador_Imagenes_Swipe(complemento.getFotos(),this,1);
 
         /*
         if (complemento.getFotos() != null) {
@@ -435,7 +435,7 @@ public class Activity_Elemento extends AppCompatActivity {
         plato.setValoraciones(nuevo.getValoraciones());
 
         arrayValoraciones = plato.getValoraciones();
-        adaptadorImagenes = new Adaptador_Imagenes_Swipe(plato.getFotos(),this);
+        adaptadorImagenes = new Adaptador_Imagenes_Swipe(plato.getFotos(),this,1);
 
         /*
         if (plato.getFotos() != null) {

@@ -67,7 +67,7 @@ public class Adaptador_Otros extends RecyclerView.Adapter<Adaptador_Otros.ViewHo
                         .into(holder.imagen);
             }else {
                 Picasso.with(mContext)
-                        .load(R.drawable.otros_1)
+                        .load(R.drawable.deafult_otros)
                         .fit()
                         .centerCrop()
                         .into(holder.imagen);

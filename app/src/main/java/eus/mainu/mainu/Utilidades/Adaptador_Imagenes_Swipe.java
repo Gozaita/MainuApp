@@ -27,10 +27,12 @@ public class Adaptador_Imagenes_Swipe extends PagerAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private boolean vacio = false;
+    private int tipo;
 
-    public Adaptador_Imagenes_Swipe(ArrayList<Imagen> imagenes, Context mContext) {
+    public Adaptador_Imagenes_Swipe(ArrayList<Imagen> imagenes, Context mContext, int tipo) {
         this.imagenes= imagenes;
         this.mContext = mContext;
+        this.tipo = tipo;
     }
 
     @Override
@@ -60,12 +62,19 @@ public class Adaptador_Imagenes_Swipe extends PagerAdapter {
 
         // PICASO....
         if(vacio){
-            Picasso.with(mContext)
-                    .load(R.drawable.otros_1)
-                    .fit()
-                    .centerCrop()
-                    .into(imageView);
-
+            if(tipo == 1){
+                Picasso.with(mContext)
+                        .load(R.drawable.deafult_image)
+                        .fit()
+                        .centerCrop()
+                        .into(imageView);
+            }else {
+                Picasso.with(mContext)
+                        .load(R.drawable.deafult_menu)
+                        .fit()
+                        .centerCrop()
+                        .into(imageView);
+            }
         } else {
             Picasso.with(mContext)
                     .load(imagenes.get(position).getRuta())

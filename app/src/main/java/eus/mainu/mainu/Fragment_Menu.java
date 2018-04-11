@@ -28,6 +28,7 @@ import eus.mainu.mainu.Utilidades.Adaptador_Platos;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.Menu;
 import eus.mainu.mainu.Utilidades.Menu;
+import eus.mainu.mainu.datalayer.Imagen;
 import eus.mainu.mainu.datalayer.Plato;
 
 
@@ -39,6 +40,7 @@ public class Fragment_Menu extends Fragment {
     private Context mContext;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listaMenu;
+    private ViewPager viewPager;
 
     private Menu menu = new Menu();
 
@@ -67,9 +69,8 @@ public class Fragment_Menu extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
         //Ponemos el viewPager
-        ViewPager viewPager = view.findViewById(R.id.viewPagerMenu);
-        Adaptador_Imagenes_Swipe adaptadorImagenes = new Adaptador_Imagenes_Swipe(menu.getImagenes(),mContext);
-        viewPager.setAdapter(adaptadorImagenes);
+        viewPager = view.findViewById(R.id.viewPagerMenu);
+
         TabLayout tabLayout = view.findViewById(R.id.tab_fotos_menu);
         tabLayout.setupWithViewPager(viewPager, true);
 
@@ -118,19 +119,33 @@ public class Fragment_Menu extends Fragment {
     //Metodo para inflar los listviews y las imagenes
     public void setListView(){
 
+        ArrayList<Imagen> imagenes = new ArrayList<>();
+        if(menu != null){
+            imagenes = menu.getImagenes();
+        }
+        Adaptador_Imagenes_Swipe adaptadorImagenes = new Adaptador_Imagenes_Swipe(imagenes,mContext,2);
+        viewPager.setAdapter(adaptadorImagenes);
+
         Adaptador_Menu mAdapter = new Adaptador_Menu(mContext);
 
-        mAdapter.addSectionHeaderItem(getResources().getString(R.string.primer_Plato));
-        for(int i = 0; i < menu.getPrimeros().size(); i++){
-            mAdapter.addItem(menu.getPrimeros().get(i));
+        if(menu != null){
+            mAdapter.addSectionHeaderItem(getResources().getString(R.string.primer_Plato));
+            for(int i = 0; i < menu.getPrimeros().size(); i++){
+                mAdapter.addItem(menu.getPrimeros().get(i));
+            }
+            mAdapter.addSectionHeaderItem(getResources().getString(R.string.segundo_Plato));
+            for(int i = 0; i < menu.getSegundos().size(); i++){
+                mAdapter.addItem(menu.getSegundos().get(i));
+            }
+            mAdapter.addSectionHeaderItem(getResources().getString(R.string.postre));
+            for(int i = 0; i < menu.getPostres().size(); i++){
+                mAdapter.addItem(menu.getPostres().get(i));
+            }
         }
-        mAdapter.addSectionHeaderItem(getResources().getString(R.string.segundo_Plato));
-        for(int i = 0; i < menu.getSegundos().size(); i++){
-            mAdapter.addItem(menu.getSegundos().get(i));
-        }
-        mAdapter.addSectionHeaderItem(getResources().getString(R.string.postre));
-        for(int i = 0; i < menu.getPostres().size(); i++){
-            mAdapter.addItem(menu.getPostres().get(i));
+        else {
+            mAdapter.addSectionHeaderItem(getResources().getString(R.string.primer_Plato));
+            mAdapter.addSectionHeaderItem(getResources().getString(R.string.segundo_Plato));
+            mAdapter.addSectionHeaderItem(getResources().getString(R.string.postre));
         }
         listaMenu.setDivider(null);
         listaMenu.setAdapter(mAdapter);
@@ -152,7 +167,7 @@ public class Fragment_Menu extends Fragment {
                 //Chequeamos si tenemos el menu actualizado
                 //request.checkMenuActualizados();
 
-                if(request.isConnected(mContext) && menu.getPlatos().isEmpty()){
+                if(request.isConnected(mContext) && menu==null){
                     menu = request.getMenu();
                     setListView();
                 }
