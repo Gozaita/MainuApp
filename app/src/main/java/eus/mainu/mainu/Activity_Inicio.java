@@ -44,6 +44,9 @@ public class Activity_Inicio extends AppCompatActivity {
             @Override
             public void run() {
 
+                //Codigo que se ejecuta al de x tiempo
+                consigueDatos();
+
                 //Decimos que queremos navegar a la activity main
                 Intent intent = new Intent().setClass(
                         Activity_Inicio.this, Activity_Main.class);
@@ -57,7 +60,6 @@ public class Activity_Inicio extends AppCompatActivity {
             }
         };
 
-        consigueDatos();
         Timer timer = new Timer();
         timer.schedule(task, SPLASH_SCREEN_DELAY);
 
