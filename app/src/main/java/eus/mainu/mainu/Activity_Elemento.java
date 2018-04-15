@@ -80,7 +80,7 @@ public class Activity_Elemento extends AppCompatActivity {
         setContentView(R.layout.activity_elemento);
 
         //Para swype back, da problemas con el
-        //gestureDetector = new GestureDetector(this, new SwipeDetector());
+        gestureDetector = new GestureDetector(this, new SwipeDetector());
         final ViewPager viewPager = findViewById(R.id.viewPagerElemento);
         nombre = findViewById(R.id.textViewNombre);
         TextView primerComentario = findViewById(R.id.primerComentario);
@@ -585,6 +585,11 @@ public class Activity_Elemento extends AppCompatActivity {
             // Check movement along the Y-axis. If it exceeds SWIPE_MAX_OFF_PATH,
             // then dismiss the swipe.
             if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
+                return false;
+            }
+
+            // Para que no interfiera con el swype de las fotos o de las estrellas
+            if(e1.getY() < 1100 || e2.getY() < 1100){
                 return false;
             }
 

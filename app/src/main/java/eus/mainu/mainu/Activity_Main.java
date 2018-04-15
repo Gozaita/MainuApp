@@ -128,7 +128,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
         setupViewPager();
 
-        searchView.setIconified(true);
 
         Administrador_Cache cache = new Administrador_Cache();
         ArrayList<Bocadillo> a = (ArrayList<Bocadillo>) cache.leerListaBocadillos(this);
@@ -137,34 +136,40 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
             arrayListSring.add(a.get(i).getNombre() );
         }
 
-        adapter = new ArrayAdapter<String>(this, R.layout.listview_testtt, arrayListSring);
+        adapter = new ArrayAdapter<String>(this, R.layout.recyclingview_testtt, arrayListSring);
         searchResult.setAdapter(adapter);
         searchResult.setDivider(null);
         searchResult.setVisibility(View.INVISIBLE); //Empieza oculto hasta darle a la lupa
+        searchView.setIconified(true);
+
+        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchEditText.setTextColor(getResources().getColor(R.color.blanco));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.blanco));
+
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus) {
                     searchResult.setVisibility(View.VISIBLE);
                     tabLayout.setVisibility(View.GONE);
+                    toolbar.setTitle("");
                 }
                 else {
                     searchResult.setVisibility(View.INVISIBLE);
                     tabLayout.setVisibility(View.VISIBLE);
+                    toolbar.setTitle("Bocadillos");
                 }
             }
         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 Activity_Main.this.adapter.getFilter().filter(newText);
-
                 return false;
             }
         });
@@ -172,7 +177,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
 
     /********************************************************************************************/
-
     //Metodo para customizar la toolbar e implementar la busqueda, se puede convinar con el metodo on page scroll
     private void setToolbar(){
         getSupportActionBar().setTitle(R.string.menuDelDia);

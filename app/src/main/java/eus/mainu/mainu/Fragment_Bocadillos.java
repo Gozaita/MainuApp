@@ -120,13 +120,6 @@ public class Fragment_Bocadillos extends Fragment implements MenuItem.OnActionEx
         });
     }
 
-    /*@Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.activity__principal, menu);
-        MenuItem itemBusqueda = menu.findItem(R.id.buscar);
-        SearchView searchView = searchI
-    }*/
-
     private void resetLista(){
         //Creamos el objeto de la clase adaptador
         Adaptador_Bocadillos adapter = new Adaptador_Bocadillos(arrayBocadillos, getActivity());
