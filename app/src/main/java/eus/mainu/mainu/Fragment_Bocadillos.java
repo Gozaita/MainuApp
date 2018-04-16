@@ -80,6 +80,12 @@ public class Fragment_Bocadillos extends Fragment implements MenuItem.OnActionEx
         return view;
     }
 
+    // Para acceder a setBocadillos pasandole la lista filtrada
+    public void actualizaListaBocadillos(ArrayList<Bocadillo> filtrada){
+        this.arrayBocadillos = filtrada;
+
+        setBocadillos();
+    }
     //**********************************************************************************************
     //Clase para crear y adaptar la informacion al recycling view
     private void setBocadillos(){

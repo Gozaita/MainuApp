@@ -2,6 +2,7 @@ package eus.mainu.mainu;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,6 +49,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Fragmentos;
 import eus.mainu.mainu.Utilidades.Administrador_Cache;
@@ -54,12 +57,16 @@ import eus.mainu.mainu.Utilidades.HttpPostRequest;
 import eus.mainu.mainu.Utilidades.Menu;
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
+import eus.mainu.mainu.datalayer.Ingrediente;
 
 public class Activity_Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
 
     //Variables globales
     private final String TAG = "Activity MAIN";
     private final int SIGN_IN_CODE = 777; //Es 777 porque yo he querido, podria ser cualquiera
+
+    //Variables locales
+    private boolean searchIsFocused = false;
 
     //Elementos layout
     private DrawerLayout drawer;
@@ -70,9 +77,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     private TextView nombre, email;
     private SearchView searchView;
 
-    private ListView searchResult;
     private ArrayList<String> arrayListSring = new ArrayList<String>();
-    private ArrayAdapter adapter;
 
     //Datos del usuario
     private GoogleApiClient googleApiClient;
@@ -95,7 +100,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         tabLayout = findViewById(R.id.tabs);
         toolbar = findViewById(R.id.toolbar);
         searchView = findViewById(R.id.searchView);
-        searchResult = findViewById(R.id.searchResult);
         setSupportActionBar(toolbar);
 
         //Hay que hacer esto para referenciar los elementos del nav header
@@ -111,7 +115,8 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         setDrawer();
 
         Menu menu = (Menu) getIntent().getSerializableExtra("Menu");
-        ArrayList<Bocadillo> listaBocadillos = (ArrayList<Bocadillo>) getIntent().getSerializableExtra("listaBocadillos");
+        final ArrayList<Bocadillo> listaBocadillos = (ArrayList<Bocadillo>) getIntent().getSerializableExtra("listaBocadillos");
+        final ArrayList<Bocadillo> listaBocadillosFiltrada = new ArrayList<>();
         ArrayList<Complemento> listaOtros = (ArrayList<Complemento>) getIntent().getSerializableExtra("listaOtros");
 
         Bundle bundle = new Bundle();
@@ -125,23 +130,14 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         bundle = new Bundle();
         bundle.putSerializable("listaOtros", listaOtros);
         fOtros.setArguments(bundle);
-
         setupViewPager();
 
 
-        Administrador_Cache cache = new Administrador_Cache();
-        ArrayList<Bocadillo> a = (ArrayList<Bocadillo>) cache.leerListaBocadillos(this);
-
-        for (int i = 0; i < a.size(); i++){
-            arrayListSring.add(a.get(i).getNombre() );
+        for (int i = 0; i < listaBocadillos.size(); i++){
+            arrayListSring.add(listaBocadillos.get(i).getNombre() );
         }
 
-        adapter = new ArrayAdapter<String>(this, R.layout.recyclingview_testtt, arrayListSring);
-        searchResult.setAdapter(adapter);
-        searchResult.setDivider(null);
-        searchResult.setVisibility(View.INVISIBLE); //Empieza oculto hasta darle a la lupa
         searchView.setIconified(true);
-
         EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchEditText.setTextColor(getResources().getColor(R.color.blanco));
         searchEditText.setHintTextColor(getResources().getColor(R.color.blanco));
@@ -149,15 +145,16 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
+                searchIsFocused = hasFocus;
                 if(hasFocus) {
-                    searchResult.setVisibility(View.VISIBLE);
                     tabLayout.setVisibility(View.GONE);
+                    findViewById(R.id.tabLayout2).setVisibility(View.GONE);
                     toolbar.setTitle("");
                 }
                 else {
-                    searchResult.setVisibility(View.INVISIBLE);
-                    tabLayout.setVisibility(View.VISIBLE);
-                    toolbar.setTitle("Bocadillos");
+                    //searchResult.setVisibility(View.INVISIBLE);
+                    //tabLayout.setVisibility(View.VISIBLE);
+                    //toolbar.setTitle("Bocadillos");
                 }
             }
         });
@@ -169,13 +166,50 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Activity_Main.this.adapter.getFilter().filter(newText);
+
+                int index = 0;
+                listaBocadillosFiltrada.clear();
+                for(Bocadillo b : listaBocadillos){
+                    // Importante pasar todoo a minusculas
+                    if(b.getNombre().toLowerCase().contains( newText.toLowerCase() )){
+                        listaBocadillosFiltrada.add(b);
+                    } else {
+                        for(Ingrediente i : b.getIngredientes()){
+                            if(i.getNombre().toLowerCase().contains( newText.toLowerCase()))
+                                listaBocadillosFiltrada.add(b);
+                        }
+                    }
+
+                    index++;
+                }
+
+                fBocadillos.actualizaListaBocadillos(listaBocadillosFiltrada);
+
+                return false;
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                tabLayout.setVisibility(View.VISIBLE);
+                findViewById(R.id.tabLayout2).setVisibility(View.GONE);
+                toolbar.setTitle("Bocadillos");
                 return false;
             }
         });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        if(searchIsFocused){
+            searchView.setVisibility(View.INVISIBLE);
+            tabLayout.setVisibility(View.VISIBLE);
+            toolbar.setTitle("Bocadillos");
+        } else{
+            // Si no los usuarios no pueden salir de la app
+            super.onBackPressed();
+        }
+    }
     /********************************************************************************************/
     //Metodo para customizar la toolbar e implementar la busqueda, se puede convinar con el metodo on page scroll
     private void setToolbar(){
@@ -223,7 +257,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                     case 0:
                         getSupportActionBar().setTitle(R.string.menuDelDia);
                         searchView.setVisibility(View.INVISIBLE);
-                        searchResult.setVisibility(View.INVISIBLE);
                         break;
                     case 1:
                         getSupportActionBar().setTitle(R.string.bocadillos);
@@ -232,7 +265,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                     case 2:
                         getSupportActionBar().setTitle(R.string.complementos);
                         searchView.setVisibility(View.INVISIBLE);
-                        searchResult.setVisibility(View.INVISIBLE);
                         break;
                 }
             }

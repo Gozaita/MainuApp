@@ -62,7 +62,7 @@ public class Adaptador_Bocadillos extends RecyclerView.Adapter<Adaptador_Bocadil
             //Decimos que queremos navegar a la clase Elemento
             Intent intent = new Intent(mContext, Activity_Elemento.class);
             //Le pasamos la informacion que necesita la clase
-            intent.putExtra("Bocadillo",arrayBocadillos.get(position));
+            intent.putExtra("Bocadillo", arrayBocadillos.get(position));
             //Iniciamos la actividad
             mContext.startActivity(intent);
 
@@ -105,7 +105,7 @@ public class Adaptador_Bocadillos extends RecyclerView.Adapter<Adaptador_Bocadil
 
         ArrayList<Ingrediente> arrayIngredientes = arrayBocadillos.get(position).getIngredientes();
 
-        for(i = 0; i < arrayIngredientes.size();i++){
+        for(i = 0; i < arrayIngredientes.size(); i++){
             ingredientes.append(arrayIngredientes.get(i).getNombre()).append(", ");
         }
 

@@ -20,12 +20,6 @@
 
             <include layout="@layout/layout_centro_viewpager"/>
 
-            <ListView
-                android:id="@+id/searchResult"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/transparente"/>
-
         </RelativeLayout>
 
         <RelativeLayout

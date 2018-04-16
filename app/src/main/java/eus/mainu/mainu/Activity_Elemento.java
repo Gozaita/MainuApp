@@ -589,7 +589,7 @@ public class Activity_Elemento extends AppCompatActivity {
             }
 
             // Para que no interfiera con el swype de las fotos o de las estrellas
-            if(e1.getY() < 1100 || e2.getY() < 1100){
+            if(e1.getY() < 1300 || e2.getY() < 1300){
                 return false;
             }
 
