@@ -60,7 +60,6 @@ public class Activity_Elemento extends AppCompatActivity {
     private TextView puntuacion;
     private TextView precio;
     private ImageButton atras, flechaIzquierda, flechaDerecha;
-    //private ImageButton imagen;
     private ImageButton botonCamara;
     private ImageButton enviar;
     private RatingBar ratingBar,ratUsuario;
@@ -69,7 +68,6 @@ public class Activity_Elemento extends AppCompatActivity {
 
     private String tipo = "";
     private int id=0;
-    //private String idToken = "666";
     private Uri imagenUri;
     ArrayList<Valoracion> arrayValoraciones = new ArrayList<>();
 
@@ -87,8 +85,8 @@ public class Activity_Elemento extends AppCompatActivity {
         puntuacion = findViewById(R.id.textViewPuntuacion);
         ratingBar = findViewById(R.id.estrellitasElemento);
         ratUsuario = findViewById(R.id.ratingBarUsuario);
+        ratUsuario.setRating(0);
         precio = findViewById(R.id.textViewPrecio);
-        //imagen = findViewById(R.id.botonImagenElemento);
         listaComentarios = findViewById(R.id.recycler_view_lista_comentarios);
         comentario = findViewById(R.id.editText);
         botonCamara = findViewById(R.id.botonCamara);
@@ -167,11 +165,6 @@ public class Activity_Elemento extends AppCompatActivity {
 
         setAtrasButton();
 
-
-        //Para poner las estrellas blancas mediante codigo,
-        //Las ponemos mediante el xml, aunque solo funciona para la version de android 5.0 en adelante
-        //LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
-        //stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
 
     }
 
@@ -256,6 +249,7 @@ public class Activity_Elemento extends AppCompatActivity {
 
                 try {
                     enviar.setVisibility(View.GONE);
+
                     //Quitamos el teclado si esta abierto
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
@@ -308,62 +302,84 @@ public class Activity_Elemento extends AppCompatActivity {
         //Vemos si la info es de un bocadillo
         if (getIntent().hasExtra("Bocadillo")) {
             Bocadillo bocadillo = (Bocadillo) getIntent().getSerializableExtra("Bocadillo");
-            setBocadillo(bocadillo);
+            bocadillo = pideBocadillo(bocadillo.getId()); //Esto hace que la actividad tarde en iniciarse
+
             tipo = "bocadillos";
             id = bocadillo.getId();
 
+            setBocadillo(bocadillo);
         }
+
         //Vemos si la info es de un complemento
         if (getIntent().hasExtra("Complemento")) {
-
             Complemento complemento = (Complemento) getIntent().getSerializableExtra("Complemento");
-            setComplemento(complemento);
+            complemento = pideComplemento(complemento.getId());
+
             tipo = "otro";
             id = complemento.getId();
 
+            setComplemento(complemento);
         }
+
         //Vemos si es un plato
         if (getIntent().hasExtra("Plato")) {
             Plato plato = (Plato) getIntent().getSerializableExtra("Plato");
-            setPlato(plato);
+            plato = pidePlato(plato.getId());
+
             tipo = "menu";
             id = plato.getId();
 
+            setPlato(plato);
         }
     }
 
-    private void setBocadillo(Bocadillo bocadillo) {
-
-        Log.d(TAG, "setBocadillo: " + bocadillo.getNombre());
+    private Bocadillo pideBocadillo(int id){
 
         HttpGetRequest request = new HttpGetRequest();
 
         Bocadillo nuevo = new Bocadillo();
         if (request.isConnected(this)) {
-            nuevo = request.getBocadillo(bocadillo.getId());
+            nuevo = request.getBocadillo(id);
         }
+
+        return nuevo;
+    }
+
+    private Complemento pideComplemento(int id){
+
+        HttpGetRequest request = new HttpGetRequest();
+
+        Complemento nuevo = new Complemento();
+        if (request.isConnected(this)) {
+            nuevo = request.getComplemento(id);
+        }
+
+        return nuevo;
+    }
+
+    private Plato pidePlato(int id){
+
+        HttpGetRequest request = new HttpGetRequest();
+
+        Plato nuevo = new Plato();
+        if (request.isConnected(this)) {
+            nuevo = request.getPlato(id);
+        }
+
+        return nuevo;
+    }
+
+    //private Complemento pideComplemento()
+
+    private void setBocadillo(Bocadillo bocadillo) {
+
+        Log.d(TAG, "setBocadillo: " + bocadillo.getNombre());
 
         nombre.setText(bocadillo.getNombre());
         precio.setText(String.format(Locale.getDefault(), "%.2f€", bocadillo.getPrecio()));
 
-        //Metemos la nueva informacion en el bocadillo
-        bocadillo.setFotos(nuevo.getFotos());
-        bocadillo.setValoraciones(nuevo.getValoraciones());
-
         arrayValoraciones = bocadillo.getValoraciones();
         adaptadorImagenes = new Adaptador_Imagenes_Swipe(bocadillo.getFotos(),this,1);
-
-        /*
-        if (bocadillo.getFotos() != null) {
-            if (!bocadillo.getFotos().isEmpty()) {
-                Picasso.with(this)
-                        .load(bocadillo.getFotos().get(0).getRuta())
-                        .fit()
-                        .centerCrop()
-                        .into(imagen);
-            }
-        }
-        */
 
         if (bocadillo.getPuntuacion() != 0) {
             puntuacion.setText(String.format(Locale.getDefault(), "%.1f", bocadillo.getPuntuacion()));
@@ -378,34 +394,13 @@ public class Activity_Elemento extends AppCompatActivity {
 
         Log.d(TAG, "setComplemento: " + complemento.getNombre());
 
-        HttpGetRequest request = new HttpGetRequest();
-
-        Complemento nuevo = new Complemento();
-        if (request.isConnected(this)) {
-            nuevo = request.getComplemento(complemento.getId());
-        }
 
         nombre.setText(complemento.getNombre());
         precio.setText(String.format(Locale.getDefault(), "%.2f€", complemento.getPrecio()));
 
-        //Metemos la nueva informacion
-        complemento.setFotos(nuevo.getFotos());
-        complemento.setValoraciones(nuevo.getValoraciones());
-
         arrayValoraciones = complemento.getValoraciones();
         adaptadorImagenes = new Adaptador_Imagenes_Swipe(complemento.getFotos(),this,1);
 
-        /*
-        if (complemento.getFotos() != null) {
-            if (!complemento.getFotos().isEmpty()) {
-                Picasso.with(this)
-                        .load(complemento.getFotos().get(0).getRuta())
-                        .fit()
-                        .centerCrop()
-                        .into(imagen);
-            }
-        }
-        */
 
         if (complemento.getPuntuacion() != 0) {
             puntuacion.setText(String.format(Locale.getDefault(), "%.1f", complemento.getPuntuacion()));
@@ -420,33 +415,12 @@ public class Activity_Elemento extends AppCompatActivity {
 
         Log.d(TAG, "setPlato: " + plato.getNombre());
 
-        HttpGetRequest request = new HttpGetRequest();
-
-        Plato nuevo = new Plato();
-        if (request.isConnected(this)) {
-            nuevo = request.getPlato(plato.getId());
-        }
 
         nombre.setText(plato.getNombre());
         precio.setVisibility(View.GONE);
 
-        //Metemos la nueva informacion
-        plato.setFotos(nuevo.getFotos());
-        plato.setValoraciones(nuevo.getValoraciones());
-
         arrayValoraciones = plato.getValoraciones();
         adaptadorImagenes = new Adaptador_Imagenes_Swipe(plato.getFotos(),this,1);
-
-        /*
-        if (plato.getFotos() != null) {
-            if (!plato.getFotos().isEmpty()) {
-                Picasso.with(this)
-                        .load(plato.getFotos().get(0).getRuta())
-                        .fit()
-                        .centerCrop()
-                        .into(imagen);
-            }
-        }*/
 
         if (plato.getPuntuacion() != 0) {
             puntuacion.setText(String.format(Locale.getDefault(), "%.1f", plato.getPuntuacion()));
@@ -538,7 +512,7 @@ public class Activity_Elemento extends AppCompatActivity {
 
                 //Para comprimir la imagen en JPEG
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
                 String encodedImage = Base64.encodeToString(stream.toByteArray(), Base64.DEFAULT);
 
                 //Enviamos la imagen en un JSON codificada en Base 64
