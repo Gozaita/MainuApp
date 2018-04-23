@@ -22,7 +22,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         String url = params[0];
-        String result, inputLine;
+        String result = "", inputLine;
 
         try {
             URL myUrl = new URL(url);
@@ -33,17 +33,20 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
             connection.setConnectTimeout(15000);
             connection.connect();
 
-            InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
-            BufferedReader reader = new BufferedReader(streamReader);
-            StringBuilder stringBuilder = new StringBuilder();
+            if( connection.getResponseCode() == 200){
+                InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
+                BufferedReader reader = new BufferedReader(streamReader);
+                StringBuilder stringBuilder = new StringBuilder();
 
-            while((inputLine = reader.readLine()) != null){
-                stringBuilder.append(inputLine);
+                while((inputLine = reader.readLine()) != null){
+                    stringBuilder.append(inputLine);
+                }
+
+                reader.close();
+                streamReader.close();
+                result = stringBuilder.toString();
             }
 
-            reader.close();
-            streamReader.close();
-            result = stringBuilder.toString();
         } catch (Exception e) {
             e.printStackTrace();
             result = null;

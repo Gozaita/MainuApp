@@ -17,6 +17,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -25,12 +26,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.auth.api.Auth;
@@ -77,6 +81,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     private TextView nombre, email;
     private SearchView searchView;
 
+
     private ArrayList<String> arrayListSring = new ArrayList<String>();
 
     //Datos del usuario
@@ -116,6 +121,8 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
         Menu menu = (Menu) getIntent().getSerializableExtra("Menu");
         final ArrayList<Bocadillo> listaBocadillos = (ArrayList<Bocadillo>) getIntent().getSerializableExtra("listaBocadillos");
+        listaBocadillos.add(new Bocadillo(9999, "Todavía no te decides?", 0, 0, new ArrayList<Ingrediente>() ));
+
         final ArrayList<Bocadillo> listaBocadillosFiltrada = new ArrayList<>();
         ArrayList<Complemento> listaOtros = (ArrayList<Complemento>) getIntent().getSerializableExtra("listaOtros");
 
@@ -148,13 +155,16 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 searchIsFocused = hasFocus;
                 if(hasFocus) {
                     tabLayout.setVisibility(View.GONE);
+                    findViewById(R.id.recyclerView_ingredientes).setVisibility(View.VISIBLE);
                     findViewById(R.id.tabLayout2).setVisibility(View.GONE);
                     toolbar.setTitle("");
                 }
                 else {
-                    //searchResult.setVisibility(View.INVISIBLE);
-                    //tabLayout.setVisibility(View.VISIBLE);
-                    //toolbar.setTitle("Bocadillos");
+                    searchView.setIconified(true);
+                    tabLayout.setVisibility(View.VISIBLE);
+                    findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
+                    findViewById(R.id.tabLayout2).setVisibility(View.VISIBLE);
+                    toolbar.setTitle("Bocadillos");
                 }
             }
         });
@@ -202,8 +212,9 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     @Override
     public void onBackPressed() {
         if(searchIsFocused){
-            searchView.setVisibility(View.INVISIBLE);
+            searchView.setIconified(true);
             tabLayout.setVisibility(View.VISIBLE);
+            findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
             toolbar.setTitle("Bocadillos");
         } else{
             // Si no los usuarios no pueden salir de la app
