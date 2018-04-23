@@ -16,16 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!--Quitamos la imagen
-            <ImageButton
-                android:id="@+id/botonImagenElemento"
-                android:layout_width="match_parent"
-                android:layout_height="225dp"
-                android:adjustViewBounds="true"
-                android:background="@color/negro"
-                app:srcCompat="@drawable/otros_1" />
-                -->
-
             <android.support.v4.view.ViewPager
                 android:id="@+id/viewPagerElemento"
                 android:layout_width="match_parent"
