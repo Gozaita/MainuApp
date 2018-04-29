@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -35,32 +37,16 @@ public class Fragment_Bocadillos extends Fragment implements MenuItem.OnActionEx
     //Variables
     private ArrayList<Bocadillo> arrayBocadillos = new ArrayList<>();
     private ArrayList<String> arrayIngredientes = new ArrayList<>(Arrays.asList(
-            "Bacon",
-            "Bonito",
-            "Calamares",
-            "Cebolla",
-            "Champiñones",
-            "Chorizo",
-            "Croissant",
-            "Hamburguesa",
-            "Huevo",
-            "Huevo cocido",
-            "Jamón york",
-            "Jamón serrano",
-            "Lechuga",
-            "Lomo",
+            "Bacon", "Bonito",
+            "Calamares", "Cebolla", "Champiñones", "Chorizo", "Croissant",
+            "Hamburguesa", "Huevo", "Huevo cocido",
+            "Jamón york", "Jamón serrano",
+            "Lechuga", "Lomo",
             "Mahonesa",
-            "Pan de molde",
-            "Pavo",
-            "Pimientos verdes",
-            "Pollo",
-            "Pollo empanado",
+            "Pan de molde", "Pavo", "Pimientos verdes", "Pollo", "Pollo empanado",
             "Queso",
-            "Salchichas",
-            "Salsa césar",
-            "Ternera",
-            "Tomate",
-            "Tortilla"
+            "Salchichas", "Salsa césar",
+            "Ternera", "Tomate", "Tortilla"
             ));
 
     public Fragment_Bocadillos(){
@@ -78,6 +64,16 @@ public class Fragment_Bocadillos extends Fragment implements MenuItem.OnActionEx
         Bundle bundle = this.getArguments();
         if (bundle != null) {
              arrayBocadillos = (ArrayList<Bocadillo>) bundle.getSerializable("listaBocadillos");
+        }
+    }
+
+    public void deseleccionarTodosIngredientes(){
+        for (int i = 0; i < recyclerViewIngredientes.getChildCount(); i++) {
+            View mChild = recyclerViewIngredientes.getChildAt(i);
+
+            //Replace R.id.checkbox with the id of CheckBox in your layout
+            CheckBox mCheckBox = (CheckBox) mChild.findViewById(R.id.ingredienteCheckBox);
+            mCheckBox.setChecked(false);
         }
     }
 

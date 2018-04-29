@@ -81,6 +81,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     private ArrayList<Bocadillo> listaBocadillos;
     private ArrayList<Bocadillo> listaBocadillosFiltrada;
     private ArrayList<Complemento> listaOtros;
+    private ArrayList<String> ingredientesFiltro = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,9 +133,24 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         setupViewPager();
 
         searchView.setIconified(true);
-        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        final EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         searchEditText.setTextColor(getResources().getColor(R.color.blanco));
         searchEditText.setHintTextColor(getResources().getColor(R.color.blanco));
+
+        ImageView closeButton = (ImageView)searchView.findViewById(R.id.search_close_btn);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fBocadillos.actualizaListaBocadillos(listaBocadillos);
+                searchView.setQuery("", false);
+                searchView.setIconified(true);
+                searchView.onActionViewCollapsed();
+                tabLayout.setVisibility(View.VISIBLE);
+                findViewById(R.id.tabLayout2).setVisibility(View.GONE);
+                toolbar.setTitle("Bocadillos");
+                fBocadillos.deseleccionarTodosIngredientes();
+            }
+        });
 
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -163,7 +179,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
                 listaBocadillosFiltrada.clear();
                 for(Bocadillo b : listaBocadillos){
                     // Importante pasar todoo a minusculas
@@ -178,16 +193,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 }
 
                 fBocadillos.actualizaListaBocadillos(listaBocadillosFiltrada);
-
-                return false;
-            }
-        });
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                tabLayout.setVisibility(View.VISIBLE);
-                findViewById(R.id.tabLayout2).setVisibility(View.GONE);
-                toolbar.setTitle("Bocadillos");
                 return false;
             }
         });
@@ -207,17 +212,38 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     }
 
     public void filterByIngredient(String ingrediente) {
+        // Si está, lo borramos
+        if(ingredientesFiltro.contains(ingrediente))
+            ingredientesFiltro.remove(ingrediente);
+        // Si no está, lo añadimos
+        else
+            ingredientesFiltro.add(ingrediente);
 
-        listaBocadillosFiltrada.clear();
-        for (Bocadillo b : listaBocadillos) {
-            // Importante pasar todoo a minusculas
-            for (Ingrediente i : b.getIngredientes()) {
-                if (i.getNombre().toLowerCase().equalsIgnoreCase( ingrediente))
+        // Importante pasar todoo a minusculas
+        if(ingredientesFiltro.size() > 0){
+            listaBocadillosFiltrada.clear();
+            for (Bocadillo b : listaBocadillos) {
+                int nPass = 0;
+                for (String ing : ingredientesFiltro){
+                    boolean pass = false;
+                    for (Ingrediente i : b.getIngredientes()) {
+                        if (i.getNombre().toLowerCase().equalsIgnoreCase(ing)){
+                            pass = true;
+                        }
+                    }
+                    // Si en todos los ingredientes de un bocadiilo no está, fuera
+                    if(pass)
+                        nPass++;
+                }
+                if(nPass == ingredientesFiltro.size())
                     listaBocadillosFiltrada.add(b);
             }
-        }
 
-        fBocadillos.actualizaListaBocadillos(listaBocadillosFiltrada);
+            fBocadillos.actualizaListaBocadillos(listaBocadillosFiltrada);
+        } else{
+            // Si no hay ingredientes a filtar --> reseteamos
+            fBocadillos.actualizaListaBocadillos(listaBocadillos);
+        }
     }
 
     /********************************************************************************************/

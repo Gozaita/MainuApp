@@ -1,6 +1,5 @@
 package eus.mainu.mainu.Utilidades;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,15 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import java.util.ArrayList;
-import java.util.Locale;
-import eus.mainu.mainu.Activity_Elemento;
 import eus.mainu.mainu.Activity_Main;
 import eus.mainu.mainu.R;
-import eus.mainu.mainu.datalayer.Bocadillo;
-import eus.mainu.mainu.datalayer.Ingrediente;
 
 public class Adaptador_Ingredientes extends RecyclerView.Adapter<Adaptador_Ingredientes.ViewHolder> {
 
@@ -55,7 +48,8 @@ public class Adaptador_Ingredientes extends RecyclerView.Adapter<Adaptador_Ingre
             public void onClick(View v) {
 
                 String z = ((AppCompatCheckBox) v).getText().toString();
-
+                Activity_Main a = (Activity_Main) mContext;
+                a.filterByIngredient(z);
             }
         });
     }
