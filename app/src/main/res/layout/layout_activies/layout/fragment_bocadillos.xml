@@ -6,24 +6,42 @@
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeBocadillos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="50dp">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-10dp">
 
         <RelativeLayout
             android:id="@+id/relLayout2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp">
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView_ingredientes"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+            </android.support.v7.widget.RecyclerView>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view_lista_bocadillos"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recyclerView_ingredientes">
             </android.support.v7.widget.RecyclerView>
+
+            <!-- Solo aparece cuando la lista está vacía -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tienes un gusto demasiado exquisito."
+                android:fontFamily="@font/roboto_light"
+                android:textStyle="bold"
+                android:textColor="@color/negro"
+                android:textSize="15sp"
+                android:layout_margin="10dp"
+                android:layout_below="@id/recycler_view_lista_bocadillos"/>
+
         </RelativeLayout>
-
     </android.support.v4.widget.SwipeRefreshLayout>
-
 
 </RelativeLayout>

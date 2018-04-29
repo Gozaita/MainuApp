@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,7 +27,7 @@ public class Activity_Inicio extends AppCompatActivity {
 
     private Menu menu;
     private ArrayList<Bocadillo> listaBocadillos;
-    private  ArrayList<Complemento> listaOtros;
+    private ArrayList<Complemento> listaOtros;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +52,9 @@ public class Activity_Inicio extends AppCompatActivity {
                 Intent intent = new Intent().setClass(
                         Activity_Inicio.this, Activity_Main.class);
                 //Le pasamos la informacion que necesita la clase
-                intent.putExtra("Menu",menu);
-                intent.putExtra("listaBocadillos",listaBocadillos);
-                intent.putExtra("listaOtros",listaOtros);
+                intent.putExtra("Menu", menu);
+                intent.putExtra("listaBocadillos", listaBocadillos);
+                intent.putExtra("listaOtros", listaOtros);
                 //Iniciamos la actividad
                 startActivity(intent);
                 finish();
@@ -78,11 +79,13 @@ public class Activity_Inicio extends AppCompatActivity {
 
         listaBocadillos = administraPeticionesCacheBocadillos(conectado);
         listaOtros = administraPeticionesCacheOtros(conectado);
+
         Log.d(TAG, "onCreate: Datos conseguidos");
 
 
     }
 
+    /********************************************************************************************/
     private ArrayList<Bocadillo> administraPeticionesCacheBocadillos(boolean conectado){
 
         //Cada request se puede usar una vez

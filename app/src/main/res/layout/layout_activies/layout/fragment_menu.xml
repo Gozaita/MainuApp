@@ -5,63 +5,58 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="50dp">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/relLayout2">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPagerMenu"
+        <RelativeLayout
+            android:id="@+id/relLayout2"
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="match_parent">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_fotos_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPagerMenu"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_fotos_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/viewPagerMenu"
+                app:tabBackground="@drawable/tab_selector"
+                app:tabGravity="center"
+                app:tabIndicatorHeight="0dp" />
+
+            <!--Quitamos la imagen
+
+            <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
             android:layout_alignBottom="@+id/viewPagerMenu"
-            app:tabBackground="@drawable/tab_selector"
-            app:tabGravity="center"
-            app:tabIndicatorHeight="0dp"/>
+            android:background="@color/gris"
+            app:srcCompat="@drawable/ic_keyboard_arrow_left_24dp"
+            android:id="@+id/flecha_izquierda"/>
 
-        <!--Quitamos la imagen
-
-        <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/viewPagerMenu"
-        android:background="@color/gris"
-        app:srcCompat="@drawable/ic_keyboard_arrow_left_24dp"
-        android:id="@+id/flecha_izquierda"/>
-
-        <ImageButton
-        android:layout_width="30dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/viewPagerMenu"
-        android:background="@color/gris"
-        app:srcCompat="@drawable/ic_keyboard_arrow_right_24dp"
-        android:id="@+id/flecha_derecha" />
-        -->
-        <ListView
-            android:id="@+id/listaMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tab_fotos_menu"/>
-
-        <!--
-        <include layout="@layout/snippet_menu_centro"/>
-        -->
+            <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@+id/viewPagerMenu"
+            android:background="@color/gris"
+            app:srcCompat="@drawable/ic_keyboard_arrow_right_24dp"
+            android:id="@+id/flecha_derecha" />
+            -->
+            <ListView
+                android:id="@+id/listaMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tab_fotos_menu" />
 
 
-</RelativeLayout>
+        </RelativeLayout>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

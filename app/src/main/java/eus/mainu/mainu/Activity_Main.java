@@ -1,8 +1,6 @@
 package eus.mainu.mainu;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +15,6 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -26,15 +23,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.auth.api.Auth;
@@ -53,10 +44,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Fragmentos;
-import eus.mainu.mainu.Utilidades.Administrador_Cache;
 import eus.mainu.mainu.Utilidades.HttpPostRequest;
 import eus.mainu.mainu.Utilidades.Menu;
 import eus.mainu.mainu.datalayer.Bocadillo;
@@ -81,9 +70,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     private TextView nombre, email;
     private SearchView searchView;
 
-
-    private ArrayList<String> arrayListSring = new ArrayList<String>();
-
     //Datos del usuario
     private GoogleApiClient googleApiClient;
 
@@ -91,6 +77,10 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
     private Fragment_Menu fMenu = new Fragment_Menu();
     private Fragment_Bocadillos fBocadillos = new Fragment_Bocadillos();
     private Fragment_Otros fOtros = new Fragment_Otros();
+
+    private ArrayList<Bocadillo> listaBocadillos;
+    private ArrayList<Bocadillo> listaBocadillosFiltrada;
+    private ArrayList<Complemento> listaOtros;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,11 +110,13 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         setDrawer();
 
         Menu menu = (Menu) getIntent().getSerializableExtra("Menu");
-        final ArrayList<Bocadillo> listaBocadillos = (ArrayList<Bocadillo>) getIntent().getSerializableExtra("listaBocadillos");
+        listaBocadillos = (ArrayList<Bocadillo>) getIntent().getSerializableExtra("listaBocadillos");
         listaBocadillos.add(new Bocadillo(9999, "Todavía no te decides?", 0, 0, new ArrayList<Ingrediente>() ));
 
-        final ArrayList<Bocadillo> listaBocadillosFiltrada = new ArrayList<>();
-        ArrayList<Complemento> listaOtros = (ArrayList<Complemento>) getIntent().getSerializableExtra("listaOtros");
+        listaBocadillosFiltrada = new ArrayList<>();
+        listaOtros = (ArrayList<Complemento>) getIntent().getSerializableExtra("listaOtros");
+
+
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("Menu", menu);
@@ -138,11 +130,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         bundle.putSerializable("listaOtros", listaOtros);
         fOtros.setArguments(bundle);
         setupViewPager();
-
-
-        for (int i = 0; i < listaBocadillos.size(); i++){
-            arrayListSring.add(listaBocadillos.get(i).getNombre() );
-        }
 
         searchView.setIconified(true);
         EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
@@ -177,7 +164,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                int index = 0;
                 listaBocadillosFiltrada.clear();
                 for(Bocadillo b : listaBocadillos){
                     // Importante pasar todoo a minusculas
@@ -189,8 +175,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                                 listaBocadillosFiltrada.add(b);
                         }
                     }
-
-                    index++;
                 }
 
                 fBocadillos.actualizaListaBocadillos(listaBocadillosFiltrada);
@@ -221,6 +205,21 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
             super.onBackPressed();
         }
     }
+
+    public void filterByIngredient(String ingrediente) {
+
+        listaBocadillosFiltrada.clear();
+        for (Bocadillo b : listaBocadillos) {
+            // Importante pasar todoo a minusculas
+            for (Ingrediente i : b.getIngredientes()) {
+                if (i.getNombre().toLowerCase().equalsIgnoreCase( ingrediente))
+                    listaBocadillosFiltrada.add(b);
+            }
+        }
+
+        fBocadillos.actualizaListaBocadillos(listaBocadillosFiltrada);
+    }
+
     /********************************************************************************************/
     //Metodo para customizar la toolbar e implementar la busqueda, se puede convinar con el metodo on page scroll
     private void setToolbar(){
@@ -254,9 +253,9 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         tabLayout.setupWithViewPager(viewPager);
 
         //Añadimos 3 iconos
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_sandwich);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_french_fries);
+        tabLayout.getTabAt(0).setIcon(R.drawable.nav_menu);
+        tabLayout.getTabAt(1).setIcon(R.drawable.nav_bocadillos);
+        tabLayout.getTabAt(2).setIcon(R.drawable.nav_otros);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

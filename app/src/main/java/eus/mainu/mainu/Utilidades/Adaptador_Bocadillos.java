@@ -22,11 +22,11 @@ public class Adaptador_Bocadillos extends RecyclerView.Adapter<Adaptador_Bocadil
 
     //Variables
     private Context mContext;
-    private ArrayList<Bocadillo> arrayBocadillos = new ArrayList<>();
+    private ArrayList<Bocadillo> arrayBocadillos;
 
 
-    public Adaptador_Bocadillos(ArrayList<Bocadillo> arrayBocadillos, Context context) {
-        this.arrayBocadillos = arrayBocadillos;
+    public Adaptador_Bocadillos(ArrayList<Bocadillo> array, Context context) {
+        this.arrayBocadillos = array;
         mContext = context;
     }
 

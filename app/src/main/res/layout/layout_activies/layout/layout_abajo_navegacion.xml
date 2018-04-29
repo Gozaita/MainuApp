@@ -3,9 +3,8 @@
     <RelativeLayout
         android:id="@+id/tabLayout2"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="5dp">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -16,7 +15,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tabs"
-                android:background="@drawable/blanco_gris_borde_arriba"/>
+                android:background="@drawable/layout_abajo_borde"/>
 
         </android.support.design.widget.AppBarLayout>
 

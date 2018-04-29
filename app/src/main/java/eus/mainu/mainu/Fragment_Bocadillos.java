@@ -8,17 +8,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
-import eus.mainu.mainu.Utilidades.Administrador_Cache;
+import java.util.Arrays;
+
+import eus.mainu.mainu.Utilidades.Adaptador_Ingredientes;
 import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.Adaptador_Bocadillos;
 import eus.mainu.mainu.datalayer.Bocadillo;
@@ -32,9 +30,38 @@ public class Fragment_Bocadillos extends Fragment implements MenuItem.OnActionEx
     private Context mContext;
     private SwipeRefreshLayout swipeRefreshLayout;
     private android.support.v7.widget.RecyclerView recyclerView;
+    private android.support.v7.widget.RecyclerView recyclerViewIngredientes;
 
     //Variables
     private ArrayList<Bocadillo> arrayBocadillos = new ArrayList<>();
+    private ArrayList<String> arrayIngredientes = new ArrayList<>(Arrays.asList(
+            "Bacon",
+            "Bonito",
+            "Calamares",
+            "Cebolla",
+            "Champiñones",
+            "Chorizo",
+            "Croissant",
+            "Hamburguesa",
+            "Huevo",
+            "Huevo cocido",
+            "Jamón york",
+            "Jamón serrano",
+            "Lechuga",
+            "Lomo",
+            "Mahonesa",
+            "Pan de molde",
+            "Pavo",
+            "Pimientos verdes",
+            "Pollo",
+            "Pollo empanado",
+            "Queso",
+            "Salchichas",
+            "Salsa césar",
+            "Ternera",
+            "Tomate",
+            "Tortilla"
+            ));
 
     public Fragment_Bocadillos(){
 
@@ -63,6 +90,13 @@ public class Fragment_Bocadillos extends Fragment implements MenuItem.OnActionEx
 
         //Cogemos el recycling view
         recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);
+        recyclerViewIngredientes = view.findViewById(R.id.recyclerView_ingredientes);
+
+        Adaptador_Ingredientes adaptorIngredientes = new Adaptador_Ingredientes(arrayIngredientes, getActivity());
+        Adaptador_Bocadillos aa = new Adaptador_Bocadillos(arrayBocadillos, getActivity());
+        recyclerViewIngredientes.setAdapter( adaptorIngredientes );
+        recyclerViewIngredientes.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        //recyclerViewIngredientes.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //Añadimos una linea debajo de cada objeto
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mContext, new LinearLayoutManager(mContext).getOrientation());
@@ -75,7 +109,6 @@ public class Fragment_Bocadillos extends Fragment implements MenuItem.OnActionEx
         //Inflamos la vista
         setBocadillos();
         escuchamosSwipe();
-
 
         return view;
     }
