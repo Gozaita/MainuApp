@@ -76,11 +76,19 @@ public class Adaptador_Imagenes_Swipe extends PagerAdapter {
                         .into(imageView);
             }
         } else {
-            Picasso.with(mContext)
-                    .load(imagenes.get(position).getRuta())
-                    .fit()
-                    .centerCrop()
-                    .into(imageView);
+            if(imagenes.get(position).getRuta() != "noImagen"){
+                Picasso.with(mContext)
+                        .load(imagenes.get(position).getRuta())
+                        .fit()
+                        .centerCrop()
+                        .into(imageView);
+            } else {
+                Picasso.with(mContext)
+                        .load(R.drawable.deafult_image)
+                        .fit()
+                        .centerCrop()
+                        .into(imageView);
+            }
         }
 
 

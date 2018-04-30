@@ -3,8 +3,10 @@ package eus.mainu.mainu.Utilidades;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import eus.mainu.mainu.R;
 import eus.mainu.mainu.datalayer.Imagen;
 import eus.mainu.mainu.datalayer.Plato;
+import eus.mainu.mainu.datalayer.Usuario;
 
 /**
  * Created by narciso on 24/02/18.
@@ -73,22 +75,28 @@ public class Menu implements Serializable{
 
         //Cogemos las imagenes oficiales de los platos
         for(i = 0; i < primeros.size(); i++) {
-            if(!primeros.get(i).getFotos().get(0).getRuta().isEmpty()){
+            if(!primeros.get(i).getFotos().isEmpty()){
                 imagenes.add(primeros.get(i).getFotos().get(0));
+            } else{
+                imagenes.add(new Imagen(999, "noImagen",new Usuario(999,"mainu","",0)));
             }
         }
 
         //Cogemos las imagenes oficiales de los platos
         for(i = 0; i < segundos.size(); i++) {
-            if(!segundos.get(i).getFotos().get(0).getRuta().isEmpty()){
+            if(!segundos.get(i).getFotos().isEmpty()){
                 imagenes.add(segundos.get(i).getFotos().get(0));
+            } else{
+                imagenes.add(new Imagen(999, "noImagen",new Usuario(999,"mainu","",0)));
             }
         }
 
         //Cogemos las imagenes oficiales de los platos
         for(i = 0; i < postres.size(); i++) {
-            if(!postres.get(i).getFotos().get(0).getRuta().isEmpty()){
+            if(!postres.get(i).getFotos().isEmpty()){
                 imagenes.add(postres.get(i).getFotos().get(0));
+            } else{
+                imagenes.add(new Imagen(999, "noImagen",new Usuario(999,"mainu","",0)));
             }
         }
 
