@@ -104,8 +104,10 @@ public class Activity_Inicio extends AppCompatActivity {
 
             if(!remoteLastUpdate.equalsIgnoreCase(localLastUpdate) ){
                 arrayBocadillos = request2.getBocadillos();
-                cache.guardarLastUpdate(this, "bocadillos", remoteLastUpdate);
-                cache.guardarListaBocadillos(this, arrayBocadillos);
+                if(arrayBocadillos.size() != 0) {
+                    cache.guardarLastUpdate(this, "bocadillos", remoteLastUpdate);
+                    cache.guardarListaBocadillos(this, arrayBocadillos);
+                }
             } else{
                 usarCache = true;
             }
@@ -137,8 +139,10 @@ public class Activity_Inicio extends AppCompatActivity {
 
             if(!remoteLastUpdate.equalsIgnoreCase(localLastUpdate) ){
                 arrayComplementos = request2.getOtros();
-                cache.guardarLastUpdate(this, "otros", remoteLastUpdate);
-                cache.guardarListaOtros(this, arrayComplementos);
+                if(arrayComplementos.size() != 0) {
+                    cache.guardarLastUpdate(this, "otros", remoteLastUpdate);
+                    cache.guardarListaOtros(this, arrayComplementos);
+                }
             } else{
                 usarCache = true;
             }

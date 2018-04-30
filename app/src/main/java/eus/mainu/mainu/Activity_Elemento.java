@@ -443,41 +443,47 @@ public class Activity_Elemento extends AppCompatActivity {
                 Log.d(TAG, "onClick: Boton Camara");
 
                 if(!VariablesGlobales.idToken.equals("666")) {
-                    if(checkPermisos(Permisos.PERMISOS)){
-                        //Tenemos permisos, comprobamos internet
-                        if(new HttpGetRequest().isConnected(view.getContext())){
-                            //Hay conexion
+                    boolean camara = false;
+                    do {
+                        if(checkPermisos(Permisos.PERMISOS)){
+                            //Tenemos permisos, comprobamos internet
+                            if(new HttpGetRequest().isConnected(view.getContext())){
+                                //Hay conexion
 
-                            //Iniciamos la camara intent
-                            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                //Iniciamos la camara intent
+                                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                cameraIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-                            //Abrimos el directorio donde guardamos la imagen
-                            File directorioImagenes = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                                //Abrimos el directorio donde guardamos la imagen
+                                File directorioImagenes = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
-                            //Creamos un nombre unico para cada imagen
-                            String nombre = getNombre();
+                                //Creamos un nombre unico para cada imagen
+                                String nombre = getNombre();
 
-                            //Juntamos el directorio y el nombre
-                            File imagen = new File(directorioImagenes,nombre);
+                                //Juntamos el directorio y el nombre
+                                File imagen = new File(directorioImagenes,nombre);
 
-                            //Lo pasamos a este formato
-                            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-                            StrictMode.setVmPolicy(builder.build());
-                            imagenUri = Uri.fromFile(imagen);
+                                //Lo pasamos a este formato
+                                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                                StrictMode.setVmPolicy(builder.build());
+                                imagenUri = Uri.fromFile(imagen);
 
-                            //imagenUri = FileProvider.getUriForFile(view.getContext(), view.getContext().getPackageName(), imagen);
-                            //Decimos que se guarde en la uri
-                            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imagenUri);
-                            startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+                                //imagenUri = FileProvider.getUriForFile(view.getContext(), view.getContext().getPackageName(), imagen);
+                                //Decimos que se guarde en la uri
+                                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imagenUri);
+                                startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+                                camara = false;
 
-
-                        }else {
-                            Toast.makeText(view.getContext(), R.string.noConexion, Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(view.getContext(), R.string.noConexion, Toast.LENGTH_SHORT).show();
+                            }
+                        }else{
+                            pidePermisos(Permisos.PERMISOS);
+                            if(checkPermisos(Permisos.PERMISOS)){
+                                camara = true;
+                            }
                         }
-                    }else{
-                        pidePermisos(Permisos.PERMISOS);
-                    }
+                    }while(camara);
                 } else {
                     Toast.makeText(view.getContext(), R.string.noRegistro, Toast.LENGTH_SHORT).show();
                 }
