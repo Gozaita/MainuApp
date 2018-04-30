@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import eus.mainu.mainu.Activity_Main;
 import eus.mainu.mainu.R;
+import eus.mainu.mainu.datalayer.Ingrediente;
 
 public class Adaptador_Ingredientes extends RecyclerView.Adapter<Adaptador_Ingredientes.ViewHolder> {
 
@@ -19,10 +20,10 @@ public class Adaptador_Ingredientes extends RecyclerView.Adapter<Adaptador_Ingre
 
     //Variables
     private Context mContext;
-    private ArrayList<String> arrayIngredientes;
+    private ArrayList<Ingrediente> arrayIngredientes;
 
 
-    public Adaptador_Ingredientes(ArrayList<String> array, Context context) {
+    public Adaptador_Ingredientes(ArrayList<Ingrediente> array, Context context) {
         this.arrayIngredientes = array;
         mContext = context;
     }
@@ -37,19 +38,22 @@ public class Adaptador_Ingredientes extends RecyclerView.Adapter<Adaptador_Ingre
 
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         Log.d(TAG,"onBindViewHolder: called."); //Para debuguear
-
-        holder.checkbox.setText( arrayIngredientes.get(position) );
+        holder.checkbox.setText( arrayIngredientes.get(position).getNombre() );
+        holder.checkbox.setChecked( arrayIngredientes.get(position).isChecked() );
 
         //Accion que se ejecuta al pulsar en un objeto de la lista
         holder.checkbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                arrayIngredientes.get(position);
+                String ing = ((AppCompatCheckBox) v).getText().toString();
 
-                String z = ((AppCompatCheckBox) v).getText().toString();
+                arrayIngredientes.get(position).setChecked( !arrayIngredientes.get(position).isChecked() );
+
                 Activity_Main a = (Activity_Main) mContext;
-                a.filterByIngredient(z);
+                a.filterByIngredient(ing);
             }
         });
     }

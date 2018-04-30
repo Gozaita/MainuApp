@@ -146,12 +146,12 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 searchView.setIconified(true);
                 searchView.onActionViewCollapsed();
                 tabLayout.setVisibility(View.VISIBLE);
-                findViewById(R.id.tabLayout2).setVisibility(View.GONE);
+                findViewById(R.id.tabLayout2).setVisibility(View.VISIBLE);
+                findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
                 toolbar.setTitle("Bocadillos");
                 fBocadillos.deseleccionarTodosIngredientes();
             }
         });
-
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -165,7 +165,6 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 else {
                     searchView.setIconified(true);
                     tabLayout.setVisibility(View.VISIBLE);
-                    findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
                     findViewById(R.id.tabLayout2).setVisibility(View.VISIBLE);
                     toolbar.setTitle("Bocadillos");
                 }
@@ -293,14 +292,18 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                     case 0:
                         getSupportActionBar().setTitle(R.string.menuDelDia);
                         searchView.setVisibility(View.INVISIBLE);
+                        searchView.setIconified(true);
                         break;
                     case 1:
                         getSupportActionBar().setTitle(R.string.bocadillos);
                         searchView.setVisibility(View.VISIBLE);
+                        searchView.setIconified(true);
+                        findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
                         break;
                     case 2:
                         getSupportActionBar().setTitle(R.string.complementos);
                         searchView.setVisibility(View.INVISIBLE);
+                        searchView.setIconified(true);
                         break;
                 }
             }

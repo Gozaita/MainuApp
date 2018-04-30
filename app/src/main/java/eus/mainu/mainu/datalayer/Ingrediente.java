@@ -1,17 +1,12 @@
 package eus.mainu.mainu.datalayer;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-
-/**
- * Created by Manole on 16/02/2018.
- * Clase de Ingrediente
- */
 
 public class Ingrediente implements Serializable{
 
     private int id;
     private String nombre;
+    private boolean checked;
 
     public Ingrediente(String nombre) {
         this.nombre = nombre;
@@ -25,7 +20,6 @@ public class Ingrediente implements Serializable{
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -33,9 +27,11 @@ public class Ingrediente implements Serializable{
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public boolean isChecked() { return checked; }
+    public void setChecked(boolean checked) { this.checked = checked; }
 
 }

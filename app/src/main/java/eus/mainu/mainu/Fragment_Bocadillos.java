@@ -2,10 +2,8 @@ package eus.mainu.mainu;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -19,9 +17,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import eus.mainu.mainu.Utilidades.Adaptador_Ingredientes;
-import eus.mainu.mainu.Utilidades.HttpGetRequest;
 import eus.mainu.mainu.Utilidades.Adaptador_Bocadillos;
 import eus.mainu.mainu.datalayer.Bocadillo;
+import eus.mainu.mainu.datalayer.Ingrediente;
 
 //Clase del fragmento responsable de visualizar los bocadillos
 public class Fragment_Bocadillos extends Fragment implements MenuItem.OnActionExpandListener {
@@ -30,24 +28,26 @@ public class Fragment_Bocadillos extends Fragment implements MenuItem.OnActionEx
 
     //Elementos Layout
     private Context mContext;
-    private SwipeRefreshLayout swipeRefreshLayout;
     private android.support.v7.widget.RecyclerView recyclerView;
     private android.support.v7.widget.RecyclerView recyclerViewIngredientes;
 
     //Variables
     private ArrayList<Bocadillo> arrayBocadillos = new ArrayList<>();
-    private ArrayList<String> arrayIngredientes = new ArrayList<>(Arrays.asList(
-            "Bacon", "Bonito",
-            "Calamares", "Cebolla", "Champiñones", "Chorizo", "Croissant",
-            "Hamburguesa", "Huevo", "Huevo cocido",
-            "Jamón york", "Jamón serrano",
-            "Lechuga", "Lomo",
-            "Mahonesa",
-            "Pan de molde", "Pavo", "Pimientos verdes", "Pollo", "Pollo empanado",
-            "Queso",
-            "Salchichas", "Salsa césar",
-            "Ternera", "Tomate", "Tortilla"
-            ));
+    private ArrayList<Ingrediente> arrayIngredientes2 = new ArrayList<Ingrediente>( Arrays.asList(
+            new Ingrediente("bacon"), new Ingrediente("bonito"),
+            new Ingrediente("calamares"), new Ingrediente("cebolla"), new Ingrediente("champiñones"),
+            new Ingrediente("chorizo"), new Ingrediente("croissant"),
+            new Ingrediente("hamburguesa"), new Ingrediente("huevo"), new Ingrediente("huevo cocido"),
+            new Ingrediente("jamón serrano"), new Ingrediente("jamón york"),
+            new Ingrediente("lechuga"), new Ingrediente("lomo"),
+            new Ingrediente("mahonesa"),
+            new Ingrediente("pan de molde"), new Ingrediente("pavo"),
+            new Ingrediente("pimientos verdes"),
+            new Ingrediente("pollo"), new Ingrediente("pollo empanado"),
+            new Ingrediente("queso"),
+            new Ingrediente("salchichas"), new Ingrediente("salsa césar"),
+            new Ingrediente("ternera"), new Ingrediente("tomate"),
+            new Ingrediente("tortilla") ));
 
     public Fragment_Bocadillos(){
 
@@ -88,23 +88,17 @@ public class Fragment_Bocadillos extends Fragment implements MenuItem.OnActionEx
         recyclerView = view.findViewById(R.id.recycler_view_lista_bocadillos);
         recyclerViewIngredientes = view.findViewById(R.id.recyclerView_ingredientes);
 
-        Adaptador_Ingredientes adaptorIngredientes = new Adaptador_Ingredientes(arrayIngredientes, getActivity());
+        Adaptador_Ingredientes adaptorIngredientes = new Adaptador_Ingredientes(arrayIngredientes2, getActivity());
         Adaptador_Bocadillos aa = new Adaptador_Bocadillos(arrayBocadillos, getActivity());
         recyclerViewIngredientes.setAdapter( adaptorIngredientes );
         recyclerViewIngredientes.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        //recyclerViewIngredientes.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //Añadimos una linea debajo de cada objeto
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mContext, new LinearLayoutManager(mContext).getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        //Ponemos el SwipeToRefresh
-        swipeRefreshLayout = view.findViewById(R.id.swipeBocadillos);
-        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
-
         //Inflamos la vista
         setBocadillos();
-        escuchamosSwipe();
 
         return view;
     }
@@ -124,35 +118,6 @@ public class Fragment_Bocadillos extends Fragment implements MenuItem.OnActionEx
         //Adaptamos el recyclingview
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-    }
-
-    //Metodo para definir la accion del swipe to refresh
-    private void escuchamosSwipe() {
-
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            //Accion que se ejecuta cuando se activa
-            @Override
-            public void onRefresh() {
-                //Creamos otro request porque solo se puede llamar al asynctask una vez
-                HttpGetRequest request = new HttpGetRequest();
-
-                //Chequeamos si tenemos el menu actualizado
-                //request.checkMenuActualizados();
-
-                if(request.isConnected(mContext) && arrayBocadillos.isEmpty()){
-                    arrayBocadillos = request.getBocadillos();
-                    setBocadillos();
-                }
-
-                //Esto es para ejecutar un hilo que se encarga de hacer la accion, creo
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                }, 2000);   //Tiempo en ms durante el cual se muestra el icono de refresh
-            }
-        });
     }
 
     private void resetLista(){
