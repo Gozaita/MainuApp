@@ -1,11 +1,11 @@
-﻿>*Este repositorio contiene  el cliente Android del proyecto **MainU**. Para la API del proyecto, consulta [**MainU API**](https://github.com/Gozaita/MainuAPI). Para una visión global del proyecto, puedes dirigirte a [mainu.eus](http://mainu.eus).*
+﻿>*Este repositorio contiene  el cliente Android del proyecto **MainU**. Para la API del proyecto, consulta [**MainU API**](https://github.com/mainu4u/MainuAPI). Para una visión global del proyecto, puedes dirigirte a [mainu.eus](http://mainu.eus).*
 
 <img src=https://i.imgur.com/Wc9VOaZ.png?1 width=150px/>
 
 MainU App
 ===================
 
-**MainU App** es una aplicación para Android, basada en los servicios ofrecidos por [**MainU API**](https://github.com/Gozaita/MainuAPI). Su ámbito de actuación se centra en la Escuela de Ingeniería de Bilbao (UPV/EHU).
+**MainU App** es una aplicación para Android, basada en los servicios ofrecidos por [**MainU API**](https://github.com/mainu4u/MainuAPI). Su ámbito de actuación se centra en la Escuela de Ingeniería de Bilbao (UPV/EHU).
 
 > Desarrollado por Ismael Estalayo, Guillermo Ozaita, Andreea Stanciu y Adrián Vázquez.
 > 
@@ -18,8 +18,8 @@ El proyecto de MainU
 
 **MainU** es un proyecto que pretende dar servicio al alumnado y profesorado de la Escuela de Ingeniería de Bilbao así como al resto de público objetivo de la cafetería del centro. El proyecto engloba diferentes partes:
 - Base de datos de MainU
-- [MainU API](https://github.com/Gozaita/MainuAPI)
-- [MainU App](https://github.com/Gozaita/MainuApp)
+- [MainU API](https://github.com/mainu4u/MainuAPI)
+- [MainU App](https://github.com/mainu4u/MainuApp)
 
 Cliente Android
 -------------
