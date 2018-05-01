@@ -315,7 +315,7 @@ public class Activity_Elemento extends AppCompatActivity {
             Complemento complemento = (Complemento) getIntent().getSerializableExtra("Complemento");
             complemento = pideComplemento(complemento.getId());
 
-            tipo = "otro";
+            tipo = "otros";
             id = complemento.getId();
 
             setComplemento(complemento);

@@ -389,7 +389,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 try {
                     JSONObject postData = new JSONObject();
                     postData.put("report",edt.getText().toString());
-                    new HttpPostRequest().execute("https://api.mainu.eus/report", postData.toString());
+                    new HttpPostRequest().execute("https://api  .mainu.eus/report", postData.toString());
 
                 } catch (JSONException e) {
                     e.printStackTrace();
