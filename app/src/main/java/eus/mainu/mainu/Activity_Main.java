@@ -300,6 +300,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
                         // Al cambiar de vista, reseteamos
                         // Lo ponemos aquí para que el usuario no se entere (y no lo vea)
+                        findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
                         if(!ingredientesFiltro.isEmpty() ){
                             fBocadillos.actualizaListaBocadillos(listaBocadillos);
                             fBocadillos.deseleccionarTodosIngredientes();
@@ -319,6 +320,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
                         // Al cambiar de vista, reseteamos
                         // Lo ponemos aquí para que el usuario no se entere (y no lo vea)
+                        findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
                         if(!ingredientesFiltro.isEmpty() ){
                             fBocadillos.actualizaListaBocadillos(listaBocadillos);
                             fBocadillos.deseleccionarTodosIngredientes();
