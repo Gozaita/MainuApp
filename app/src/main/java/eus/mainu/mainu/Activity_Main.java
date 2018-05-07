@@ -149,7 +149,10 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                 findViewById(R.id.tabLayout2).setVisibility(View.VISIBLE);
                 findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
                 toolbar.setTitle("Bocadillos");
+                // Reseteamos la lista de ingredientes filtrados
+                fBocadillos.actualizaListaBocadillos(listaBocadillos);
                 fBocadillos.deseleccionarTodosIngredientes();
+                ingredientesFiltro.clear();
             }
         });
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
@@ -242,6 +245,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
         } else{
             // Si no hay ingredientes a filtar --> reseteamos
             fBocadillos.actualizaListaBocadillos(listaBocadillos);
+            ingredientesFiltro.clear();
         }
     }
 
@@ -293,6 +297,14 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                         getSupportActionBar().setTitle(R.string.menuDelDia);
                         searchView.setVisibility(View.INVISIBLE);
                         searchView.setIconified(true);
+
+                        // Al cambiar de vista, reseteamos
+                        // Lo ponemos aquí para que el usuario no se entere (y no lo vea)
+                        if(!ingredientesFiltro.isEmpty() ){
+                            fBocadillos.actualizaListaBocadillos(listaBocadillos);
+                            fBocadillos.deseleccionarTodosIngredientes();
+                            ingredientesFiltro.clear();
+                        }
                         break;
                     case 1:
                         getSupportActionBar().setTitle(R.string.bocadillos);
@@ -304,6 +316,14 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
                         getSupportActionBar().setTitle(R.string.complementos);
                         searchView.setVisibility(View.INVISIBLE);
                         searchView.setIconified(true);
+
+                        // Al cambiar de vista, reseteamos
+                        // Lo ponemos aquí para que el usuario no se entere (y no lo vea)
+                        if(!ingredientesFiltro.isEmpty() ){
+                            fBocadillos.actualizaListaBocadillos(listaBocadillos);
+                            fBocadillos.deseleccionarTodosIngredientes();
+                            ingredientesFiltro.clear();
+                        }
                         break;
                 }
             }
