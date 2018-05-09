@@ -29,29 +29,10 @@
                 app:tabGravity="center"
                 app:tabIndicatorHeight="0dp" />
 
-            <!--Quitamos la imagen
-
-            <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/viewPagerMenu"
-            android:background="@color/gris"
-            app:srcCompat="@drawable/ic_keyboard_arrow_left_24dp"
-            android:id="@+id/flecha_izquierda"/>
-
-            <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_alignBottom="@+id/viewPagerMenu"
-            android:background="@color/gris"
-            app:srcCompat="@drawable/ic_keyboard_arrow_right_24dp"
-            android:id="@+id/flecha_derecha" />
-            -->
             <ListView
                 android:id="@+id/listaMenu"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="267dp"
                 android:layout_below="@+id/tab_fotos_menu" />
 
 

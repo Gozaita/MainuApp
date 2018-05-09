@@ -24,30 +24,67 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:text="Staff:"/>
+            android:text="Desarrolladores:"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:text="• Ismael Estalayo"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:text="• Guillermo Carlos Ozaita"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:text="• Andreea Stanciu"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:text="• Adrián Vazquez"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:text="Devs:"/>
+            android:layout_marginTop="100px"
+            android:text="Contacto:"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autoLink="email"
+            android:layout_marginLeft="30px"
+            android:text="• Mail:  dev@mainu.eus "/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autoLink="web"
+            android:layout_marginLeft="30px"
+            android:text="• Codigo:  https://github.com/mainu4u/"/>
+
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Ismael Estalayo"/>
+            style="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:layout_marginTop="100px"
+            android:text="Agradecimientos:"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Guillermo Carlos Ozaita"/>
+            android:autoLink="web"
+            android:layout_marginLeft="30px"
+            android:text="• Iconos de:  https://smashicons.com/"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Andreea Stanciu"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Adrián Vazquez"/>
+            android:autoLink="web"
+            android:layout_marginLeft="30px"
+            android:text="• Iconos de: https://www.freepik.com/"/>
 
     </LinearLayout>
 
