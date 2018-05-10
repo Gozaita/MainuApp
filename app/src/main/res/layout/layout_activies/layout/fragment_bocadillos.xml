@@ -20,11 +20,11 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_lista_bocadillos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="516dp"
             android:layout_below="@id/recyclerView_ingredientes">
         </android.support.v7.widget.RecyclerView>
 
-        <!-- Solo aparece cuando la lista está vacía -->
+        <!-- Solo aparece cuando la lista está vacía
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
             android:textColor="@color/negro"
             android:textSize="15sp"
             android:layout_margin="10dp"
-            android:layout_below="@id/recycler_view_lista_bocadillos"/>
+            android:layout_below="@id/recycler_view_lista_bocadillos"/> -->
 
     </RelativeLayout>
 

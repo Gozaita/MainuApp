@@ -112,7 +112,7 @@ public class Activity_Main extends AppCompatActivity implements NavigationView.O
 
         Menu menu = (Menu) getIntent().getSerializableExtra("Menu");
         listaBocadillos = (ArrayList<Bocadillo>) getIntent().getSerializableExtra("listaBocadillos");
-        listaBocadillos.add(new Bocadillo(9999, "Todavía no te decides?", 0, 0, new ArrayList<Ingrediente>() ));
+        //listaBocadillos.add(new Bocadillo(9999, "Todavía no te decides?", 0, 0, new ArrayList<Ingrediente>() ));
 
         listaBocadillosFiltrada = new ArrayList<>();
         listaOtros = (ArrayList<Complemento>) getIntent().getSerializableExtra("listaOtros");
