@@ -2,7 +2,6 @@ package eus.mainu.mainu.Utilidades;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import eus.mainu.mainu.Activity_Elemento;
+import eus.mainu.mainu.ActivityElemento;
 import eus.mainu.mainu.R;
 import eus.mainu.mainu.datalayer.Plato;
 
@@ -21,14 +20,14 @@ import eus.mainu.mainu.datalayer.Plato;
  * Clase para adaptar los platos al listview, en este momento no vale para nada, hace que la aplicacion cargue mas despacio
  */
 
-public class Adaptador_Platos extends BaseAdapter {
+public class AdaptadorPlatos extends BaseAdapter {
 
     private final String TAG = "Adaptador de Plato";
 
     private Context mContext;
     private ArrayList<Plato> platos;
 
-    public Adaptador_Platos(Context mContext, ArrayList<Plato> platos) {
+    public AdaptadorPlatos(Context mContext, ArrayList<Plato> platos) {
         this.mContext = mContext;
         this.platos = platos;
     }
@@ -71,15 +70,13 @@ public class Adaptador_Platos extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 //Decimos que queremos navegar a la clase Elemento
-                Intent intent = new Intent(mContext, Activity_Elemento.class);
+                Intent intent = new Intent(mContext, ActivityElemento.class);
                 //Le pasamos la informacion que necesita la clase
                 intent.putExtra("Plato",platos.get(i));
                 //Iniciamos la actividad
                 mContext.startActivity(intent);
             }
         });
-
-
         // returns the view for the current row
         return view;
     }

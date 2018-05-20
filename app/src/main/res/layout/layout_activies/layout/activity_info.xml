@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="eus.mainu.mainu.Activity_Info">
+    tools:context="eus.mainu.mainu.ActivityInfo">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"

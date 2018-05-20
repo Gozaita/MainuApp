@@ -12,11 +12,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-import eus.mainu.mainu.Activity_Elemento;
+import eus.mainu.mainu.ActivityElemento;
 import eus.mainu.mainu.R;
 import eus.mainu.mainu.datalayer.Plato;
 
-public class Adaptador_Menu extends BaseAdapter {
+public class AdaptadorMenu extends BaseAdapter {
 
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_SEPARATOR = 1;
@@ -26,7 +26,7 @@ public class Adaptador_Menu extends BaseAdapter {
 
     private LayoutInflater mInflater;
 
-    public Adaptador_Menu(Context context) {
+    public AdaptadorMenu(Context context) {
         mInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -85,7 +85,7 @@ public class Adaptador_Menu extends BaseAdapter {
                         @Override
                         public void onClick(View view) {
                             //Decimos que queremos navegar a la clase Elemento
-                            Intent intent = new Intent(mInflater.getContext(), Activity_Elemento.class);
+                            Intent intent = new Intent(mInflater.getContext(), ActivityElemento.class);
                             //Le pasamos la informacion que necesita la clase
                             intent.putExtra("Plato",mData.get(position));
                             //Iniciamos la actividad

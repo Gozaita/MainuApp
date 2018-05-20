@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import eus.mainu.mainu.datalayer.Bocadillo;
 import eus.mainu.mainu.datalayer.Complemento;
 
-public class Administrador_Cache {
+public class CacheAdmin {
 
     public void guardarLastUpdate (Context context, String tipo, String fecha) {
 

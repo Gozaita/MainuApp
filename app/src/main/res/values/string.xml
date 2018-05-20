@@ -50,6 +50,7 @@
     <string name="despedida">Chao chaito</string>
     <string name="noConexion">No hay conexión</string>
     <string name="noRegistro">Hace falta iniciar sesión</string>
+    <string name="signInSuccess">Has iniciado sesión</string>
 
 
     <!--Urls-->
@@ -58,7 +59,7 @@
     <string name="getComplementos">https://api.mainu.eus/otros</string>
 
     <!--Claves-->
-    <string name="server_client_id">423305197397-t9t6lfv9fj8gqddapa2hpitmj2ggjen8.apps.googleusercontent.com</string>#${GITIGNORE.CLIENT}
+    <string name="server_client_id">423305197397-t9t6lfv9fj8gqddapa2hpitmj2ggjen8.apps.googleusercontent.com</string> #${GITIGNORE.CLIENT}
 
     <!-- Emojis -->
     <string name="emoji_Corazon">Otros&#8230;</string>
