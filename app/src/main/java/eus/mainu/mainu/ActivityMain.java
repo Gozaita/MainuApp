@@ -599,8 +599,6 @@ public class ActivityMain extends AppCompatActivity implements
 					// TODO: Realizar acciones en caso de que falle el silent sign-in
 				}
 			});
-		} else {
-			Toast.makeText(this, R.string.fail, Toast.LENGTH_SHORT).show();
 		}
 	}
 }
