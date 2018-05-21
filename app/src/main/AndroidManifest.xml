@@ -24,23 +24,23 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".ActivityMain"
+            android:name=".main.ActivityMain"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivityElemento"
-            android:parentActivityName=".ActivityMain"
+            android:name=".elemento.ActivityElemento"
+            android:parentActivityName=".main.ActivityMain"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".ActivityInfo"
-            android:parentActivityName=".ActivityMain"
+            android:name=".info.ActivityInfo"
+            android:parentActivityName=".main.ActivityMain"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ActivityInicio"
+        <activity android:name=".inicio.ActivityInicio"
             android:screenOrientation="portrait"
              >
             <intent-filter>

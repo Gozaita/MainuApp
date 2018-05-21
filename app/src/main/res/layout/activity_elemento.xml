@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="eus.mainu.mainu.elemento.ActivityElemento">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPagerElemento"
+                android:layout_width="match_parent"
+                android:layout_height="225dp" />
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_alignBottom="@+id/viewPagerElemento"
+                android:layout_alignTop="@id/viewPagerElemento"
+                android:background="@color/transparente"
+                app:srcCompat="@drawable/ic_keyboard_arrow_left_24dp"
+                android:id="@+id/flecha_izquierda"/>
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@+id/viewPagerElemento"
+                android:layout_alignTop="@id/viewPagerElemento"
+                android:background="@color/transparente"
+                app:srcCompat="@drawable/ic_keyboard_arrow_right_24dp"
+                android:id="@+id/flecha_derecha" />
+
+            <!--Quitamos el boton de atras -->
+            <ImageButton
+                android:id="@+id/atrasButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="2dp"
+                android:background="@color/transparente"
+                app:srcCompat="@drawable/ic_arrow_back_24dp" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewPagerElemento"
+                android:background="@color/colorPrimary"
+                android:id="@+id/caracteristicas">
+
+                <TextView
+                    android:id="@+id/textViewNombre"
+                    android:layout_width="wrap_content"
+                    android:maxWidth="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="Nombre"
+                    android:textColor="@color/blanco"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/roboto_light"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/textViewPrecio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@+id/textViewNombre"
+                    android:layout_marginEnd="10dp"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="X.XX€"
+                    android:textColor="@color/blanco"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/textViewPuntuacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/textViewNombre"
+                    android:layout_below="@+id/textViewNombre"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="3.5"
+                    android:textColor="@color/blanco"
+                    android:textSize="15sp" />
+
+                <RatingBar
+                    android:id="@+id/estrellitasElemento"
+                    style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                    android:progressTint="@color/blanco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/textViewPuntuacion"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toEndOf="@+id/textViewPuntuacion"
+                    android:stepSize="0.5"
+                    android:isIndicator="true"/>
+
+                <ImageButton
+                    android:id="@+id/botonCamara"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/estrellitasElemento"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/transparente"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/camera" />
+
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/botonEnviar"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignBottom="@+id/editText"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="7dp"
+                android:layout_marginEnd="11dp"
+                android:visibility="visible"
+                android:background="@color/transparente"
+                app:srcCompat="@drawable/ic_send_24dp" />
+
+            <RatingBar
+                android:id="@+id/ratingBarUsuario"
+                style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/caracteristicas"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:isIndicator="false"
+                android:stepSize="0.5" />
+
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ratingBarUsuario"
+                android:layout_marginEnd="11dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toStartOf="@id/botonEnviar"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:fontFamily="@font/roboto_light"
+                android:hint="@string/danos"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/primerComentario"
+                android:layout_below="@id/editText"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:text="@string/primero"
+                android:textSize="20sp"
+                android:visibility="gone"/>
+
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_lista_comentarios"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/editText"
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="15dp" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

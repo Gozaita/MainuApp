@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="eus.mainu.mainu.main.ActivityMain">
+
+    <!-- La toolbar de la actividad-->
+    <include layout="@layout/snippet_toolbar"/>
+
+    <!-- El BODY de la actividad-->
+    <include layout="@layout/content_activity_main" />
+
+
+</android.support.design.widget.CoordinatorLayout>
