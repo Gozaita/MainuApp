@@ -112,10 +112,10 @@ public class ActivityMain extends AppCompatActivity implements
 		setCuenta();
 		setDrawer();
 
-		Menu menu = (Menu) getIntent().getSerializableExtra("Menu");
-		bocadillos = (ArrayList<Bocadillo>) getIntent().getSerializableExtra("listaBocadillos");
+		Menu menu = (Menu) getIntent().getSerializableExtra("menu");
+		bocadillos = (ArrayList<Bocadillo>) getIntent().getSerializableExtra("bocadillos");
 		bocadillosFiltrados = new ArrayList<>();
-		otros = (ArrayList<Complemento>) getIntent().getSerializableExtra("listaOtros");
+		otros = (ArrayList<Complemento>) getIntent().getSerializableExtra("otros");
 
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("menu", menu);
