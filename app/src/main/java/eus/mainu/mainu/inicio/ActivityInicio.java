@@ -48,7 +48,7 @@ public class ActivityInicio extends AppCompatActivity {
 						ActivityInicio.this, ActivityMain.class);
 				intent.putExtra("menu", menu);
 				intent.putExtra("bocadillos", bocadillos);
-				intent.putExtra("eus/mainu/mainu/otros", otros);
+				intent.putExtra("otros", otros);
 				startActivity(intent);
 				finish();
 			}
@@ -81,7 +81,7 @@ public class ActivityInicio extends AppCompatActivity {
 		}
 
 		manageCache("bocadillos",conectado);
-		manageCache("eus/mainu/mainu/otros", conectado);
+		manageCache("otros", conectado);
 
 		Log.d(TAG, "onCreate: Se han obtenido los datos");
 	}
@@ -115,7 +115,7 @@ public class ActivityInicio extends AppCompatActivity {
 						cache.guardarLastUpdate(this, type, remoteLastUpdate);
 						cache.guardarListaBocadillos(this, bocadillos);
 					}
-				} else if (type.equals("eus/mainu/mainu/otros")) {
+				} else if (type.equals("otros")) {
 					otros = req2.getOtros();
 					if (otros.size() != 0) {
 						cache.guardarLastUpdate(this, type, remoteLastUpdate);
@@ -132,14 +132,14 @@ public class ActivityInicio extends AppCompatActivity {
 		if (usarCache) {
 			if (type.equals("bocadillos")) {
 				bocadillos = (ArrayList<Bocadillo>) cache.leerListaBocadillos(this);
-			} else if (type.equals("eus/mainu/mainu/otros")) {
+			} else if (type.equals("otros")) {
 				otros = (ArrayList<Otro>) cache.leerListaOtros(this);
 			}
 		}
 
 		if (type.equals("bocadillos")) {
 			this.bocadillos = bocadillos;
-		} else if (type.equals("eus/mainu/mainu/otros")) {
+		} else if (type.equals("otros")) {
 			this.otros = otros;
 		}
 	}

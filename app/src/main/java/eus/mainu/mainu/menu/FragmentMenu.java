@@ -71,7 +71,7 @@ public class FragmentMenu extends Fragment {
 
 		// Poner swipeToRefresh
 		swipe = view.findViewById(R.id.swipeMenu);
-		swipe.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+		swipe.setColorSchemeColors(getResources().getColor(R.color.blue));
 
 		// Inflar la vista
 		setMenu();
@@ -121,22 +121,22 @@ public class FragmentMenu extends Fragment {
 		AdaptadorMenu adaptadorMenu = new AdaptadorMenu(mContext);
 
 		if (menu != null) {
-			adaptadorMenu.addSectionHeaderItem(getResources().getString(R.string.primer_Plato));
+			adaptadorMenu.addSectionHeaderItem(getResources().getString(R.string.menu_primeros));
 			for (int i = 0; i < menu.getPrimeros().size(); i++) {
 				adaptadorMenu.addItem(menu.getPrimeros().get(i));
 			}
-			adaptadorMenu.addSectionHeaderItem(getResources().getString(R.string.segundo_Plato));
+			adaptadorMenu.addSectionHeaderItem(getResources().getString(R.string.menu_segundos));
 			for (int i = 0; i < menu.getSegundos().size(); i++) {
 				adaptadorMenu.addItem(menu.getSegundos().get(i));
 			}
-			adaptadorMenu.addSectionHeaderItem(getResources().getString(R.string.postre));
+			adaptadorMenu.addSectionHeaderItem(getResources().getString(R.string.menu_postres));
 			for (int i = 0; i < menu.getPostres().size(); i++) {
 				adaptadorMenu.addItem(menu.getPostres().get(i));
 			}
 		} else {
-			adaptadorMenu.addSectionHeaderItem(getResources().getString(R.string.primer_Plato));
-			adaptadorMenu.addSectionHeaderItem(getResources().getString(R.string.segundo_Plato));
-			adaptadorMenu.addSectionHeaderItem(getResources().getString(R.string.postre));
+			adaptadorMenu.addSectionHeaderItem(getResources().getString(R.string.menu_primeros));
+			adaptadorMenu.addSectionHeaderItem(getResources().getString(R.string.menu_segundos));
+			adaptadorMenu.addSectionHeaderItem(getResources().getString(R.string.menu_postres));
 		}
 		listaMenu.setDivider(null);
 		listaMenu.setAdapter(adaptadorMenu);

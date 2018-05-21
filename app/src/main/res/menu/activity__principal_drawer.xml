@@ -7,31 +7,31 @@
         <item
             android:id="@+id/home"
             android:icon="@drawable/ic_inicio"
-            android:title="@string/Inicio" />
+            android:title="@string/title_home" />
         <item
             android:id="@+id/informacion"
             android:icon="@drawable/ic_info"
-            android:title="@string/Informacion" />
+            android:title="@string/title_info" />
         <item
             android:id="@+id/comparte"
             android:icon="@drawable/ic_compartir"
-            android:title="@string/Comparte" />
+            android:title="@string/title_share" />
         <item
             android:id="@+id/error"
             android:icon="@drawable/ic_reporte"
-            android:title="@string/Error" />
+            android:title="@string/title_report" />
     </group>
 
-    <item android:title="@string/ajustes">
+    <item android:title="@string/title_account">
     <menu>
         <item
             android:id="@+id/iniciarSesion"
             android:icon="@drawable/ic_google"
-            android:title="@string/IniciarSesion" />
+            android:title="@string/title_login" />
         <item
             android:id="@+id/cerrarSesion"
             android:icon="@drawable/ic_salir"
-            android:title="@string/CerrarSesion"
+            android:title="@string/title_logout"
             android:visible="true"/>
     </menu>
     </item>

@@ -41,7 +41,7 @@ public class FragmentOtros extends Fragment {
 		mContext = getContext();
 		Bundle bundle = this.getArguments();
 		if (bundle != null) {
-			otros = (ArrayList<Otro>) bundle.getSerializable("eus/mainu/mainu/otros");
+			otros = (ArrayList<Otro>) bundle.getSerializable("otros");
 		}
 	}
 
@@ -56,7 +56,7 @@ public class FragmentOtros extends Fragment {
 		swipe = view.findViewById(R.id.swipeComplementos);
 
 		// Poner swipeToRefresh
-		swipe.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+		swipe.setColorSchemeColors(getResources().getColor(R.color.blue));
 
 		// Inflar vista
 		setOtros();

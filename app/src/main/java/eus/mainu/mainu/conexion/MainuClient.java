@@ -12,7 +12,7 @@ public interface MainuClient {
     @GET("bocadillos")
     Call<ArrayList<Bocadillo>> getBocadillos();
 
-    @GET("eus/mainu/mainu/otros")
+	@GET("otros")
     Call<ArrayList<Otro>> getOtros();
 
     @GET("menu")

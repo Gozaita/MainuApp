@@ -15,7 +15,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tabs"
-                android:background="@drawable/layout_abajo_borde"/>
+                android:background="@drawable/linea_inferior" />
 
         </android.support.design.widget.AppBarLayout>
 

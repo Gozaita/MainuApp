@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/toolbar"
             app:title="Acerca de MainU"
-            app:titleTextColor="@color/blanco">
+            app:titleTextColor="@color/white">
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Desarrolladores"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/blue" />
 
         <TextView
             android:layout_width="match_parent"
@@ -106,7 +106,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="50dp"
             android:text="Contacto"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/blue" />
 
         <TextView
             android:layout_width="match_parent"
@@ -127,7 +127,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="50dp"
             android:text="Créditos"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/blue" />
 
         <TextView
             android:layout_width="match_parent"

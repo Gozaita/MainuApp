@@ -12,8 +12,8 @@
         android:gravity="center_vertical"
         android:layout_marginTop="5dp"
         android:layout_marginStart="6dp"
-        android:text="@string/primer_Plato"
-        android:textColor="@color/colorPrimary"
+        android:text="@string/menu_primeros"
+        android:textColor="@color/blue"
         android:textSize="15sp"
         android:fontFamily="@font/roboto_light"
         android:layout_alignParentBottom="true" />

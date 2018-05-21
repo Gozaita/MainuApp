@@ -104,7 +104,7 @@ public class ActivityElemento extends AppCompatActivity {
 		getInformacion();
 
 		if (VariablesGlobales.idToken.equals("666")) {
-			comentario.setHint(R.string.noRegistro);
+			comentario.setHint(R.string.login_warning);
 			comentario.setEnabled(false);
 			puntuacionUsuario.setEnabled(false);
 			enviar.setEnabled(false);
@@ -112,7 +112,7 @@ public class ActivityElemento extends AppCompatActivity {
 		} else {
 			// Para que no se muestre seleccionado al entrar en la actividad
 			comentario.setCursorVisible(false);
-			comentario.setHint(R.string.danos);
+			comentario.setHint(R.string.default_report);
 			sendValoracion();
 		}
 
@@ -217,7 +217,7 @@ public class ActivityElemento extends AppCompatActivity {
 							+ tipo + "/" + id, postData.toString());
 
 
-					Toast.makeText(getApplicationContext(), R.string.agradecimiento,
+					Toast.makeText(getApplicationContext(), R.string.greetings,
 							Toast.LENGTH_SHORT).show();
 
 				} catch (JSONException e) {
@@ -250,7 +250,7 @@ public class ActivityElemento extends AppCompatActivity {
 			Otro otro = (Otro) getIntent().getSerializableExtra("otro");
 			otro = getOtro(otro.getId());
 
-			tipo = "eus/mainu/mainu/otros";
+			tipo = "otros";
 			id = otro.getId();
 
 			setOtro(otro);
@@ -400,7 +400,7 @@ public class ActivityElemento extends AppCompatActivity {
 								camara = false;
 
 							} else {
-								Toast.makeText(view.getContext(), R.string.noConexion,
+								Toast.makeText(view.getContext(), R.string.connection_fail,
 										Toast.LENGTH_SHORT).show();
 							}
 						} else {
@@ -411,7 +411,7 @@ public class ActivityElemento extends AppCompatActivity {
 						}
 					} while (camara);
 				} else {
-					Toast.makeText(view.getContext(), R.string.noRegistro,
+					Toast.makeText(view.getContext(), R.string.login_warning,
 							Toast.LENGTH_SHORT).show();
 				}
 			}
@@ -453,7 +453,7 @@ public class ActivityElemento extends AppCompatActivity {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				Toast.makeText(this, R.string.agradecimiento,
+				Toast.makeText(this, R.string.greetings,
 						Toast.LENGTH_LONG).show();
 			}
 		}

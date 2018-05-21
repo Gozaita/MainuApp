@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_otros">Bestelakoak</string>
+    <string name="title_bocadillos">Ogitartekoak</string>
+    <string name="title_menu">Eguneko platerrak</string>
+    <string name="header_report">Lagundu gaitzazu</string>
+    <string name="navigation_drawer_open">Zabaldu ezkerreko panela</string>
+    <string name="navigation_drawer_close">Itxi ezkerreko panela</string>
+</resources>

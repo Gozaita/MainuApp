@@ -1,8 +1,64 @@
 <resources>
-    <string name="title_activity__principal">Activity_Principal</string>
+    <!--Títulos-->
+    <string name="app_name" translatable="false">MainU</string>
+    <string name="title_otros">Otros</string>
+    <string name="title_bocadillos">Bocadillos</string>
+    <string name="title_menu">Menú del dia</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!--Texto Suelto-->
+    <string name="header_report">Ayúdanos a mejorar</string>
+    <string name="default_username">Inicia sesión con tu cuenta de Google</string>
+    <string name="default_mail">default_search</string>
+    <string name="default_search">Buscar</string>
+    <string name="default_report">Danos tu opinión&#8230;</string>
+    <string name="default_comment">¡Deja tu comentario!</string>
+    <string name="deafult_share_title">¡Mira como mola!</string>
+    <string name="default_share_body">Una aplicación para la cafetería de la Escuela de Ingeniería de Bilbao: mainu.eus</string>
+    <string name="share_app_select">Compartir con</string>
 
-    <string name="action_settings">Settings</string>
+    <!--Navigation Drawer-->
+    <string name="title_home">Inicio</string>
+    <string name="title_info">Información</string>
+    <string name="title_share">Comparte</string>
+    <string name="title_report">Reportar error</string>
+    <string name="title_login">Iniciar sesión</string>
+    <string name="title_logout">Cerrar sesión</string>
+    <string name="title_account">Ajustes</string>
+    <string name="navigation_drawer_open">Abrir menú lateral</string>
+    <string name="navigation_drawer_close">Cerrar menú lateral</string>
+
+    <!--AlertBox-->
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+
+    <!--Fragmento Menú-->
+    <string name="menu_primeros">Primeros</string>
+    <string name="menu_segundos">Segundos</string>
+    <string name="menu_postres">Postre</string>
+
+    <!--Fragmento Otros-->
+    <string name="otros_section_one">Tostas y mini pizzas</string>
+    <string name="otros_section_two">Bollería</string>
+    <string name="otros_section_three">Bebidas calientes</string>
+    <string name="otros_section_four">Bebidas frías</string>
+    <string name="otros_section_five">Otros&#8230;</string>
+
+    <!--Toasts-->
+    <string name="greetings">¡Gracias por tu colaboración!</string>
+    <string name="fail">Oopsie Woopsie, se ha escapado el fetch</string>
+    <string name="bye">Chao chaito</string>
+    <string name="connection_fail">No hay conexión</string>
+    <string name="login_warning">Hace falta iniciar sesión</string>
+    <string name="login_success">Has iniciado sesión</string>
+
+    <!--Urls-->
+    <string name="url_bocadillos">https://api.mainu.eus/bocadillos</string>
+    <string name="url_menu">https://api.mainu.eus/menu</string>
+    <string name="url_otros">https://api.mainu.eus/otros</string>
+
+    <!--Claves-->
+    <string name="server_client_id">423305197397-t9t6lfv9fj8gqddapa2hpitmj2ggjen8.apps.googleusercontent.com</string>
+
+    <!-- Emojis -->
+    <string name="emoji_heart">Otros&#8230;</string>
 </resources>

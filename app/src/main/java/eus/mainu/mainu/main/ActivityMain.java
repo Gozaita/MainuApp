@@ -120,7 +120,7 @@ public class ActivityMain extends AppCompatActivity implements
 		Menu menu = (Menu) getIntent().getSerializableExtra("menu");
 		bocadillos = (ArrayList<Bocadillo>) getIntent().getSerializableExtra("bocadillos");
 		bocadillosFiltrados = new ArrayList<>();
-		otros = (ArrayList<Otro>) getIntent().getSerializableExtra("eus/mainu/mainu/otros");
+		otros = (ArrayList<Otro>) getIntent().getSerializableExtra("otros");
 
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("menu", menu);
@@ -131,7 +131,7 @@ public class ActivityMain extends AppCompatActivity implements
 		fBocadillos.setArguments(bundle);
 
 		bundle = new Bundle();
-		bundle.putSerializable("eus/mainu/mainu/otros", otros);
+		bundle.putSerializable("otros", otros);
 		fOtros.setArguments(bundle);
 
 		setupViewPager();
@@ -140,8 +140,8 @@ public class ActivityMain extends AppCompatActivity implements
 
 		final EditText searchEditText = searchView.
 				findViewById(android.support.v7.appcompat.R.id.search_src_text);
-		searchEditText.setTextColor(getResources().getColor(R.color.blanco));
-		searchEditText.setHintTextColor(getResources().getColor(R.color.blanco));
+		searchEditText.setTextColor(getResources().getColor(R.color.white));
+		searchEditText.setHintTextColor(getResources().getColor(R.color.white));
 
 		ImageView closeButton = searchView.findViewById(R.id.search_close_btn);
 		closeButton.setOnClickListener(new View.OnClickListener() {
@@ -265,7 +265,7 @@ public class ActivityMain extends AppCompatActivity implements
 		/**
 		 * Personalización de toolbar. Compatible con onPageScroll.
 		 */
-		getSupportActionBar().setTitle(R.string.menuDelDia);
+		getSupportActionBar().setTitle(R.string.title_menu);
 	}
 
 	private void setDrawer() {
@@ -274,7 +274,7 @@ public class ActivityMain extends AppCompatActivity implements
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
 				this, drawer, toolbar,R.string.navigation_drawer_open,
 				R.string.navigation_drawer_close);
-		toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.blanco));
+		toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
 		drawer.addDrawerListener(toggle);
 		toggle.syncState();
 	}
@@ -314,7 +314,7 @@ public class ActivityMain extends AppCompatActivity implements
 
 				switch (position) {
 					case 0:
-						getSupportActionBar().setTitle(R.string.menuDelDia);
+						getSupportActionBar().setTitle(R.string.title_menu);
 						searchView.setVisibility(View.INVISIBLE);
 						searchView.setIconified(true);
 
@@ -327,13 +327,13 @@ public class ActivityMain extends AppCompatActivity implements
 						}
 						break;
 					case 1:
-						getSupportActionBar().setTitle(R.string.bocadillos);
+						getSupportActionBar().setTitle(R.string.title_bocadillos);
 						searchView.setVisibility(View.VISIBLE);
 						searchView.setIconified(true);
 						findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
 						break;
 					case 2:
-						getSupportActionBar().setTitle(R.string.complementos);
+						getSupportActionBar().setTitle(R.string.title_otros);
 						searchView.setVisibility(View.INVISIBLE);
 						searchView.setIconified(true);
 
@@ -424,8 +424,8 @@ public class ActivityMain extends AppCompatActivity implements
 
 		final EditText edt = dialogView.findViewById(R.id.edit1);
 
-		dialogBuilder.setTitle(R.string.Ayudanos);
-		dialogBuilder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+		dialogBuilder.setTitle(R.string.header_report);
+		dialogBuilder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				try {
 					JSONObject postData = new JSONObject();
@@ -436,11 +436,11 @@ public class ActivityMain extends AppCompatActivity implements
 					e.printStackTrace();
 				}
 
-				Toast.makeText(ActivityMain.this, R.string.agradecimiento,
+				Toast.makeText(ActivityMain.this, R.string.greetings,
 						Toast.LENGTH_SHORT).show();
 			}
 		});
-		dialogBuilder.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+		dialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				//pass
 			}
@@ -466,7 +466,7 @@ public class ActivityMain extends AppCompatActivity implements
 			@Override
 			public void onResult(@NonNull Status status) {
 				if (status.isSuccess()) {
-					Toast.makeText(ActivityMain.this, R.string.despedida, Toast.LENGTH_SHORT).show();
+					Toast.makeText(ActivityMain.this, R.string.bye, Toast.LENGTH_SHORT).show();
 				} else {
 					Toast.makeText(ActivityMain.this, R.string.fail, Toast.LENGTH_SHORT).show();
 				}
@@ -500,8 +500,8 @@ public class ActivityMain extends AppCompatActivity implements
 	private void resetNavigationDrawer() {
 		Log.d(TAG, "resetNavigationDrawer");
 
-		nombre.setText(R.string.iniciaSesion);
-		email.setText(R.string.utilizaGoogle);
+		nombre.setText(R.string.default_username);
+		email.setText(R.string.default_mail);
 		VariablesGlobales.idToken = "666";
 
 		Picasso.with(this).load(R.drawable.logo_blanco).fit().into(fotoUsuario, new Callback() {
@@ -580,7 +580,7 @@ public class ActivityMain extends AppCompatActivity implements
 
 		if (result.isSuccess()) {
 			if (notify) {
-				Toast.makeText(this, R.string.signInSuccess, Toast.LENGTH_SHORT).show();
+				Toast.makeText(this, R.string.login_success, Toast.LENGTH_SHORT).show();
 			}
 			GoogleSignInAccount cuenta = result.getSignInAccount();
 			nombre.setText(cuenta.getDisplayName());

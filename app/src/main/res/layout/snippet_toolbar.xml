@@ -16,7 +16,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/toolbar"
                 app:title="Title"
-                app:titleTextColor="@color/blanco">
+                app:titleTextColor="@color/white">
             </android.support.v7.widget.Toolbar>
 
             <RelativeLayout

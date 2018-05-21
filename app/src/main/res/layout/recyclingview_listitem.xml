@@ -24,7 +24,7 @@
         android:fontFamily="@font/roboto_light"
         android:text="Nombre"
         android:textStyle="bold"
-        android:textColor="@color/negro"
+        android:textColor="@color/black"
         android:textSize="15sp"/>
 
     <TextView

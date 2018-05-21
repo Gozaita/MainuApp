@@ -73,7 +73,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
     public String getLastUpdate(String tipo){
         String lastUpdate = "0";
 
-        if(tipo.equals("bocadillos") || tipo.equals("menu") || tipo.equals("eus/mainu/mainu/otros")){
+        if (tipo.equals("bocadillos") || tipo.equals("menu") || tipo.equals("otros")) {
             try{
                 lastUpdate = execute("https://api.mainu.eus/last_update/" + tipo).get();
             } catch (Exception e) {
@@ -134,7 +134,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         ArrayList<Otro> arrayOtros = new ArrayList<>();
 
         try {
-            String result = execute("https://api.mainu.eus/eus.mainu.mainu.otros").get();
+            String result = execute("https://api.mainu.eus/otros").get();
 
             Administrador_JSON json = new Administrador_JSON();
             arrayOtros = json.getOtros(result);
@@ -176,7 +176,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         Otro otro = new Otro();
 
         StringBuilder url = new StringBuilder();
-        url.append("https://api.mainu.eus/eus.mainu.mainu.otros/");
+        url.append("https://api.mainu.eus/otros/");
         url.append(id);
 
         try {
