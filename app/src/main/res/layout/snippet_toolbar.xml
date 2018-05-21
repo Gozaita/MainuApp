@@ -28,9 +28,9 @@
                     app:queryHint="Buscar..."
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:searchIcon="@drawable/ic_search_24dp"
-                    app:closeIcon="@drawable/ic_close_white"
-                    app:searchHintIcon="@drawable/ic_search_24dp"
+                    app:searchIcon="@drawable/ic_buscar"
+                    app:closeIcon="@drawable/ic_cerrar"
+                    app:searchHintIcon="@drawable/ic_buscar"
                     android:layout_alignParentRight="true">
                 </android.support.v7.widget.SearchView>
 

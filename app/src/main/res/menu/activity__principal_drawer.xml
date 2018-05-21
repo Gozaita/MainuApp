@@ -6,19 +6,19 @@
     <group >
         <item
             android:id="@+id/home"
-            android:icon="@drawable/ic_home_black_24dp"
+            android:icon="@drawable/ic_inicio"
             android:title="@string/Inicio" />
         <item
             android:id="@+id/informacion"
-            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:icon="@drawable/ic_info"
             android:title="@string/Informacion" />
         <item
             android:id="@+id/comparte"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_compartir"
             android:title="@string/Comparte" />
         <item
             android:id="@+id/error"
-            android:icon="@drawable/ic_warning_black_24dp"
+            android:icon="@drawable/ic_reporte"
             android:title="@string/Error" />
     </group>
 
@@ -26,11 +26,11 @@
     <menu>
         <item
             android:id="@+id/iniciarSesion"
-            android:icon="@drawable/google"
+            android:icon="@drawable/ic_google"
             android:title="@string/IniciarSesion" />
         <item
             android:id="@+id/cerrarSesion"
-            android:icon="@drawable/ic_remove_circle_outline_black_24dp"
+            android:icon="@drawable/ic_salir"
             android:title="@string/CerrarSesion"
             android:visible="true"/>
     </menu>

@@ -299,9 +299,9 @@ public class ActivityMain extends AppCompatActivity implements
 		tabLayout.setupWithViewPager(viewPager);
 
 		// Añadimos 3 iconos
-		tabLayout.getTabAt(0).setIcon(R.drawable.nav_menu);
-		tabLayout.getTabAt(1).setIcon(R.drawable.nav_bocadillos);
-		tabLayout.getTabAt(2).setIcon(R.drawable.nav_otros);
+		tabLayout.getTabAt(0).setIcon(R.drawable.ic_plato);
+		tabLayout.getTabAt(1).setIcon(R.drawable.ic_bocadillos);
+		tabLayout.getTabAt(2).setIcon(R.drawable.ic_otros);
 
 		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override

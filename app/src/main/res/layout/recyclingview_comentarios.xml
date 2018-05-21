@@ -16,7 +16,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:id="@+id/fotoUsuario"
-        app:srcCompat="@drawable/mainu_logo"
+        app:srcCompat="@drawable/logo_base"
         android:background="@color/transparente"/>
 
     <TextView

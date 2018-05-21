@@ -55,7 +55,7 @@
         android:layout_height="17dp"
         android:layout_alignEnd="@+id/precioTextView"
         android:layout_alignTop="@id/descripcionTextView"
-        app:srcCompat="@drawable/ic_star_mainu_24dp" />
+        app:srcCompat="@drawable/ic_estrella_llena" />
 
     <TextView
         android:id="@+id/puntuacionTextView"

@@ -10,6 +10,6 @@
         android:id="@+id/imagenSwipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srcCompat="@drawable/mainu_logo" />
+        app:srcCompat="@drawable/logo_base" />
 
 </LinearLayout>

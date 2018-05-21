@@ -67,7 +67,7 @@ public class Adaptador_Comentarios extends RecyclerView.Adapter<Adaptador_Coment
 
             @Override
             public void onError() {
-                holder.foto.setImageResource(R.drawable.mainu_logo);
+                holder.foto.setImageResource(R.drawable.logo_base);
             }
         });
 

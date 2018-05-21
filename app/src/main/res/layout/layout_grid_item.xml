@@ -56,7 +56,7 @@
                     android:layout_height="15dp"
                     android:layout_alignEnd="@id/precio_card"
                     android:layout_below="@id/precio_card"
-                    app:srcCompat="@drawable/ic_star_24dp" />
+                    app:srcCompat="@drawable/ic_estrella_blanca" />
 
                 <TextView
                     android:id="@+id/puntuacionTextView"

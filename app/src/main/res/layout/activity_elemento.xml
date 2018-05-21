@@ -27,7 +27,7 @@
                 android:layout_alignBottom="@+id/viewPagerElemento"
                 android:layout_alignTop="@id/viewPagerElemento"
                 android:background="@color/transparente"
-                app:srcCompat="@drawable/ic_keyboard_arrow_left_24dp"
+                app:srcCompat="@drawable/ic_izquierda"
                 android:id="@+id/flecha_izquierda"/>
 
             <ImageButton
@@ -37,7 +37,7 @@
                 android:layout_alignBottom="@+id/viewPagerElemento"
                 android:layout_alignTop="@id/viewPagerElemento"
                 android:background="@color/transparente"
-                app:srcCompat="@drawable/ic_keyboard_arrow_right_24dp"
+                app:srcCompat="@drawable/ic_derecha"
                 android:id="@+id/flecha_derecha" />
 
             <!--Quitamos el boton de atras -->
@@ -48,7 +48,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="2dp"
                 android:background="@color/transparente"
-                app:srcCompat="@drawable/ic_arrow_back_24dp" />
+                app:srcCompat="@drawable/ic_atras" />
 
 
             <RelativeLayout
@@ -117,7 +117,7 @@
                     android:layout_marginEnd="10dp"
                     android:background="@color/transparente"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/camera" />
+                    app:srcCompat="@drawable/ic_camara" />
 
             </RelativeLayout>
 
@@ -131,7 +131,7 @@
                 android:layout_marginEnd="11dp"
                 android:visibility="visible"
                 android:background="@color/transparente"
-                app:srcCompat="@drawable/ic_send_24dp" />
+                app:srcCompat="@drawable/ic_enviar" />
 
             <RatingBar
                 android:id="@+id/ratingBarUsuario"
