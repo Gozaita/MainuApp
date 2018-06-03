@@ -13,8 +13,7 @@ public class Bocadillo implements Serializable {
 	private ArrayList<Valoracion> valoraciones = new ArrayList<>();
 	private ArrayList<Imagen> imagenes = new ArrayList<>();
 
-	public Bocadillo() {
-	}
+	public Bocadillo() {	}
 
 	public Bocadillo(int id, String nombre, double precio, double puntuacion,
 					 ArrayList<Ingrediente> ingredientes) {
@@ -40,7 +39,6 @@ public class Bocadillo implements Serializable {
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -48,7 +46,6 @@ public class Bocadillo implements Serializable {
 	public String getNombre() {
 		return nombre;
 	}
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -56,7 +53,6 @@ public class Bocadillo implements Serializable {
 	public double getPrecio() {
 		return precio;
 	}
-
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
@@ -64,7 +60,6 @@ public class Bocadillo implements Serializable {
 	public double getPuntuacion() {
 		return puntuacion;
 	}
-
 	public void setPuntuacion(double puntuacion) {
 		this.puntuacion = puntuacion;
 	}
@@ -72,7 +67,6 @@ public class Bocadillo implements Serializable {
 	public ArrayList<Ingrediente> getIngredientes() {
 		return ingredientes;
 	}
-
 	public void setIngredientes(ArrayList<Ingrediente> ingredientes) {
 		this.ingredientes = ingredientes;
 	}
@@ -80,7 +74,6 @@ public class Bocadillo implements Serializable {
 	public ArrayList<Valoracion> getValoraciones() {
 		return valoraciones;
 	}
-
 	public void setValoraciones(ArrayList<Valoracion> valoraciones) {
 		this.valoraciones = valoraciones;
 	}
@@ -88,7 +81,6 @@ public class Bocadillo implements Serializable {
 	public ArrayList<Imagen> getImagenes() {
 		return imagenes;
 	}
-
 	public void setImagenes(ArrayList<Imagen> imagenes) {
 		this.imagenes = imagenes;
 	}
