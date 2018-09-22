@@ -18,6 +18,7 @@ import eus.mainu.mainu.conexion.HttpGetRequest;
 import eus.mainu.mainu.menu.Menu;
 import eus.mainu.mainu.data.Bocadillo;
 import eus.mainu.mainu.data.Otro;
+import eus.mainu.mainu.data.Ingrediente;
 
 public class ActivityInicio extends AppCompatActivity {
 
@@ -28,6 +29,8 @@ public class ActivityInicio extends AppCompatActivity {
 	private Menu menu;
 	private ArrayList<Bocadillo> bocadillos;
 	private ArrayList<Otro> otros;
+	private ArrayList<Ingrediente> ingredientes;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,7 @@ public class ActivityInicio extends AppCompatActivity {
 				intent.putExtra("menu", menu);
 				intent.putExtra("bocadillos", bocadillos);
 				intent.putExtra("otros", otros);
+				intent.putExtra("ingredientes",ingredientes);
 				startActivity(intent);
 				finish();
 			}
@@ -82,6 +86,7 @@ public class ActivityInicio extends AppCompatActivity {
 
 		manageCache("bocadillos",conectado);
 		manageCache("otros", conectado);
+		manageCache("ingredientes",conectado);
 
 		Log.d(TAG, "onCreate: Se han obtenido los datos");
 	}
@@ -101,6 +106,8 @@ public class ActivityInicio extends AppCompatActivity {
 		HttpGetRequest req2 = new HttpGetRequest();
 		ArrayList<Bocadillo>  bocadillos = new ArrayList<>();
 		ArrayList<Otro> otros = new ArrayList<>();
+		ArrayList<Ingrediente> ingredientes = new ArrayList<>();
+
 
 		CacheAdmin cache = new CacheAdmin();
 		boolean usarCache = false;
@@ -121,6 +128,12 @@ public class ActivityInicio extends AppCompatActivity {
 						cache.guardarLastUpdate(this, type, remoteLastUpdate);
 						cache.guardarListaOtros(this, otros);
 					}
+				} else if (type.equals("ingredientes")) {
+					ingredientes = req2.getIngredientes();
+					if (ingredientes.size() != 0) {
+						cache.guardarLastUpdate(this, type, remoteLastUpdate);
+						cache.guardarListaIngredientes(this, ingredientes);
+					}
 				}
 			} else {
 				usarCache = true;
@@ -134,6 +147,8 @@ public class ActivityInicio extends AppCompatActivity {
 				bocadillos = (ArrayList<Bocadillo>) cache.leerListaBocadillos(this);
 			} else if (type.equals("otros")) {
 				otros = (ArrayList<Otro>) cache.leerListaOtros(this);
+			} else if (type.equals("ingredientes")) {
+				ingredientes = (ArrayList<Ingrediente>) cache.leerListaIngredientes(this);
 			}
 		}
 
@@ -141,6 +156,8 @@ public class ActivityInicio extends AppCompatActivity {
 			this.bocadillos = bocadillos;
 		} else if (type.equals("otros")) {
 			this.otros = otros;
+		} else if (type.equals("ingredientes")) {
+			this.ingredientes = ingredientes;
 		}
 	}
 }

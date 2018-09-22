@@ -88,6 +88,7 @@ public class ActivityMain extends AppCompatActivity implements
 	private ArrayList<Bocadillo> bocadillos;
 	private ArrayList<Bocadillo> bocadillosFiltrados;
 	private ArrayList<Otro> otros;
+	private ArrayList<Ingrediente> ingredientes;
 	private ArrayList<String> ingredientesSeleccionados = new ArrayList<>();
 
 	@Override
@@ -119,6 +120,7 @@ public class ActivityMain extends AppCompatActivity implements
 
 		Menu menu = (Menu) getIntent().getSerializableExtra("menu");
 		bocadillos = (ArrayList<Bocadillo>) getIntent().getSerializableExtra("bocadillos");
+		ingredientes = (ArrayList<Ingrediente>) getIntent().getSerializableExtra("ingredientes");
 		bocadillosFiltrados = new ArrayList<>();
 		otros = (ArrayList<Otro>) getIntent().getSerializableExtra("otros");
 
@@ -128,6 +130,7 @@ public class ActivityMain extends AppCompatActivity implements
 
 		bundle = new Bundle();
 		bundle.putSerializable("bocadillos", bocadillos);
+		bundle.putSerializable("ingredientes", ingredientes);
 		fBocadillos.setArguments(bundle);
 
 		bundle = new Bundle();

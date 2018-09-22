@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import eus.mainu.mainu.data.Ingrediente;
 import eus.mainu.mainu.menu.Menu;
 import eus.mainu.mainu.data.Bocadillo;
 import eus.mainu.mainu.data.Otro;
@@ -145,6 +146,25 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         }
 
         return arrayOtros;
+    }
+
+    //Método para crear el array de Complementos
+    public ArrayList<Ingrediente> getIngredientes()
+    {
+        ArrayList<Ingrediente> arrayIngredientes = new ArrayList<>();
+
+        try {
+            String result = execute("https://api.mainu.eus/ingredientes").get();
+
+            Administrador_JSON json = new Administrador_JSON();
+            arrayIngredientes = json.getIngredientes(result);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return arrayIngredientes;
     }
 
 

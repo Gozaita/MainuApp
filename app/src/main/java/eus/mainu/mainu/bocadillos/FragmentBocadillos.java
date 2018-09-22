@@ -32,21 +32,7 @@ public class FragmentBocadillos extends Fragment implements MenuItem.OnActionExp
 
 	// Variables
 	private ArrayList<Bocadillo> bocadillos = new ArrayList<>();
-	private ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>(Arrays.asList(
-			new Ingrediente("bacon"), new Ingrediente("bonito"),
-			new Ingrediente("calamares"), new Ingrediente("cebolla"), new Ingrediente("champiñones"),
-			new Ingrediente("chorizo"), new Ingrediente("croissant"),
-			new Ingrediente("hamburguesa"), new Ingrediente("huevo"), new Ingrediente("huevo cocido"),
-			new Ingrediente("jamón serrano"), new Ingrediente("jamón york"),
-			new Ingrediente("lechuga"), new Ingrediente("lomo"),
-			new Ingrediente("mahonesa"),
-			new Ingrediente("pan de molde"), new Ingrediente("pavo"),
-			new Ingrediente("pimientos verdes"),
-			new Ingrediente("pollo"), new Ingrediente("pollo empanado"),
-			new Ingrediente("queso"),
-			new Ingrediente("salchichas"), new Ingrediente("salsa césar"),
-			new Ingrediente("ternera"), new Ingrediente("tomate"),
-			new Ingrediente("tortilla")));
+	private ArrayList<Ingrediente> ingredientes = new ArrayList<>();
 
 	public FragmentBocadillos() {
 
@@ -63,6 +49,7 @@ public class FragmentBocadillos extends Fragment implements MenuItem.OnActionExp
 		Bundle bundle = this.getArguments();
 		if (bundle != null) {
 			bocadillos = (ArrayList<Bocadillo>) bundle.getSerializable("bocadillos");
+			ingredientes = (ArrayList<Ingrediente>) bundle.getSerializable("ingredientes");
 		}
 	}
 

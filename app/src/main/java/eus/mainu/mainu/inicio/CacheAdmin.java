@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import eus.mainu.mainu.data.Bocadillo;
+import eus.mainu.mainu.data.Ingrediente;
 import eus.mainu.mainu.data.Otro;
 
 public class CacheAdmin {
@@ -110,4 +111,39 @@ public class CacheAdmin {
 
         return listaOtros;
     }
+
+    //**********************************************************************************************
+    public void guardarListaIngredientes (Context context, ArrayList<Ingrediente> listaIngredientes) {
+
+        try {
+            FileOutputStream fos = context.openFileOutput("arrayIngredientes", Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream (fos);
+            oos.writeObject(listaIngredientes);
+            oos.close();
+            fos.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Object leerListaIngredientes (Context context) {
+
+        Object listaIngredientes = new ArrayList<Ingrediente>();
+        try {
+            FileInputStream fis = context.openFileInput("arrayIngredientes");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            listaIngredientes = ois.readObject();
+            ois.close();
+            fis.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaIngredientes;
+    }
+
+
+
 }

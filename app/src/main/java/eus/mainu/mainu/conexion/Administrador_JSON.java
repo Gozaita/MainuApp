@@ -130,6 +130,35 @@ class Administrador_JSON {
         return arrayOtros;
     }
 
+    //Método para crear el array de Ingredientes
+    ArrayList<Ingrediente> getIngredientes(String result)
+    {
+        ArrayList<Ingrediente> arrayIngredientes = new ArrayList<>();
+
+        try {
+            JSONArray obj = new JSONArray(result);
+            for (int i = 0; i < obj.length(); i++){
+                JSONObject o = obj.getJSONObject(i);
+                arrayIngredientes.add(
+                        new Ingrediente( getInt(o,"id"),
+                                getString(o,"nombre"))
+                );
+            }
+
+            Collections.sort(arrayIngredientes, new Comparator<Ingrediente>() {
+                @Override
+                public int compare(Ingrediente ingrediente1, Ingrediente ingrediente2){
+                    return  ingrediente1.getNombre().compareTo(ingrediente2.getNombre());
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return arrayIngredientes;
+    }
+
 
     //Para recuperar un solo bocadillo a partir de su id
     Bocadillo getBocadillo(String result){
