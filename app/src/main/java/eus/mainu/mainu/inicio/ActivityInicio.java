@@ -92,7 +92,7 @@ public class ActivityInicio extends AppCompatActivity {
 	}
 
 	private void manageCache(String type, boolean conectado) {
-		/**
+		/*
 		 * 2 objetos de petición/request:
 		 * 	-	Obtener última fecha de modificación
 		 * 	-	Obtener lista
@@ -115,28 +115,36 @@ public class ActivityInicio extends AppCompatActivity {
 		if (conectado) {
 			String remoteLastUpdate = req1.getLastUpdate(type);
 			String localLastUpdate = cache.leerLastUpdate(this, type);
-			if (!remoteLastUpdate.equalsIgnoreCase(localLastUpdate)) {
-				if (type.equals("bocadillos")) {
-					bocadillos = req2.getBocadillos();
-					if (bocadillos.size() != 0) {
-						cache.guardarLastUpdate(this, type, remoteLastUpdate);
-						cache.guardarListaBocadillos(this, bocadillos);
+			if(remoteLastUpdate != null) {
+				if (!remoteLastUpdate.equalsIgnoreCase(localLastUpdate)) {
+					if (type.equals("bocadillos")) {
+						bocadillos = req2.getBocadillos();
+						if(bocadillos != null) {
+							if (bocadillos.size() != 0) {
+								cache.guardarLastUpdate(this, type, remoteLastUpdate);
+								cache.guardarListaBocadillos(this, bocadillos);
+							}
+						}
+					} else if (type.equals("otros")) {
+						otros = req2.getOtros();
+						if(otros != null) {
+							if (otros.size() != 0) {
+								cache.guardarLastUpdate(this, type, remoteLastUpdate);
+								cache.guardarListaOtros(this, otros);
+							}
+						}
+					} else if (type.equals("ingredientes")) {
+						ingredientes = req2.getIngredientes();
+						if(ingredientes != null) {
+							if (ingredientes.size() != 0) {
+								cache.guardarLastUpdate(this, type, remoteLastUpdate);
+								cache.guardarListaIngredientes(this, ingredientes);
+							}
+						}
 					}
-				} else if (type.equals("otros")) {
-					otros = req2.getOtros();
-					if (otros.size() != 0) {
-						cache.guardarLastUpdate(this, type, remoteLastUpdate);
-						cache.guardarListaOtros(this, otros);
-					}
-				} else if (type.equals("ingredientes")) {
-					ingredientes = req2.getIngredientes();
-					if (ingredientes.size() != 0) {
-						cache.guardarLastUpdate(this, type, remoteLastUpdate);
-						cache.guardarListaIngredientes(this, ingredientes);
-					}
+				} else {
+					usarCache = true;
 				}
-			} else {
-				usarCache = true;
 			}
 		} else {
 			usarCache = true;
