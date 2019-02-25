@@ -87,7 +87,7 @@ public class AdaptadorMenu extends BaseAdapter {
                             //Decimos que queremos navegar a la clase Elemento
                             Intent intent = new Intent(mInflater.getContext(), ActivityElemento.class);
                             //Le pasamos la informacion que necesita la clase
-                            intent.putExtra("Plato",mData.get(position));
+                            intent.putExtra("plato",mData.get(position));
                             //Iniciamos la actividad
                             mInflater.getContext().startActivity(intent);
                         }

@@ -143,7 +143,7 @@ public class FragmentMenu extends Fragment {
 	}
 
 	private void listenToSwipe() {
-		/**
+		/*
 		 * Define la acción que se ejecuta al realizar el swipe
 		 */
 		swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
