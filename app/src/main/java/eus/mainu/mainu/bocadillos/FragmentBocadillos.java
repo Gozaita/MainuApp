@@ -70,6 +70,7 @@ public class FragmentBocadillos extends Fragment implements MenuItem.OnActionExp
 
 		vistaBocadillos = view.findViewById(R.id.recycler_view_lista_bocadillos);
 		vistaIngredientes = view.findViewById(R.id.recyclerView_ingredientes);
+		vistaIngredientes.setVisibility(View.VISIBLE);
 
 		// Bocadillos: línea debajo de cada objeto
 		DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mContext,

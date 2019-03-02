@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,6 +75,7 @@ public class ActivityMain extends AppCompatActivity implements
 	private TabLayout tabLayout;
 	private Toolbar toolbar;
 	private ImageView fotoUsuario;
+	private ImageButton clearFilter;
 	private TextView nombre, email;
 	private SearchView searchView;
 
@@ -104,6 +106,8 @@ public class ActivityMain extends AppCompatActivity implements
 		tabLayout = findViewById(R.id.tabs);
 		toolbar = findViewById(R.id.toolbar);
 		searchView = findViewById(R.id.searchView);
+		clearFilter = findViewById(R.id.clearFilter);
+		clearFilter.setVisibility(View.GONE);
 		setSupportActionBar(toolbar);
 
 		// Hay que hacer esto para referenciar los elementos del nav header
@@ -156,7 +160,6 @@ public class ActivityMain extends AppCompatActivity implements
 				searchView.onActionViewCollapsed();
 				tabLayout.setVisibility(View.VISIBLE);
 				findViewById(R.id.tabLayout2).setVisibility(View.VISIBLE);
-				findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
 				toolbar.setTitle("Bocadillos");
 
 				// Reseteamos la lista de ingredientes filtrados
@@ -172,14 +175,15 @@ public class ActivityMain extends AppCompatActivity implements
 				searchIsFocused = hasFocus;
 				if (hasFocus) {
 					tabLayout.setVisibility(View.GONE);
-					findViewById(R.id.recyclerView_ingredientes).setVisibility(View.VISIBLE);
 					findViewById(R.id.tabLayout2).setVisibility(View.GONE);
 					toolbar.setTitle("");
+					findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
 				} else {
 					searchView.setIconified(true);
 					tabLayout.setVisibility(View.VISIBLE);
 					findViewById(R.id.tabLayout2).setVisibility(View.VISIBLE);
 					toolbar.setTitle("Bocadillos");
+					findViewById(R.id.recyclerView_ingredientes).setVisibility(View.VISIBLE);
 				}
 			}
 		});
@@ -208,6 +212,23 @@ public class ActivityMain extends AppCompatActivity implements
 				return false;
 			}
 		});
+
+		clearFilter.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				tabLayout.setVisibility(View.VISIBLE);
+				findViewById(R.id.tabLayout2).setVisibility(View.VISIBLE);
+				toolbar.setTitle("Bocadillos");
+
+				clearFilter.setVisibility(View.GONE);
+				searchView.setVisibility(View.VISIBLE);
+
+				// Reseteamos la lista de ingredientes filtrados
+				fBocadillos.setBocadillos(bocadillos);
+				fBocadillos.uncheckIngredientes();
+				ingredientesSeleccionados.clear();
+			}
+		});
 	}
 
 	@Override
@@ -215,7 +236,6 @@ public class ActivityMain extends AppCompatActivity implements
 		if (searchIsFocused) {
 			searchView.setIconified(true);
 			tabLayout.setVisibility(View.VISIBLE);
-			findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
 			toolbar.setTitle("Bocadillos");
 		} else {
 			// Si no, los usuarios no pueden salir de la app
@@ -240,6 +260,10 @@ public class ActivityMain extends AppCompatActivity implements
 		 * 4. Se actualiza la lista de bocadillos visibles
 		 */
 		if (ingredientesSeleccionados.size() > 0) {
+			/** si hay ingrediente filtrado, mostramos el boton de cancelar y ocultamos searchView */
+			clearFilter.setVisibility(View.VISIBLE);
+			searchView.setVisibility(View.GONE);
+
 			bocadillosFiltrados.clear();
 			for (Bocadillo b : bocadillos) {
 				int nPass = 0;
@@ -259,6 +283,10 @@ public class ActivityMain extends AppCompatActivity implements
 			}
 			fBocadillos.setBocadillos(bocadillosFiltrados);
 		} else {
+			/** si hay ingrediente filtrado, mostramos el boton de cancelar y ocultamos searchView */
+			clearFilter.setVisibility(View.GONE);
+			searchView.setVisibility(View.VISIBLE);
+
 			fBocadillos.setBocadillos(bocadillos);
 			ingredientesSeleccionados.clear();
 		}
@@ -322,7 +350,6 @@ public class ActivityMain extends AppCompatActivity implements
 						searchView.setIconified(true);
 
 						// !Bocadillos --> Resetear filtro de ingredientes
-						findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
 						if (!ingredientesSeleccionados.isEmpty()) {
 							fBocadillos.setBocadillos(bocadillos);
 							fBocadillos.uncheckIngredientes();
@@ -333,7 +360,6 @@ public class ActivityMain extends AppCompatActivity implements
 						getSupportActionBar().setTitle(R.string.title_bocadillos);
 						searchView.setVisibility(View.VISIBLE);
 						searchView.setIconified(true);
-						findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
 						break;
 					case 2:
 						getSupportActionBar().setTitle(R.string.title_otros);
@@ -341,7 +367,6 @@ public class ActivityMain extends AppCompatActivity implements
 						searchView.setIconified(true);
 
 						// !Bocadillos --> Resetear filtro de ingredientes
-						findViewById(R.id.recyclerView_ingredientes).setVisibility(View.GONE);
 						if (!ingredientesSeleccionados.isEmpty()) {
 							fBocadillos.setBocadillos(bocadillos);
 							fBocadillos.uncheckIngredientes();
