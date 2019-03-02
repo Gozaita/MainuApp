@@ -76,6 +76,9 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
 
         if (tipo.equals("bocadillos") || tipo.equals("menu") || tipo.equals("otros") || tipo.equals("ingredientes")) {
             try{
+                if(tipo.equals("ingredientes")) // los ingredientes y bocadillos comparten actualización
+                    tipo = "bocadillos";
+
                 lastUpdate = execute("https://api.mainu.eus/last_update/" + tipo).get();
             } catch (Exception e) {
                 e.printStackTrace();
