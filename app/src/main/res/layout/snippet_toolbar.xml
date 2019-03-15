@@ -38,6 +38,7 @@
                     android:id="@+id/clearFilter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
                     android:src="@drawable/ic_cerrar"
                     android:background="@color/transparent"
                     android:layout_gravity="center"/>
