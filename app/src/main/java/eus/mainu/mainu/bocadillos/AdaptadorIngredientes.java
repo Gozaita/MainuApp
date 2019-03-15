@@ -36,7 +36,9 @@ public class AdaptadorIngredientes extends RecyclerView.Adapter<AdaptadorIngredi
 
 	@Override
 	public void onBindViewHolder(final ViewHolder holder, int position) {
-		holder.checkbox.setText(ingredientes.get(position).getNombre());
+
+		String nom = ingredientes.get(position).getNombre();
+		holder.checkbox.setText(nom.substring(0, 1).toUpperCase() + nom.substring(1));
 		holder.checkbox.setChecked(ingredientes.get(position).isChecked());
 
 		holder.checkbox.setOnClickListener(new View.OnClickListener() {
