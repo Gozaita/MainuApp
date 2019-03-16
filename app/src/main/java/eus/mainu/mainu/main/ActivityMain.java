@@ -310,13 +310,13 @@ public class ActivityMain extends AppCompatActivity implements
 		toggle.syncState();
 	}
 
+	/**
+	 * Responsable de la creación de tres fragmentos:
+	 * 	-	Menú
+	 * 	-	Bocadillos
+	 * 	-	Otros
+	 */
 	private void setupViewPager() {
-		/**
-		 * Responsable de la creación de tres fragmentos:
-		 * 	-	Menú
-		 * 	-	Bocadillos
-		 * 	-	Otros
-		 */
 		Log.d(TAG, "setupViewPager");
 
 		// Creamos los fragmentos
@@ -355,6 +355,7 @@ public class ActivityMain extends AppCompatActivity implements
 							fBocadillos.uncheckIngredientes();
 							ingredientesSeleccionados.clear();
 						}
+						clearFilter.setVisibility(View.GONE);
 						break;
 					case 1:
 						getSupportActionBar().setTitle(R.string.title_bocadillos);
@@ -372,6 +373,7 @@ public class ActivityMain extends AppCompatActivity implements
 							fBocadillos.uncheckIngredientes();
 							ingredientesSeleccionados.clear();
 						}
+						clearFilter.setVisibility(View.GONE);
 						break;
 				}
 			}
@@ -388,12 +390,13 @@ public class ActivityMain extends AppCompatActivity implements
 
 	}
 
+
+	/**
+	 * Definición de las acciones del NavigationDrawer.
+	 */
 	@SuppressWarnings("StatementWithEmptyBody")
 	@Override
 	public boolean onNavigationItemSelected(MenuItem item) {
-		/**
-		 * Definición de las acciones del NavigationDrawer.
-		 */
 
 		int id = item.getItemId();
 
@@ -429,10 +432,10 @@ public class ActivityMain extends AppCompatActivity implements
 
 	}
 
+	/**
+	 * Compartir a través de otras aplicaciones del sistema
+	 */
 	private void compartir() {
-		/**
-		 * Compartir a través de otras aplicaciones del sistema
-		 */
 		Intent intent = new Intent(Intent.ACTION_SEND);
 		intent.setType("text/plain");
 		intent.putExtra(Intent.EXTRA_TEXT,
@@ -440,10 +443,10 @@ public class ActivityMain extends AppCompatActivity implements
 		startActivity(Intent.createChooser(intent, "Compartir con"));
 	}
 
+	/**
+	 * Reporte de errores y sugerencias
+	 */
 	public void reporte() {
-		/**
-		 * Reporte de errores y sugerencias
-		 */
 		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
 		LayoutInflater inflater = this.getLayoutInflater();
 		@SuppressLint("InflateParams") final View dialogView =
@@ -477,18 +480,18 @@ public class ActivityMain extends AppCompatActivity implements
 		b.show();
 	}
 
+	/**
+	 * Inicio de sesión. SIGN_IN_CODE es un código único que se devuelve al iniciar sesión.
+	 */
 	private void iniciarSesion() {
-		/**
-		 * Inicio de sesión. SIGN_IN_CODE es un código único que se devuelve al iniciar sesión.
-		 */
 		Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
 		startActivityForResult(signInIntent, SIGN_IN_CODE);
 	}
 
+	/**
+	 * Cierre de sesión. Devuelve un toast indicando cómo ha ido.
+	 */
 	private void cerrarSesion() {
-		/**
-		 * Cierre de sesión. Devuelve un toast indicando cómo ha ido.
-		 */
 		Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
 				new ResultCallback<Status>() {
 			@Override
@@ -503,11 +506,11 @@ public class ActivityMain extends AppCompatActivity implements
 		resetNavigationDrawer();
 	}
 
+	/**
+	 * Al pedir la cuetna de usuario se dbee pasar el client_id, que debe coincidir con el
+	 * almacenado en la API.
+	 */
 	private void setCuenta() {
-		/**
-		 * Al pedir la cuetna de usuario se dbee pasar el client_id, que debe coincidir con el
-		 * almacenado en la API.
-		 */
 		Log.d(TAG, "setCuenta");
 
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
@@ -551,12 +554,12 @@ public class ActivityMain extends AppCompatActivity implements
 		});
 	}
 
+	/**
+	 * Cuando se inicia la actividad, se hace un silent sign-in para comprobar si el usuario
+	 * ya ha iniciado sesión.
+	 */
 	@Override
 	protected void onStart() {
-		/**
-		 * Cuando se inicia la actividad, se hace un silent sign-in para comprobar si el usuario
-		 * ya ha iniciado sesión.
-		 */
 		super.onStart();
 
 		Log.d(TAG, "onStart");
@@ -576,11 +579,11 @@ public class ActivityMain extends AppCompatActivity implements
 		}
 	}
 
+	/**
+	 * Se ejecuta en caso de fallo de conexión
+	 */
 	@Override
 	public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-		/**
-		 * Se ejecuta en caso de fallo de conexión
-		 */
 		Log.d(TAG, "onConnectionFailed");
 
 		Toast.makeText(this, R.string.fail, Toast.LENGTH_SHORT).show();
@@ -598,12 +601,12 @@ public class ActivityMain extends AppCompatActivity implements
 		}
 	}
 
+	/**
+	 * Comprueba el resultado devuelto por el sign-in y, en caso de que haya ido
+	 * correctamente, muestra la información de usuario en el NavigationDrawer.
+	 * Si el parámetro 'notify' está activado, se notifica un inicio de sesión correcto.
+	 */
 	private void solveSignIn(GoogleSignInResult result, Boolean notify) {
-		/**
-		 * Comprueba el resultado devuelto por el sign-in y, en caso de que haya ido
-		 * correctamente, muestra la información de usuario en el NavigationDrawer.
-		 * Si el parámetro 'notify' está activado, se notifica un inicio de sesión correcto.
-		 */
 		Log.d(TAG, "resultadoSignIn: " + result.isSuccess());
 
 		if (result.isSuccess()) {
