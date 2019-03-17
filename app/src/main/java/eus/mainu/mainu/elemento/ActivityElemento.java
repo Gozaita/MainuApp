@@ -33,6 +33,8 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -209,9 +211,21 @@ public class ActivityElemento extends AppCompatActivity {
 					JSONObject valoracion = new JSONObject();
 					valoracion.put("puntuacion", puntuacionUsuario.getRating());
 					puntuacionUsuario.setEnabled(false);
-					valoracion.put("texto", comentario.getText().toString());
+
+					try
+					{
+						String enconde = URLEncoder.encode(comentario.getText().toString(),"UTF-8");
+						valoracion.put("texto", enconde);
+
+						Log.e("UTF 8",enconde);
+					}
+					catch (UnsupportedEncodingException e)
+					{
+						Log.e("utf8", "conversion", e);
+					}
 					comentario.setEnabled(false);
 					postData.put("valoracion", valoracion);
+
 
 					new HttpPostRequest().execute("https://api.mainu.eus/add_valoracion/"
 							+ tipo + "/" + id, postData.toString());
@@ -220,9 +234,24 @@ public class ActivityElemento extends AppCompatActivity {
 					Toast.makeText(getApplicationContext(), R.string.greetings,
 							Toast.LENGTH_SHORT).show();
 
+
+
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+
+				/*
+				try
+				{
+
+					String encoded = URLEncoder.encode(postData, "UTF-8");
+					Log.e("UTF 8",encoded );
+				}
+				catch (UnsupportedEncodingException e)
+				{
+					Log.e("utf8", "conversion", e);
+				}
+				*/
 			}
 		});
 	}
