@@ -110,11 +110,7 @@ public class ActivityElemento extends AppCompatActivity {
 			comentario.setEnabled(false);
 			puntuacionUsuario.setEnabled(false);
 			enviar.setEnabled(false);
-			;
 		} else {
-			// Para que no se muestre seleccionado al entrar en la actividad
-			comentario.setCursorVisible(false);
-			comentario.setHint(R.string.default_report);
 			sendValoracion();
 		}
 
