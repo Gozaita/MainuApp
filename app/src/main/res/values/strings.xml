@@ -45,6 +45,7 @@
 
     <!--Toasts-->
     <string name="greetings">¡Gracias por tu colaboración!</string>
+    <string name="rate">Hace falta puntuar</string>
     <string name="fail">Oopsie Woopsie, se ha escapado el fetch</string>
     <string name="bye">Chao chaito</string>
     <string name="connection_fail">No hay conexión</string>

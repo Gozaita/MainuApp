@@ -199,40 +199,50 @@ public class ActivityElemento extends AppCompatActivity {
 		enviar.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				try {
-					enviar.setVisibility(View.GONE);
 
-					// Quitamos el teclado si esta abierto
-					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-					imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+					if(puntuacionUsuario.getRating() >= 1) {
 
-					// Creamos el JSON
-					JSONObject postData = new JSONObject();
-					postData.put("idToken", VariablesGlobales.idToken);
-					JSONObject valoracion = new JSONObject();
-					valoracion.put("puntuacion", puntuacionUsuario.getRating());
-					puntuacionUsuario.setEnabled(false);
+						enviar.setVisibility(View.GONE);
 
-					try
-					{
-						String enconde = URLEncoder.encode(comentario.getText().toString(),"UTF-8");
-						valoracion.put("texto", enconde);
+						// Quitamos el teclado si esta abierto
+						InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+						imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-						Log.e("UTF 8",enconde);
+						// Creamos el JSON
+						JSONObject postData = new JSONObject();
+						postData.put("idToken", VariablesGlobales.idToken);
+						JSONObject valoracion = new JSONObject();
+						valoracion.put("puntuacion", puntuacionUsuario.getRating());
+						puntuacionUsuario.setEnabled(false);
+
+						try
+						{
+							String enconde = URLEncoder.encode(comentario.getText().toString(),"UTF-8");
+							valoracion.put("texto", enconde);
+
+							Log.e("UTF 8",enconde);
+						}
+						catch (UnsupportedEncodingException e)
+						{
+							Log.e("utf8", "conversion", e);
+						}
+						comentario.setEnabled(false);
+						postData.put("valoracion", valoracion);
+
+
+						new HttpPostRequest().execute("https://api.mainu.eus/add_valoracion/"
+								+ tipo + "/" + id, postData.toString());
+
+
+						Toast.makeText(getApplicationContext(), R.string.greetings,
+								Toast.LENGTH_SHORT).show();
+
 					}
-					catch (UnsupportedEncodingException e)
+					else
 					{
-						Log.e("utf8", "conversion", e);
+						Toast.makeText(getApplicationContext(), R.string.rate,
+								Toast.LENGTH_SHORT).show();
 					}
-					comentario.setEnabled(false);
-					postData.put("valoracion", valoracion);
-
-
-					new HttpPostRequest().execute("https://api.mainu.eus/add_valoracion/"
-							+ tipo + "/" + id, postData.toString());
-
-
-					Toast.makeText(getApplicationContext(), R.string.greetings,
-							Toast.LENGTH_SHORT).show();
 
 
 
