@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Random;
 
 import eus.mainu.mainu.menu.Menu;
 import eus.mainu.mainu.data.Bocadillo;
@@ -266,7 +265,7 @@ class Administrador_JSON {
             puntuacion = o.getDouble(nombre);
         }
         else {
-            puntuacion = 3 + (5 - 3)*(new Random()).nextDouble();
+            puntuacion = 0;
         }
 
         return puntuacion;

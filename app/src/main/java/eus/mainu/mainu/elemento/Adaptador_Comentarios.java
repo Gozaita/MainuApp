@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 import eus.mainu.mainu.R;
@@ -50,7 +52,19 @@ public class Adaptador_Comentarios extends RecyclerView.Adapter<Adaptador_Coment
 
         Log.d(TAG, "onBindViewHolder: Called");
 
-        holder.comentario.setText(arrayValoraciones.get(position).getComentario());
+
+        try
+        {
+            String decode = URLDecoder.decode(arrayValoraciones.get(position).getComentario(),"UTF-8");
+            holder.comentario.setText(decode);
+
+            Log.e("UTF 8",decode);
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            Log.e("utf8", "conversion", e);
+        }
+
         holder.nombre.setText(arrayValoraciones.get(position).getUsuario().getNombre());
         holder.estrellas.setRating((float) arrayValoraciones.get(position).getPuntuacion());
 
