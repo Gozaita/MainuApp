@@ -1,16 +1,13 @@
-﻿>*Este repositorio contiene  el cliente Android del proyecto **MainU**. Para la API del proyecto, consulta [**MainU API**](https://github.com/mainu4u/MainuAPI). Para una visión global del proyecto, puedes dirigirte a [mainu.eus](http://mainu.eus).*
+﻿>*Este repositorio contiene  el cliente Android del proyecto **MainU**. Para la API del proyecto, consulta [**MainU API**](https://github.com/mainu4u/MainuAPI). Para una visión global del proyecto, puedes dirigirte a [mainu4u](https://github.com/mainu4u).*
 
 <img src=https://i.imgur.com/Wc9VOaZ.png?1 width=150px/>
 
-MainU App
+MainU App ![](https://img.shields.io/badge/maintenance-inactive-inactive)
 ===================
 
 **MainU App** es una aplicación para Android, basada en los servicios ofrecidos por [**MainU API**](https://github.com/mainu4u/MainuAPI). Su ámbito de actuación se centra en la Escuela de Ingeniería de Bilbao (UPV/EHU).
 
 > Desarrollado por Ismael Estalayo, Guillermo Ozaita, Andreea Stanciu y Adrián Vázquez.
-> 
-> +info: [mainu.eus](http://mainu.eus)
-
 ----------
 
 El proyecto de MainU
